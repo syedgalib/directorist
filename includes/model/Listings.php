@@ -1278,6 +1278,8 @@ class Directorist_Listings {
             return;
         }
 
+        do_action( 'directorist_before_listings_loop', $post_ids );
+
         foreach ( $post_ids as $listing_id ) {
             ?>
             <div class="directorist-col-12">
@@ -1292,6 +1294,8 @@ class Directorist_Listings {
             // Exit early or log an error if the input is invalid
             return;
         }
+
+        do_action( 'directorist_before_listings_loop', $post_ids );
 
         foreach ( $post_ids as $listing_id ) {
             ?>
