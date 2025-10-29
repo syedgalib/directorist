@@ -220,6 +220,8 @@ final class Directorist_Base {
 
             add_action( 'init', [ self::$instance, 'on_install_update_actions' ] );
 
+            new Directorist\Modules\GutenbergTemplate();
+
             Directorist\Asset_Loader\Asset_Loader::init();
 
             // ATBDP_Listing_Type_Manager
@@ -425,6 +427,7 @@ final class Directorist_Base {
                 ATBDP_INC_DIR . 'modules/multi-directory-setup/class-multi-directory-migration',
                 ATBDP_INC_DIR . 'modules/multi-directory-setup/class-multi-directory-manager',
                 ATBDP_INC_DIR . 'modules/multi-directory-setup/class-ai-builder',
+                ATBDP_INC_DIR . 'modules/gutenberg-template/init',
             ]
         );
 
