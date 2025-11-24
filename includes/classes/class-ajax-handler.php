@@ -258,7 +258,7 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
                 $_POST['ids']    = $args['ids'];
             }
 
-            $listings = new Directorist\Directorist_Listings( $args, $type );
+            $listings = apply_filters( 'directorist_instant_search_listings', new Directorist\Directorist_Listings( $args, $type ), $args, $type, $_POST );
 
             ob_start();
             if ( 'list' === $listings->view ) {
@@ -279,7 +279,7 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
             $location               = get_term_by( 'id', $location_id, ATBDP_LOCATION );
 
             wp_send_json(
-                [
+                apply_filters( 'directorist_instant_search_response', [
                     'search_result'  => $archive_view,
                     'directory_type' => $listings->render_shortcode(),
                     'view_as'        => $archive_view,
@@ -290,7 +290,7 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
 
                     'render_listings' => $render_listings,
                     'view' => $listings->view
-                ]
+                ], $listings, $args, $type, $_POST )
             );
         }
 
