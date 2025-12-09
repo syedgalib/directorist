@@ -1258,6 +1258,8 @@ class Directorist_Listings {
             }, ARRAY_FILTER_USE_KEY
         );
 
+        do_action( 'directorist_before_load_listings_archive', $this );
+
         $render_custom_template = apply_filters( 'directorist_should_render_listings_custom_archive_template', false, $this );
 
         if ( $render_custom_template ) {
@@ -2459,6 +2461,7 @@ class Directorist_Listings {
             return $this->filter_button_text;
         }
     }
+
     public function mobile_view_filter_template() {
         $search_field_atts = $this->get_search_field_atts();
 

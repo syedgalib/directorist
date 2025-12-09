@@ -279,18 +279,20 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
             $location               = get_term_by( 'id', $location_id, ATBDP_LOCATION );
 
             wp_send_json(
-                apply_filters( 'directorist_instant_search_response', [
-                    'search_result'  => $archive_view,
-                    'directory_type' => $listings->render_shortcode(),
-                    'view_as'        => $archive_view,
-                    'count'          => $listings->query_results->total,
-                    'header_title'   => $display_listings_count ? $listings->listings_header_title() : '',
-                    'category_name'  => $category ? $category->name : '',
-                    'location_name'  => $location ? $location->name : '',
+                apply_filters(
+                    'directorist_instant_search_response', [
+                        'search_result'  => $archive_view,
+                        'directory_type' => $listings->render_shortcode(),
+                        'view_as'        => $archive_view,
+                        'count'          => $listings->query_results->total,
+                        'header_title'   => $display_listings_count ? $listings->listings_header_title() : '',
+                        'category_name'  => $category ? $category->name : '',
+                        'location_name'  => $location ? $location->name : '',
 
-                    'render_listings' => $render_listings,
-                    'view' => $listings->view
-                ], $listings, $args, $type, $_POST )
+                        'render_listings' => $render_listings,
+                        'view' => $listings->view
+                    ], $listings, $args, $type, $_POST 
+                )
             );
         }
 
