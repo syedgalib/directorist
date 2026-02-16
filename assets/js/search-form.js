@@ -961,6 +961,52 @@ function _arrayWithHoles(r) {
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js ***!
+  \*******************************************************************/
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ _classCallCheck; }
+/* harmony export */ });
+function _classCallCheck(a, n) {
+  if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/createClass.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/createClass.js ***!
+  \****************************************************************/
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ _createClass; }
+/* harmony export */ });
+/* harmony import */ var _toPropertyKey_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./toPropertyKey.js */ "./node_modules/@babel/runtime/helpers/esm/toPropertyKey.js");
+
+function _defineProperties(e, r) {
+  for (var t = 0; t < r.length; t++) {
+    var o = r[t];
+    o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, (0,_toPropertyKey_js__WEBPACK_IMPORTED_MODULE_0__["default"])(o.key), o);
+  }
+}
+function _createClass(e, r, t) {
+  return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
+    writable: !1
+  }), e;
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
@@ -1253,21 +1299,29 @@ var __webpack_exports__ = {};
   \*********************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var _global_components_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../global/components/debounce */ "./assets/src/js/global/components/debounce.js");
-/* harmony import */ var _global_components_select2_custom_control__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../global/components/select2-custom-control */ "./assets/src/js/global/components/select2-custom-control.js");
-/* harmony import */ var _global_components_select2_custom_control__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_global_components_select2_custom_control__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _global_components_setup_select2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../global/components/setup-select2 */ "./assets/src/js/global/components/setup-select2.js");
-/* harmony import */ var _components_category_custom_fields__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/category-custom-fields */ "./assets/src/js/public/components/category-custom-fields.js");
-/* harmony import */ var _components_colorPicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/colorPicker */ "./assets/src/js/public/components/colorPicker.js");
-/* harmony import */ var _components_colorPicker__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_components_colorPicker__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _components_directoristDropdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/directoristDropdown */ "./assets/src/js/public/components/directoristDropdown.js");
-/* harmony import */ var _components_directoristDropdown__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_directoristDropdown__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _components_directoristSelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/directoristSelect */ "./assets/src/js/public/components/directoristSelect.js");
-/* harmony import */ var _components_directoristSelect__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_components_directoristSelect__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var _global_components_debounce__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../global/components/debounce */ "./assets/src/js/global/components/debounce.js");
+/* harmony import */ var _global_components_select2_custom_control__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../global/components/select2-custom-control */ "./assets/src/js/global/components/select2-custom-control.js");
+/* harmony import */ var _global_components_select2_custom_control__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_global_components_select2_custom_control__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _global_components_setup_select2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../global/components/setup-select2 */ "./assets/src/js/global/components/setup-select2.js");
+/* harmony import */ var _components_category_custom_fields__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/category-custom-fields */ "./assets/src/js/public/components/category-custom-fields.js");
+/* harmony import */ var _components_colorPicker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/colorPicker */ "./assets/src/js/public/components/colorPicker.js");
+/* harmony import */ var _components_colorPicker__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_colorPicker__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_directoristDropdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/directoristDropdown */ "./assets/src/js/public/components/directoristDropdown.js");
+/* harmony import */ var _components_directoristDropdown__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_components_directoristDropdown__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _components_directoristSelect__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/directoristSelect */ "./assets/src/js/public/components/directoristSelect.js");
+/* harmony import */ var _components_directoristSelect__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_components_directoristSelect__WEBPACK_IMPORTED_MODULE_10__);
+
+
+
 
 function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 
 
 
@@ -1275,11 +1329,193 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
 
 
+var ViewportAwareDropdown = /*#__PURE__*/function () {
+  function ViewportAwareDropdown() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__["default"])(this, ViewportAwareDropdown);
+    this.options = _objectSpread({
+      dropdownClass: '.directorist-search-basic-dropdown-content',
+      triggerClass: '.directorist-search-basic-dropdown-label',
+      activeClass: 'dropdown-content-show',
+      upwardClass: 'dropdown-upward',
+      offset: 8,
+      positioningDelay: 10,
+      mutationDelay: 50,
+      animationDelay: 300
+    }, options);
+    this.observer = null;
+    this.isInitialized = false;
+    this.init();
+  }
+  return (0,_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__["default"])(ViewportAwareDropdown, [{
+    key: "init",
+    value: function init() {
+      if (this.isInitialized) return;
+      this.bindEvents();
+      this.setupMutationObserver();
+      this.isInitialized = true;
+    }
+  }, {
+    key: "bindEvents",
+    value: function bindEvents() {
+      var _this2 = this;
+      var debouncedResize = (0,_global_components_debounce__WEBPACK_IMPORTED_MODULE_4__["default"])(function () {
+        return _this2.updateVisibleDropdowns();
+      }, 100);
+      var debouncedScroll = (0,_global_components_debounce__WEBPACK_IMPORTED_MODULE_4__["default"])(function () {
+        return _this2.updateVisibleDropdowns();
+      }, 50);
+      window.addEventListener('resize', debouncedResize);
+      window.addEventListener('scroll', debouncedScroll);
+    }
+  }, {
+    key: "positionDropdown",
+    value: function positionDropdown(trigger) {
+      var dropdown = trigger.parentElement.querySelector(this.options.dropdownClass);
+      if (!dropdown) return;
+      dropdown.classList.remove(this.options.upwardClass);
+      var triggerRect = trigger.getBoundingClientRect();
+      var dropdownHeight = dropdown.offsetHeight;
+      var dropdownWidth = dropdown.offsetWidth;
+      var viewportHeight = window.innerHeight;
+      var viewportWidth = window.innerWidth;
+      var spaceBelow = viewportHeight - triggerRect.bottom;
+      var spaceAbove = triggerRect.top;
+      var spaceRight = viewportWidth - triggerRect.left;
+      var spaceLeft = triggerRect.right;
+      var needsUpward = spaceBelow < dropdownHeight + this.options.offset && spaceAbove > spaceBelow;
+      var needsLeft = spaceRight < dropdownWidth && spaceLeft > spaceRight;
+      if (needsUpward) {
+        dropdown.classList.add(this.options.upwardClass);
+      }
+      this.setDropdownPosition(dropdown, needsUpward, needsLeft);
+    }
+  }, {
+    key: "setDropdownPosition",
+    value: function setDropdownPosition(dropdown, upward, left) {
+      var isRTL = document.dir === 'rtl' || document.documentElement.dir === 'rtl';
+      Object.assign(dropdown.style, (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])({
+        position: 'absolute',
+        top: upward ? '' : '100%',
+        bottom: upward ? '100%' : '',
+        left: left && !isRTL || !left && isRTL ? 'auto' : '0',
+        right: left && !isRTL || !left && isRTL ? '0' : 'auto',
+        transform: ''
+      }, upward ? 'marginBottom' : 'marginTop', "".concat(this.options.offset, "px")));
+    }
+  }, {
+    key: "updateVisibleDropdowns",
+    value: function updateVisibleDropdowns() {
+      var _this3 = this;
+      var visibleDropdowns = document.querySelectorAll("".concat(this.options.dropdownClass, ".").concat(this.options.activeClass));
+      visibleDropdowns.forEach(function (dropdown) {
+        var trigger = dropdown.parentElement.querySelector(_this3.options.triggerClass);
+        if (trigger) {
+          _this3.positionDropdown(trigger);
+        }
+      });
+    }
+  }, {
+    key: "setupMutationObserver",
+    value: function setupMutationObserver() {
+      var _this4 = this;
+      if (this.observer) return;
+      this.observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            var target = mutation.target;
+            if (target.classList.contains(_this4.options.dropdownClass) && target.classList.contains(_this4.options.activeClass)) {
+              var trigger = target.parentElement.querySelector(_this4.options.triggerClass);
+              if (trigger) {
+                setTimeout(function () {
+                  return _this4.positionDropdown(trigger);
+                }, _this4.options.mutationDelay);
+              }
+            }
+          }
+          if (mutation.type === 'childList') {
+            mutation.addedNodes.forEach(function (node) {
+              if (node.nodeType === Node.ELEMENT_NODE) {
+                var dropdowns = node.querySelectorAll ? node.querySelectorAll(_this4.options.dropdownClass) : node.matches && node.matches(_this4.options.dropdownClass) ? [node] : [];
+                dropdowns.forEach(function (dropdown) {
+                  var trigger = dropdown.parentElement.querySelector(_this4.options.triggerClass);
+                  if (trigger) {
+                    _this4.attachDropdownEvents(trigger);
+                  }
+                });
+              }
+            });
+          }
+        });
+      });
+      this.observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class']
+      });
+    }
+  }, {
+    key: "attachDropdownEvents",
+    value: function attachDropdownEvents(trigger) {
+      var _this5 = this;
+      if (trigger.dataset.viewportDropdownAttached) return;
+      trigger.addEventListener('click', function (e) {
+        setTimeout(function () {
+          return _this5.positionDropdown(e.target);
+        }, _this5.options.positioningDelay);
+      });
+      trigger.dataset.viewportDropdownAttached = 'true';
+    }
+  }, {
+    key: "initializeAllDropdowns",
+    value: function initializeAllDropdowns() {
+      var _this6 = this;
+      var allTriggers = document.querySelectorAll(this.options.triggerClass);
+      allTriggers.forEach(function (trigger) {
+        _this6.attachDropdownEvents(trigger);
+      });
+    }
+  }, {
+    key: "position",
+    value: function position(trigger) {
+      var element = typeof trigger === 'string' ? document.querySelector(trigger) : trigger;
+      if (element) this.positionDropdown(element);
+    }
+  }, {
+    key: "updateOptions",
+    value: function updateOptions(newOptions) {
+      Object.assign(this.options, newOptions);
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this.observer) {
+        this.observer.disconnect();
+        this.observer = null;
+      }
+      this.isInitialized = false;
+    }
+  }]);
+}();
+var viewportDropdown = new ViewportAwareDropdown();
+
+// Initialize all dropdowns when DOM is ready
+document.addEventListener('DOMContentLoaded', function () {
+  viewportDropdown.initializeAllDropdowns();
+});
 (function ($) {
   window.addEventListener('load', function () {
     //Remove Preload after Window Load
     $('body').removeClass('directorist-preload');
     $('.button.wp-color-result').attr('style', ' ');
+
+    // Escape text for safe HTML insertion (XSS prevention)
+    function escapeHtml(text) {
+      var div = document.createElement('div');
+      div.textContent = text == null ? '' : String(text);
+      return div.innerHTML;
+    }
 
     /* ----------------
           Search Form
@@ -1364,8 +1600,58 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       selectedRadioItem(this);
     });
 
+    // Initialize selected item count for checkboxes that are already checked on page load
+    // Process each dropdown that has checked checkboxes to avoid redundant calls
+    $('.directorist-search-form__top .directorist-search-basic-dropdown-content, .directorist-search-modal .directorist-search-basic-dropdown-content').each(function () {
+      var checkedCheckbox = $(this).find('input[type="checkbox"]:checked');
+      if (checkedCheckbox.length > 0) {
+        // Call once per dropdown with any checked checkbox
+        selectedItemCount(checkedCheckbox.first());
+      }
+    });
+
+    // Initialize selected radio items that are already checked on page load
+    $('.directorist-search-form__top .directorist-search-basic-dropdown input[type="radio"]:checked, .directorist-search-modal .directorist-search-basic-dropdown input[type="radio"]:checked').each(function () {
+      selectedRadioItem(this);
+    });
+
+    // Initialize all input fields that have values on page load
+    $('.directorist-search-form__top .directorist-search-field__input:not(.directorist-search-basic-dropdown), .directorist-search-modal .directorist-search-field__input:not(.directorist-search-basic-dropdown)').each(function () {
+      var inputField = $(this);
+      var inputValue = inputField.val();
+      var searchField = inputField.closest('.directorist-search-field');
+
+      // Check if it's a select field
+      if (inputField.hasClass('directorist-select')) {
+        var selectElement = inputField.find('select');
+        if (selectElement.length) {
+          inputValue = selectElement.val() || selectElement.data('selected-id');
+        }
+      }
+
+      // If field has a value, add appropriate classes
+      if (inputValue && inputValue !== '' && inputValue !== '0') {
+        searchField.addClass('input-has-value');
+        if (!searchField.hasClass('input-is-focused')) {
+          searchField.addClass('input-is-focused');
+        }
+      }
+    });
+
+    // Initialize color picker background colors on page load
+    $('.wp-color-picker, .directorist-color-picker').each(function () {
+      var colorValue = $(this).val();
+      if (colorValue && colorValue !== '') {
+        var colorButton = $(this).closest('.directorist-search-field').find('.wp-color-result');
+        if (colorButton.length) {
+          colorButton.css('background-color', colorValue);
+        }
+      }
+    });
+
     // Basic Search Dropdown Toggle
     $('body').on('click', '.directorist-search-form__top .directorist-search-basic-dropdown-label, .directorist-search-modal .directorist-search-basic-dropdown-label', function (e) {
+      var _this7 = this;
       e.preventDefault();
       var dropDownParent = $(this).closest('.directorist-search-field');
       var dropDownContent = $(this).siblings('.directorist-search-basic-dropdown-content');
@@ -1373,12 +1659,17 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       if (dropDownContent.hasClass('dropdown-content-show')) {
         dropDownParent.addClass('input-is-focused');
         dropDownContent.slideDown();
+        setTimeout(function () {
+          viewportDropdown.position(_this7);
+        }, viewportDropdown.options.animationDelay);
       } else {
         dropDownParent.removeClass('input-is-focused');
         dropDownContent.slideUp();
       }
       // Hide all other open contents
-      $('.directorist-search-basic-dropdown-content.dropdown-content-show').not(dropDownContent).removeClass('dropdown-content-show').slideUp();
+      $('.directorist-search-basic-dropdown-content.dropdown-content-show').not(dropDownContent).each(function () {
+        $(this).removeClass('dropdown-content-show dropdown-upward').slideUp();
+      });
     });
 
     // Dropdown Content Hide on Outside Click
@@ -1387,9 +1678,12 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       var dropDownParent = $('.directorist-search-form-dropdown.input-is-focused');
       var dropDownContent = $('.directorist-search-basic-dropdown-content.dropdown-content-show');
       if (!dropDownRoot.length) {
-        dropDownParent.removeClass('input-is-focused');
-        dropDownContent.removeClass('dropdown-content-show');
-        dropDownContent.slideUp();
+        dropDownParent.each(function () {
+          $(this).removeClass('input-is-focused');
+        });
+        dropDownContent.each(function () {
+          $(this).removeClass('dropdown-content-show dropdown-upward').slideUp();
+        });
       }
     });
 
@@ -1397,19 +1691,23 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
     function initSearchFields() {
       var searchFields = document.querySelectorAll('.directorist-search-field__input:not(.directorist-search-basic-dropdown)');
       searchFields.forEach(function (searchField) {
+        var wrapper = searchField.closest('.directorist-search-field');
+        if (!wrapper) {
+          return;
+        }
         var inputFieldValue = searchField.value;
         if (searchField.classList.contains('directorist-select')) {
           inputFieldValue = searchField.querySelector('select').dataset.selectedId;
         }
         if (inputFieldValue !== '') {
-          searchField.parentElement.classList.add('input-has-value');
-          if (!searchField.parentElement.classList.contains('input-is-focused')) {
-            searchField.parentElement.classList.add('input-is-focused');
+          wrapper.classList.add('input-has-value');
+          if (!wrapper.classList.contains('input-is-focused')) {
+            wrapper.classList.add('input-is-focused');
           }
         } else {
           inputFieldValue = '';
-          if (searchField.parentElement.classList.contains('input-has-value')) {
-            searchField.parentElement.classList.remove('input-has-value');
+          if (wrapper.classList.contains('input-has-value')) {
+            wrapper.classList.remove('input-has-value');
           }
         }
       });
@@ -1649,15 +1947,22 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
     // Searchform Reset Trigger
     if ($('.directorist-btn-reset-js') !== null) {
       $('body').on('click', '.directorist-btn-reset-js', function (e) {
+        var _this8 = this;
         e.preventDefault();
-        // Clear URL params on modal form reset
-        if (this.closest('.directorist-search-modal')) {
-          // Clear only the query parameters
+        setTimeout(function () {
+          // Clear URL params on modal form reset
           var baseUrl = window.location.origin + window.location.pathname;
 
           // Update the URL in the address bar
           window.history.replaceState(null, '', baseUrl);
-        }
+          if (_this8.closest('.directorist-search-modal')) {
+            // Clear only the query parameters
+            var _baseUrl = window.location.origin + window.location.pathname;
+
+            // Update the URL in the address bar
+            window.history.replaceState(null, '', _baseUrl);
+          }
+        }, 300);
 
         // Reset search form values
         if (this.closest('.directorist-contents-wrap')) {
@@ -1679,14 +1984,32 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
     // Search Modal Open
     function searchModalOpen(searchModalParent) {
+      // Modal Overlay
       var modalOverlay = searchModalParent.querySelector('.directorist-search-modal__overlay');
+      // Modal Content
       var modalContent = searchModalParent.querySelector('.directorist-search-modal__contents');
 
-      // Overlay Style
+      // Modal Overlay Style
       modalOverlay.style.cssText = 'opacity: 1; visibility: visible; transition: 0.3s ease;';
 
       // Modal Content Style
-      modalContent.style.cssText = 'opacity: 1; visibility: visible; bottom:0;';
+      modalContent.style.cssText = 'opacity: 1; visibility: visible; bottom: 50%; transform: translate(-50%, 50%)';
+
+      // Check if container width is less than 576px
+      var containerWidth = document.body.offsetWidth;
+      if (containerWidth < 576) {
+        // Check if backdrop is added to body
+        var bodyElement = document.body;
+        var bodyStyles = getComputedStyle(bodyElement);
+        var bodyBackdropStyle = (bodyStyles === null || bodyStyles === void 0 ? void 0 : bodyStyles.backdropFilter) || '';
+        if (bodyBackdropStyle !== 'none' && bodyBackdropStyle !== '') {
+          // If backdrop is added to body, set bottom to 50%
+          modalContent.style.cssText += 'bottom: 50%; transform: translate(-50%, 50%)';
+        } else {
+          // If backdrop is not added to body, set bottom to 0
+          modalContent.style.cssText += 'bottom: 0; transform: translate(-50%, 0)';
+        }
+      }
     }
 
     // Search Modal Close
@@ -1696,7 +2019,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
       // Overlay Style
       if (modalOverlay) {
-        modalOverlay.style.cssText = 'opacity: 0; visibility: hidden; transition: 0.5s ease';
+        modalOverlay.style.cssText = 'opacity: 0; visibility: hidden';
       }
 
       // Modal Content Style
@@ -1905,7 +2228,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
     });
 
     // Listing Type Change
-    $('body').on('click', '.search_listing_types', function (event) {
+    $('body').on('click', '.search_listing_types, .directorist-type-nav__link', function (event) {
       event.preventDefault();
       var parent = $(this).closest('.directorist-search-contents');
       var listing_type = $(this).attr('data-listing_type');
@@ -1956,7 +2279,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
             handleRadiusVisibility();
             directorist_custom_range_slider();
             initSearchFields();
-            (0,_components_category_custom_fields__WEBPACK_IMPORTED_MODULE_4__["default"])($);
+            (0,_components_category_custom_fields__WEBPACK_IMPORTED_MODULE_7__["default"])($);
           }
           var parentAfterAjax = $(this).closest('.directorist-search-contents');
           parentAfterAjax.find('.directorist-search-form-box').removeClass('atbdp-form-fade');
@@ -1970,7 +2293,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
         }
       });
     });
-    (0,_components_category_custom_fields__WEBPACK_IMPORTED_MODULE_4__["default"])($);
+    (0,_components_category_custom_fields__WEBPACK_IMPORTED_MODULE_7__["default"])($);
 
     // Back Button to go back to the previous page
     $('body').on('click', '.directorist-btn__back', function (e) {
@@ -1995,15 +2318,24 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
         radius_search_item_selector = '.directorist-location-js';
       }
 
-      // Now, use jQuery to loop through the elements
-      $(radius_search_item_selector).each(function (index, locationDOM) {
-        var $location = $(locationDOM);
-        var isEmpty = $location.val() === '';
-        var $container = $location.closest('.directorist-contents-wrap').find('.directorist-search-field-radius_search, .directorist-radius-search');
-        $container.css({
-          display: isEmpty ? 'none' : 'block'
+      // Check if radius search item selector elements exist
+      var $radiusSearchItems = $(radius_search_item_selector);
+      if ($radiusSearchItems.length === 0) {
+        // If no elements found, hide all radius search containers
+        $('.directorist-search-field-radius_search, .directorist-radius-search').css({
+          display: 'none'
         });
-      });
+      } else {
+        // Loop through the elements
+        $radiusSearchItems.each(function (index, locationDOM) {
+          var $location = $(locationDOM);
+          var isEmpty = $location.val() === '';
+          var $container = $location.closest('.directorist-contents-wrap').find('.directorist-search-field-radius_search, .directorist-radius-search');
+          $container.css({
+            display: isEmpty ? 'none' : 'block'
+          });
+        });
+      }
     }
 
     // handleRadiusVisibility Trigger
@@ -2117,10 +2449,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
           getResultContainer: getWidgetResultContainer
         }];
         input_fields.forEach(function (field) {
-          if (!$(field.input_elm).length) {
-            return;
-          }
-          $(field.input_elm).on('keyup', (0,_global_components_debounce__WEBPACK_IMPORTED_MODULE_1__["default"])(function (event) {
+          $('body').off('keyup.directoristOpenstreet', field.input_elm).on('keyup.directoristOpenstreet', field.input_elm, (0,_global_components_debounce__WEBPACK_IMPORTED_MODULE_4__["default"])(function (event) {
             event.preventDefault();
             var blockedKeyCodes = [16, 17, 18, 19, 20, 27, 33, 34, 35, 36, 37, 38, 39, 40, 45, 91, 93, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 144, 145];
 
@@ -2141,7 +2470,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
                 display: 'block'
               });
               $.ajax({
-                url: 'https://nominatim.openstreetmap.org/?q=%27+'.concat(search, '+%27&format=json'),
+                url: 'https://nominatim.openstreetmap.org/?q=' + encodeURIComponent(search) + '&format=json&limit=5',
                 type: 'GET',
                 data: {},
                 success: function success(data) {
@@ -2154,7 +2483,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
                   var iconHTML = directorist.icon_markup.replace('##URL##', iconURL).replace('##CLASS##', '');
                   var locationIconHTML = "<span class='location-icon'>" + iconHTML + '</span>';
                   for (var i = 0, len = data.length > 5 ? 5 : data.length; i < len; i++) {
-                    res += '<li><a href="#" data-lat=' + data[i].lat + ' data-lon=' + data[i].lon + '>' + locationIconHTML + "<span class='location-address'>" + data[i].display_name, +'</span></a></li>';
+                    res += '<li><a href="#" data-lat="' + escapeHtml(String(data[i].lat)) + '" data-lon="' + escapeHtml(String(data[i].lon)) + '">' + locationIconHTML + "<span class='location-address'>" + escapeHtml(String(data[i].display_name || '')) + '</span></a></li>';
                   }
                   function displayLocation(position, event) {
                     var lat = position.coords.latitude;
@@ -2254,7 +2583,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
     function directorist_custom_range_slider() {
       var sliders = document.querySelectorAll('.directorist-custom-range-slider');
       sliders.forEach(function (sliderItem) {
-        var _slider$directoristCu, _slider$directoristCu2;
+        var _slider$directoristCu, _slider$directoristCu2, _slider$directoristCu3;
         var slider = sliderItem.querySelector('.directorist-custom-range-slider__slide');
 
         // Skip if already initialized
@@ -2268,6 +2597,8 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
         var sliderRange = sliderItem.querySelector('.directorist-custom-range-slider__range');
         var sliderRangeShow = sliderItem.querySelector('.directorist-custom-range-slider__range__show');
         var sliderRangeValue = sliderItem.querySelector('.directorist-custom-range-slider__wrap .directorist-custom-range-slider__range');
+        var minInputName = (minInput === null || minInput === void 0 ? void 0 : minInput.getAttribute('name')) || '';
+        var maxInputName = (maxInput === null || maxInput === void 0 ? void 0 : maxInput.getAttribute('name')) || '';
         var isRTL = document.dir === 'rtl';
 
         // Flags
@@ -2278,18 +2609,26 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
         // Parse the URL parameters
         var urlParams = new URLSearchParams(window.location.search);
         var customNumberParams = urlParams.get('custom-number');
-        var customRangeMinParams = urlParams.get('directorist-custom-range-slider__value__min');
-        var customRangeMaxParams = urlParams.get('directorist-custom-range-slider__value__max');
+        var rangeFieldName = (sliderRange === null || sliderRange === void 0 ? void 0 : sliderRange.getAttribute('name')) || '';
+        var fieldRangeValueParam = rangeFieldName ? urlParams.get(rangeFieldName) : null;
+        var specificRangeMinParam = minInputName ? urlParams.get(minInputName) : null;
+        var specificRangeMaxParam = maxInputName ? urlParams.get(maxInputName) : null;
+        var globalRangeMinParam = urlParams.get('directorist-custom-range-slider__value__min');
+        var globalRangeMaxParam = urlParams.get('directorist-custom-range-slider__value__max');
+        var effectiveRangeMinParam = specificRangeMinParam !== null && specificRangeMinParam !== void 0 ? specificRangeMinParam : globalRangeMinParam;
+        var effectiveRangeMaxParam = specificRangeMaxParam !== null && specificRangeMaxParam !== void 0 ? specificRangeMaxParam : globalRangeMaxParam;
         var locationDistanceParams = urlParams.get('miles');
-        var milesParams = new URLSearchParams(window.location.search).has('miles');
-        if (locationDistanceParams !== '0-0' && sliderDefaultValue >= 0) {
+        var milesParams = urlParams.has('miles');
+        if (rangeFieldName === 'miles' && locationDistanceParams !== '0-0' && sliderDefaultValue >= 0) {
           sliderRadiusActive = true;
         }
 
         // if already have custom values, then slider is activated
-        if (customNumberParams && customNumberParams !== '0-0') {
+        if (fieldRangeValueParam && fieldRangeValueParam !== '0-0') {
           sliderActivated = true;
-        } else if (customRangeMinParams && customRangeMinParams !== '0' && customRangeMaxParams && customRangeMaxParams !== '0') {
+        } else if (customNumberParams && customNumberParams !== '0-0') {
+          sliderActivated = true;
+        } else if (effectiveRangeMaxParam && effectiveRangeMaxParam !== '0') {
           sliderActivated = true;
         }
         if (typeof directoristCustomRangeSlider === 'undefined') return;
@@ -2313,19 +2652,26 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
           var maxValue = maxInput.value;
 
           // Assign min-max values from custom-range-slider params
-          if (customNumberParams && customNumberParams !== '0-0') {
-            var _customNumberParams$s = customNumberParams.split('-').map(Number),
-              _customNumberParams$s2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_customNumberParams$s, 2),
-              min = _customNumberParams$s2[0],
-              max = _customNumberParams$s2[1];
-
-            // Use the split values as min-max
+          if (fieldRangeValueParam && fieldRangeValueParam !== '0-0') {
+            var _fieldRangeValueParam = fieldRangeValueParam.split('-').map(Number),
+              _fieldRangeValueParam2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_fieldRangeValueParam, 2),
+              min = _fieldRangeValueParam2[0],
+              max = _fieldRangeValueParam2[1];
             minValue = min;
             maxValue = max;
-          } else if (customRangeMinParams && customRangeMaxParams) {
+          } else if (customNumberParams && customNumberParams !== '0-0') {
+            var _customNumberParams$s = customNumberParams.split('-').map(Number),
+              _customNumberParams$s2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_customNumberParams$s, 2),
+              _min = _customNumberParams$s2[0],
+              _max = _customNumberParams$s2[1];
+
+            // Use the split values as min-max
+            minValue = _min;
+            maxValue = _max;
+          } else if (effectiveRangeMinParam && effectiveRangeMaxParam) {
             // Modal Search Form
-            minValue = customRangeMinParams;
-            maxValue = customRangeMaxParams;
+            minValue = effectiveRangeMinParam;
+            maxValue = effectiveRangeMaxParam;
           }
 
           // Initial with [min, max] value
@@ -2373,7 +2719,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
           rangeSliderObserver();
         });
 
-        // Update slider config
+        // Update slider config - update values but don't trigger change during drag
         (_slider$directoristCu2 = slider.directoristCustomRangeSlider) === null || _slider$directoristCu2 === void 0 || _slider$directoristCu2.on('update', function (values, handle) {
           var value = Math.round(values[handle]);
           // Assign min-max value based on handler
@@ -2387,9 +2733,13 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
           if (sliderRangeShow) sliderRangeShow.innerHTML = rangeValue;
           if (sliderRangeValue) {
             sliderRangeValue.setAttribute('value', rangeValue);
-            if (!rangeInitLoad) {
-              $(sliderRangeValue).trigger('change');
-            }
+          }
+        });
+
+        // Trigger change only when dragging ends (mouse/touch released)
+        (_slider$directoristCu3 = slider.directoristCustomRangeSlider) === null || _slider$directoristCu3 === void 0 || _slider$directoristCu3.on('end', function () {
+          if (sliderRangeValue && !rangeInitLoad) {
+            $(sliderRangeValue).trigger('change');
           }
         });
 
@@ -2442,14 +2792,14 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       var radiusSearch = sliderItem.closest('.directorist-search-field-radius_search');
       var defaultValue = slider.getAttribute('default-value') || '0';
       if (radiusSearch) {
-        var _slider$directoristCu3;
+        var _slider$directoristCu4;
         minInput.value = '0';
         maxInput.value = defaultValue;
-        slider === null || slider === void 0 || (_slider$directoristCu3 = slider.directoristCustomRangeSlider) === null || _slider$directoristCu3 === void 0 || _slider$directoristCu3.set([0, defaultValue]); // Set initial values
+        slider === null || slider === void 0 || (_slider$directoristCu4 = slider.directoristCustomRangeSlider) === null || _slider$directoristCu4 === void 0 || _slider$directoristCu4.set([0, defaultValue]); // Set initial values
       } else {
-        var _slider$directoristCu4;
+        var _slider$directoristCu5;
         // Reset values to their initial state
-        slider === null || slider === void 0 || (_slider$directoristCu4 = slider.directoristCustomRangeSlider) === null || _slider$directoristCu4 === void 0 || _slider$directoristCu4.set([0, 0]); // Set initial values
+        slider === null || slider === void 0 || (_slider$directoristCu5 = slider.directoristCustomRangeSlider) === null || _slider$directoristCu5 === void 0 || _slider$directoristCu5.set([0, 0]); // Set initial values
         minInput.value = '0'; // Set initial min value
         maxInput.value = '0'; // Set initial max value
         rangeValue.value = '0-0';
@@ -2485,7 +2835,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       if (directorist.i18n_text.select_listing_map === 'google') {
         var url = directorist.ajax_url;
       } else {
-        url = "https://nominatim.openstreetmap.org/?postalcode=".concat(zipcode, "&format=json&addressdetails=1");
+        url = "https://nominatim.openstreetmap.org/?postalcode=".concat(encodeURIComponent(zipcode), "&format=json&addressdetails=1");
         $('.directorist-country').css({
           display: 'block'
         });
@@ -2525,7 +2875,8 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
               zipcode_search.find('.zip-cityLng').val(lon);
             } else {
               for (var i = 0; i < data.length; i++) {
-                res += "<li><a href=\"#\" data-lat=".concat(data[i].lat, " data-lon=").concat(data[i].lon, ">").concat(data[i].address.country, "</a></li>");
+                var country = data[i] && data[i].address && data[i].address.country ? data[i].address.country : '';
+                res += '<li><a href="#" data-lat="' + escapeHtml(String(data[i].lat)) + '" data-lon="' + escapeHtml(String(data[i].lon)) + '">' + escapeHtml(country) + '</a></li>';
               }
             }
             $(country_suggest).html("<ul>".concat(res, "</ul>"));

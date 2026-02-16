@@ -14,6 +14,9 @@ class Localized_Data {
         // Load in frontend and backend
         wp_localize_script( 'jquery', 'directorist', self::public_data() );
 
+        // Load formgent integration data for frontend
+        wp_localize_script( 'directorist-formgent-integration', 'directoristFormgentData', self::formgent_data() );
+
         // Load in backend only
         if ( is_admin() ) {
             wp_localize_script( 'jquery', 'directorist_admin', self::admin_data() );
@@ -38,7 +41,7 @@ class Localized_Data {
                 'Referer-Page-ID' => get_the_ID(),
             ]
         ];
-        
+
         return $data;
     }
 
@@ -94,6 +97,7 @@ class Localized_Data {
             'assets_url'                      => DIRECTORIST_ASSETS,
             'home_url'                        => home_url(),
             'rest_url'                        => rest_url(),
+            'rest_nonce'                      => wp_create_nonce( 'wp_rest' ),
             'nonceName'                       => 'atbdp_nonce_js',
             'login_alert_message'             => __( 'Sorry, you need to login first.', 'directorist' ),
             'rtl'                             => is_rtl() ? 'true' : 'false',
@@ -127,7 +131,7 @@ class Localized_Data {
             'currentDate'                     => get_the_date(),
             'enable_reviewer_content'         => $enable_reviewer_content,
             'add_listing_data'                => self::get_add_listings_data(),
-            'lazy_load_taxonomy_fields'       => get_directorist_option( 'lazy_load_taxonomy_fields', false, true ),
+            'lazy_load_taxonomy_fields'       => false,
             'current_page_id'                 => get_the_ID(),
             'icon_markup'                     => '<i class="directorist-icon-mask ##CLASS##" aria-hidden="true" style="--directorist-icon: url(##URL##)"></i>',
             'search_form_default_label'       => __( 'Label', 'directorist' ),
@@ -231,8 +235,8 @@ class Localized_Data {
             'filterByGroupInputLabel'      => __( 'Filter By Icon Pack', 'directorist' ),
             'doneButtonLabel'              => __( 'Done', 'directorist' ),
             'iconGroupLabels'              => [
-                'fontAwesome' => __( 'Font Awesome', 'directorist' ),
                 'lineAwesome' => __( 'Line Awesome', 'directorist' ),
+                'fontAwesome' => __( 'Font Awesome', 'directorist' ),
             ],
         ];
 
@@ -351,5 +355,15 @@ class Localized_Data {
         }
 
         return $relation;
+    }
+
+    public static function formgent_data() {
+        $data = [
+            'strings' => [
+                'enquiries' => __( 'Enquiries', 'directorist' ),
+            ]
+        ];
+
+        return apply_filters( 'directorist_formgent_data', $data );
     }
 }
