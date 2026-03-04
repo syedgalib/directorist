@@ -7,7 +7,7 @@ const commonConfig = {
 	resolve: {
 		extensions: ['.js', '.vue'],
 		alias: {
-			vue$: 'vue/dist/vue.esm.js',
+			vue$: 'vue/dist/vue.runtime.esm-bundler.js',
 		},
 	},
 	plugins: [new VueLoaderPlugin()],

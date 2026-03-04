@@ -54,8 +54,8 @@
       >
         {{ default_option.label }}
       </option>
-      <template v-for="(option, option_key) in theOptions">
-        <option :key="option_key" :value="option.value">
+      <template v-for="(option, option_key) in theOptions" :key="option_key">
+        <option :value="option.value">
           {{ option.label }}
         </option>
       </template>
