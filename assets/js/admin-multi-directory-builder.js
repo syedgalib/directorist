@@ -24557,8 +24557,245 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   render: function() { return /* binding */ render; },
 /* harmony export */   staticRenderFns: function() { return /* binding */ staticRenderFns; }
 /* harmony export */ });
-var render = function render() {};
-var staticRenderFns = [];
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "cptm-builder-section"
+  }, [_vm.widgetCardOptionsWindowActiveStatus || _vm.widgetOptionsWindowActiveStatus ? _c('div', {
+    staticClass: "cptm-options-area"
+  }, [_c('options-window', _vm._b({
+    attrs: {
+      "active": _vm.widgetCardOptionsWindowActiveStatus
+    },
+    on: {
+      "close": function close($event) {
+        return _vm.closeCardWidgetOptionsWindow();
+      }
+    }
+  }, 'options-window', _vm.widgetCardOptionsWindow, false)), _vm._v(" "), _c('options-window', _vm._b({
+    attrs: {
+      "active": _vm.widgetOptionsWindowActiveStatus
+    },
+    on: {
+      "update": function update($event) {
+        return _vm.updateWidgetOptionsData($event, _vm.widgetOptionsWindow);
+      },
+      "close": function close($event) {
+        return _vm.closeWidgetOptionsWindow();
+      }
+    }
+  }, 'options-window', _vm.widgetOptionsWindow, false))], 1) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "cptm-preview-area"
+  }, [_c('div', {
+    staticClass: "cptm-card-preview-area-wrap"
+  }, [_c('div', {
+    staticClass: "cptm-card-preview-widget"
+  }, [_c('div', {
+    staticClass: "cptm-title-bar"
+  }, [_c('div', {
+    staticClass: "cptm-title-bar-headings cptm-card-light"
+  }, [Object.keys(_vm.card_options.general).length ? _c('div', {
+    staticClass: "cptm-card-options-widgets-area"
+  }, [_vm._l(_vm.card_options.general, function (widget, widget_key) {
+    return [_c(widget.type + '-card-widget', {
+      key: widget_key,
+      tag: "component",
+      attrs: {
+        "label": _vm.getWidgetLabel(widget),
+        "canMove": false,
+        "canTrash": false
+      },
+      on: {
+        "edit": function edit($event) {
+          return _vm.editOption(_vm.card_options.general, widget_key);
+        }
+      }
+    })];
+  })], 2) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "cptm-title-bar-actions"
+  }, [_c('div', {
+    staticClass: "cptm-card-preview-quick-action"
+  }, [_c('card-widget-placeholder', {
+    attrs: {
+      "id": "listings_header_quick_actions",
+      "containerClass": "cptm-card-preview-quick-action-placeholder cptm-card-light",
+      "label": _vm.local_layout.listings_header.quick_actions.label,
+      "availableWidgets": _vm.theAvailableWidgets,
+      "activeWidgets": _vm.active_widgets,
+      "acceptedWidgets": _vm.local_layout.listings_header.quick_actions.acceptedWidgets,
+      "selectedWidgets": _vm.local_layout.listings_header.quick_actions.selectedWidgets,
+      "maxWidget": _vm.local_layout.listings_header.quick_actions.maxWidget,
+      "showWidgetsPickerWindow": _vm.getActiveInsertWindowStatus('listings_header_quick_actions'),
+      "widgetDropable": _vm.widgetIsDropable(_vm.local_layout.listings_header.quick_actions)
+    },
+    on: {
+      "insert-widget": function insertWidget($event) {
+        return _vm.insertWidget($event, _vm.local_layout.listings_header.quick_actions);
+      },
+      "drag-widget": function dragWidget($event) {
+        return _vm.onDragStartWidget($event, _vm.local_layout.listings_header.quick_actions);
+      },
+      "drop-widget": function dropWidget($event) {
+        return _vm.appendWidget($event, _vm.local_layout.listings_header.quick_actions);
+      },
+      "dragend-widget": function dragendWidget($event) {
+        return _vm.onDragEndWidget();
+      },
+      "edit-widget": function editWidget($event) {
+        return _vm.editWidget($event);
+      },
+      "trash-widget": function trashWidget($event) {
+        return _vm.trashWidget($event, _vm.local_layout.listings_header.quick_actions);
+      },
+      "placeholder-on-drop": function placeholderOnDrop($event) {
+        return _vm.handleDropOnPlaceholder(_vm.local_layout.listings_header.quick_actions);
+      },
+      "placeholder-on-dragover": function placeholderOnDragover($event) {
+        return _vm.handleDragOverOnPlaceholder(_vm.local_layout.listings_header.quick_actions);
+      },
+      "placeholder-on-dragenter": function placeholderOnDragenter($event) {
+        return _vm.handleDragEnterOnPlaceholder(_vm.local_layout.listings_header.quick_actions);
+      },
+      "placeholder-on-dragleave": function placeholderOnDragleave($event) {
+        return _vm.handleDragleaveOnPlaceholder(_vm.local_layout.listings_header.quick_actions);
+      },
+      "open-widgets-picker-window": function openWidgetsPickerWindow($event) {
+        return _vm.activeInsertWindow('listings_header_quick_actions');
+      },
+      "close-widgets-picker-window": function closeWidgetsPickerWindow($event) {
+        return _vm.closeInsertWindow();
+      }
+    }
+  })], 1)])]), _vm._v(" "), _c('div', {
+    staticClass: "cptm-listing-card-preview-header"
+  }, [_c('div', {
+    staticClass: "cptm-card-preview-thumbnail"
+  }, [_c('div', {
+    staticClass: "cptm-card-preview-thumbnail-overlay"
+  }, [_c('div', {
+    staticClass: "cptm-card-preview-thumbnail-placeholer"
+  }, [_c('card-widget-placeholder', {
+    attrs: {
+      "id": "listings_header_thumbnail",
+      "containerClass": "cptm-card-preview-thumbnail-placeholder cptm-card-dark",
+      "label": _vm.local_layout.listings_header.thumbnail.label,
+      "availableWidgets": _vm.theAvailableWidgets,
+      "activeWidgets": _vm.active_widgets,
+      "acceptedWidgets": _vm.local_layout.listings_header.thumbnail.acceptedWidgets,
+      "selectedWidgets": _vm.local_layout.listings_header.thumbnail.selectedWidgets,
+      "maxWidget": _vm.local_layout.listings_header.thumbnail.maxWidget,
+      "showWidgetsPickerWindow": _vm.getActiveInsertWindowStatus('listings_header_thumbnail'),
+      "widgetDropable": _vm.widgetIsDropable(_vm.local_layout.listings_header.thumbnail)
+    },
+    on: {
+      "insert-widget": function insertWidget($event) {
+        return _vm.insertWidget($event, _vm.local_layout.listings_header.thumbnail);
+      },
+      "drag-widget": function dragWidget($event) {
+        return _vm.onDragStartWidget($event, _vm.local_layout.listings_header.thumbnail);
+      },
+      "drop-widget": function dropWidget($event) {
+        return _vm.appendWidget($event, _vm.local_layout.listings_header.thumbnail);
+      },
+      "dragend-widget": function dragendWidget($event) {
+        return _vm.onDragEndWidget();
+      },
+      "edit-widget": function editWidget($event) {
+        return _vm.editWidget($event);
+      },
+      "trash-widget": function trashWidget($event) {
+        return _vm.trashWidget($event, _vm.local_layout.listings_header.thumbnail);
+      },
+      "placeholder-on-drop": function placeholderOnDrop($event) {
+        return _vm.handleDropOnPlaceholder(_vm.local_layout.listings_header.thumbnail);
+      },
+      "placeholder-on-dragover": function placeholderOnDragover($event) {
+        return _vm.handleDragOverOnPlaceholder(_vm.local_layout.listings_header.thumbnail);
+      },
+      "placeholder-on-dragenter": function placeholderOnDragenter($event) {
+        return _vm.handleDragEnterOnPlaceholder(_vm.local_layout.listings_header.thumbnail);
+      },
+      "open-widgets-picker-window": function openWidgetsPickerWindow($event) {
+        return _vm.activeInsertWindow('listings_header_thumbnail');
+      },
+      "close-widgets-picker-window": function closeWidgetsPickerWindow($event) {
+        return _vm.closeInsertWindow();
+      }
+    }
+  })], 1), _vm._v(" "), _vm._m(0)])])]), _vm._v(" "), _c('div', {
+    staticClass: "cptm-listing-card-preview-footer"
+  }, [_c('card-widget-placeholder', {
+    attrs: {
+      "id": "listings_header_quick_info",
+      "containerClass": "cptm-listing-card-preview-quick-info-placeholder cptm-card-light",
+      "label": _vm.local_layout.listings_header.quick_info.label,
+      "availableWidgets": _vm.theAvailableWidgets,
+      "activeWidgets": _vm.active_widgets,
+      "acceptedWidgets": _vm.local_layout.listings_header.quick_info.acceptedWidgets,
+      "selectedWidgets": _vm.local_layout.listings_header.quick_info.selectedWidgets,
+      "maxWidget": _vm.local_layout.listings_header.quick_info.maxWidget,
+      "showWidgetsPickerWindow": _vm.getActiveInsertWindowStatus('listings_header_quick_info'),
+      "widgetDropable": _vm.widgetIsDropable(_vm.local_layout.listings_header.quick_info)
+    },
+    on: {
+      "insert-widget": function insertWidget($event) {
+        return _vm.insertWidget($event, _vm.local_layout.listings_header.quick_info);
+      },
+      "drag-widget": function dragWidget($event) {
+        return _vm.onDragStartWidget($event, _vm.local_layout.listings_header.quick_info);
+      },
+      "drop-widget": function dropWidget($event) {
+        return _vm.appendWidget($event, _vm.local_layout.listings_header.quick_info);
+      },
+      "dragend-widget": function dragendWidget($event) {
+        return _vm.onDragEndWidget();
+      },
+      "edit-widget": function editWidget($event) {
+        return _vm.editWidget($event);
+      },
+      "trash-widget": function trashWidget($event) {
+        return _vm.trashWidget($event, _vm.local_layout.listings_header.quick_info);
+      },
+      "placeholder-on-drop": function placeholderOnDrop($event) {
+        return _vm.handleDropOnPlaceholder(_vm.local_layout.listings_header.quick_info);
+      },
+      "open-widgets-picker-window": function openWidgetsPickerWindow($event) {
+        return _vm.activeInsertWindow('listings_header_quick_info');
+      },
+      "close-widgets-picker-window": function closeWidgetsPickerWindow($event) {
+        return _vm.closeInsertWindow();
+      }
+    }
+  })], 1), _vm._v(" "), Object.keys(_vm.card_options.content_settings).length ? _c('div', {
+    staticClass: "cptm-card-options-widgets-area"
+  }, [_vm._l(_vm.card_options.content_settings, function (widget, widget_key) {
+    return [_c(widget.type + '-card-widget', {
+      key: widget_key,
+      tag: "component",
+      attrs: {
+        "label": _vm.getWidgetLabel(widget),
+        "canMove": false,
+        "canTrash": false
+      },
+      on: {
+        "edit": function edit($event) {
+          return _vm.editOption(_vm.card_options.content_settings, widget_key);
+        }
+      }
+    })];
+  })], 2) : _vm._e()])])])]);
+};
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "cptm-card-preview-thumbnail-bg"
+  }, [_c('span', {
+    staticClass: "uil uil-scenery"
+  })]);
+}];
+render._withStripped = true;
 
 
 /***/ }),
@@ -24953,8 +25190,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   render: function() { return /* binding */ render; },
 /* harmony export */   staticRenderFns: function() { return /* binding */ staticRenderFns; }
 /* harmony export */ });
-var render = function render() {};
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "cptm-multi-option-group"
+  }, [_vm.label.length ? _c('h3', {
+    staticClass: "cptm-multi-option-label"
+  }, [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _vm._l(_vm.local_fields, function (field, field_key) {
+    return [_c(field.type + '-field', _vm._b({
+      key: field_key,
+      tag: "component",
+      on: {
+        "update": function update($event) {
+          return _vm.updateValue(field_key, $event);
+        }
+      }
+    }, 'component', field, false))];
+  })], 2);
+};
 var staticRenderFns = [];
+render._withStripped = true;
 
 
 /***/ }),
@@ -25527,8 +25783,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   render: function() { return /* binding */ render; },
 /* harmony export */   staticRenderFns: function() { return /* binding */ staticRenderFns; }
 /* harmony export */ });
-var render = function render() {};
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "cptm-multi-option-group"
+  }, [_c('h3', {
+    staticClass: "cptm-multi-option-label"
+  }, [_vm._v(_vm._s(_vm.label))]), _vm._v(" "), _vm._l(_vm.theActiveGroups, function (option_group, option_group_key) {
+    return [_c('div', {
+      key: option_group_key,
+      staticClass: "cptm-multi-option-group-section"
+    }, [_c('h3', [_vm._v("# " + _vm._s(option_group_key + 1))]), _vm._v(" "), _vm._l(option_group, function (option, option_key) {
+      return [_c(option.type + '-field', _vm._b({
+        key: "".concat(_vm.fieldId, "_").concat(option_key),
+        tag: "component",
+        attrs: {
+          "root": option_group,
+          "validation": _vm.getValidation(option_key, option_group_key, option),
+          "value": option.value
+        },
+        on: {
+          "update": function update($event) {
+            return _vm.updateValue(option_group_key, option_key, $event);
+          }
+        }
+      }, 'component', _vm.getSanitizedOption(option), false))];
+    }), _vm._v(" "), _c('p', {
+      staticStyle: {
+        "text-align": "right"
+      }
+    }, [_c('button', {
+      staticClass: "cptm-btn cptm-btn-secondery",
+      attrs: {
+        "type": "button"
+      },
+      on: {
+        "click": function click($event) {
+          return _vm.removeOptionGroup(option_group_key);
+        }
+      }
+    }, [_vm._v("\n                    " + _vm._s(_vm.removeButtonLabel) + "\n                ")])])], 2)];
+  }), _vm._v(" "), _c('button', {
+    staticClass: "cptm-btn cptm-btn-primary",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function click($event) {
+        return _vm.addNewOptionGroup();
+      }
+    }
+  }, [_vm._v("\n        " + _vm._s(_vm.addNewButtonLabel) + "\n    ")])], 2);
+};
 var staticRenderFns = [];
+render._withStripped = true;
 
 
 /***/ }),
@@ -28453,8 +28762,105 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   render: function() { return /* binding */ render; },
 /* harmony export */   staticRenderFns: function() { return /* binding */ staticRenderFns; }
 /* harmony export */ });
-var render = function render() {};
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "cptm-form-group",
+    class: _vm.formGroupClass
+  }, [_vm.label.length ? _c('label', [_c(_vm.labelType, {
+    tag: "component"
+  }, [_vm._v(_vm._s(_vm.label))])], 1) : _vm._e(), _vm._v(" "), _vm.description.length ? _c('p', {
+    staticClass: "cptm-form-group-info",
+    domProps: {
+      "innerHTML": _vm._s(_vm.description)
+    }
+  }) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "directorist_dropdown",
+    class: (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, '--open', _vm.show_option_modal)
+  }, [_c('a', {
+    staticClass: "directorist_dropdown-toggle",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function click($event) {
+        $event.preventDefault();
+        return _vm.toggleTheOptionModal();
+      }
+    }
+  }, [_c('span', {
+    staticClass: "directorist_dropdown-toggle__text"
+  }, [_vm._v(_vm._s(_vm.theCurrentOptionLabel))])]), _vm._v(" "), _vm.theOptions ? _c('div', {
+    staticClass: "directorist_dropdown-option",
+    class: (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, '--show', _vm.show_option_modal)
+  }, [_c('ul', _vm._l(_vm.theOptions, function (option, option_key) {
+    return _c('li', {
+      key: option_key
+    }, [_c('a', {
+      class: {
+        active: option.value == _vm.value ? true : false
+      },
+      attrs: {
+        "href": "#"
+      },
+      domProps: {
+        "innerHTML": _vm._s(option.label ? option.label : '')
+      },
+      on: {
+        "click": function click($event) {
+          $event.preventDefault();
+          return _vm.updateOption(option.value);
+        }
+      }
+    })]);
+  }), 0)]) : _vm._e()]), _vm._v(" "), _c('select', {
+    staticClass: "cptm-d-none",
+    domProps: {
+      "value": _vm.value
+    },
+    on: {
+      "change": function change($event) {
+        return _vm.update_value($event.target.value);
+      }
+    }
+  }, [_vm.showDefaultOption && _vm.default_option ? _c('option', {
+    domProps: {
+      "value": _vm.default_option.value
+    }
+  }, [_vm._v("\n      " + _vm._s(_vm.default_option.label) + "\n    ")]) : _vm._e(), _vm._v(" "), _vm._l(_vm.theOptions, function (option, option_key) {
+    return [_c('option', {
+      key: option_key,
+      domProps: {
+        "value": option.value
+      }
+    }, [_vm._v("\n        " + _vm._s(option.label) + "\n      ")])];
+  })], 2), _vm._v(" "), _c('form-field-validatior', {
+    attrs: {
+      "section-id": _vm.sectionId,
+      "field-id": _vm.fieldId,
+      "root": _vm.root,
+      "value": _vm.value,
+      "rules": _vm.rules
+    },
+    on: {
+      "validate": function validate($event) {
+        return _vm.$emit('validate', $event);
+      }
+    },
+    model: {
+      value: _vm.validationLog,
+      callback: function callback($$v) {
+        _vm.validationLog = $$v;
+      },
+      expression: "validationLog"
+    }
+  })], 1);
+};
 var staticRenderFns = [];
+render._withStripped = true;
 
 
 /***/ }),

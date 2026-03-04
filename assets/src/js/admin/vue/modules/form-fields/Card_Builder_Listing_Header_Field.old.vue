@@ -22,9 +22,10 @@
           <div class="cptm-title-bar">
             <div class="cptm-title-bar-headings cptm-card-light">
               <div class="cptm-card-options-widgets-area" v-if="Object.keys( card_options.general ).length">
-                <template v-for="( widget, widget_key ) in card_options.general" :key="widget_key">
+                <template v-for="( widget, widget_key ) in card_options.general">
                   <component
                     :is="widget.type + '-card-widget'"
+                    :key="widget_key"
                     :label="getWidgetLabel( widget )"
                     :canMove="false"
                     :canTrash="false"
@@ -129,9 +130,10 @@
           </div>
 
           <div class="cptm-card-options-widgets-area" v-if="Object.keys( card_options.content_settings ).length">
-            <template v-for="( widget, widget_key ) in card_options.content_settings" :key="widget_key">
+            <template v-for="( widget, widget_key ) in card_options.content_settings">
               <component
                 :is="widget.type + '-card-widget'"
+                :key="widget_key"
                 :label="getWidgetLabel( widget )"
                 :canMove="false"
                 :canTrash="false"

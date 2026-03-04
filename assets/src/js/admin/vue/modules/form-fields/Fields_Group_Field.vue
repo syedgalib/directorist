@@ -1,9 +1,10 @@
 <template>
     <div class="cptm-multi-option-group">
         <h3 class="cptm-multi-option-label" v-if="label.length">{{ label }}</h3>
-        <template v-for="( field, field_key ) in local_fields" :key="field_key">
+        <template v-for="( field, field_key ) in local_fields">
             <component
                 :is="field.type + '-field'"
+                :key="field_key"
                 v-bind="field"
                 @update="updateValue( field_key, $event )">
             </component>

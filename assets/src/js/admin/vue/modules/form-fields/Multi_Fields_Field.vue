@@ -1,12 +1,13 @@
 <template>
     <div class="cptm-multi-option-group">
         <h3 class="cptm-multi-option-label">{{ label }}</h3>
-        <template v-for="( option_group, option_group_key ) in theActiveGroups" :key="option_group_key">
-            <div class="cptm-multi-option-group-section">
+        <template v-for="( option_group, option_group_key ) in theActiveGroups">
+            <div class="cptm-multi-option-group-section" :key="option_group_key">
                 <h3># {{ ( option_group_key + 1 ) }}</h3>
-                <template v-for="( option, option_key ) in option_group" :key="`${fieldId}_${option_key}`">
+                <template v-for="( option, option_key ) in option_group">
                     <component
                         :is="option.type + '-field'"
+                        :key="`${fieldId}_${option_key}`"
                         :root="option_group"
                         v-bind="getSanitizedOption( option )"
                         :validation="getValidation( option_key, option_group_key, option )"
