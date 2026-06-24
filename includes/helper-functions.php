@@ -4897,7 +4897,7 @@ function directorist_get_listing_preview_image( $listing_id = 0 ) {
  * @return array
  */
 function directorist_get_listing_gallery_images( $listing_id = 0 ) {
-    $images = get_post_meta( $listing_id, '_listing_img', true );
+    $images = maybe_unserialize( get_post_meta( $listing_id, '_listing_img', true ) );
 
     if ( empty( $images ) || ! is_array( $images ) ) {
         return [];
