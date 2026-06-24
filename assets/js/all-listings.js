@@ -1515,13 +1515,9 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
       type: 'POST',
       data: instant_search_data,
       beforeSend: function beforeSend() {
-        var _searchElm$offset;
         searchElm.find('.directorist-advanced-filter__form .directorist-btn-sm').attr('disabled', true);
         searchElm.find('.directorist-archive-items').addClass('atbdp-form-fade');
         searchElm.find('.directorist-header-bar .directorist-advanced-filter').removeClass('directorist-advanced-filter--show').hide();
-        if (((_searchElm$offset = searchElm.offset()) === null || _searchElm$offset === void 0 ? void 0 : _searchElm$offset.top) > 0) {
-          $(document).scrollTop(searchElm.offset().top);
-        }
         closeAllSearchModal();
       },
       success: function success(html) {

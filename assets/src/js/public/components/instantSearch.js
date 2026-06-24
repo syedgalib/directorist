@@ -63,10 +63,6 @@ import initSearchCategoryCustomFields from './category-custom-fields';
 					.removeClass('directorist-advanced-filter--show')
 					.hide();
 
-				if (searchElm.offset()?.top > 0) {
-					$(document).scrollTop(searchElm.offset().top);
-				}
-
 				closeAllSearchModal();
 			},
 			success: function (html) {
