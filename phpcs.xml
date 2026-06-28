@@ -26,6 +26,9 @@
 	<arg name="extensions" value="php" />
 	<arg name="standard" value="WordPress" />
 
+	<!-- Scan the plugin root when no path is passed on the command line. -->
+	<file>.</file>
+
 	<!-- Exclude paths -->
 	<exclude-pattern>/__*/</exclude-pattern>
 	<exclude-pattern>/.github</exclude-pattern>

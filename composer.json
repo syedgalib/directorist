@@ -26,12 +26,12 @@
 			"composer install --no-cache",
 			"composer permission"
 		],
-		"phpcs": "vendor/bin/phpcs --standard=phpcs.xml",
-		"format": "vendor/bin/phpcbf --standard=phpcs.xml",
-		"sniffer:php8.1": "vendor/bin/phpcs -p . --standard=PHPCompatibilityWP --severity=1 --runtime-set testVersion 8.1- --extensions=php",
+		"phpcs": "phpcs --standard=phpcs.xml",
+		"format": "phpcbf --standard=phpcs.xml",
+		"sniffer:php8.1": "phpcs -p . --standard=PHPCompatibilityWP --severity=1 --runtime-set testVersion 8.1- --extensions=php",
 		"permission": [
-			"chmod +x vendor/bin/phpcs",
-			"chmod +x vendor/bin/phpcbf"
+			"chmod +x phpcs",
+			"chmod +x phpcbf"
 		]
 	}
 }
