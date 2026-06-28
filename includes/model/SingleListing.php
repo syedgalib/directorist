@@ -80,8 +80,8 @@ class Directorist_Single_Listing {
         $single_fields          = directorist_single_listings_contents( 
             $this->type,
             [
-                'listing_id'        => (int) $this->id,
-                'listing_owner_id'  => (int) $this->author_id,
+                'listing_id'       => (int) $this->id,
+                'listing_owner_id' => (int) $this->author_id,
             ]
         );
         $submission_form_fields = directorist_submission_form_fields_raw( $this->type );
@@ -220,7 +220,7 @@ class Directorist_Single_Listing {
             }
 
             if ( 'map' === $field['widget_name'] ) {
-                $address = get_post_meta( $this->id, '_address', true );
+                $address    = get_post_meta( $this->id, '_address', true );
                 $manual_lat = get_post_meta( $this->id, '_manual_lat', true );
                 $manual_lng = get_post_meta( $this->id, '_manual_lng', true );
 
@@ -286,8 +286,8 @@ class Directorist_Single_Listing {
                 $value = true;
             }
         } elseif ( 'image_upload' === $data['widget_name'] ) {
-            $listing_img    =  directorist_get_listing_gallery_images( $this->id );
-            $preview_img    = directorist_get_listing_preview_image( $this->id );
+            $listing_img =  directorist_get_listing_gallery_images( $this->id );
+            $preview_img = directorist_get_listing_preview_image( $this->id );
             if ( $listing_img || $preview_img ) {
                 $value = true;
             }
@@ -332,14 +332,14 @@ class Directorist_Single_Listing {
     }
 
     public function is_custom_field( $data ) {
-        $fields = ['html', 'button', 'checkbox', 'color_picker', 'date', 'file', 'number', 'radio', 'select', 'text', 'textarea', 'time', 'url' ];
+        $fields          = ['html', 'button', 'checkbox', 'color_picker', 'date', 'file', 'number', 'radio', 'select', 'text', 'textarea', 'time', 'url' ];
         $is_custom_field = in_array( $data['widget_name'], $fields ) ? true : false;
         return $is_custom_field;
     }
 
     public function get_custom_field_value( $type, $data ) {
         $result = '';
-        $value = is_array( $data['value'] ) ? join( ",", $data['value'] ) : $data['value'];
+        $value  = is_array( $data['value'] ) ? join( ",", $data['value'] ) : $data['value'];
 
         switch ( $type ) {
             case 'radio':
@@ -360,7 +360,7 @@ class Directorist_Single_Listing {
                 foreach ( $data['options'] as $option ) {
                     $key = $option['option_value'];
                     if ( in_array( $key, explode( ',', $value ) ) ) {
-                        $space = str_repeat( ' ', 1 );
+                        $space          = str_repeat( ' ', 1 );
                         $option_value[] = $space . $option['option_label'];
                     }
                 }
@@ -472,7 +472,7 @@ class Directorist_Single_Listing {
         }
 
         $bricks_meta_key = defined( 'BRICKS_DB_PAGE_CONTENT' ) ? BRICKS_DB_PAGE_CONTENT : '_bricks_page_content_2';
-        $bricks_data = get_post_meta( $page_id, $bricks_meta_key, true );
+        $bricks_data     = get_post_meta( $page_id, $bricks_meta_key, true );
         
         if ( empty( $bricks_data ) || ! is_array( $bricks_data ) ) {
             return false;
@@ -509,7 +509,7 @@ class Directorist_Single_Listing {
                 'icon'  => 'lab la-facebook',
                 'link'  => "https://www.facebook.com/share.php?u={$link}&title={$title}",
             ],
-            'twitter' => [
+            'twitter'  => [
                 'title' => __( 'X', 'directorist' ),
                 'icon'  => 'lab la-twitter',
                 'link'  => 'https://x.com/intent/tweet?text=' . $title . '&amp;url=' . $link,
@@ -527,9 +527,9 @@ class Directorist_Single_Listing {
     public function quick_actions_template() {
 
         $actions = $this->listing_header( '', 'quick-widgets-placeholder', 'quick-action-placeholder' );
-        $args = [
-            'listing'  => $this,
-            'actions'  => $actions,
+        $args    = [
+            'listing' => $this,
+            'actions' => $actions,
         ];
 
         if ( $actions ) {
@@ -564,7 +564,7 @@ class Directorist_Single_Listing {
         if ( ! empty( $submission_form_fields['fields'] ) ) {
             foreach ( $submission_form_fields['fields'] as $field ) {
                 if ( ! empty( $field['widget_name'] ) ) {
-                    $active_form_widgets[] = $field['widget_name'];
+                    $active_form_widgets[]                          = $field['widget_name'];
                     $form_fields_by_widget[ $field['widget_name'] ] = $field;
 
                     // Index button fields by their field_key/widget_key for
@@ -595,9 +595,9 @@ class Directorist_Single_Listing {
                 // multiple button fields, then resolve the real meta key
                 // (field_key) from the matched form field data.
                 if ( 'button' === $widget && $widget_key && isset( $form_fields_by_key[ $widget_key ] ) ) {
-                    $matched_field          = $form_fields_by_key[ $widget_key ];
-                    $action['form_data']    = $matched_field;
-                    $action['field_key']    = ! empty( $matched_field['field_key'] ) ? $matched_field['field_key'] : $widget_key;
+                    $matched_field       = $form_fields_by_key[ $widget_key ];
+                    $action['form_data'] = $matched_field;
+                    $action['field_key'] = ! empty( $matched_field['field_key'] ) ? $matched_field['field_key'] : $widget_key;
                 } elseif ( isset( $form_fields_by_widget[ $widget ] ) ) {
                     $action['form_data'] = $form_fields_by_widget[ $widget ];
                 }
@@ -754,7 +754,7 @@ class Directorist_Single_Listing {
     }
 
     public function has_price_range() {
-        $id = $this->id;
+        $id                 = $this->id;
         $plan_average_price = is_fee_manager_active() ? is_plan_allowed_average_price_range( $this->fm_plan ) : true;
 
         if ( ! empty( $this->price_range ) && ( 'range' === $this->atbd_listing_pricing ) && $plan_average_price ) {
@@ -765,12 +765,12 @@ class Directorist_Single_Listing {
     }
 
     public function price_range_html() {
-        $id = $this->id;
+        $id       = $this->id;
         $currency = directorist_get_currency();
         $c_symbol = atbdp_currency_symbol( $currency );
         $active   = '<span class="directorist-price-active">' . $c_symbol . '</span>';
         $inactive = '<span>' . $c_symbol . '</span>';
-        $output = '';
+        $output   = '';
 
         switch ( $this->price_range ) {
             case 'skimming':
@@ -793,8 +793,8 @@ class Directorist_Single_Listing {
     }
 
     public function contact_owner_form_disabled() {
-        $author_id          = get_post_field( 'post_author', $this->id );
-        $hide_contact_form  = get_user_meta( $author_id, 'directorist_hide_contact_form', true );
+        $author_id         = get_post_field( 'post_author', $this->id );
+        $hide_contact_form = get_user_meta( $author_id, 'directorist_hide_contact_form', true );
 
         if ( ! empty( $hide_contact_form ) && 'yes' == $hide_contact_form ) {
             return true;
@@ -805,11 +805,11 @@ class Directorist_Single_Listing {
 
     public function contact_owner_fields( $field_data = [] ) {
         $default_fields = [
-            'name' => [
-                'enable' => true,
+            'name'    => [
+                'enable'      => true,
                 'placeholder' => __( 'Name', 'directorist' ),
             ],
-            'email' => [
+            'email'   => [
                 'placeholder' => __( 'Email', 'directorist' ),
             ],
             'message' => [
@@ -863,12 +863,12 @@ class Directorist_Single_Listing {
 
     public function author_info( $arg ) {
         $author_id = $this->author_id;
-        $result = '';
+        $result    = '';
 
         switch ( $arg ) {
             case 'member_since':
                 $user_registered = get_the_author_meta( 'user_registered', $author_id );
-                $result = human_time_diff( strtotime( $user_registered ), current_time( 'timestamp' ) );
+                $result          = human_time_diff( strtotime( $user_registered ), current_time( 'timestamp' ) );
             break;
 
             case 'name':
@@ -925,7 +925,7 @@ class Directorist_Single_Listing {
             $before = $symbol;
         }
 
-        $price = $before . atbdp_format_amount( $this->price, $allow_decimal ) . $after;
+        $price      = $before . atbdp_format_amount( $this->price, $allow_decimal ) . $after;
         $price_html = apply_filters( 'atbdp_listing_price', sprintf( "<span class='directorist-listing-price'>%s</span>", $price ) );
         return $price_html;
     }
@@ -1004,14 +1004,14 @@ class Directorist_Single_Listing {
     }
 
     public function edit_link() {
-        $id = $this->id;
+        $id       = $this->id;
         $redirect = '';
         if ( isset( $_GET['redirect'] ) ) {
             // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $redirect = wp_validate_redirect( wp_unslash( $_GET['redirect'] ), '' );
         }
         
-        $payment = isset( $_GET['payment'] ) ? sanitize_text_field( wp_unslash( $_GET['payment'] ) ) : '';
+        $payment   = isset( $_GET['payment'] ) ? sanitize_text_field( wp_unslash( $_GET['payment'] ) ) : '';
         $edit_link = ! empty( $payment ) ? add_query_arg( 'redirect', $redirect, ATBDP_Permalink::get_edit_listing_page_link( $id ) ) : ATBDP_Permalink::get_edit_listing_page_link( $id );
         
         return $edit_link;
@@ -1022,7 +1022,7 @@ class Directorist_Single_Listing {
     }
 
     public function current_user_is_author() {
-        $id = $this->id;
+        $id        = $this->id;
         $author_id = get_post_field( 'post_author', $id );
 
         if ( is_user_logged_in() && $author_id == get_current_user_id() ) {
@@ -1127,15 +1127,15 @@ class Directorist_Single_Listing {
 
     public function header_template() {
         
-        $display_title     = $this->listing_header( 'title', 'listing-title-placeholder' );
-        $args = [
-                'listing'           => $this,
-                'use_listing_title' => true,
-                'section_title'     => '',
-                'section_icon'      => '',
-                'display_title'     => $display_title,
-                'display_tagline'   => ! empty( $display_title['enable_tagline'] ) ? $display_title['enable_tagline'] : false,
-                'display_content'   => false,
+        $display_title = $this->listing_header( 'title', 'listing-title-placeholder' );
+        $args          = [
+            'listing'           => $this,
+            'use_listing_title' => true,
+            'section_title'     => '',
+            'section_icon'      => '',
+            'display_title'     => $display_title,
+            'display_tagline'   => ! empty( $display_title['enable_tagline'] ) ? $display_title['enable_tagline'] : false,
+            'display_content'   => false,
         ];
 
         return Helper::get_template( 'single/header', $args );
@@ -1252,7 +1252,7 @@ class Directorist_Single_Listing {
                         $existing_attrs = trim( $existing_attrs );
                     }
                     
-                    $attributes = ! empty( $existing_attrs ) ? $existing_attrs . ' ' : '';
+                    $attributes  = ! empty( $existing_attrs ) ? $existing_attrs . ' ' : '';
                     $attributes .= 'src="' . esc_url( $url ) . '"';
                     
                     $inner_content = preg_replace( '/<a[^>]*>.*?<\/a>/is', '', $matches[3] );
@@ -1286,18 +1286,18 @@ class Directorist_Single_Listing {
             break;
 
             case 'file':
-                $done = str_replace( '|||', '', $field_details );
+                $done     = str_replace( '|||', '', $field_details );
                 $name_arr = explode( '/', $done );
                 $filename = end( $name_arr );
-                $result = sprintf( '<a href="%s" target="_blank" download>%s</a>', esc_url( $done ), $filename );
+                $result   = sprintf( '<a href="%s" target="_blank" download>%s</a>', esc_url( $done ), $filename );
             break;
 
             case 'checkbox':
                 $choices = get_post_meta( $field_id, 'choices', true );
                 $choices = explode( "\n", $choices );
-                $values = explode( "\n", $field_details );
-                $values = array_map( 'trim', $values );
-                $output = [];
+                $values  = explode( "\n", $field_details );
+                $values  = array_map( 'trim', $values );
+                $output  = [];
                 foreach ( $choices as $choice ) {
                     if ( strpos( $choice, ':' ) !== false ) {
                         $_choice = explode( ':', $choice );
@@ -1311,7 +1311,7 @@ class Directorist_Single_Listing {
                     }
                     $_checked = '';
                     if ( in_array( $_value, $values ) ) {
-                        $space = str_repeat( ' ', 1 );
+                        $space    = str_repeat( ' ', 1 );
                         $output[] = "{$space}$_value";
                     }
                 }
@@ -1337,14 +1337,14 @@ class Directorist_Single_Listing {
     }
 
     public function map_data() {
-        $id      = $this->id;
+        $id = $this->id;
 
         $manual_lat = get_post_meta( $id, '_manual_lat', true );
         $manual_lng = get_post_meta( $id, '_manual_lng', true );
         $phone      = get_post_meta( $id, '_phone', true );
 
         $address = get_post_meta( $id, '_address', true );
-        $ad = ! empty( $address ) ? esc_html( $address ) : '';
+        $ad      = ! empty( $address ) ? esc_html( $address ) : '';
 
         $display_map_info           = apply_filters( 'atbdp_listing_map_info_window', get_directorist_option( 'display_map_info', 1 ) );
         $display_image_map          = get_directorist_option( 'display_image_map', 1 );
@@ -1366,13 +1366,13 @@ class Directorist_Single_Listing {
 
         if ( ! empty( $listing_prv_img ) ) {
             $cropped_image = atbdp_image_cropping( $listing_prv_img, 150, 150, true, 100 );
-            $img_url = ! empty( $cropped_image['url'] ) ? $cropped_image['url'] : atbdp_get_image_source( $listing_prv_img, 'small' );
+            $img_url       = ! empty( $cropped_image['url'] ) ? $cropped_image['url'] : atbdp_get_image_source( $listing_prv_img, 'small' );
         }
 
         if ( empty( $img_url ) && ! empty( $listing_img[0] ) ) {
             $gallery_image_id = (int) $listing_img[0];
-            $cropped_image = atbdp_image_cropping( $gallery_image_id, 150, 150, true, 100 );
-            $img_url = ! empty( $cropped_image['url'] ) ? $cropped_image['url'] : atbdp_get_image_source( $gallery_image_id, 'small' );
+            $cropped_image    = atbdp_image_cropping( $gallery_image_id, 150, 150, true, 100 );
+            $img_url          = ! empty( $cropped_image['url'] ) ? $cropped_image['url'] : atbdp_get_image_source( $gallery_image_id, 'small' );
         }
 
         if ( empty( $img_url ) ) {
@@ -1394,7 +1394,7 @@ class Directorist_Single_Listing {
             $t = '';
         }
 
-        $info_content = "";
+        $info_content  = "";
         $info_content .= "<div class='map-info-wrapper map-listing-card-single'>";
 
         // favorite badge
@@ -1456,7 +1456,7 @@ class Directorist_Single_Listing {
          */
         $info_content = apply_filters( 'directorist_single_map_info_content', $info_content, $this );
 
-        $cats = get_the_terms( $this->id, ATBDP_CATEGORY );
+        $cats     = get_the_terms( $this->id, ATBDP_CATEGORY );
         $cat_icon = '';
         // if (!empty($cats)) {
         //  $cat_icon = get_cat_icon($cats[0]->term_id);
@@ -1483,8 +1483,8 @@ class Directorist_Single_Listing {
 
     public function get_review_template() {
         // Review
-        $average           = directorist_get_listing_rating( $this->id );
-        $reviews_count     = directorist_get_listing_review_count( $this->id );
+        $average       = directorist_get_listing_rating( $this->id );
+        $reviews_count = directorist_get_listing_review_count( $this->id );
 
         // Icons
         $icon_empty_star = directorist_icon( 'fas fa-star', false, 'star-empty' );
@@ -1557,9 +1557,9 @@ class Directorist_Single_Listing {
 
     public function user_avatar() {
 
-        $user_pro_pic   = get_user_meta( $this->author_id, 'pro_pic', true );
-        $u_pro_pic      = ! empty( $u_pro_pic ) ? wp_get_attachment_image_src( $u_pro_pic, 'thumbnail' ) : '';
-        $author_data    = get_userdata( $this->author_id );
+        $user_pro_pic = get_user_meta( $this->author_id, 'pro_pic', true );
+        $u_pro_pic    = ! empty( $u_pro_pic ) ? wp_get_attachment_image_src( $u_pro_pic, 'thumbnail' ) : '';
+        $author_data  = get_userdata( $this->author_id );
 
         $author_first_name = ! empty( $author_data ) ?  $author_data->first_name : '';
         $author_last_name  = ! empty( $author_data ) ?  $author_data->last_name : '';
@@ -1599,8 +1599,8 @@ class Directorist_Single_Listing {
             }
         }
         $args = [
-            'post_type' => ATBDP_POST_TYPE,
-            'tax_query' => [
+            'post_type'      => ATBDP_POST_TYPE,
+            'tax_query'      => [
                 'relation' => $relationship,
                 [
                     'taxonomy' => ATBDP_CATEGORY,
@@ -1618,17 +1618,17 @@ class Directorist_Single_Listing {
         ];
 
         if ( ! empty( $same_author ) ) {
-            $args['author']  = get_post_field( 'post_author', $id );
+            $args['author'] = get_post_field( 'post_author', $id );
         }
 
-        $meta_queries = [];
+        $meta_queries                   = [];
         $meta_queries['directory_type'] = [
             'key'     => '_directory_type',
             'value'   => $this->type,
             'compare' => '=',
         ];
 
-        $meta_queries = apply_filters( 'atbdp_related_listings_meta_queries', $meta_queries );
+        $meta_queries       = apply_filters( 'atbdp_related_listings_meta_queries', $meta_queries );
         $count_meta_queries = count( $meta_queries );
         if ( $count_meta_queries ) {
             $args['meta_query'] = ( $count_meta_queries > 1 ) ? array_merge( ['relation' => 'AND'], $meta_queries ) : $meta_queries;

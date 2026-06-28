@@ -246,8 +246,8 @@ class License {
         // process form data if submitted
         if ( isset( $_POST['_nonce'] ) && wp_verify_nonce( sanitize_key( wp_unslash( $_POST['_nonce'] ) ), $this->client->name ) ) {
             $form_data = [
-                '_nonce' => sanitize_key( wp_unslash( $_POST['_nonce'] ) ),
-                '_action' => isset( $_POST['_action'] ) ? sanitize_text_field( wp_unslash( $_POST['_action'] ) ) : '',
+                '_nonce'      => sanitize_key( wp_unslash( $_POST['_nonce'] ) ),
+                '_action'     => isset( $_POST['_action'] ) ? sanitize_text_field( wp_unslash( $_POST['_action'] ) ) : '',
                 'license_key' => isset( $_POST['license_key'] ) ? sanitize_text_field( wp_unslash( $_POST['license_key'] ) ) : '',
             ];
             $this->license_form_submit( $form_data );

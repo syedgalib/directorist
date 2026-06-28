@@ -40,7 +40,7 @@ class Builder_Controller extends Abstract_Controller {
                         'type'        => 'integer',
                         'default'     => directorist_get_default_directory()
                     ),
-                    'builder_tab' => array(
+                    'builder_tab'  => array(
                         'description' => __( 'Directory builder tab id.', 'directorist' ),
                         'type'        => 'string',
                         'enum'        => array(
@@ -69,7 +69,7 @@ class Builder_Controller extends Abstract_Controller {
                         'description' => __( 'Directory id.', 'directorist' ),
                         'type'        => 'integer',
                     ),
-                    'builder_tab' => array(
+                    'builder_tab'  => array(
                         'description' => __( 'Directory builder tab id.', 'directorist' ),
                         'type'        => 'string',
                         'enum'        => array(
@@ -206,7 +206,7 @@ class Builder_Controller extends Abstract_Controller {
             'title'      => __( 'Directory Builder.', 'directorist' ),
             'type'       => 'object',
             'properties' => array(
-                'groups'        => array(
+                'groups' => array(
                     'description' => __( 'Listing field groups.', 'directorist' ),
                     'type'        => 'array',
                     'context'     => array( 'view', 'edit' ),
@@ -217,7 +217,7 @@ class Builder_Controller extends Abstract_Controller {
                                 'description' => __( 'Group label.', 'directorist' ),
                                 'type'        => 'string',
                             ),
-                            'fields'  => array(
+                            'fields' => array(
                                 'description' => __( 'Group fields key.', 'directorist' ),
                                 'type'        => 'array',
                                 'items'       => array(
@@ -227,12 +227,12 @@ class Builder_Controller extends Abstract_Controller {
                         ),
                     ),
                 ),
-                'fields'        => array(
+                'fields' => array(
                     'description' => __( 'Listing item fields.', 'directorist' ),
                     'type'        => 'object',
                     'context'     => array( 'view', 'edit' ),
-                    'properties' => array(
-                        '[field_id]'        => array(
+                    'properties'  => array(
+                        '[field_id]' => array(
                             'description' => __( 'Field map.', 'directorist' ),
                             'type'        => 'object',
                         ),

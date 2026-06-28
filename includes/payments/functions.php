@@ -43,12 +43,12 @@ function atbdp_purchase_form_required_fields() {
 function atbdp_get_payment_statuses() {
 
     $statuses = [
-        'created' => __( "Created", 'directorist' ),
-        'pending' => __( "Pending", 'directorist' ),
+        'created'   => __( "Created", 'directorist' ),
+        'pending'   => __( "Pending", 'directorist' ),
         'completed' => __( "Completed", 'directorist' ),
-        'failed' => __( "Failed", 'directorist' ),
+        'failed'    => __( "Failed", 'directorist' ),
         'cancelled' => __( "Cancelled", 'directorist' ),
-        'refunded' => __( "Refunded", 'directorist' ),
+        'refunded'  => __( "Refunded", 'directorist' ),
     ];
 
     return apply_filters( 'atbdp_payment_statuses', $statuses );
@@ -64,12 +64,12 @@ function atbdp_get_payment_statuses() {
 function atbdp_get_payment_bulk_actions() {
 
     $actions = [
-        'set_to_created' => __( "Set Status to Created", 'directorist' ),
-        'set_to_pending' => __( "Set Status to Pending", 'directorist' ),
+        'set_to_created'   => __( "Set Status to Created", 'directorist' ),
+        'set_to_pending'   => __( "Set Status to Pending", 'directorist' ),
         'set_to_completed' => __( "Set Status to Completed", 'directorist' ),
-        'set_to_failed' => __( "Set Status to Failed", 'directorist' ),
+        'set_to_failed'    => __( "Set Status to Failed", 'directorist' ),
         'set_to_cancelled' => __( "Set Status to Cancelled", 'directorist' ),
-        'set_to_refunded' => __( "Set Status to Refunded", 'directorist' ),
+        'set_to_refunded'  => __( "Set Status to Refunded", 'directorist' ),
     ];
 
     return apply_filters( 'atbdp_order_bulk_actions', $actions );
@@ -120,10 +120,10 @@ function atbdp_get_payment_currency_settings() {
 
     // Get the payment currency settings, and use the general currency settings if the payment currency setting is empty.
     $currency_settings = [
-        'currency' => get_directorist_option( 'payment_currency', directorist_get_currency() ),
+        'currency'            => get_directorist_option( 'payment_currency', directorist_get_currency() ),
         'thousands_separator' => get_directorist_option( 'payment_thousand_separator', get_directorist_option( 'g_thousand_separator', ',' ) ),
-        'decimal_separator' => get_directorist_option( 'payment_decimal_separator', get_directorist_option( 'g_decimal_separator', '.' ) ),
-        'position' => get_directorist_option( 'payment_currency_position', directorist_get_currency_position() ),
+        'decimal_separator'   => get_directorist_option( 'payment_decimal_separator', get_directorist_option( 'g_decimal_separator', '.' ) ),
+        'position'            => get_directorist_option( 'payment_currency_position', directorist_get_currency_position() ),
 
     ];
 

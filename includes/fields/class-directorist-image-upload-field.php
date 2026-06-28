@@ -61,7 +61,7 @@ class Image_Upload_Field extends Base_Field {
         $total_size = 0;
 
         foreach ( $new_images as $file ) {
-            $filepath  = realpath( $temp_dir . $file );
+            $filepath = realpath( $temp_dir . $file );
 
             if ( empty( $file ) || ! $filepath ) {
                 continue;
@@ -122,7 +122,7 @@ class Image_Upload_Field extends Base_Field {
         $unit       = 'MB';
 
         if ( $size_in_mb < 1 ) {
-            $unit = 'KB';
+            $unit       = 'KB';
             $size_in_mb = KB_IN_BYTES * $size_in_mb;
         }
 
@@ -134,7 +134,7 @@ class Image_Upload_Field extends Base_Field {
         $unit       = 'MB';
 
         if ( $size_in_mb < 1 ) {
-            $unit = 'KB';
+            $unit       = 'KB';
             $size_in_mb = KB_IN_BYTES * $size_in_mb;
         }
 

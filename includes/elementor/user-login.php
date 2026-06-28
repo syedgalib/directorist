@@ -19,14 +19,14 @@ class Directorist_User_Login extends Custom_Widget_Base {
     public function az_fields() {
         $fields = [
             [
-                'mode'    => 'section_start',
-                'id'      => 'sec_general',
-                'label'   => __( 'General', 'directorist' ),
+                'mode'  => 'section_start',
+                'id'    => 'sec_general',
+                'label' => __( 'General', 'directorist' ),
             ],
             [
-                'type'      => Controls_Manager::HEADING,
-                'id'        => 'sec_heading',
-                'label'     => __( 'This widget works only in Login page. It has no additional elementor settings.', 'directorist' ),
+                'type'  => Controls_Manager::HEADING,
+                'id'    => 'sec_heading',
+                'label' => __( 'This widget works only in Login page. It has no additional elementor settings.', 'directorist' ),
             ],
             [
                 'mode' => 'section_end',

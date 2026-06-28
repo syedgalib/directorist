@@ -324,7 +324,7 @@ if ( ! class_exists( 'ATBDP_Add_Listing' ) ) :
 
                 // Terms & conditions and privacy policy have been merged in v8.
                 if ( ! empty( $posted_data['t_c_check'] ) || ! empty( $posted_data['privacy_policy'] ) ) {
-                    $meta_data['_t_c_check'] = true;
+                    $meta_data['_t_c_check']      = true;
                     $meta_data['_privacy_policy'] = true;
                 }
 
@@ -787,7 +787,7 @@ if ( ! class_exists( 'ATBDP_Add_Listing' ) ) :
                 return;
             }
 
-            $categories    = $field->get_value( $posted_data );
+            $categories   = $field->get_value( $posted_data );
             $category_ids = [];
 
             foreach ( $categories as $category ) {

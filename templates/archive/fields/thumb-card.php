@@ -21,10 +21,10 @@ $background_color  = get_directorist_option( 'prv_background_color', '#fff' );
 $style_component = [];
 
 if ( $by_ratio ) {
-    $padding_top_value = (int) $ratio_height / (int) $ratio_width * 100;
+    $padding_top_value                = (int) $ratio_height / (int) $ratio_width * 100;
     $style_component[ 'padding-top' ] = "{$padding_top_value}%";
 } else {
-    $height_value = (int) $ratio_height;
+    $height_value                = (int) $ratio_height;
     $style_component[ 'height' ] = "{$height_value}px";
 }
 if ( $image_size !== 'full' && ! $blur_background ) {
@@ -40,21 +40,21 @@ foreach ( $style_component as $style_prop => $style_value ) {
 }
 
 $front_wrap_html = "<div class='directorist-thumnail-card-front-wrap'>" . $listings->loop_get_the_thumbnail( 'directorist-thumnail-card-front-img' ) . "</div>";
-$back_wrap_html = "<div class='directorist-thumnail-card-back-wrap'>" . $listings->loop_get_the_thumbnail( 'directorist-thumnail-card-back-img' ) . "</div>";
+$back_wrap_html  = "<div class='directorist-thumnail-card-back-wrap'>" . $listings->loop_get_the_thumbnail( 'directorist-thumnail-card-back-img' ) . "</div>";
 
 
 $blur_bg = ( $blur_background ) ? $back_wrap_html : '';
 
 // Card Contain
-$card_contain_wrap = "<div class='directorist-thumnail-card directorist-card-contain' style='$style'>";
+$card_contain_wrap  = "<div class='directorist-thumnail-card directorist-card-contain' style='$style'>";
 $image_contain_html = $card_contain_wrap . $blur_bg . $front_wrap_html . "</div>";
 
 // Card Cover
-$card_cover_wrap = "<div class='directorist-thumnail-card directorist-card-cover' style='$style'>";
+$card_cover_wrap  = "<div class='directorist-thumnail-card directorist-card-cover' style='$style'>";
 $image_cover_html = $card_cover_wrap . $front_wrap_html . "</div>";
 
 // Card Full
-$card_full_wrap = "<div class='directorist-thumnail-card directorist-card-full' style='$style'>";
+$card_full_wrap  = "<div class='directorist-thumnail-card directorist-card-full' style='$style'>";
 $image_full_html = $card_full_wrap . $front_wrap_html . "</div>";
 
 $the_html = $image_cover_html;

@@ -14,7 +14,7 @@ class Popular_Listings extends \WP_Widget {
         $id_base        = 'bdpl_widget';
         $name           = esc_html__( 'Directorist - Popular Listings', 'directorist' );
         $widget_options =             [
-            'classname' => 'directorist-widget',
+            'classname'   => 'directorist-widget',
             'description' => esc_html__( 'You can show popular listing by this widget', 'directorist' ),
         ];
 
@@ -31,18 +31,18 @@ class Popular_Listings extends \WP_Widget {
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         $fields = [
-            'title'       => [
-                'label'   => esc_html__( 'Title:', 'directorist' ),
-                'type'    => 'text',
+            'title'           => [
+                'label' => esc_html__( 'Title:', 'directorist' ),
+                'type'  => 'text',
             ],
             'pop_listing_num' => [
-                'label'   => esc_html__( 'Number of Listings:', 'directorist' ),
-                'type'    => 'number',
+                'label' => esc_html__( 'Number of Listings:', 'directorist' ),
+                'type'  => 'number',
             ],
-            'single_only' => [
-                'label'   => esc_html__( 'Display only on single listing', 'directorist' ),
-                'type'    => 'checkbox',
-                'value'   => 1,
+            'single_only'     => [
+                'label' => esc_html__( 'Display only on single listing', 'directorist' ),
+                'type'  => 'checkbox',
+                'value' => 1,
             ],
         ];
 
@@ -52,9 +52,9 @@ class Popular_Listings extends \WP_Widget {
     public function update( $new_instance, $old_instance ) {
         $instance = [];
 
-        $instance['title']            = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
-        $instance['pop_listing_num']  = ! empty( $new_instance['pop_listing_num'] ) ? sanitize_text_field( $new_instance['pop_listing_num'] ) : '';
-        $instance['single_only']      = ! empty( $new_instance['single_only'] ) ? 1 : 0;
+        $instance['title']           = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
+        $instance['pop_listing_num'] = ! empty( $new_instance['pop_listing_num'] ) ? sanitize_text_field( $new_instance['pop_listing_num'] ) : '';
+        $instance['single_only']     = ! empty( $new_instance['single_only'] ) ? 1 : 0;
 
         return $instance;
     }
@@ -62,7 +62,7 @@ class Popular_Listings extends \WP_Widget {
     public function widget( $args, $instance ) {
         echo wp_kses_post( $args['before_widget'] );
 
-        $title = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Popular Listings', 'directorist' );
+        $title        = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Popular Listings', 'directorist' );
         $widget_title = $args['before_title'] . apply_filters( 'widget_title', $title ) . $args['after_title'];
         echo wp_kses_post( $widget_title );
 
@@ -77,7 +77,7 @@ class Popular_Listings extends \WP_Widget {
     public function popular_listings_query( $count = 5 ) {
         $count           = intval( $count > 0 ? $count : 5 );
         $view_to_popular = get_directorist_option( 'views_for_popular' );
-        $count = apply_filters( 'atbdp_popular_listing_number', $count );
+        $count           = apply_filters( 'atbdp_popular_listing_number', $count );
 
         $args = [
             'post_type'      => ATBDP_POST_TYPE,
@@ -174,7 +174,7 @@ class Popular_Listings extends \WP_Widget {
 
         if ( count( $meta_queries ) ) {
             $meta_queries['relation'] = 'AND';
-            $args['meta_query'] = $meta_queries;
+            $args['meta_query']       = $meta_queries;
         }
 
         return new \WP_Query( apply_filters( 'atbdp_popular_listing_args', $args ) );

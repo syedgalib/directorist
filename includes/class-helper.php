@@ -95,7 +95,7 @@ class Helper {
         }
 
         // JSON Decode from Base64
-        $decode_base64 = base64_decode( $input_data );
+        $decode_base64      = base64_decode( $input_data );
         $decode_base64_json = json_decode( $decode_base64, true );
 
         if ( ! is_null( $decode_base64_json ) ) {
@@ -285,9 +285,9 @@ class Helper {
 
     public static function default_pricing_type( $listing_id ) {
         $default_pricing_type = 'price';
-        $directory_type = directorist_get_listing_directory( $listing_id );
-        $directory_type = ( ! empty( $directory_type ) ) ? $directory_type : default_directory_type();
-        $form_fields = get_term_meta( $directory_type, 'submission_form_fields', true );
+        $directory_type       = directorist_get_listing_directory( $listing_id );
+        $directory_type       = ( ! empty( $directory_type ) ) ? $directory_type : default_directory_type();
+        $form_fields          = get_term_meta( $directory_type, 'submission_form_fields', true );
         if ( isset( $form_fields['fields']['pricing']['pricing_type'] ) ) {
             if ( $form_fields['fields']['pricing']['pricing_type'] == 'price_range' ) {
                 $default_pricing_type = 'range';
@@ -313,32 +313,32 @@ class Helper {
 
     public static function price_range_template( $listing_id ) {
         $price_range = get_post_meta( $listing_id, '_price_range', true );
-        $currency = directorist_get_currency();
-        $currency = atbdp_currency_symbol( $currency );
+        $currency    = directorist_get_currency();
+        $currency    = atbdp_currency_symbol( $currency );
 
         switch ( $price_range ) {
             case 'skimming':
-                $active_items = 4;
+                $active_items     = 4;
                 $price_range_text = __( 'Skimming', 'directorist' );
             break;
 
             case 'moderate':
-                $active_items = 3;
+                $active_items     = 3;
                 $price_range_text = __( 'Moderate', 'directorist' );
             break;
 
             case 'economy':
-                $active_items = 2;
+                $active_items     = 2;
                 $price_range_text = __( 'Economy', 'directorist' );
             break;
 
             case 'bellow_economy':
-                $active_items = 1;
+                $active_items     = 1;
                 $price_range_text = __( 'Cheap', 'directorist' );
             break;
 
             default:
-                $active_items = 4;
+                $active_items     = 4;
                 $price_range_text = __( 'Skimming', 'directorist' );
             break;
         }
@@ -377,8 +377,8 @@ class Helper {
     public static function phone_link( $args ) {
         $args = array_merge(
             [
-                'number'    => '',
-                'whatsapp'  => false,
+                'number'   => '',
+                'whatsapp' => false,
             ], $args 
         );
 
@@ -395,9 +395,9 @@ class Helper {
 
         if ( is_integer( $user_id_or_obj ) ) {
             $user_id = $user_id_or_obj;
-            $user = get_userdata( $user_id );
+            $user    = get_userdata( $user_id );
         } else {
-            $user = $user_id_or_obj;
+            $user    = $user_id_or_obj;
             $user_id = $user->data->ID;
         }
 
@@ -505,13 +505,13 @@ class Helper {
     }
 
     public static function is_new( $listing_id ) {
-        $post = get_post( $listing_id ); // @cache @kowsar
+        $post             = get_post( $listing_id ); // @cache @kowsar
         $new_listing_time = get_directorist_option( 'new_listing_day' );
-        $each_hours = 60 * 60 * 24;
-        $s_date1 = strtotime( current_time( 'mysql' ) );
-        $s_date2 = strtotime( $post->post_date );
-        $s_date_diff = abs( $s_date1 - $s_date2 );
-        $days = round( $s_date_diff / $each_hours );
+        $each_hours       = 60 * 60 * 24;
+        $s_date1          = strtotime( current_time( 'mysql' ) );
+        $s_date2          = strtotime( $post->post_date );
+        $s_date_diff      = abs( $s_date1 - $s_date2 );
+        $days             = round( $s_date_diff / $each_hours );
 
         if ( $days <= (int) $new_listing_time ) {
             return true;
@@ -530,7 +530,7 @@ class Helper {
         if ( ! empty( $settings['preview_image'] ) ) {
             $default_preview = $settings['preview_image'];
         } else {
-            $default_img = get_directorist_option( 'default_preview_image' );
+            $default_img     = get_directorist_option( 'default_preview_image' );
             $default_preview = $default_img ? $default_img : DIRECTORIST_ASSETS . 'images/grid.jpg';
         }
 
@@ -627,7 +627,7 @@ class Helper {
         );
 
         foreach ( $types as $type ) {
-            $page_id   = get_directorist_type_option( $type->term_id, 'single_listing_page' );
+            $page_id                = get_directorist_type_option( $type->term_id, 'single_listing_page' );
             $single_listing_enabled = get_directorist_type_option( $type->term_id, 'enable_single_listing_page' );
             if ( $single_listing_enabled && $page_id ) {
                 $pages[$page_id] = $type->name;
@@ -654,17 +654,17 @@ class Helper {
     // get_listing_order_id
     public static function get_listing_order_id( $listing_id = '' ) {
         $args = [
-            'post_type' => 'atbdp_orders',
+            'post_type'   => 'atbdp_orders',
             'post_status' => 'publish',
-            'meta_query' => [
+            'meta_query'  => [
                 [
-                    'key' => '_listing_id',
+                    'key'   => '_listing_id',
                     'value' => $listing_id,
                 ]
             ]
         ];
 
-        $orders = new \WP_Query( $args );
+        $orders   = new \WP_Query( $args );
         $order_id = ( $orders->have_posts() ) ? $orders->post->ID : '';
 
         return $order_id;
@@ -691,7 +691,7 @@ class Helper {
     }
 
     public static function sanitize_query_strings( $url = '' ) {
-        $matches = [];
+        $matches    = [];
         $qs_pattern = '/[?].+/';
 
         $qs = preg_match( $qs_pattern, $url, $matches );
@@ -769,7 +769,7 @@ class Helper {
      * @return string URL
      */
     public static function escape_query_strings_from_url( $url = '' ) {
-        $matches = [];
+        $matches    = [];
         $qs_pattern = '/[?].+/';
 
         $qs = preg_match( $qs_pattern, $url, $matches );
@@ -826,7 +826,7 @@ class Helper {
         }
 
         $qs_pattern = self::get_query_string_pattern();
-        $matches = [];
+        $matches    = [];
 
         preg_match( $qs_pattern, $url, $matches );
 

@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Builder {
-    protected $fields   = [];
+    protected $fields = [];
 
     protected $cookies_consent = false;
 
@@ -23,7 +23,7 @@ class Builder {
 
     protected $rating_type;
 
-    private static $instance    = null;
+    private static $instance = null;
 
     public static function get( $data ) {
         if ( is_null( self::$instance ) ) {

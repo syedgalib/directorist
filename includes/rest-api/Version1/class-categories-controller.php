@@ -196,7 +196,7 @@ class Categories_Controller extends Terms_Controller {
                         ),
                     ),
                 ),
-                'icon' => array(
+                'icon'        => array(
                     'description' => __( 'Icon class.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
@@ -204,18 +204,18 @@ class Categories_Controller extends Terms_Controller {
                         'sanitize_callback' => 'sanitize_text_field',
                     ),
                 ),
-                'directory' => array(
+                'directory'   => array(
                     'description' => __( 'Directory type ids for this resource.', 'directorist' ),
                     'type'        => 'array',
-                    'items' => array(
-                        'type'   => 'integer',
+                    'items'       => array(
+                        'type' => 'integer',
                     ),
                     'context'     => array( 'view', 'edit' ),
                     'arg_options' => array(
                         'sanitize_callback' => 'wp_parse_id_list',
                     ),
                 ),
-                'count' => array(
+                'count'       => array(
                     'description' => __( 'Number of published listings for the resource.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
@@ -336,9 +336,9 @@ class Categories_Controller extends Terms_Controller {
 
         if ( directorist_is_multi_directory_enabled() ) {
             $params['directory'] = array(
-                'description' => __( 'Limit result set to specific directory type ids.', 'directorist' ),
-                'type'        => 'array',
-                'items'       => array(
+                'description'       => __( 'Limit result set to specific directory type ids.', 'directorist' ),
+                'type'              => 'array',
+                'items'             => array(
                     'type' => 'integer',
                 ),
                 'validate_callback' => 'rest_validate_request_arg',

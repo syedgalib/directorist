@@ -786,9 +786,9 @@ if ( ! class_exists( 'ATBDP_Custom_Post' ) ) :
                 $columns['atbdp_featured'] = __( 'Featured', 'directorist' );
             }
 
-            $columns['directorist_listing_view_count']  = '<span class="screen-reader-text">' . esc_html__( 'Listing views', 'directorist' ) . '</span><span aria-hidden="true" class="dashicons dashicons-visibility"></span>';
+            $columns['directorist_listing_view_count'] = '<span class="screen-reader-text">' . esc_html__( 'Listing views', 'directorist' ) . '</span><span aria-hidden="true" class="dashicons dashicons-visibility"></span>';
 
-            $columns['atbdp_date']        = __( 'Date', 'directorist' );
+            $columns['atbdp_date'] = __( 'Date', 'directorist' );
 
             return apply_filters( 'atbdp_add_new_listing_column', $columns );
         }
@@ -876,7 +876,7 @@ if ( ! class_exists( 'ATBDP_Custom_Post' ) ) :
 
                 case 'atbdp_date':
                     $creation_time = get_the_time( 'U' );
-                    $created_date = date_i18n( $date_format, $creation_time );
+                    $created_date  = date_i18n( $date_format, $creation_time );
 
                     $never_expire = get_post_meta( $post_id, '_never_expire', true );
                     $expiry_date  = '';

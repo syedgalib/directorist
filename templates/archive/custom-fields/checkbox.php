@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$tag = tag_escape( $before ? $before : 'div' );
+$tag         = tag_escape( $before ? $before : 'div' );
 $closing_tag = tag_escape( $after ? $after : 'div' );
 
 ?>

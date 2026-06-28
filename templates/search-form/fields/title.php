@@ -8,7 +8,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 $conditional_logic_attr = $searchform->get_conditional_logic_attributes( $data );
-$value                 = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
+$value                  = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
 ?>
 
 <div class="directorist-search-field directorist-form-group directorist-search-query <?php echo esc_attr( $empty_label ); ?>"<?php echo $conditional_logic_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped in get_conditional_logic_attributes() ?>>

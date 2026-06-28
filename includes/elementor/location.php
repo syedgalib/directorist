@@ -19,15 +19,15 @@ class Directorist_Location extends Custom_Widget_Base {
     public function az_fields() {
         $fields = [
             [
-                'mode'    => 'section_start',
-                'id'      => 'sec_general',
-                'label'   => __( 'General', 'directorist' ),
+                'mode'  => 'section_start',
+                'id'    => 'sec_general',
+                'label' => __( 'General', 'directorist' ),
             ],
             [
-                'type'      => Controls_Manager::SWITCHER,
-                'id'        => 'header',
-                'label'     => __( 'Show Header?', 'directorist' ),
-                'default'   => 'yes',
+                'type'    => Controls_Manager::SWITCHER,
+                'id'      => 'header',
+                'label'   => __( 'Show Header?', 'directorist' ),
+                'default' => 'yes',
             ],
             [
                 'type'      => Controls_Manager::TEXT,
@@ -68,19 +68,19 @@ class Directorist_Location extends Custom_Widget_Base {
                 'default' => '3',
             ],
             [
-                'type'      => Controls_Manager::NUMBER,
-                'id'        => 'number_loc',
-                'label'     => __( 'Number of locations to Show', 'directorist' ),
-                'min'       => 1,
-                'max'       => 100,
-                'step'      => 1,
-                'default'   => 6,
+                'type'    => Controls_Manager::NUMBER,
+                'id'      => 'number_loc',
+                'label'   => __( 'Number of locations to Show', 'directorist' ),
+                'min'     => 1,
+                'max'     => 100,
+                'step'    => 1,
+                'default' => 6,
             ],
             [
-                'type'      => Controls_Manager::SWITCHER,
-                'id'        => 'show_pagination',
-                'label'     => __( 'Show Pagination?', 'directorist' ),
-                'default'   => 'no',
+                'type'    => Controls_Manager::SWITCHER,
+                'id'      => 'show_pagination',
+                'label'   => __( 'Show Pagination?', 'directorist' ),
+                'default' => 'no',
             ],
             [
                 'type'    => Controls_Manager::SELECT,
@@ -104,10 +104,10 @@ class Directorist_Location extends Custom_Widget_Base {
                 'default' => 'desc',
             ],
             [
-                'type'      => Controls_Manager::SWITCHER,
-                'id'        => 'user',
-                'label'     => __( 'Only For Logged In User?', 'directorist' ),
-                'default'   => 'no',
+                'type'    => Controls_Manager::SWITCHER,
+                'id'      => 'user',
+                'label'   => __( 'Only For Logged In User?', 'directorist' ),
+                'default' => 'no',
             ],
             [
                 'mode' => 'section_end',

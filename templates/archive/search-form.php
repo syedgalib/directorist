@@ -8,7 +8,7 @@
 
 <?php
 if ( is_numeric( $searchform->listing_type ) ) {
-    $term = get_term_by( 'id', $searchform->listing_type, ATBDP_TYPE );
+    $term         = get_term_by( 'id', $searchform->listing_type, ATBDP_TYPE );
     $listing_type = $term->slug;
 }
 ?>

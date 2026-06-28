@@ -62,7 +62,7 @@ class Pages_Controller extends Abstract_Controller {
      * @return WP_REST_Response
      */
     public function get_items( $request ) {
-        $pages = get_pages();
+        $pages         = get_pages();
         $pages_options = array(
             array( 'value' => '', 'label' => 'Select...' )
         );

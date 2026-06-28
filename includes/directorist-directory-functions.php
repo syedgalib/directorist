@@ -23,8 +23,8 @@ function directorist_get_listing_form_fields( $directory_id, $context = [] ) {
         return array();
     }
 
-    $_fields   = directorist_get_var( $form_data['fields'], [] );
-    $_groups   = directorist_get_var( $form_data['groups'], [] );
+    $_fields = directorist_get_var( $form_data['fields'], [] );
+    $_groups = directorist_get_var( $form_data['groups'], [] );
 
     $fields_keys = [];
     $fields      = [];
@@ -261,7 +261,7 @@ function directorist_get_directory_general_settings( $directory_id ) {
 
 function directorist_get_directories( array $args = [] ) {
     $defaults = [
-        'hide_empty' => false,
+        'hide_empty'   => false,
         'default_only' => false,
     ];
 

@@ -24,8 +24,8 @@ class DB {
      */
     public static function get_listings_data( $args ) {
         $args['fields'] = 'ids';
-        $query       = new WP_Query( $args );
-        $paginated   = ! $query->get( 'no_found_rows' );
+        $query          = new WP_Query( $args );
+        $paginated      = ! $query->get( 'no_found_rows' );
 
         $results = (object) [
             'ids'          => wp_parse_id_list( $query->posts ),

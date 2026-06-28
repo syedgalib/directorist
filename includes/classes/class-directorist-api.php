@@ -10,8 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class API {
 
-    const URL = 'https://app.directorist.com/wp-json/directorist/';
-    const PROMO_CACHE_TTL = HOUR_IN_SECONDS;
+    const URL                     = 'https://app.directorist.com/wp-json/directorist/';
+    const PROMO_CACHE_TTL         = HOUR_IN_SECONDS;
     const PROMO_VERSION_CHECK_TTL = 5 * MINUTE_IN_SECONDS;
 
     /**
@@ -125,7 +125,7 @@ class API {
 
         if ( empty( $products ) ) {
             return [
-                'themes' => [],
+                'themes'     => [],
                 'extensions' => [],
             ];
         }
@@ -158,7 +158,7 @@ class API {
      * @return string
      */
     public static function get( $endpoint = '' ) {
-        $url = static::URL . $endpoint;
+        $url      = static::URL . $endpoint;
         $response = wp_remote_get( $url, static::get_request_args() );
 
         return wp_remote_retrieve_body( $response );

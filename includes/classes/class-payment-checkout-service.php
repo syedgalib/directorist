@@ -80,12 +80,14 @@ class PaymentCheckoutService {
         $discounted_subtotal = max( 0, (float) $order->sub_total - $discount_amount );
         $tax_amount          = directorist_compute_fixed_or_percent_amount( $order->tax_type, $order->tax_rate, $discounted_subtotal );
 
-        Template::render( 'checkout/order-payment-summary', [
-            'order'               => $order,
-            'discount_amount'     => $discount_amount,
-            'discounted_subtotal' => $discounted_subtotal,
-            'tax_amount'          => $tax_amount,
-        ] );
+        Template::render(
+            'checkout/order-payment-summary', [
+                'order'               => $order,
+                'discount_amount'     => $discount_amount,
+                'discounted_subtotal' => $discounted_subtotal,
+                'tax_amount'          => $tax_amount,
+            ] 
+        );
     }
 
     public function handle_checkout_subtotal( float $subtotal, string $checkout_type, WP_REST_Request $request ) {

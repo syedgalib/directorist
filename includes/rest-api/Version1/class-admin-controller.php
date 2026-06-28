@@ -49,7 +49,7 @@ class Admin_Controller extends Abstract_Controller {
                             'validate_callback' => [ $this, 'validate_not_empty' ],
                             'required'          => true,
                         ],
-                        'activate'     => [
+                        'activate' => [
                             'description'       => __( 'The slug of the plugin to be installed.', 'directorist' ),
                             'type'              => 'string',
                             'sanitize_callback' => 'sanitize_text_field',

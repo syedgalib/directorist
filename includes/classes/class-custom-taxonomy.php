@@ -205,7 +205,7 @@ if ( ! class_exists( 'ATBDP_Custom_Taxonomy' ) ) :
         public function get_directory_type_slug( $id ) {
 
             if ( is_numeric( $id ) ) {
-                $term                   = get_term_by( 'id', $id, ATBDP_TYPE );
+                $term = get_term_by( 'id', $id, ATBDP_TYPE );
                 // Check if the term exists
                 if ( $term && ! is_wp_error( $term ) ) {
                     $current_directory_type = $term->slug; // Get the slug if term exists
@@ -447,7 +447,7 @@ if ( ! class_exists( 'ATBDP_Custom_Taxonomy' ) ) :
 
         public function add_category_form_fields() {
             $default_listing_type = $this->default_listing_type();
-            $directories = directorist_get_directories(
+            $directories          = directorist_get_directories(
                 [
                     'fields' => 'id=>name',
                 ]
@@ -600,7 +600,7 @@ if ( ! class_exists( 'ATBDP_Custom_Taxonomy' ) ) :
             $category_base = directorist_get_category_base();
             if ( directorist_is_archive_template_enabled() && $category_base ) {
                 $args['rewrite'] = [
-                    'slug' => $category_base,
+                    'slug'         => $category_base,
                     'hierarchical' => true,
                 ];
             }
@@ -623,7 +623,7 @@ if ( ! class_exists( 'ATBDP_Custom_Taxonomy' ) ) :
                 'menu_name'         => __( 'Tags', 'directorist' ),
             ];
 
-            $args       = [
+            $args = [
                 'hierarchical'      => false,
                 'labels'            => $labels,
                 'show_ui'           => true,
@@ -688,7 +688,7 @@ if ( ! class_exists( 'ATBDP_Custom_Taxonomy' ) ) :
 
                 $directories = directorist_get_directories(
                     [
-                        'fields'  => 'id=>name',
+                        'fields' => 'id=>name',
                     ]
                 );
 
@@ -712,7 +712,7 @@ if ( ! class_exists( 'ATBDP_Custom_Taxonomy' ) ) :
 
                 $directories = directorist_get_directories(
                     [
-                        'fields'  => 'id=>name',
+                        'fields' => 'id=>name',
                     ]
                 );
 
@@ -854,7 +854,7 @@ if ( ! class_exists( 'ATBDP_Custom_Taxonomy' ) ) :
                 $actions[ __( 'Directory', 'directorist' ) ] = [
                     'directory_reset_to_empty'   => __( 'Reset To Empty', 'directorist' ),
                     'directory_reset_to_default' => __( 'Reset To Default', 'directorist' ),
-                    'directory_assign_all'     => __( 'Assign All Directories', 'directorist' ),
+                    'directory_assign_all'       => __( 'Assign All Directories', 'directorist' ),
                 ];
             }
 

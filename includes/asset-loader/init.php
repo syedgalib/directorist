@@ -61,9 +61,9 @@ class Asset_Loader {
         Enqueue::register_script( 'directorist-payment-receipt', 'build/js/react/frontend/payment-receipt.js', ['jquery', 'wp-api-fetch'] );
         Enqueue::script( 'directorist-listing-owner-dashboard', 'build/js/react/frontend/listing-owner-dashboard' );
 
-        $c_position   = directorist_get_currency_position();
-        $currency = directorist_get_currency();
-        $symbol   = atbdp_currency_symbol( $currency );
+        $c_position = directorist_get_currency_position();
+        $currency   = directorist_get_currency();
+        $symbol     = atbdp_currency_symbol( $currency );
             
         wp_localize_script(
             'directorist-listing-owner-dashboard', 'directorist_admin_order', [

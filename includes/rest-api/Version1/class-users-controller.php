@@ -43,15 +43,15 @@ class Users_Controller extends Abstract_Controller {
                     'permission_callback' => array( $this, 'create_item_permissions_check' ),
                     'args'                => array_merge(
                         $this->get_endpoint_args_for_item_schema( WP_REST_Server::CREATABLE ), array(
-                            'email' => array(
-                                'required' => true,
-                                'type'     => 'string',
+                            'email'    => array(
+                                'required'    => true,
+                                'type'        => 'string',
                                 'description' => __( 'New user email address.', 'directorist' ),
                             ),
                             'username' => array(
-                                'required' => false,
+                                'required'    => false,
                                 'description' => __( 'New user username.', 'directorist' ),
-                                'type'     => 'string',
+                                'type'        => 'string',
                             ),
                             'password' => array(
                                 'required'    => true,
@@ -68,7 +68,7 @@ class Users_Controller extends Abstract_Controller {
 
         register_rest_route(
             $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d]+)', array(
-                'args' => array(
+                'args'   => array(
                     'id' => array(
                         'description' => __( 'Unique identifier for the resource.', 'directorist' ),
                         'type'        => 'integer',
@@ -93,7 +93,7 @@ class Users_Controller extends Abstract_Controller {
                     'callback'            => array( $this, 'delete_item' ),
                     'permission_callback' => array( $this, 'delete_item_permissions_check' ),
                     'args'                => array(
-                        'force' => array(
+                        'force'    => array(
                             'default'     => false,
                             'type'        => 'boolean',
                             'description' => __( 'Required to be true, as resource does not support trashing.', 'directorist' ),
@@ -235,7 +235,7 @@ class Users_Controller extends Abstract_Controller {
      * @return WP_Error|WP_REST_Response
      */
     public function get_items( $request ) {
-        $prepared_args = array();
+        $prepared_args            = array();
         $prepared_args['exclude'] = $request['exclude'];
         $prepared_args['include'] = $request['include'];
         $prepared_args['order']   = $request['order'];
@@ -245,7 +245,7 @@ class Users_Controller extends Abstract_Controller {
         } else {
             $prepared_args['offset'] = ( $request['page'] - 1 ) * $prepared_args['number'];
         }
-        $orderby_possibles = $this->get_orderby_possibles();
+        $orderby_possibles        = $this->get_orderby_possibles();
         $prepared_args['orderby'] = $orderby_possibles[ $request['orderby'] ];
         $prepared_args['search']  = $request['search'];
 
@@ -283,7 +283,7 @@ class Users_Controller extends Abstract_Controller {
 
         $users = array();
         foreach ( $query->results as $user ) {
-            $data = $this->prepare_item_for_response( $user, $request );
+            $data    = $this->prepare_item_for_response( $user, $request );
             $users[] = $this->prepare_response_for_collection( $data );
         }
 
@@ -291,7 +291,7 @@ class Users_Controller extends Abstract_Controller {
 
         // Store pagination values for headers then unset for count query.
         $per_page = (int) $prepared_args['number'];
-        $page = ceil( ( ( (int) $prepared_args['offset'] ) / $per_page ) + 1 );
+        $page     = ceil( ( ( (int) $prepared_args['offset'] ) / $per_page ) + 1 );
 
         $prepared_args['fields'] = 'ID';
 
@@ -356,7 +356,7 @@ class Users_Controller extends Abstract_Controller {
             $username = sanitize_user( current( explode( '@', $request['email'] ) ), true );
 
             // Ensure username is unique.
-            $append = 1;
+            $append     = 1;
             $o_username = $username;
 
             while ( username_exists( $username ) ) {
@@ -609,7 +609,7 @@ class Users_Controller extends Abstract_Controller {
         );
 
         foreach ( array_keys( $schema['properties']['social_links']['properties'] ) as $field ) {
-            $value = get_user_meta( $id, 'atbdp_' . $field, true );
+            $value                          = get_user_meta( $id, 'atbdp_' . $field, true );
             $data['social_links'][ $field ] = ( ! empty( $value ) ? $value : null );
         }
 
@@ -730,7 +730,7 @@ class Users_Controller extends Abstract_Controller {
      */
     protected function prepare_links( $user ) {
         $links = array(
-            'self' => array(
+            'self'       => array(
                 'href' => rest_url( sprintf( '/%s/%s/%d', $this->namespace, $this->rest_base, $user->ID ) ),
             ),
             'collection' => array(
@@ -752,13 +752,13 @@ class Users_Controller extends Abstract_Controller {
             'title'      => 'user',
             'type'       => 'object',
             'properties' => array(
-                'id' => array(
+                'id'             => array(
                     'description' => __( 'Unique identifier for the resource.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'date_created'    => array(
+                'date_created'   => array(
                     'description' => __( 'The date the user was created, as GMT.', 'directorist' ),
                     'type'        => 'string',
                     'format'      => 'date-time',
@@ -770,7 +770,7 @@ class Users_Controller extends Abstract_Controller {
                     'type'        => 'string',
                     'context'     => array( 'view' ),
                 ),
-                'username' => array(
+                'username'       => array(
                     'description' => __( 'User login name.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
@@ -778,12 +778,12 @@ class Users_Controller extends Abstract_Controller {
                         'sanitize_callback' => 'sanitize_user',
                     ),
                 ),
-                'nickname'           => array(
+                'nickname'       => array(
                     'description' => __( 'The nickname for the user.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view' ),
                 ),
-                'first_name' => array(
+                'first_name'     => array(
                     'description' => __( 'User first name.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
@@ -791,7 +791,7 @@ class Users_Controller extends Abstract_Controller {
                         'sanitize_callback' => 'sanitize_text_field',
                     ),
                 ),
-                'last_name' => array(
+                'last_name'      => array(
                     'description' => __( 'User last name.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
@@ -799,24 +799,24 @@ class Users_Controller extends Abstract_Controller {
                         'sanitize_callback' => 'sanitize_text_field',
                     ),
                 ),
-                'description'        => array(
+                'description'    => array(
                     'description' => __( 'Description of the user.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'email' => array(
+                'email'          => array(
                     'description' => __( 'The email address for the user.', 'directorist' ),
                     'type'        => 'string',
                     'format'      => 'email',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'url' => array(
+                'url'            => array(
                     'description' => __( 'The website url for the user.', 'directorist' ),
                     'type'        => 'string',
                     'format'      => 'url',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'password' => array(
+                'password'       => array(
                     'description' => __( 'User password.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'edit' ),
@@ -827,12 +827,12 @@ class Users_Controller extends Abstract_Controller {
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'phone'        => array(
+                'phone'          => array(
                     'description' => __( 'Phone number of the user.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'avatar'       => array(
+                'avatar'         => array(
                     'description' => __( 'User avatar image data.', 'directorist' ),
                     'type'        => 'object',
                     'context'     => array( 'view', 'edit' ),
@@ -874,7 +874,7 @@ class Users_Controller extends Abstract_Controller {
                         ),
                     ),
                 ),
-                'avater'       => array(
+                'avater'         => array(
                     'description' => __( 'User avatar image data.', 'directorist' ),
                     'type'        => 'object',
                     'context'     => array( 'view', 'edit' ),
@@ -916,7 +916,7 @@ class Users_Controller extends Abstract_Controller {
                         ),
                     ),
                 ),
-                'social_links' => array(
+                'social_links'   => array(
                     'description' => __( 'User social links.', 'directorist' ),
                     'type'        => 'object',
                     'context'     => array( 'view', 'edit' ),
@@ -927,7 +927,7 @@ class Users_Controller extends Abstract_Controller {
                             'format'      => 'uri',
                             'context'     => array( 'view', 'edit' ),
                         ),
-                        'twitter' => array(
+                        'twitter'  => array(
                             'description' => __( 'X profile link.', 'directorist' ),
                             'type'        => 'string',
                             'format'      => 'uri',
@@ -939,7 +939,7 @@ class Users_Controller extends Abstract_Controller {
                             'format'      => 'uri',
                             'context'     => array( 'view', 'edit' ),
                         ),
-                        'youtube' => array(
+                        'youtube'  => array(
                             'description' => __( 'Youtube profile link.', 'directorist' ),
                             'type'        => 'string',
                             'format'      => 'uri',
@@ -947,14 +947,14 @@ class Users_Controller extends Abstract_Controller {
                         ),
                     ),
                 ),
-                'favorite' =>  array(
+                'favorite'       =>  array(
                     'description' => __( 'User favorite listing ids.', 'directorist' ),
                     'type'        => 'array',
                     'items'       => array(
                         'type' => 'integer',
                     ),
-                    'context'  => array( 'view' ),
-                    'readonly' => true,
+                    'context'     => array( 'view' ),
+                    'readonly'    => true,
                 ),
                 'listings_count' => array(
                     'description' => __( 'Quantity of listings created by the user.', 'directorist' ),
@@ -963,7 +963,7 @@ class Users_Controller extends Abstract_Controller {
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'user_type' => array(
+                'user_type'      => array(
                     'description' => __( 'User type.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
@@ -1000,7 +1000,7 @@ class Users_Controller extends Abstract_Controller {
             'description'       => __( 'Ensure result set excludes specific IDs.', 'directorist' ),
             'type'              => 'array',
             'items'             => array(
-                'type'          => 'integer',
+                'type' => 'integer',
             ),
             'default'           => array(),
             'sanitize_callback' => 'wp_parse_id_list',
@@ -1009,45 +1009,45 @@ class Users_Controller extends Abstract_Controller {
             'description'       => __( 'Limit result set to specific IDs.', 'directorist' ),
             'type'              => 'array',
             'items'             => array(
-                'type'          => 'integer',
+                'type' => 'integer',
             ),
             'default'           => array(),
             'sanitize_callback' => 'wp_parse_id_list',
         );
-        $params['offset'] = array(
-            'description'        => __( 'Offset the result set by a specific number of items.', 'directorist' ),
-            'type'               => 'integer',
-            'sanitize_callback'  => 'absint',
-            'validate_callback'  => 'rest_validate_request_arg',
+        $params['offset']  = array(
+            'description'       => __( 'Offset the result set by a specific number of items.', 'directorist' ),
+            'type'              => 'integer',
+            'sanitize_callback' => 'absint',
+            'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['order'] = array(
-            'default'            => 'asc',
-            'description'        => __( 'Order sort attribute ascending or descending.', 'directorist' ),
-            'enum'               => array( 'asc', 'desc' ),
-            'sanitize_callback'  => 'sanitize_key',
-            'type'               => 'string',
-            'validate_callback'  => 'rest_validate_request_arg',
+        $params['order']   = array(
+            'default'           => 'asc',
+            'description'       => __( 'Order sort attribute ascending or descending.', 'directorist' ),
+            'enum'              => array( 'asc', 'desc' ),
+            'sanitize_callback' => 'sanitize_key',
+            'type'              => 'string',
+            'validate_callback' => 'rest_validate_request_arg',
         );
         $params['orderby'] = array(
-            'default'            => 'name',
-            'description'        => __( 'Sort collection by object attribute.', 'directorist' ),
-            'enum'               => array_keys( $this->get_orderby_possibles() ),
-            'sanitize_callback'  => 'sanitize_key',
-            'type'               => 'string',
-            'validate_callback'  => 'rest_validate_request_arg',
+            'default'           => 'name',
+            'description'       => __( 'Sort collection by object attribute.', 'directorist' ),
+            'enum'              => array_keys( $this->get_orderby_possibles() ),
+            'sanitize_callback' => 'sanitize_key',
+            'type'              => 'string',
+            'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['email'] = array(
-            'description'        => __( 'Limit result set to resources with a specific email.', 'directorist' ),
-            'type'               => 'string',
-            'format'             => 'email',
-            'validate_callback'  => 'rest_validate_request_arg',
+        $params['email']   = array(
+            'description'       => __( 'Limit result set to resources with a specific email.', 'directorist' ),
+            'type'              => 'string',
+            'format'            => 'email',
+            'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['role'] = array(
-            'description'        => __( 'Limit result set to resources with a specific role.', 'directorist' ),
-            'type'               => 'string',
-            'default'            => 'all',
-            'enum'               => array_merge( array( 'all' ), $this->get_role_names() ),
-            'validate_callback'  => 'rest_validate_request_arg',
+        $params['role']    = array(
+            'description'       => __( 'Limit result set to resources with a specific role.', 'directorist' ),
+            'type'              => 'string',
+            'default'           => 'all',
+            'enum'              => array_merge( array( 'all' ), $this->get_role_names() ),
+            'validate_callback' => 'rest_validate_request_arg',
         );
         return $params;
     }

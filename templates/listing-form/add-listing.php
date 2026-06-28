@@ -9,8 +9,8 @@ use \Directorist\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-$action_url = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
-$listing_id = ! empty( $p_id ) ? $p_id : '';
+$action_url  = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+$listing_id  = ! empty( $p_id ) ? $p_id : '';
 $has_sidebar = (bool) $enable_sidebar;
 
 ?>
@@ -28,10 +28,10 @@ $has_sidebar = (bool) $enable_sidebar;
                         <div class="multistep-wizard__nav">
                             <?php
                             foreach ( $form_data as $key => $section ) {
-                                $label              = $section['label'] ?? '';
-                                $id                 = str_replace( ' ', '-', strtolower( $label ) );
-                                $listing_type       = isset( $section['fields']['listing_type'] ) ? $section['fields']['listing_type']['widget_name'] : '';
-                                $section['fields']  = array_filter(
+                                $label             = $section['label'] ?? '';
+                                $id                = str_replace( ' ', '-', strtolower( $label ) );
+                                $listing_type      = isset( $section['fields']['listing_type'] ) ? $section['fields']['listing_type']['widget_name'] : '';
+                                $section['fields'] = array_filter(
                                     $section['fields'], function( $field ) {
                                         return empty( $field['only_for_admin'] );
                                     }

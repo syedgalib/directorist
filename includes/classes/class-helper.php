@@ -9,7 +9,7 @@ if ( ! class_exists( 'ATBDP_Helper' ) ) :
     class ATBDP_Helper {
         private $__nonce_action = 'atbdp_nonce_action';
 
-        private $__nonce_name   = 'atbdp_nonce';
+        private $__nonce_name = 'atbdp_nonce';
 
         public function __construct() {
             add_action( 'init', [ $this, 'check_req_php_version' ], 100 );
@@ -51,7 +51,7 @@ if ( ! class_exists( 'ATBDP_Helper' ) ) :
                 $gallery_image .= '<div class="atbd_big_gallery">';
                 $gallery_image .= '<div class="atbd_directory_gallery">';
                 foreach ( $args['image_links'] as $image_link ) {
-                    $image_link = ! empty( $image_link ) ? $image_link : '';
+                    $image_link     = ! empty( $image_link ) ? $image_link : '';
                     $gallery_image .= '<div class="single_image">';
                     $gallery_image .= '<img src="' . esc_url( $image_link ) . '" alt=" ' . esc_html( $args['p_title'] ) . '">';
                     $gallery_image .= '</div>';
@@ -61,11 +61,11 @@ if ( ! class_exists( 'ATBDP_Helper' ) ) :
                     $gallery_image .= '<span class="prev fa fa-angle-left"></span>';
                     $gallery_image .= '<span class="next fa fa-angle-right"></span>';
                 }
-                $gallery_image .= '</div>';
+                $gallery_image         .= '</div>';
                 $image_links_thumbnails = ! empty( $args['image_links_thumbnails'] ) ? $args['image_links_thumbnails'] : [];
                 $listing_prv_img        = ! empty( $args['listing_prv_img'] ) ? $args['listing_prv_img'] : '';
                 if ( ! empty( $args['display_thumbnail_img'] ) && ( 1 != count( $image_links_thumbnails ) || ( ! empty( $listing_prv_img ) && ! empty( $display_prv_image ) ) ) ) {
-                    $gallery_image .= '<div class="atbd_directory_image_thumbnail">';
+                    $gallery_image           .= '<div class="atbd_directory_image_thumbnail">';
                     $listing_prv_imgurl_thumb = ! empty( $listing_prv_img ) ? atbdp_get_image_source( $listing_prv_img, 'thumbnail' ) : '';
                     if ( ! empty( $listing_prv_imgurl_thumb && ! empty( $args['display_prv_image'] ) ) ) {
                         array_unshift( $image_links_thumbnails, $listing_prv_imgurl_thumb );
@@ -84,10 +84,10 @@ if ( ! class_exists( 'ATBDP_Helper' ) ) :
             } elseif ( ! empty( $args['display_prv_image'] ) ) {
                 $default_image     = get_directorist_option( 'default_preview_image', DIRECTORIST_ASSETS . 'images/grid.jpg' );
                 $listing_prv_image = ! empty( $listing_prv_img ) ? esc_url( $listing_prv_imgurl ) : $default_image;
-                $gallery_image .= '<div class="single_image">';
-                $gallery_image .= '<img src="' . $listing_prv_image . '"
+                $gallery_image    .= '<div class="single_image">';
+                $gallery_image    .= '<img src="' . $listing_prv_image . '"
                                      alt="' . esc_html( $args['p_title'] ) . '">';
-                $gallery_image .= '</div>';
+                $gallery_image    .= '</div>';
             }
 
             return $gallery_image;
@@ -177,17 +177,17 @@ if ( ! class_exists( 'ATBDP_Helper' ) ) :
             if ( $by_ratio ) {
                 $padding_top_value = (int) $ratio_height / (int) $ratio_width * 100;
                 $padding_top_css   = "padding-top: $padding_top_value%;";
-                $style .= $padding_top_css;
+                $style            .= $padding_top_css;
             } else {
                 $height_value = (int) $ratio_height;
                 $height_css   = "height: {$height_value}px;";
-                $style .= $height_css;
+                $style       .= $height_css;
             }
 
             $background_color_css = '';
             if ( 'full' !== $image_size && ! $blur_background ) {
                 $background_color_css = "background-color: $background_color";
-                $style .= $background_color_css;
+                $style               .= $background_color_css;
             }
 
             // Card Front Wrap
@@ -237,8 +237,8 @@ if ( ! class_exists( 'ATBDP_Helper' ) ) :
                         'style' => [],
                     ],
                     'img' => [
-                        'src' => [],
-                        'alt' => [],
+                        'src'   => [],
+                        'alt'   => [],
                         'class' => [],
                     ]
                 ]
@@ -363,8 +363,8 @@ if ( ! class_exists( 'ATBDP_Helper' ) ) :
             $return      = '#';
 
             foreach ( $color_parts as $color ) {
-                $color = hexdec( $color ); // Convert to decimal
-                $color = max( 0, min( 255, $color + $steps ) ); // Adjust color
+                $color   = hexdec( $color ); // Convert to decimal
+                $color   = max( 0, min( 255, $color + $steps ) ); // Adjust color
                 $return .= str_pad( dechex( $color ), 2, '0', STR_PAD_LEFT ); // Make two char hex code
             }
 

@@ -46,10 +46,10 @@ class Markup {
     public static function get_rating_stars( $rating = 0, $base_rating = 5 ) {
         $rating = max( 0, min( $base_rating, $rating ) );
 
-        $empty_star = '';
-        $full_star = '';
-        $counter = 0;
-        $rating = self::convert_to_num( $rating );
+        $empty_star     = '';
+        $full_star      = '';
+        $counter        = 0;
+        $rating         = self::convert_to_num( $rating );
         $rounded_rating = floor( $rating );
 
         $full_star = str_repeat( directorist_icon( 'fas fa-star', false, 'star-full' ), $rounded_rating );

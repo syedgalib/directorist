@@ -5,19 +5,19 @@ use Directorist\Asset_Loader\Enqueue;
 if ( ! class_exists( 'ATBDP_Settings_Panel' ) ) {
     class ATBDP_Settings_Panel
     {
-        private $extension_url    = '';
+        private $extension_url = '';
 
-        public $fields            = [];
+        public $fields = [];
 
-        public $layouts           = [];
+        public $layouts = [];
 
-        public $config            = [];
+        public $config = [];
 
-        public $default_form      = [];
+        public $default_form = [];
 
         public $old_custom_fields = [];
 
-        public $cetagory_options  = [];
+        public $cetagory_options = [];
 
         // run
         public function run() {
@@ -59,8 +59,8 @@ if ( ! class_exists( 'ATBDP_Settings_Panel' ) ) {
         // register_setting_fields
         public function register_setting_fields( $fields = [] ) {
             $fields['script_debugging'] = [
-                'type'  => 'toggle',
-                'label' => 'Script debugging',
+                'type'        => 'toggle',
+                'label'       => 'Script debugging',
                 'description' => __( 'Loads unminified .css, .js files', 'directorist' ),
             ];
 
@@ -78,11 +78,11 @@ if ( ! class_exists( 'ATBDP_Settings_Panel' ) ) {
             ];
 
             $fields['single_listing_slug_with_directory_type'] = [
-                'type'  => 'toggle',
-                'label' => __( 'Add Directory Type to Permalink', 'directorist' ),
-                'value' => directorist_is_multi_directory_enabled(),
+                'type'    => 'toggle',
+                'label'   => __( 'Add Directory Type to Permalink', 'directorist' ),
+                'value'   => directorist_is_multi_directory_enabled(),
                 'show-if' => [
-                    'where' => "enable_multi_directory",
+                    'where'      => "enable_multi_directory",
                     'conditions' => [
                         ['key' => 'value', 'compare' => '=', 'value' => true],
                     ],
@@ -97,18 +97,18 @@ if ( ! class_exists( 'ATBDP_Settings_Panel' ) ) {
             ];
 
             $fields['enable_multi_directory'] = [
-                'type'  => 'toggle',
-                'label' => 'Enable Multi Directory',
-                'value' => false,
+                'type'                  => 'toggle',
+                'label'                 => 'Enable Multi Directory',
+                'value'                 => false,
                 'confirm-before-change' => true,
-                'confirmation-modal' => [
+                'confirmation-modal'    => [
                     'show-model-header' => false
                 ],
-                'data-on-change' => [
+                'data-on-change'        => [
                     'action' => 'updateData',
                     'args'   => [ 'reload_after_save' => true ]
                 ],
-                'componets' => [
+                'componets'             => [
                     'link' => [
                         'label' => __( 'Start Building Directory', 'directorist' ),
                         'type'  => 'success',
@@ -146,7 +146,7 @@ if ( ! class_exists( 'ATBDP_Settings_Panel' ) ) {
                 'export-file-name'         => __( 'listings-export-data', 'directorist' ),
                 'prepare-export-file-from' => 'directorist_prepare_listings_export_file',
                 'nonce'                    => [
-                    'key' => 'directorist_nonce',
+                    'key'   => 'directorist_nonce',
                     'value' => wp_create_nonce( directorist_get_nonce_key() ),
                 ],
             ];
@@ -188,11 +188,11 @@ SWBD;
 
             // Marker Clustering
             $fields['marker_clustering'] = [
-                'type'  => 'toggle',
-                'label' => __( 'Marker Clustering', 'directorist' ),
-                'value' => true,
+                'type'    => 'toggle',
+                'label'   => __( 'Marker Clustering', 'directorist' ),
+                'value'   => true,
                 'show-if' => [
-                    'where' => "select_listing_map",
+                    'where'      => "select_listing_map",
                     'conditions' => [
                         ['key' => 'value', 'compare' => '=', 'value' => 'google'],
                     ],
@@ -202,11 +202,11 @@ SWBD;
 
             // Map Country Restriction Field
             $fields['country_restriction'] = [
-                'type'  => 'toggle',
-                'label' => __( 'Country Restriction', 'directorist' ),
-                'value' => false,
+                'type'    => 'toggle',
+                'label'   => __( 'Country Restriction', 'directorist' ),
+                'value'   => false,
                 'show-if' => [
-                    'where' => "select_listing_map",
+                    'where'      => "select_listing_map",
                     'conditions' => [
                         ['key' => 'value', 'compare' => '=', 'value' => 'google'],
                     ],
@@ -215,9 +215,9 @@ SWBD;
 
             // Use Default Latitude/Longitude in All Listing Map View
             $fields['use_def_lat_long'] = [
-                'type'  => 'toggle',
-                'label' => __( 'Force Default Location', 'directorist' ),
-                'value' => false,
+                'type'        => 'toggle',
+                'label'       => __( 'Force Default Location', 'directorist' ),
+                'value'       => false,
                 'description' => __(
                     'Enable this option to force the default latitude and longitude to create a default location on all listings map view.
                 Otherwise default location works only on the add listing form map.', 'directorist'
@@ -225,7 +225,7 @@ SWBD;
             ];
 
             $countries = atbdp_country_code_to_name();
-            $items = [];
+            $items     = [];
 
             foreach ( $countries as $country => $code ) {
                 $items[] = [
@@ -240,7 +240,7 @@ SWBD;
                 'options' => $items,
                 'value'   => '',
                 'show-if' => [
-                    'where' => "country_restriction",
+                    'where'      => "country_restriction",
                     'conditions' => [
                         ['key' => 'value', 'compare' => '=', 'value' => true],
                     ],
@@ -256,11 +256,11 @@ SWBD;
             ];
 
             $fields['pending_confirmation_msg'] = [
-                'type'  => 'textarea',
-                'label' => __( 'Pending Confirmation Message', 'directorist' ),
-                'value' => __( 'Thank you for your submission. Your listing is being reviewed and it may take up to 24 hours to complete the review.', 'directorist' ),
+                'type'    => 'textarea',
+                'label'   => __( 'Pending Confirmation Message', 'directorist' ),
+                'value'   => __( 'Thank you for your submission. Your listing is being reviewed and it may take up to 24 hours to complete the review.', 'directorist' ),
                 'show-if' => [
-                    'where' => "submission_confirmation",
+                    'where'      => "submission_confirmation",
                     'conditions' => [
                         ['key' => 'value', 'compare' => '=', 'value' => true],
                     ],
@@ -268,11 +268,11 @@ SWBD;
             ];
 
             $fields['publish_confirmation_msg'] = [
-                'type'  => 'textarea',
-                'label' => __( 'Publish Confirmation Message', 'directorist' ),
-                'value' => __( 'Congratulations! Your listing has been approved/published. Now it is publicly available.', 'directorist' ),
+                'type'    => 'textarea',
+                'label'   => __( 'Publish Confirmation Message', 'directorist' ),
+                'value'   => __( 'Congratulations! Your listing has been approved/published. Now it is publicly available.', 'directorist' ),
                 'show-if' => [
-                    'where' => "submission_confirmation",
+                    'where'      => "submission_confirmation",
                     'conditions' => [
                         ['key' => 'value', 'compare' => '=', 'value' => true],
                     ],
@@ -285,7 +285,7 @@ SWBD;
         // get_simple_data_content
         public function get_simple_data_content( array $args = [] ) {
             $default = [ 'path' => '', 'json_decode' => true ];
-            $args = array_merge( $default,  $args );
+            $args    = array_merge( $default,  $args );
 
             $path = ( ! empty( $args['path'] ) ) ? $args['path'] : '';
 
@@ -309,7 +309,7 @@ SWBD;
 
             if ( ! directorist_verify_nonce() ) {
                 $status['status_log'] = [
-                    'type' => 'error',
+                    'type'    => 'error',
                     'message' => __( 'Something is wrong! Please refresh and retry.', 'directorist' ),
                 ];
 
@@ -318,7 +318,7 @@ SWBD;
 
             if ( ! current_user_can( 'manage_options' ) ) {
                 $status['status_log'] = [
-                    'type' => 'error',
+                    'type'    => 'error',
                     'message' => __( 'You are not allowed to access this resource', 'directorist' ),
                 ];
 
@@ -331,7 +331,7 @@ SWBD;
             // If field list is empty
             if ( empty( $field_list ) || ! is_array( $field_list ) ) {
                 $status['status_log'] = [
-                    'type' => 'success',
+                    'type'    => 'success',
                     'message' => __( 'No changes made', 'directorist' ),
                 ];
 
@@ -361,7 +361,7 @@ SWBD;
             // If field list is empty
             if ( empty( $options ) || ! is_array( $options ) ) {
                 $status['status_log'] = [
-                    'type' => 'success',
+                    'type'    => 'success',
                     'message' => __( 'Nothing to save', 'directorist' ),
                 ];
 
@@ -385,10 +385,10 @@ SWBD;
             do_action( 'directorist_options_updated' );
 
             // Send Status
-            $status['options'] = $options;
-            $status['success'] = true;
+            $status['options']    = $options;
+            $status['success']    = true;
             $status['status_log'] = [
-                'type' => 'success',
+                'type'    => 'success',
                 'message' => __( 'Saving Successful', 'directorist' ),
             ];
 
@@ -418,29 +418,29 @@ Please remember that your order may be canceled if you do not make your payment 
 
             $bank_payment_desc = __( 'You can make your payment directly to our bank account using this gateway. Please use your ORDER ID as a reference when making the payment. We will complete your order as soon as your deposit is cleared in our bank.', 'directorist' );
 
-            $default_size = directorist_default_preview_size();
+            $default_size              = directorist_default_preview_size();
             $default_preview_size_text = $default_size['width'] . 'x' . $default_size['height'] . ' px';
 
 
             $this->fields = apply_filters(
                 'atbdp_listing_type_settings_field_list', [
 
-                    'enable_monetization' => [
-                        'label'         => __( 'Enable Monetization', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
-                        'description'   => __(
+                    'enable_monetization'                        => [
+                        'label'       => __( 'Enable Monetization', 'directorist' ),
+                        'type'        => 'toggle',
+                        'value'       => false,
+                        'description' => __(
                             'Enable monetization to accept payments from users and earn through listing submissions.
                     ', 'directorist'
                         ),
 
                     ],
 
-                    'enable_featured_listing' => [
-                        'label'         => __( 'Monetize with Featured Listings', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
-                        'description'   => sprintf(
+                    'enable_featured_listing'                    => [
+                        'label'       => __( 'Monetize with Featured Listings', 'directorist' ),
+                        'type'        => 'toggle',
+                        'value'       => false,
+                        'description' => sprintf(
                             __(
                                 'Enable this option to charge users for featuring their listing.
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -449,59 +449,59 @@ Please remember that your order may be canceled if you do not make your payment 
                             ),
                             esc_url( '' ) // Replace with your URL
                         ),
-                        'show-if' => [
-                            'where' => "enable_monetization",
+                        'show-if'     => [
+                            'where'      => "enable_monetization",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
 
-                    'featured_listing_desc' => [
-                        'type' => 'textarea',
-                        'label' => __( 'Listing Description at Checkout', 'directorist' ),
+                    'featured_listing_desc'                      => [
+                        'type'    => 'textarea',
+                        'label'   => __( 'Listing Description at Checkout', 'directorist' ),
                         'show-if' => [
-                            'where' => "enable_featured_listing",
+                            'where'      => "enable_featured_listing",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
-                        'value' => __( 'You are about to feature your listing, promoting it to the top of search results and listings pages for enhanced visibility.', 'directorist' ),
+                        'value'   => __( 'You are about to feature your listing, promoting it to the top of search results and listings pages for enhanced visibility.', 'directorist' ),
                     ],
 
-                    'featured_listing_price' => [
-                        'label'         => __( 'Featured Listing Fee', 'directorist' ),
-                        'type'          => 'number',
-                        'min'           => 0,
-                        'step'           => '0.01',
-                        'value'         => 19.99,
-                        'description'   => __( 'Set the amount you want to charge users for featuring their listing.', 'directorist' ),
-                        'show-if' => [
-                            'where' => "enable_featured_listing",
-                            'conditions' => [
-                                ['key' => 'value', 'compare' => '=', 'value' => true],
-                            ],
-                        ],
-                    ],
-
-                    'featured_listing_time' => [
-                        'label'         => __( 'Featured Listing Duration (in Days)', 'directorist' ),
-                        'description'   => __( 'Set how many days a listing stays featured', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => 30,
-                        'show-if' => [
-                            'where' => "enable_featured_listing",
+                    'featured_listing_price'                     => [
+                        'label'       => __( 'Featured Listing Fee', 'directorist' ),
+                        'type'        => 'number',
+                        'min'         => 0,
+                        'step'        => '0.01',
+                        'value'       => 19.99,
+                        'description' => __( 'Set the amount you want to charge users for featuring their listing.', 'directorist' ),
+                        'show-if'     => [
+                            'where'      => "enable_featured_listing",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
 
-                    'active_gateways' => [
-                        'label'     => __( 'Payment Methods', 'directorist' ),
-                        'type'      => 'checkbox',
-                        'value'     => ['bank_transfer'],
-                        'options'   => apply_filters(
+                    'featured_listing_time'                      => [
+                        'label'       => __( 'Featured Listing Duration (in Days)', 'directorist' ),
+                        'description' => __( 'Set how many days a listing stays featured', 'directorist' ),
+                        'type'        => 'number',
+                        'value'       => 30,
+                        'show-if'     => [
+                            'where'      => "enable_featured_listing",
+                            'conditions' => [
+                                ['key' => 'value', 'compare' => '=', 'value' => true],
+                            ],
+                        ],
+                    ],
+
+                    'active_gateways'                            => [
+                        'label'       => __( 'Payment Methods', 'directorist' ),
+                        'type'        => 'checkbox',
+                        'value'       => ['bank_transfer'],
+                        'options'     => apply_filters(
                             'directorist_active_gateways', [
                                 [
                                     'value' => 'bank_transfer',
@@ -512,11 +512,11 @@ Please remember that your order may be canceled if you do not make your payment 
                         'description' => __( 'Check the gateway(s) you would like to use to collect payment from your users. A user will be use any of the active gateways during the checkout process ', 'directorist' ),
                     ],
 
-                    'default_gateway' => [
-                        'label'     => __( 'Default Gateway', 'directorist' ),
-                        'type'      => 'select',
-                        'value'     => 'bank_transfer',
-                        'options'   => apply_filters(
+                    'default_gateway'                            => [
+                        'label'       => __( 'Default Gateway', 'directorist' ),
+                        'type'        => 'select',
+                        'value'       => 'bank_transfer',
+                        'options'     => apply_filters(
                             'atbdp_default_gateways', [
                                 [
                                     'value' => 'bank_transfer',
@@ -527,41 +527,41 @@ Please remember that your order may be canceled if you do not make your payment 
                         'description' => __( 'Select the default gateway you would like to show as a selected gateway on the checkout page', 'directorist' ),
                     ],
 
-                    'payment_currency_note'  => [
-                        'type'          => 'note',
-                        'title'         => __( 'Note About This Currency Settings:', 'directorist' ),
+                    'payment_currency_note'                      => [
+                        'type'        => 'note',
+                        'title'       => __( 'Note About This Currency Settings:', 'directorist' ),
                         'description' => __( 'This currency settings lets you customize how you would like to accept payment from your user/customer and how to display pricing on the order form/history.', 'directorist' ),
                     ],
 
-                    'payment_currency' => [
-                        'type'          => 'text',
-                        'label'         => __( 'Currency Code', 'directorist' ),
-                        'value'         => __( 'USD', 'directorist' ),
+                    'payment_currency'                           => [
+                        'type'        => 'text',
+                        'label'       => __( 'Currency Code', 'directorist' ),
+                        'value'       => __( 'USD', 'directorist' ),
                         'description' => sprintf(
                             __( 'Enter the 3-letter currency code (e.g., USD for US Dollar). For a full list of currency codes, refer to %s.', 'directorist' ),
                             "<a href='" . esc_url( 'https://www.iban.com/currency-codes' ) . "'>" . __( 'ISO 4217 Currency Codes', 'directorist' ) . "</a>"
                         ),
                     ],
 
-                    'payment_thousand_separator' => [
-                        'type'          => 'text',
-                        'label'         => __( 'Thousand Separator', 'directorist' ),
-                        'value'         => __( ',', 'directorist' ),
-                        'description'   => __( 'Enter the currency thousand separator. Eg. , or . etc.', 'directorist' ),
+                    'payment_thousand_separator'                 => [
+                        'type'        => 'text',
+                        'label'       => __( 'Thousand Separator', 'directorist' ),
+                        'value'       => __( ',', 'directorist' ),
+                        'description' => __( 'Enter the currency thousand separator. Eg. , or . etc.', 'directorist' ),
                     ],
 
-                    'payment_decimal_separator' => [
-                        'type'          => 'text',
-                        'label'         => __( 'Decimal Separator', 'directorist' ),
-                        'value'         => __( '.', 'directorist' ),
+                    'payment_decimal_separator'                  => [
+                        'type'        => 'text',
+                        'label'       => __( 'Decimal Separator', 'directorist' ),
+                        'value'       => __( '.', 'directorist' ),
                         'description' => __( 'Enter the currency decimal separator. Eg. "." or ",". Default is "."', 'directorist' ),
                     ],
 
-                    'payment_currency_position' => [
-                        'label'     => __( 'Currency Position', 'directorist' ),
-                        'type'      => 'select',
-                        'value'     => 'before',
-                        'options'   => [
+                    'payment_currency_position'                  => [
+                        'label'       => __( 'Currency Position', 'directorist' ),
+                        'type'        => 'select',
+                        'value'       => 'before',
+                        'options'     => [
                             [
                                 'value' => 'before',
                                 'label' => __( '$5 - Before', 'directorist' ),
@@ -575,47 +575,47 @@ Please remember that your order may be canceled if you do not make your payment 
                     ],
 
                     // gateway settings
-                    'offline_payment_note'    => [
-                        'type'                => 'note',
-                        'title'               => __( 'Note About Bank Transfer Gateway:', 'directorist' ),
-                        'description'         => __( 'You should remember that this payment gateway needs some manual action to complete an order. After getting notification of order using this offline payment gateway, you should check your bank if the money is deposited to your account. Then you should change the order status manually from the "Order History" submenu.', 'directorist' ),
+                    'offline_payment_note'                       => [
+                        'type'        => 'note',
+                        'title'       => __( 'Note About Bank Transfer Gateway:', 'directorist' ),
+                        'description' => __( 'You should remember that this payment gateway needs some manual action to complete an order. After getting notification of order using this offline payment gateway, you should check your bank if the money is deposited to your account. Then you should change the order status manually from the "Order History" submenu.', 'directorist' ),
                     ],
 
-                    'bank_transfer_title' => [
-                        'type'            => 'text',
-                        'label'           => __( 'Gateway Title', 'directorist' ),
-                        'value'           => __( 'Bank Transfer', 'directorist' ),
-                        'description'     => __( 'Enter the title of this gateway that should be displayed to the user on the front end.', 'directorist' ),
+                    'bank_transfer_title'                        => [
+                        'type'        => 'text',
+                        'label'       => __( 'Gateway Title', 'directorist' ),
+                        'value'       => __( 'Bank Transfer', 'directorist' ),
+                        'description' => __( 'Enter the title of this gateway that should be displayed to the user on the front end.', 'directorist' ),
                     ],
 
-                    'bank_transfer_description' => [
-                        'type'          => 'textarea',
-                        'label'         => __( 'Gateway Description', 'directorist' ),
-                        'value'         => $bank_payment_desc,
-                        'description'   => __( 'Enter some description for your user to transfer funds to your account.', 'directorist' ),
+                    'bank_transfer_description'                  => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Gateway Description', 'directorist' ),
+                        'value'       => $bank_payment_desc,
+                        'description' => __( 'Enter some description for your user to transfer funds to your account.', 'directorist' ),
                     ],
 
-                    'bank_transfer_instruction' => [
-                        'type'          => 'textarea',
-                        'label'         => __( 'Bank Information', 'directorist' ),
-                        'value'         => $bank_transfer_instruction,
-                        'description'   => __( 'Enter your bank information below so that use can make payment directly to your bank account.', 'directorist' ),
+                    'bank_transfer_instruction'                  => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Bank Information', 'directorist' ),
+                        'value'       => $bank_transfer_instruction,
+                        'description' => __( 'Enter your bank information below so that use can make payment directly to your bank account.', 'directorist' ),
                     ],
 
                     //extension setting
-                    'extension_promotion'    => [
-                        'type'          => 'note',
-                        'title'         => __( 'Need more Features?', 'directorist' ),
-                        'description'   => sprintf( __( 'You can add new features and expand the functionality of the plugin even more by using extensions. %s', 'directorist' ), $this->extension_url ),
+                    'extension_promotion'                        => [
+                        'type'        => 'note',
+                        'title'       => __( 'Need more Features?', 'directorist' ),
+                        'description' => sprintf( __( 'You can add new features and expand the functionality of the plugin even more by using extensions. %s', 'directorist' ), $this->extension_url ),
                     ],
 
                     // Button Type
-                    'button_type' => [
-                        'label' => __( 'Button Type', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'select_option',
+                    'button_type'                                => [
+                        'label'               => __( 'Button Type', 'directorist' ),
+                        'type'                => 'select',
+                        'value'               => 'select_option',
                         'show-default-option' => true,
-                        'options'   => [
+                        'options'             => [
                             [
                                 'value' => 'button_type_primary',
                                 'label' => __( 'Primary', 'directorist' ),
@@ -628,36 +628,36 @@ Please remember that your order may be canceled if you do not make your payment 
                     ],
 
                     // Primary Button
-                    'button_primary_example' => [
-                        'label'             => __( 'Button Example', 'directorist' ),
-                        'description'       => __( 'Modify the color of primary buttons like Save & Preview, Search, etc to match your design preferences', 'directorist' ),
-                        'type'              => 'button-example',
-                        'button-class'      => 'directorist-btn-primary',
-                        'button-label'      => __( 'Primary', 'directorist' ),
-                        'show-if' => [
-                            'where' => "button_type",
+                    'button_primary_example'                     => [
+                        'label'        => __( 'Button Example', 'directorist' ),
+                        'description'  => __( 'Modify the color of primary buttons like Save & Preview, Search, etc to match your design preferences', 'directorist' ),
+                        'type'         => 'button-example',
+                        'button-class' => 'directorist-btn-primary',
+                        'button-label' => __( 'Primary', 'directorist' ),
+                        'show-if'      => [
+                            'where'      => "button_type",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'button_type_primary'],
                             ],
                         ],
                     ],
-                    'button_primary_color' => [
-                        'label' => __( 'Text Color', 'directorist' ),
-                        'type' => 'color',
-                        'value' => '#ffffff',
+                    'button_primary_color'                       => [
+                        'label'   => __( 'Text Color', 'directorist' ),
+                        'type'    => 'color',
+                        'value'   => '#ffffff',
                         'show-if' => [
-                            'where' => "button_type",
+                            'where'      => "button_type",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'button_type_primary'],
                             ],
                         ],
                     ],
-                    'button_primary_bg_color' => [
-                        'label' => __( 'Background Color', 'directorist' ),
-                        'type' => 'color',
-                        'value' => '#444752',
+                    'button_primary_bg_color'                    => [
+                        'label'   => __( 'Background Color', 'directorist' ),
+                        'type'    => 'color',
+                        'value'   => '#444752',
                         'show-if' => [
-                            'where' => "button_type",
+                            'where'      => "button_type",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'button_type_primary'],
                             ],
@@ -665,66 +665,66 @@ Please remember that your order may be canceled if you do not make your payment 
                     ],
 
                     // Secondary Button
-                    'button_secondary_example' => [
-                        'label'       => __( 'Button Example', 'directorist' ),
-                        'description'       => __( 'Modify the color of secondary buttons like Logout, etc to match your design preferences', 'directorist' ),
-                        'type'              => 'button-example',
-                        'button-class'      => 'directorist-btn-secondary',
-                        'button-label'      => __( 'Secondary', 'directorist' ),
-                        'show-if' => [
-                            'where' => "button_type",
+                    'button_secondary_example'                   => [
+                        'label'        => __( 'Button Example', 'directorist' ),
+                        'description'  => __( 'Modify the color of secondary buttons like Logout, etc to match your design preferences', 'directorist' ),
+                        'type'         => 'button-example',
+                        'button-class' => 'directorist-btn-secondary',
+                        'button-label' => __( 'Secondary', 'directorist' ),
+                        'show-if'      => [
+                            'where'      => "button_type",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'button_type_secondary'],
                             ],
                         ],
                     ],
-                    'button_secondary_color' => [
-                        'label' => __( 'Text Color', 'directorist' ),
-                        'type' => 'color',
-                        'value' => '#404040',
+                    'button_secondary_color'                     => [
+                        'label'   => __( 'Text Color', 'directorist' ),
+                        'type'    => 'color',
+                        'value'   => '#404040',
                         'show-if' => [
-                            'where' => "button_type",
+                            'where'      => "button_type",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'button_type_secondary'],
                             ],
                         ],
                     ],
-                    'button_secondary_bg_color' => [
-                        'label' => __( 'Background Color', 'directorist' ),
-                        'type' => 'color',
-                        'value' => '#f2f3f5',
+                    'button_secondary_bg_color'                  => [
+                        'label'   => __( 'Background Color', 'directorist' ),
+                        'type'    => 'color',
+                        'value'   => '#f2f3f5',
                         'show-if' => [
-                            'where' => "button_type",
+                            'where'      => "button_type",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'button_type_secondary'],
                             ],
                         ],
                     ],
                     // Badge Color
-                    'featured_back_color' => [
-                        'type'        => 'color',
-                        'label'       => __( 'Background Color', 'directorist' ),
-                        'value'       => '#fa8b0c',
-                        'change-if'    => [
-                            'where' => 'badge_display_type',
+                    'featured_back_color'                        => [
+                        'type'      => 'color',
+                        'label'     => __( 'Background Color', 'directorist' ),
+                        'value'     => '#fa8b0c',
+                        'change-if' => [
+                            'where'      => 'badge_display_type',
                             'conditions' => [
                                 [
-                                    'key' => 'value',
+                                    'key'     => 'value',
                                     'compare' => '=',
-                                    'value' => 'icon_badge'
+                                    'value'   => 'icon_badge'
                                 ],
                             ],
-                            'effects' => [
+                            'effects'    => [
                                 [
-                                    'key' => 'label',
-                                    'value' => __( 'Hover Background Color', 'directorist' ),
+                                    'key'           => 'label',
+                                    'value'         => __( 'Hover Background Color', 'directorist' ),
                                     'default_value' => __( 'Background Color', 'directorist' )
                                 ],
                             ],
                         ],
                     ],
 
-                    'popular_back_color' => [
+                    'popular_back_color'                         => [
                         'type'      => 'color',
                         'label'     => __( 'Background Color', 'directorist' ),
                         'value'     => '#f51957',
@@ -737,7 +737,7 @@ Please remember that your order may be canceled if you do not make your payment 
                                     'value'   => 'icon_badge'
                                 ],
                             ],
-                            'effects' => [
+                            'effects'    => [
                                 [
                                     'key'           => 'label',
                                     'value'         => __( 'Hover Background Color', 'directorist' ),
@@ -747,10 +747,10 @@ Please remember that your order may be canceled if you do not make your payment 
                         ],
                     ],
 
-                    'new_back_color' => [
-                        'type' => 'color',
-                        'label' => __( 'Background Color', 'directorist' ),
-                        'value' => '#2C99FF',
+                    'new_back_color'                             => [
+                        'type'      => 'color',
+                        'label'     => __( 'Background Color', 'directorist' ),
+                        'value'     => '#2C99FF',
                         'change-if' => [
                             'where'      => 'badge_display_type',
                             'conditions' => [
@@ -760,7 +760,7 @@ Please remember that your order may be canceled if you do not make your payment 
                                     'value'   => 'icon_badge'
                                 ],
                             ],
-                            'effects' => [
+                            'effects'    => [
                                 [
                                     'key'           => 'label',
                                     'value'         => __( 'Hover Background Color', 'directorist' ),
@@ -771,104 +771,104 @@ Please remember that your order may be canceled if you do not make your payment 
                     ],
 
                     // Map Marker Color
-                    'marker_shape_color' => [
-                        'type' => 'color',
+                    'marker_shape_color'                         => [
+                        'type'  => 'color',
                         'label' => __( 'Marker Shape Color', 'directorist' ),
                         'value' => '#444752',
                     ],
 
-                    'marker_icon_color' => [
-                        'type' => 'color',
+                    'marker_icon_color'                          => [
+                        'type'  => 'color',
                         'label' => __( 'Marker Icon Color', 'directorist' ),
                         'value' => '#ffffff',
                     ],
 
                     // Primary Color
-                    'brand_color' => [
-                        'type' => 'color',
+                    'brand_color'                                => [
+                        'type'  => 'color',
                         'label' => __( 'Brand Color', 'directorist' ),
                         'value' => '#444752',
                     ],
 
                     // Email
-                    'email_to_expire_day' => [
-                        'label' => __( 'When to send expire notice', 'directorist' ),
-                        'type'  => 'number',
+                    'email_to_expire_day'                        => [
+                        'label'       => __( 'When to send expire notice', 'directorist' ),
+                        'type'        => 'number',
                         'description' => __( 'Select the days before a listing expires to send an expiration reminder email', 'directorist' ),
-                        'value' => 7,
+                        'value'       => 7,
                         'placeholder' => '10',
-                        'rules' => [
+                        'rules'       => [
                             'required' => true,
                         ],
                     ],
-                    'email_renewal_day' => [
-                        'label' => __( 'When to send renewal reminder', 'directorist' ),
-                        'type'  => 'number',
+                    'email_renewal_day'                          => [
+                        'label'       => __( 'When to send renewal reminder', 'directorist' ),
+                        'type'        => 'number',
                         'description' => __( 'Select the days after a listing expires to send a renewal reminder email', 'directorist' ),
-                        'value' => 7,
+                        'value'       => 7,
                         'placeholder' => '10',
-                        'rules' => [
+                        'rules'       => [
                             'required' => true,
                         ],
                     ],
-                    'delete_expired_listing_permanently' => [
+                    'delete_expired_listing_permanently'         => [
                         'label'       => __( 'Permanently Delete Expired Listings', 'directorist' ),
                         'type'        => 'toggle',
                         'description' => __( 'Automatically delete trashed listings permanently after the defined duration', 'directorist' ),
                         'value'       => false,
                     ],
-                    'delete_expired_listings_after' => [
-                        'label' => __( 'Permanently Delete After (days) of Expiration', 'directorist' ),
-                        'type'  => 'number',
-                        'value' => 15,
+                    'delete_expired_listings_after'              => [
+                        'label'       => __( 'Permanently Delete After (days) of Expiration', 'directorist' ),
+                        'type'        => 'number',
+                        'value'       => 15,
                         'placeholder' => '15',
-                        'rules' => [
+                        'rules'       => [
                             'required' => true,
                         ],
                     ],
-                    'paginate_author_listings' => [
+                    'paginate_author_listings'                   => [
                         'label' => __( 'Paginate Author Listings', 'directorist' ),
                         'type'  => 'toggle',
                         'value' => true,
                     ],
-                    'atbdp_enable_cache' => [
+                    'atbdp_enable_cache'                         => [
                         'label' => __( 'Enable Cache', 'directorist' ),
                         'type'  => 'toggle',
                         'value' => true,
                     ],
-                    'atbdp_reset_cache' => [
-                        'label' => __( 'Reset Cache', 'directorist' ),
-                        'type'  => 'toggle',
+                    'atbdp_reset_cache'                          => [
+                        'label'   => __( 'Reset Cache', 'directorist' ),
+                        'type'    => 'toggle',
                         'show-if' => [
-                            'where' => "atbdp_enable_cache",
+                            'where'      => "atbdp_enable_cache",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => false],
                             ],
                         ],
-                        'value' => false,
+                        'value'   => false,
                     ],
-                    'guest_listings' => [
+                    'guest_listings'                             => [
                         'label' => __( 'Guest Listing Submission', 'directorist' ),
                         'type'  => 'toggle',
                         'value' => false,
                     ],
-                    'guest_email_label' => [
-                        'type'      => 'text',
-                        'label'     => __( 'Guest Email Label', 'directorist' ),
-                        'value'     => __( 'Your Email', 'directorist' ),
-                        'show-if'   => [
-                            'where' => "guest_listings",
+                    'guest_email_label'                          => [
+                        'type'    => 'text',
+                        'label'   => __( 'Guest Email Label', 'directorist' ),
+                        'value'   => __( 'Your Email', 'directorist' ),
+                        'show-if' => [
+                            'where'      => "guest_listings",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'guest_email_placeholder' => [
-                        'type'      => 'text',
-                        'label'     => __( 'Guest Email Placeholder', 'directorist' ),
-                        'value'     => __( 'example@email.com', 'directorist' ),
-                        'show-if'   => [
-                            'where' => "guest_listings",
+                    'guest_email_placeholder'                    => [
+                        'type'    => 'text',
+                        'label'   => __( 'Guest Email Placeholder', 'directorist' ),
+                        'value'   => __( 'example@email.com', 'directorist' ),
+                        'show-if' => [
+                            'where'      => "guest_listings",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
@@ -876,10 +876,10 @@ Please remember that your order may be canceled if you do not make your payment 
                     ],
 
                     // listings page
-                    'all_listing_layout' => [
-                        'label' => __( 'All Listings Layout', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'left_sidebar',
+                    'all_listing_layout'                         => [
+                        'label'   => __( 'All Listings Layout', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'left_sidebar',
                         'options' => [
                             [
                                 'value' => 'left_sidebar',
@@ -896,89 +896,89 @@ Please remember that your order may be canceled if you do not make your payment 
                         ],
                     ],
 
-                    'listing_hide_top_search_bar' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Hide Top Search Bar', 'directorist' ),
-                        'value' => false,
+                    'listing_hide_top_search_bar'                => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Hide Top Search Bar', 'directorist' ),
+                        'value'   => false,
                         'show-if' => [
-                            'where' => "all_listing_layout",
+                            'where'      => "all_listing_layout",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '!=', 'value' => 'no_sidebar'],
                             ],
                         ],
                     ],
-                    'listings_sidebar_filter_text' => [
-                        'type' => 'text',
-                        'label' => __( 'Filters Text', 'directorist' ),
-                        'value' => __( 'Filters', 'directorist' ),
+                    'listings_sidebar_filter_text'               => [
+                        'type'    => 'text',
+                        'label'   => __( 'Filters Text', 'directorist' ),
+                        'value'   => __( 'Filters', 'directorist' ),
                         'show-if' => [
-                            'where' => "all_listing_layout",
+                            'where'      => "all_listing_layout",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '!=', 'value' => 'no_sidebar'],
                             ],
                         ],
                     ],
-                    'listings_filter_button_text' => [
-                        'type' => 'text',
-                        'label' => __( 'Filters Button Text', 'directorist' ),
-                        'value' => __( 'Filters', 'directorist' ),
+                    'listings_filter_button_text'                => [
+                        'type'    => 'text',
+                        'label'   => __( 'Filters Button Text', 'directorist' ),
+                        'value'   => __( 'Filters', 'directorist' ),
                         'show-if' => [
-                            'where' => "all_listing_layout",
+                            'where'      => "all_listing_layout",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'no_sidebar'],
                             ],
                         ],
                     ],
-                    'display_listings_count' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Display Listings Count', 'directorist' ),
-                        'value' => true,
+                    'display_listings_count'                     => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display Listings Count', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "display_listings_header",
+                            'where'      => "display_listings_header",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'all_listing_title' => [
-                        'type' => 'text',
+                    'all_listing_title'                          => [
+                        'type'    => 'text',
                         'label'   => __( 'Listings Count Text', 'directorist' ),
                         'value'   => __( 'Items Found', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_listings_header",
+                            'where'      => "display_listings_header",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'listings_reset_text' => [
-                        'type' => 'text',
-                        'label' => __( 'Reset Button text', 'directorist' ),
-                        'value' => __( 'Reset Filters', 'directorist' ),
+                    'listings_reset_text'                        => [
+                        'type'    => 'text',
+                        'label'   => __( 'Reset Button text', 'directorist' ),
+                        'value'   => __( 'Reset Filters', 'directorist' ),
                         'show-if' => [
-                            'where' => "all_listing_layout",
+                            'where'      => "all_listing_layout",
                             'conditions' => [
                                 [ 'key' => 'value', 'compare' => '=', 'value' => 'no_sidebar' ],
                             ],
                         ],
                     ],
-                    'listings_sidebar_reset_text' => [
-                        'type' => 'text',
-                        'label' => __( 'Reset text', 'directorist' ),
-                        'value' => __( 'Clear All', 'directorist' ),
+                    'listings_sidebar_reset_text'                => [
+                        'type'    => 'text',
+                        'label'   => __( 'Reset text', 'directorist' ),
+                        'value'   => __( 'Clear All', 'directorist' ),
                         'show-if' => [
-                            'where' => "all_listing_layout",
+                            'where'      => "all_listing_layout",
                             'conditions' => [
                                 [ 'key' => 'value', 'compare' => '!=', 'value' => 'no_sidebar' ],
                             ],
                         ],
                     ],
-                    'listings_apply_text' => [
-                        'type' => 'text',
-                        'label' => __( 'Apply Button text', 'directorist' ),
-                        'value' => __( 'Apply Filters', 'directorist' ),
+                    'listings_apply_text'                        => [
+                        'type'    => 'text',
+                        'label'   => __( 'Apply Button text', 'directorist' ),
+                        'value'   => __( 'Apply Filters', 'directorist' ),
                         'show-if' => [
-                            'where' => "all_listing_layout",
+                            'where'      => "all_listing_layout",
                             'conditions' => [
                                 [ 'key' => 'value', 'compare' => '=', 'value' => 'no_sidebar' ],
                             ],
@@ -986,26 +986,26 @@ Please remember that your order may be canceled if you do not make your payment 
                     ],
 
 
-                    'display_sort_by' => [
-                        'type' => 'toggle',
+                    'display_sort_by'                            => [
+                        'type'  => 'toggle',
                         'label' => __( 'Enable Sorting Options', 'directorist' ),
                         'value' => true,
                     ],
-                    'sort_by_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( '"Sort By" Label', 'directorist' ),
-                        'value'         => __( 'Sort By', 'directorist' ),
+                    'sort_by_text'                               => [
+                        'type'    => 'text',
+                        'label'   => __( '"Sort By" Label', 'directorist' ),
+                        'value'   => __( 'Sort By', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_sort_by",
+                            'where'      => "display_sort_by",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'listings_sort_by_items' => [
-                        'label' => __( 'Sort Options', 'directorist' ),
-                        'type'  => 'checkbox',
-                        'value' => [
+                    'listings_sort_by_items'                     => [
+                        'label'   => __( 'Sort Options', 'directorist' ),
+                        'type'    => 'checkbox',
+                        'value'   => [
                             'a_z',
                             'z_a',
                             'latest',
@@ -1054,10 +1054,10 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'listings_view_as_items' => [
-                        'label' => __( 'View Type', 'directorist' ),
-                        'type'  => 'checkbox',
-                        'value' => [
+                    'listings_view_as_items'                     => [
+                        'label'   => __( 'View Type', 'directorist' ),
+                        'type'    => 'checkbox',
+                        'value'   => [
                             'listings_grid',
                             'listings_list',
                             'listings_map'
@@ -1077,10 +1077,10 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'default_listing_view' => [
-                        'label' => __( 'Default View', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'grid',
+                    'default_listing_view'                       => [
+                        'label'   => __( 'Default View', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'grid',
                         'options' => [
                             [
                                 'value' => 'grid',
@@ -1096,7 +1096,7 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'all_listing_columns' => [
+                    'all_listing_columns'                        => [
                         'label'   => __( 'Listings Grid Columns', 'directorist' ),
                         'type'    => 'radio-images',
                         'value'   => '2',
@@ -1120,11 +1120,11 @@ Please remember that your order may be canceled if you do not make your payment 
                             '4' => DIRECTORIST_ASSETS . 'images/col4.svg',
                         ],
                     ],
-                    'preview_image_quality' => [
-                        'label' => __( 'Image Quality', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'directorist_preview',
-                        'options' => [
+                    'preview_image_quality'                      => [
+                        'label'       => __( 'Image Quality', 'directorist' ),
+                        'type'        => 'select',
+                        'value'       => 'directorist_preview',
+                        'options'     => [
                             [
                                 'value' => 'directorist_preview',
                                 'label' => __( 'Default', 'directorist' ),
@@ -1144,10 +1144,10 @@ Please remember that your order may be canceled if you do not make your payment 
                         ],
                         'description' => sprintf( __( 'Default: %s.<br/>If changed, regenerate thumbnails via <a href="%s" target="_blank">this</a> plugin for proper functionality.', 'directorist' ), $default_preview_size_text, 'https://wordpress.org/plugins/regenerate-thumbnails/' ),
                     ],
-                    'way_to_show_preview' => [
-                        'label' => __( 'Image Size', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'cover',
+                    'way_to_show_preview'                        => [
+                        'label'   => __( 'Image Size', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'cover',
 
                         'options' => [
                             [
@@ -1164,31 +1164,31 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'crop_width' => [
-                        'label' => __( 'Width', 'directorist' ),
-                        'type'  => 'number',
-                        'value' => '350',
-                        'min' => '1',
-                        'max' => '1200',
-                        'step' => '1',
-                        'group' => 'container',
+                    'crop_width'                                 => [
+                        'label'       => __( 'Width', 'directorist' ),
+                        'type'        => 'number',
+                        'value'       => '350',
+                        'min'         => '1',
+                        'max'         => '1200',
+                        'step'        => '1',
+                        'group'       => 'container',
                         'group_label' => 'Container',
                     ],
-                    'crop_height' => [
-                        'label' => __( 'Height', 'directorist' ),
-                        'type'  => 'number',
-                        'value' => '260',
-                        'min' => '1',
-                        'max' => '1200',
-                        'step' => '1',
-                        'group' => 'container',
+                    'crop_height'                                => [
+                        'label'       => __( 'Height', 'directorist' ),
+                        'type'        => 'number',
+                        'value'       => '260',
+                        'min'         => '1',
+                        'max'         => '1200',
+                        'step'        => '1',
+                        'group'       => 'container',
                         'group_label' => 'Container',
                     ],
-                    'prv_container_size_by' => [
-                        'label' => __( 'Size By', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'px',
-                        'options' => [
+                    'prv_container_size_by'                      => [
+                        'label'       => __( 'Size By', 'directorist' ),
+                        'type'        => 'select',
+                        'value'       => 'px',
+                        'options'     => [
                             [
                                 'value' => 'px',
                                 'label' => __( 'Pixel', 'directorist' ),
@@ -1198,13 +1198,13 @@ Please remember that your order may be canceled if you do not make your payment 
                                 'label' => __( 'Ratio', 'directorist' ),
                             ],
                         ],
-                        'group' => 'container',
+                        'group'       => 'container',
                         'group_label' => 'Container',
                     ],
-                    'prv_background_type' => [
-                        'label' => __( 'Background', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'blur',
+                    'prv_background_type'                        => [
+                        'label'   => __( 'Background', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'blur',
 
                         'options' => [
                             [
@@ -1217,29 +1217,29 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'prv_background_color' => [
-                        'type' => 'text',
-                        'label' => __( 'Select Color', 'directorist' ),
+                    'prv_background_color'                       => [
+                        'type'    => 'text',
+                        'label'   => __( 'Select Color', 'directorist' ),
                         'show-if' => [
-                            'where' => "prv_background_type",
+                            'where'      => "prv_background_type",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'color'],
                             ],
                         ],
-                        'value' => 'gainsboro',
+                        'value'   => 'gainsboro',
                     ],
-                    'all_listing_page_items' => [
+                    'all_listing_page_items'                     => [
                         'label' => __( 'Listings Per Page', 'directorist' ),
                         'type'  => 'number',
                         'value' => '6',
-                        'min' => '1',
-                        'max' => '100',
-                        'step' => '1',
+                        'min'   => '1',
+                        'max'   => '100',
+                        'step'  => '1',
                     ],
-                    'pagination_type' => [
-                        'label' => __( 'Pagination Type', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'numbered',
+                    'pagination_type'                            => [
+                        'label'   => __( 'Pagination Type', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'numbered',
                         'options' => [
                             [
                                 'value' => 'numbered',
@@ -1251,39 +1251,39 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'display_listings_header' => [
+                    'display_listings_header'                    => [
                         'label' => __( 'Enable Header', 'directorist' ),
                         'type'  => 'toggle',
                         'value' => true,
                     ],
-                    'listing_filters_button' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Display Filters Button', 'directorist' ),
-                        'value' => true,
+                    'listing_filters_button'                     => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display Filters Button', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "all_listing_layout",
+                            'where'      => "all_listing_layout",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'no_sidebar'],
                             ],
                         ],
                     ],
                     // single listing settings
-                    'disable_single_listing' => [
-                        'type' => 'toggle',
+                    'disable_single_listing'                     => [
+                        'type'  => 'toggle',
                         'label' => __( 'Disable Single Listing View' ),
                         'value' => false,
                     ],
                     'restrict_single_listing_for_logged_in_user' => [
-                        'type' => 'toggle',
+                        'type'  => 'toggle',
                         'label' => __( 'Show Single Listings to Logged-In Users Only', 'directorist' ),
                         'value' => false,
                     ],
-                    'single_listing_template' => [
-                        'label' => __( 'Template', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'directorist_template',
+                    'single_listing_template'                    => [
+                        'label'   => __( 'Template', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'directorist_template',
                         'show-if' => [
-                            'where' => "disable_single_listing",
+                            'where'      => "disable_single_listing",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => false],
                             ],
@@ -1303,35 +1303,35 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'atbdp_listing_slug' => [
-                        'type' => 'text',
-                        'label' => __( 'Listing Slug', 'directorist' ),
+                    'atbdp_listing_slug'                         => [
+                        'type'    => 'text',
+                        'label'   => __( 'Listing Slug', 'directorist' ),
                         'show-if' => [
-                            'where' => "disable_single_listing",
+                            'where'      => "disable_single_listing",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => false],
                             ],
                         ],
-                        'value' => 'directory',
+                        'value'   => 'directory',
                     ],
-                    'dsiplay_slider_single_page' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Show Slider Image', 'directorist' ),
-                        'value' => true,
+                    'dsiplay_slider_single_page'                 => [
+                        'type'        => 'toggle',
+                        'label'       => __( 'Show Slider Image', 'directorist' ),
+                        'value'       => true,
                         'description' => __( 'Hide/show slider image from single listing page.', 'directorist' ),
-                        'show-if' => [
-                            'where' => "disable_single_listing",
+                        'show-if'     => [
+                            'where'      => "disable_single_listing",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => false],
                             ],
                         ],
                     ],
-                    'single_slider_image_size' => [
-                        'label' => __( 'Image Size', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'cover',
+                    'single_slider_image_size'                   => [
+                        'label'   => __( 'Image Size', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'cover',
                         'show-if' => [
-                            'where' => "dsiplay_slider_single_page",
+                            'where'      => "dsiplay_slider_single_page",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
@@ -1347,12 +1347,12 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'single_slider_background_type' => [
-                        'label' => __( 'Slider Background Type', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'custom-color',
+                    'single_slider_background_type'              => [
+                        'label'   => __( 'Slider Background Type', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'custom-color',
                         'show-if' => [
-                            'where' => "single_slider_image_size",
+                            'where'      => "single_slider_image_size",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'contain'],
                             ],
@@ -1368,48 +1368,48 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'single_slider_background_color' => [
-                        'type' => 'color',
-                        'label' => __( 'Background Color', 'directorist' ),
+                    'single_slider_background_color'             => [
+                        'type'    => 'color',
+                        'label'   => __( 'Background Color', 'directorist' ),
                         'show-if' => [
-                            'where' => "single_slider_background_type",
+                            'where'      => "single_slider_background_type",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'custom-color'],
                             ],
                         ],
-                        'value' => '#ffffff',
+                        'value'   => '#ffffff',
                     ],
 
-                    'gallery_crop_width' => [
-                        'label' => __( 'Image Width', 'directorist' ),
-                        'type'  => 'number',
-                        'value' => '740',
-                        'min' => '1',
-                        'max' => '1200',
-                        'step' => '1',
+                    'gallery_crop_width'                         => [
+                        'label'   => __( 'Image Width', 'directorist' ),
+                        'type'    => 'number',
+                        'value'   => '740',
+                        'min'     => '1',
+                        'max'     => '1200',
+                        'step'    => '1',
                         'show-if' => [
-                            'where' => "dsiplay_slider_single_page",
+                            'where'      => "dsiplay_slider_single_page",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'gallery_crop_height' => [
-                        'label' => __( 'Image Height', 'directorist' ),
-                        'type'  => 'number',
-                        'value' => '580',
-                        'min' => '1',
-                        'max' => '1200',
-                        'step' => '1',
+                    'gallery_crop_height'                        => [
+                        'label'   => __( 'Image Height', 'directorist' ),
+                        'type'    => 'number',
+                        'value'   => '580',
+                        'min'     => '1',
+                        'max'     => '1200',
+                        'step'    => '1',
                         'show-if' => [
-                            'where' => "dsiplay_slider_single_page",
+                            'where'      => "dsiplay_slider_single_page",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
                     // badge settings
-                    'badge_display_type' => [
+                    'badge_display_type'                         => [
                         'label'       => __( 'Badge Display Type', 'directorist' ),
                         'description' => __( 'Choose how badges should be displayed on listings', 'directorist' ),
                         'type'        => 'select',
@@ -1425,12 +1425,12 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'new_badge_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Badge Text', 'directorist' ),
-                        'description'   => __( 'Text displayed on the badge when a listing is newly created.', 'directorist' ),
-                        'value'         => __( 'New', 'directorist' ),
-                        'change-if'    => [
+                    'new_badge_text'                             => [
+                        'type'        => 'text',
+                        'label'       => __( 'Badge Text', 'directorist' ),
+                        'description' => __( 'Text displayed on the badge when a listing is newly created.', 'directorist' ),
+                        'value'       => __( 'New', 'directorist' ),
+                        'change-if'   => [
                             'where'      => 'badge_display_type',
                             'conditions' => [
                                 [
@@ -1439,7 +1439,7 @@ Please remember that your order may be canceled if you do not make your payment 
                                     'value'   => 'icon_badge'
                                 ],
                             ],
-                            'effects' => [
+                            'effects'    => [
                                 [
                                     'key'           => 'label',
                                     'value'         => __( 'Badge Hover Text', 'directorist' ),
@@ -1448,44 +1448,21 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'new_listing_day' => [
-                        'label'         => __( 'New Badge Display Duration', 'directorist' ),
-                        'description'   => __( 'Enter the number of days the "New" badge will appear on a new listing.', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => '3',
-                        'min'           => '1',
-                        'max'           => '100',
-                        'step'          => '1',
+                    'new_listing_day'                            => [
+                        'label'       => __( 'New Badge Display Duration', 'directorist' ),
+                        'description' => __( 'Enter the number of days the "New" badge will appear on a new listing.', 'directorist' ),
+                        'type'        => 'number',
+                        'value'       => '3',
+                        'min'         => '1',
+                        'max'         => '100',
+                        'step'        => '1',
                     ],
-                    'feature_badge_text' => [
-                        'type'         => 'text',
-                        'label'        => __( 'Badge Text', 'directorist' ),
-                        'description'  => __( 'Text displayed on the badge when a listing is marked as featured.', 'directorist' ),
-                        'value'        => __( 'Featured', 'directorist' ),
-                        'change-if'    => [
-                            'where' => 'badge_display_type',
-                            'conditions' => [
-                                [
-                                    'key' => 'value',
-                                    'compare' => '=',
-                                    'value' => 'icon_badge'
-                                ],
-                            ],
-                            'effects' => [
-                                [
-                                    'key' => 'label',
-                                    'value' => __( 'Badge Hover Text', 'directorist' ),
-                                    'default_value' => __( 'Badge Text', 'directorist' )
-                                ],
-                            ],
-                        ],
-                    ],
-                    'popular_badge_text' => [
-                        'type'          => 'text',
-                        'label'         => __( 'Badge Text', 'directorist' ),
-                        'description'   => __( 'Text displayed on the badge when an item is marked as popular.', 'directorist' ),
-                        'value'         => __( 'Popular', 'directorist' ),
-                        'change-if'    => [
+                    'feature_badge_text'                         => [
+                        'type'        => 'text',
+                        'label'       => __( 'Badge Text', 'directorist' ),
+                        'description' => __( 'Text displayed on the badge when a listing is marked as featured.', 'directorist' ),
+                        'value'       => __( 'Featured', 'directorist' ),
+                        'change-if'   => [
                             'where'      => 'badge_display_type',
                             'conditions' => [
                                 [
@@ -1494,7 +1471,7 @@ Please remember that your order may be canceled if you do not make your payment 
                                     'value'   => 'icon_badge'
                                 ],
                             ],
-                            'effects' => [
+                            'effects'    => [
                                 [
                                     'key'           => 'label',
                                     'value'         => __( 'Badge Hover Text', 'directorist' ),
@@ -1503,12 +1480,35 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'listing_popular_by' => [
-                        'label'     => __( 'Determine Popularity By', 'directorist' ),
+                    'popular_badge_text'                         => [
+                        'type'        => 'text',
+                        'label'       => __( 'Badge Text', 'directorist' ),
+                        'description' => __( 'Text displayed on the badge when an item is marked as popular.', 'directorist' ),
+                        'value'       => __( 'Popular', 'directorist' ),
+                        'change-if'   => [
+                            'where'      => 'badge_display_type',
+                            'conditions' => [
+                                [
+                                    'key'     => 'value',
+                                    'compare' => '=',
+                                    'value'   => 'icon_badge'
+                                ],
+                            ],
+                            'effects'    => [
+                                [
+                                    'key'           => 'label',
+                                    'value'         => __( 'Badge Hover Text', 'directorist' ),
+                                    'default_value' => __( 'Badge Text', 'directorist' )
+                                ],
+                            ],
+                        ],
+                    ],
+                    'listing_popular_by'                         => [
+                        'label'       => __( 'Determine Popularity By', 'directorist' ),
                         'description' => __( 'Select the criteria used to determine popularity.', 'directorist' ),
-                        'type'      => 'select',
-                        'value'     => 'view_count',
-                        'options'   => [
+                        'type'        => 'select',
+                        'value'       => 'view_count',
+                        'options'     => [
                             [
                                 'value' => 'view_count',
                                 'label' => __( 'View Count', 'directorist' ),
@@ -1519,39 +1519,39 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'views_for_popular' => [
-                        'type'          => 'text',
-                        'label'         => __( 'View Count Threshold', 'directorist' ),
-                        'description'   => __( 'Minimum number of views to mark an item as popular.', 'directorist' ),
-                        'value'         => 5,
+                    'views_for_popular'                          => [
+                        'type'        => 'text',
+                        'label'       => __( 'View Count Threshold', 'directorist' ),
+                        'description' => __( 'Minimum number of views to mark an item as popular.', 'directorist' ),
+                        'value'       => 5,
                     ],
-                    'count_loggedin_user' => [
-                        'type'          => 'toggle',
-                        'label'         => __( 'Track Logged-In User Views', 'directorist' ),
-                        'description'   => __( 'Include visits from logged-in users in total listing view counts.', 'directorist' ),
-                        'value'         => true,
+                    'count_loggedin_user'                        => [
+                        'type'        => 'toggle',
+                        'label'       => __( 'Track Logged-In User Views', 'directorist' ),
+                        'description' => __( 'Include visits from logged-in users in total listing view counts.', 'directorist' ),
+                        'value'       => true,
                     ],
-                    'dynamic_view_count_cache' => [
-                        'type'          => 'toggle',
-                        'label'         => __( 'Cache-Compatible View Tracking', 'directorist' ),
-                        'description'   => __( 'Enable real-time view count updates even when using caching plugins like W3 Total Cache or LiteSpeed Cache.', 'directorist' ),
-                        'value'         => false,
+                    'dynamic_view_count_cache'                   => [
+                        'type'        => 'toggle',
+                        'label'       => __( 'Cache-Compatible View Tracking', 'directorist' ),
+                        'description' => __( 'Enable real-time view count updates even when using caching plugins like W3 Total Cache or LiteSpeed Cache.', 'directorist' ),
+                        'value'       => false,
                     ],
-                    'average_review_for_popular' => [
-                        'label'         => __( 'Minimum Average Rating', 'directorist' ),
-                        'description'   => __( 'Minimum average rating (equal or greater than) to mark an item as popular.', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => '4',
-                        'min'           => '.5',
-                        'max'           => '4.5',
-                        'step'          => '.5',
+                    'average_review_for_popular'                 => [
+                        'label'       => __( 'Minimum Average Rating', 'directorist' ),
+                        'description' => __( 'Minimum average rating (equal or greater than) to mark an item as popular.', 'directorist' ),
+                        'type'        => 'number',
+                        'value'       => '4',
+                        'min'         => '.5',
+                        'max'         => '4.5',
+                        'step'        => '.5',
                     ],
 
                     // select map settings
-                    'select_listing_map' => [
-                        'label' => __( 'Select Map', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'openstreet',
+                    'select_listing_map'                         => [
+                        'label'   => __( 'Select Map', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'openstreet',
                         'options' => [
                             [
                                 'value' => 'google',
@@ -1563,296 +1563,296 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'map_api_key' => [
-                        'type' => 'text',
-                        'label' => __( 'Google Map API key', 'directorist' ),
+                    'map_api_key'                                => [
+                        'type'        => 'text',
+                        'label'       => __( 'Google Map API key', 'directorist' ),
                         'description' => sprintf( __( 'Please replace it by your own API. It\'s required to use Google Map. You can find detailed information %s.', 'directorist' ), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank"> <div class="atbdp_shortcodes" style="color: red;">here</div> </a>' ),
-                        'value' => '',
-                        'show-if' => [
-                            'where' => "select_listing_map",
+                        'value'       => '',
+                        'show-if'     => [
+                            'where'      => "select_listing_map",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'google'],
                             ],
                         ],
                     ],
-                    'default_latitude'     => [
-                        'type'           => 'text',
-                        'label'          => __( 'Default Latitude', 'directorist' ),
-                        'description'    => sprintf( __( 'You can find it %s', 'directorist' ), '<a href="https://www.maps.ie/coordinates.html" target="_blank" class="directorist-find-latlan">here</a>' ),
-                        'value'          => '40.7127753',
+                    'default_latitude'                           => [
+                        'type'        => 'text',
+                        'label'       => __( 'Default Latitude', 'directorist' ),
+                        'description' => sprintf( __( 'You can find it %s', 'directorist' ), '<a href="https://www.maps.ie/coordinates.html" target="_blank" class="directorist-find-latlan">here</a>' ),
+                        'value'       => '40.7127753',
                     ],
-                    'default_longitude'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Default Longitude', 'directorist' ),
-                        'description'   => sprintf( __( 'You can find it %s', 'directorist' ), '<a href="https://www.maps.ie/coordinates.html" target="_blank" class="directorist-find-latlan">here</a>' ),
-                        'value'         => '-74.0059728',
+                    'default_longitude'                          => [
+                        'type'        => 'text',
+                        'label'       => __( 'Default Longitude', 'directorist' ),
+                        'description' => sprintf( __( 'You can find it %s', 'directorist' ), '<a href="https://www.maps.ie/coordinates.html" target="_blank" class="directorist-find-latlan">here</a>' ),
+                        'value'       => '-74.0059728',
                     ],
-                    'map_zoom_level'       => [
-                        'label'         => __( 'Zoom Level for Single Listing', 'directorist' ),
-                        'description'   => __( 'Here 0 means 100% zoom-out. 22 means 100% zoom-in. Minimum Zoom Allowed = 1. Max Zoom Allowed = 22.', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => '16',
-                        'min'           => '1',
-                        'max'           => '22',
-                        'step'          => '1',
+                    'map_zoom_level'                             => [
+                        'label'       => __( 'Zoom Level for Single Listing', 'directorist' ),
+                        'description' => __( 'Here 0 means 100% zoom-out. 22 means 100% zoom-in. Minimum Zoom Allowed = 1. Max Zoom Allowed = 22.', 'directorist' ),
+                        'type'        => 'number',
+                        'value'       => '16',
+                        'min'         => '1',
+                        'max'         => '22',
+                        'step'        => '1',
                     ],
-                    'map_view_zoom_level' => [
-                        'label'         => __( 'Zoom Level for Map View', 'directorist' ),
-                        'description'   => __( 'Here 0 means 100% zoom-out. 18 means 100% zoom-in. Minimum Zoom Allowed = 1. Max Zoom Allowed = 18.', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => '1',
-                        'min'           => '1',
-                        'max'           => '18',
-                        'step'          => '1',
+                    'map_view_zoom_level'                        => [
+                        'label'       => __( 'Zoom Level for Map View', 'directorist' ),
+                        'description' => __( 'Here 0 means 100% zoom-out. 18 means 100% zoom-in. Minimum Zoom Allowed = 1. Max Zoom Allowed = 18.', 'directorist' ),
+                        'type'        => 'number',
+                        'value'       => '1',
+                        'min'         => '1',
+                        'max'         => '18',
+                        'step'        => '1',
                     ],
-                    'listings_map_height' => [
-                        'label'         => __( 'Map Height', 'directorist' ),
-                        'description'   => __( 'In pixel.', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => '350',
-                        'min'           => '5',
-                        'max'           => '1200',
-                        'step'          => '5',
+                    'listings_map_height'                        => [
+                        'label'       => __( 'Map Height', 'directorist' ),
+                        'description' => __( 'In pixel.', 'directorist' ),
+                        'type'        => 'number',
+                        'value'       => '350',
+                        'min'         => '5',
+                        'max'         => '1200',
+                        'step'        => '5',
                     ],
-                    'display_map_info' => [
-                        'type' => 'toggle',
+                    'display_map_info'                           => [
+                        'type'  => 'toggle',
                         'label' => __( 'Display Map Info Window', 'directorist' ),
                         'value' => true,
                     ],
-                    'display_image_map' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Display Preview Image', 'directorist' ),
-                        'value' => true,
+                    'display_image_map'                          => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display Preview Image', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "display_map_info",
+                            'where'      => "display_map_info",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_favorite_badge_map' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Display Favorite Badge', 'directorist' ),
-                        'value' => true,
+                    'display_favorite_badge_map'                 => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display Favorite Badge', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "display_map_info",
+                            'where'      => "display_map_info",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_user_avatar_map' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Display User Avatar', 'directorist' ),
-                        'value' => true,
+                    'display_user_avatar_map'                    => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display User Avatar', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "display_map_info",
+                            'where'      => "display_map_info",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_title_map' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Display Title', 'directorist' ),
-                        'value' => true,
+                    'display_title_map'                          => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display Title', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "display_map_info",
+                            'where'      => "display_map_info",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_review_map' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Display Review', 'directorist' ),
-                        'value' => true,
+                    'display_review_map'                         => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display Review', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "display_map_info",
+                            'where'      => "display_map_info",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_price_map' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Display Price', 'directorist' ),
-                        'value' => true,
+                    'display_price_map'                          => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display Price', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "display_map_info",
+                            'where'      => "display_map_info",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_address_map' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Display Address', 'directorist' ),
-                        'value' => true,
+                    'display_address_map'                        => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display Address', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "display_map_info",
+                            'where'      => "display_map_info",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_direction_map' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Display Get Direction', 'directorist' ),
-                        'value' => true,
+                    'display_direction_map'                      => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display Get Direction', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "display_map_info",
+                            'where'      => "display_map_info",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_phone_map' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Display Phone', 'directorist' ),
-                        'value' => true,
+                    'display_phone_map'                          => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display Phone', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "display_map_info",
+                            'where'      => "display_map_info",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
                     // user dashboard settings
-                    'my_listing_tab' => [
-                        'type' => 'toggle',
+                    'my_listing_tab'                             => [
+                        'type'  => 'toggle',
                         'label' => __( 'Display My Listing Tab', 'directorist' ),
                         'value' => true,
                     ],
-                    'my_listing_tab_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( '"My Listing" Tab Label', 'directorist' ),
-                        'value'         => __( 'My Listing', 'directorist' ),
+                    'my_listing_tab_text'                        => [
+                        'type'    => 'text',
+                        'label'   => __( '"My Listing" Tab Label', 'directorist' ),
+                        'value'   => __( 'My Listing', 'directorist' ),
                         'show-if' => [
-                            'where' => "my_listing_tab",
+                            'where'      => "my_listing_tab",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'user_listings_pagination' => [
-                        'type'  => 'toggle',
-                        'label' => __( 'Listings Pagination', 'directorist' ),
-                        'value' => true,
+                    'user_listings_pagination'                   => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Listings Pagination', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "my_listing_tab",
+                            'where'      => "my_listing_tab",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'user_listings_per_page' => [
-                        'label'         => __( 'Listings Per Page', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => '9',
-                        'min'           => '1',
-                        'max'           => '30',
-                        'step'          => '1',
+                    'user_listings_per_page'                     => [
+                        'label'   => __( 'Listings Per Page', 'directorist' ),
+                        'type'    => 'number',
+                        'value'   => '9',
+                        'min'     => '1',
+                        'max'     => '30',
+                        'step'    => '1',
                         'show-if' => [
-                            'where' => "my_listing_tab",
+                            'where'      => "my_listing_tab",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'my_profile_tab' => [
+                    'my_profile_tab'                             => [
                         'type'  => 'toggle',
                         'label' => __( 'Display My Profile Tab', 'directorist' ),
                         'value' => true,
                     ],
-                    'my_profile_tab_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( '"My Profile" Tab Label', 'directorist' ),
-                        'value'         => __( 'My Profile', 'directorist' ),
+                    'my_profile_tab_text'                        => [
+                        'type'    => 'text',
+                        'label'   => __( '"My Profile" Tab Label', 'directorist' ),
+                        'value'   => __( 'My Profile', 'directorist' ),
                         'show-if' => [
-                            'where' => "my_profile_tab",
+                            'where'      => "my_profile_tab",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'fav_listings_tab' => [
+                    'fav_listings_tab'                           => [
                         'type'  => 'toggle',
                         'label' => __( 'Display Favourite Listings Tab', 'directorist' ),
                         'value' => true,
                     ],
-                    'fav_listings_tab_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( '"Favourite Listings" Tab Label', 'directorist' ),
-                        'value'         => __( 'Favorite Listings', 'directorist' ),
+                    'fav_listings_tab_text'                      => [
+                        'type'    => 'text',
+                        'label'   => __( '"Favourite Listings" Tab Label', 'directorist' ),
+                        'value'   => __( 'Favorite Listings', 'directorist' ),
                         'show-if' => [
-                            'where' => "fav_listings_tab",
+                            'where'      => "fav_listings_tab",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'submit_listing_button' => [
+                    'submit_listing_button'                      => [
                         'type'  => 'toggle',
                         'label' => __( 'Display Submit Listing Button', 'directorist' ),
                         'value' => true,
                     ],
-                    'become_author_button' => [
+                    'become_author_button'                       => [
                         'type'  => 'toggle',
                         'label' => __( 'Display "Become An Author" button', 'directorist' ),
                         'value' => true,
                     ],
-                    'become_author_button_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( '"Become An Author" button Label', 'directorist' ),
-                        'value'         => __( 'Become An Author', 'directorist' ),
+                    'become_author_button_text'                  => [
+                        'type'    => 'text',
+                        'label'   => __( '"Become An Author" button Label', 'directorist' ),
+                        'value'   => __( 'Become An Author', 'directorist' ),
                         'show-if' => [
-                            'where' => "become_author_button",
+                            'where'      => "become_author_button",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
                     // all authors settings
-                    'all_authors_columns' => [
-                        'label'         => __( 'Number of Columns', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => '3',
-                        'min'           => '1',
-                        'max'           => '6',
-                        'step'          => '1',
+                    'all_authors_columns'                        => [
+                        'label' => __( 'Number of Columns', 'directorist' ),
+                        'type'  => 'number',
+                        'value' => '3',
+                        'min'   => '1',
+                        'max'   => '6',
+                        'step'  => '1',
                     ],
-                    'all_authors_sorting' => [
+                    'all_authors_sorting'                        => [
                         'type'  => 'toggle',
                         'label' => __( 'Display Alphabet Sorting', 'directorist' ),
                         'value' => true,
                     ],
-                    'all_authors_image' => [
+                    'all_authors_image'                          => [
                         'type'  => 'toggle',
                         'label' => __( 'Display Image', 'directorist' ),
                         'value' => true,
                     ],
-                    'all_authors_name' => [
+                    'all_authors_name'                           => [
                         'type'  => 'toggle',
                         'label' => __( 'Display Name', 'directorist' ),
                         'value' => true,
                     ],
-                    'all_authors_select_role' => [
-                        'label' => __( 'Select Role', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'all',
+                    'all_authors_select_role'                    => [
+                        'label'   => __( 'Select Role', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'all',
                         'options' => $this->get_user_roles(),
                     ],
-                    'all_authors_contact' => [
-                        'label' => esc_html__( 'Contact Info', 'directorist' ),
-                        'type'  => 'checkbox',
-                        'value' => [
+                    'all_authors_contact'                        => [
+                        'label'       => esc_html__( 'Contact Info', 'directorist' ),
+                        'type'        => 'checkbox',
+                        'value'       => [
                             'phone',
                             'address',
                             'website',
                         ],
                         'description' => esc_html__( 'Email will show only for logged in user.', 'directorist' ),
-                        'options' => [
+                        'options'     => [
                             [
                                 'value' => 'phone',
                                 'label' => esc_html__( 'Phone', 'directorist' ),
@@ -1871,86 +1871,86 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'all_authors_description' => [
+                    'all_authors_description'                    => [
                         'type'  => 'toggle',
                         'label' => __( 'Display Description', 'directorist' ),
                         'value' => true,
                     ],
-                    'all_authors_description_limit' => [
-                        'label'         => __( 'Description Word Limit', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => '13',
-                        'min'           => '1',
-                        'max'           => '50',
-                        'step'          => '1',
+                    'all_authors_description_limit'              => [
+                        'label'   => __( 'Description Word Limit', 'directorist' ),
+                        'type'    => 'number',
+                        'value'   => '13',
+                        'min'     => '1',
+                        'max'     => '50',
+                        'step'    => '1',
                         'show-if' => [
-                            'where' => "all_authors_description",
+                            'where'      => "all_authors_description",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'all_authors_social_info' => [
+                    'all_authors_social_info'                    => [
                         'type'  => 'toggle',
                         'label' => __( 'Display Social Info', 'directorist' ),
                         'value' => true,
                     ],
-                    'all_authors_button' => [
+                    'all_authors_button'                         => [
                         'type'  => 'toggle',
                         'label' => __( 'Display All Listings Button', 'directorist' ),
                         'value' => true,
                     ],
-                    'all_authors_button_text'  => [
-                        'type'          => 'text',
-                        'label'         => __( 'All Listings Button text', 'directorist' ),
-                        'value'         => __( 'View All Listings', 'directorist' ),
+                    'all_authors_button_text'                    => [
+                        'type'    => 'text',
+                        'label'   => __( 'All Listings Button text', 'directorist' ),
+                        'value'   => __( 'View All Listings', 'directorist' ),
                         'show-if' => [
-                            'where' => "all_authors_button",
+                            'where'      => "all_authors_button",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'all_authors_pagination' => [
+                    'all_authors_pagination'                     => [
                         'type'  => 'toggle',
                         'label' => __( 'Paginate All Authors ', 'directorist' ),
                         'value' => true,
                     ],
-                    'all_authors_per_page' => [
-                        'label'         => __( 'Authors Per Page', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => '9',
-                        'min'           => '1',
-                        'max'           => '50',
-                        'step'          => '1',
+                    'all_authors_per_page'                       => [
+                        'label' => __( 'Authors Per Page', 'directorist' ),
+                        'type'  => 'number',
+                        'value' => '9',
+                        'min'   => '1',
+                        'max'   => '50',
+                        'step'  => '1',
                     ],
                     // search form settings
-                    'search_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Search Bar Title', 'directorist' ),
+                    'search_title'                               => [
+                        'type'  => 'text',
+                        'label' => __( 'Search Bar Title', 'directorist' ),
                         'value' => __( 'Search here', 'directorist' ),
                     ],
-                    'search_subtitle'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Search Bar Sub-title', 'directorist' ),
-                        'value'         => __( 'Find the best match of your interest', 'directorist' ),
+                    'search_subtitle'                            => [
+                        'type'  => 'text',
+                        'label' => __( 'Search Bar Sub-title', 'directorist' ),
+                        'value' => __( 'Find the best match of your interest', 'directorist' ),
                     ],
 
-                    'search_more_filter' => [
+                    'search_more_filter'                         => [
                         'type'  => 'toggle',
                         'label' => __( 'Display More Filters', 'directorist' ),
                         'value' => true,
                     ],
-                    'search_filters' => [
-                        'type' => 'checkbox',
-                        'label' => __( 'Filter Actions', 'directorist' ),
+                    'search_filters'                             => [
+                        'type'    => 'checkbox',
+                        'label'   => __( 'Filter Actions', 'directorist' ),
                         'show-if' => [
-                            'where' => "search_more_filter",
+                            'where'      => "search_more_filter",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
-                        'value' => [
+                        'value'   => [
                             'search_reset_filters',
                             'search_apply_filters',
                         ],
@@ -1965,80 +1965,80 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'search_listing_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Search Button Text', 'directorist' ),
-                        'value'         => __( 'Search Listing', 'directorist' ),
+                    'search_listing_text'                        => [
+                        'type'  => 'text',
+                        'label' => __( 'Search Button Text', 'directorist' ),
+                        'value' => __( 'Search Listing', 'directorist' ),
                     ],
-                    'search_more_filters'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'More Filters Button Text', 'directorist' ),
-                        'value'         => __( 'More Filters', 'directorist' ),
+                    'search_more_filters'                        => [
+                        'type'    => 'text',
+                        'label'   => __( 'More Filters Button Text', 'directorist' ),
+                        'value'   => __( 'More Filters', 'directorist' ),
                         'show-if' => [
-                            'where' => "search_more_filter",
+                            'where'      => "search_more_filter",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'search_reset_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Reset Button Text', 'directorist' ),
-                        'value'         => __( 'Reset Filters', 'directorist' ),
+                    'search_reset_text'                          => [
+                        'type'    => 'text',
+                        'label'   => __( 'Reset Button Text', 'directorist' ),
+                        'value'   => __( 'Reset Filters', 'directorist' ),
                         'show-if' => [
-                            'where' => "search_more_filter",
+                            'where'      => "search_more_filter",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'search_apply_filter'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Apply Button Text', 'directorist' ),
-                        'value'         => __( 'Apply Filters', 'directorist' ),
+                    'search_apply_filter'                        => [
+                        'type'    => 'text',
+                        'label'   => __( 'Apply Button Text', 'directorist' ),
+                        'value'   => __( 'Apply Filters', 'directorist' ),
                         'show-if' => [
-                            'where' => "search_more_filter",
+                            'where'      => "search_more_filter",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'show_popular_category' => [
+                    'show_popular_category'                      => [
                         'type'  => 'toggle',
                         'label' => __( 'Display Popular Categories', 'directorist' ),
                         'value' => false,
                     ],
 
-                    'popular_cat_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Section Title', 'directorist' ),
-                        'value'         => __( 'Browse by popular categories', 'directorist' ),
+                    'popular_cat_title'                          => [
+                        'type'    => 'text',
+                        'label'   => __( 'Section Title', 'directorist' ),
+                        'value'   => __( 'Browse by popular categories', 'directorist' ),
                         'show-if' => [
-                            'where' => "show_popular_category",
+                            'where'      => "show_popular_category",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'popular_cat_num' => [
-                        'label'         => __( 'Number of Categories to Display', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => '10',
-                        'min'           => '1',
-                        'max'           => '30',
-                        'step'          => '1',
+                    'popular_cat_num'                            => [
+                        'label'   => __( 'Number of Categories to Display', 'directorist' ),
+                        'type'    => 'number',
+                        'value'   => '10',
+                        'min'     => '1',
+                        'max'     => '30',
+                        'step'    => '1',
                         'show-if' => [
-                            'where' => "show_popular_category",
+                            'where'      => "show_popular_category",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
                     // search result settings
-                    'search_result_layout' => [
-                        'label' => __( 'All Listings Layout', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'left_sidebar',
+                    'search_result_layout'                       => [
+                        'label'   => __( 'All Listings Layout', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'left_sidebar',
                         'options' => [
                             [
                                 'value' => 'left_sidebar',
@@ -2054,104 +2054,104 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'search_result_hide_top_search_bar' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Hide Top Search Bar', 'directorist' ),
-                        'value' => false,
+                    'search_result_hide_top_search_bar'          => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Hide Top Search Bar', 'directorist' ),
+                        'value'   => false,
                         'show-if' => [
-                            'where' => "search_result_layout",
+                            'where'      => "search_result_layout",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '!=', 'value' => 'no_sidebar'],
                             ],
                         ],
                     ],
-                    'search_result_sidebar_filter_text' => [
-                        'type' => 'text',
-                        'label' => __( 'Filters Text', 'directorist' ),
-                        'value' => __( 'Filters', 'directorist' ),
+                    'search_result_sidebar_filter_text'          => [
+                        'type'    => 'text',
+                        'label'   => __( 'Filters Text', 'directorist' ),
+                        'value'   => __( 'Filters', 'directorist' ),
                         'show-if' => [
-                            'where' => "search_result_layout",
+                            'where'      => "search_result_layout",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '!=', 'value' => 'no_sidebar'],
                             ],
                         ],
                     ],
-                    'search_result_filter_button_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Filters Button Text', 'directorist' ),
-                        'value'         => __( 'Filters', 'directorist' ),
+                    'search_result_filter_button_text'           => [
+                        'type'    => 'text',
+                        'label'   => __( 'Filters Button Text', 'directorist' ),
+                        'value'   => __( 'Filters', 'directorist' ),
                         'show-if' => [
-                            'where' => "search_result_layout",
+                            'where'      => "search_result_layout",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'no_sidebar'],
                             ],
                         ],
                     ],
-                    'display_search_result_listings_count' => [
-                        'type' => 'toggle',
-                        'label' => __( 'Display Listings Count', 'directorist' ),
-                        'value' => true,
+                    'display_search_result_listings_count'       => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display Listings Count', 'directorist' ),
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "search_header",
+                            'where'      => "search_header",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'search_result_listing_title' => [
-                        'type' => 'text',
+                    'search_result_listing_title'                => [
+                        'type'    => 'text',
                         'label'   => __( 'Listings Count Text', 'directorist' ),
                         'value'   => __( 'Items Found', 'directorist' ),
                         'show-if' => [
-                            'where' => "search_header",
+                            'where'      => "search_header",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'sresult_reset_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Reset Button Text', 'directorist' ),
-                        'value'         => __( 'Reset Filters', 'directorist' ),
+                    'sresult_reset_text'                         => [
+                        'type'    => 'text',
+                        'label'   => __( 'Reset Button Text', 'directorist' ),
+                        'value'   => __( 'Reset Filters', 'directorist' ),
                         'show-if' => [
-                            'where' => "search_result_layout",
+                            'where'      => "search_result_layout",
                             'conditions' => [
                                 [ 'key' => 'value', 'compare' => '=', 'value' => 'no_sidebar' ],
                             ],
                         ],
                     ],
-                    'sresult_sidebar_reset_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Reset text', 'directorist' ),
-                        'value'         => __( 'Clear All', 'directorist' ),
+                    'sresult_sidebar_reset_text'                 => [
+                        'type'    => 'text',
+                        'label'   => __( 'Reset text', 'directorist' ),
+                        'value'   => __( 'Clear All', 'directorist' ),
                         'show-if' => [
-                            'where' => "search_result_layout",
+                            'where'      => "search_result_layout",
                             'conditions' => [
                                 [ 'key' => 'value', 'compare' => '!=', 'value' => 'no_sidebar' ],
                             ],
                         ],
                     ],
-                    'sresult_apply_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Apply Filters Button Text', 'directorist' ),
-                        'value'         => __( 'Apply Filters', 'directorist' ),
+                    'sresult_apply_text'                         => [
+                        'type'    => 'text',
+                        'label'   => __( 'Apply Filters Button Text', 'directorist' ),
+                        'value'   => __( 'Apply Filters', 'directorist' ),
                         'show-if' => [
-                            'where' => "search_result_layout",
+                            'where'      => "search_result_layout",
                             'conditions' => [
                                 [ 'key' => 'value', 'compare' => '=', 'value' => 'no_sidebar' ],
                             ],
                         ],
                     ],
-                    'search_view_as_items' => [
-                        'type' => 'checkbox',
-                        'label' => __( 'View Type', 'directorist' ),
+                    'search_view_as_items'                       => [
+                        'type'        => 'checkbox',
+                        'label'       => __( 'View Type', 'directorist' ),
                         'description' => '',
-                        'value' => [
+                        'value'       => [
                             'listings_grid',
                             'listings_list',
                             'listings_map'
                         ],
-                        'options' => [
+                        'options'     => [
                             [
                                 'value' => 'listings_grid',
                                 'label' => __( 'Grid', 'directorist' ),
@@ -2166,21 +2166,21 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'search_sort_by' => [
+                    'search_sort_by'                             => [
                         'type'  => 'toggle',
                         'label' => __( 'Enable Sorting Options', 'directorist' ),
                         'value' => true,
                     ],
-                    'search_sortby_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( '"Sort By" Label', 'directorist' ),
-                        'value'         => __( 'Sort By', 'directorist' ),
+                    'search_sortby_text'                         => [
+                        'type'  => 'text',
+                        'label' => __( '"Sort By" Label', 'directorist' ),
+                        'value' => __( 'Sort By', 'directorist' ),
                     ],
-                    'search_sort_by_items' => [
-                        'type' => 'checkbox',
-                        'label' => __( 'Sort Options', 'directorist' ),
+                    'search_sort_by_items'                       => [
+                        'type'        => 'checkbox',
+                        'label'       => __( 'Sort Options', 'directorist' ),
                         'description' => '',
-                        'value' => [
+                        'value'       => [
                             'a_z',
                             'z_a',
                             'latest',
@@ -2190,7 +2190,7 @@ Please remember that your order may be canceled if you do not make your payment 
                             'price_high_low',
                             'random'
                         ],
-                        'options' => [
+                        'options'     => [
                             [
                                 'value' => 'a_z',
                                 'label' => __( 'A to Z (title)', 'directorist' ),
@@ -2229,70 +2229,70 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'search_listing_columns' => [
-                        'label'         => __( 'Number of Columns', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => '3',
-                        'min'           => '1',
-                        'max'           => '5',
-                        'step'          => '1',
+                    'search_listing_columns'                     => [
+                        'label' => __( 'Number of Columns', 'directorist' ),
+                        'type'  => 'number',
+                        'value' => '3',
+                        'min'   => '1',
+                        'max'   => '5',
+                        'step'  => '1',
                     ],
-                    'search_posts_num' => [
-                        'label'         => __( 'Search Results Per Page', 'directorist' ),
-                        'type'          => 'number',
-                        'value'         => '6',
-                        'min'           => '1',
-                        'max'           => '100',
-                        'step'          => '1',
+                    'search_posts_num'                           => [
+                        'label' => __( 'Search Results Per Page', 'directorist' ),
+                        'type'  => 'number',
+                        'value' => '6',
+                        'min'   => '1',
+                        'max'   => '100',
+                        'step'  => '1',
                     ],
-                    'search_header' => [
+                    'search_header'                              => [
                         'type'  => 'toggle',
                         'label' => __( 'Display Header', 'directorist' ),
                         'value' => true,
                     ],
-                    'search_result_filters_button_display' => [
-                        'type'  => 'toggle',
-                        'label' => __( 'Display Filters Button', 'directorist' ),
+                    'search_result_filters_button_display'       => [
+                        'type'    => 'toggle',
+                        'label'   => __( 'Display Filters Button', 'directorist' ),
                         'show-if' => [
-                            'where' => "search_result_layout",
+                            'where'      => "search_result_layout",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'no_sidebar'],
                             ],
                         ],
-                        'value' => true,
+                        'value'   => true,
                     ],
                     // upgrade/ regenerate pages
-                    'shortcode-updated' => [
+                    'shortcode-updated'                          => [
                         'type'  => 'toggle',
                         'label' => __( 'Upgrade/Regenerate Pages', 'directorist' ),
                         'value' => true,
                     ],
                     // pages, links, views settings
-                    'add_listing_page' => [
-                        'label' => __( 'Add Listing Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_add_listing]</div>' ),
-                        'value' => atbdp_get_option( 'add_listing_page', 'atbdp_general' ),
+                    'add_listing_page'                           => [
+                        'label'             => __( 'Add Listing Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_add_listing]</div>' ),
+                        'value'             => atbdp_get_option( 'add_listing_page', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'all_listing_page' => [
-                        'label' => __( 'All Listings Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_all_listing]</div>' ),
-                        'value' => atbdp_get_option( 'all_listing_page', 'atbdp_general' ),
+                    'all_listing_page'                           => [
+                        'label'             => __( 'All Listings Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_all_listing]</div>' ),
+                        'value'             => atbdp_get_option( 'all_listing_page', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'user_dashboard' => [
-                        'label' => __( 'Dashboard Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_user_dashboard]</div>' ),
-                        'value' => atbdp_get_option( 'user_dashboard', 'atbdp_general' ),
+                    'user_dashboard'                             => [
+                        'label'             => __( 'Dashboard Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_user_dashboard]</div>' ),
+                        'value'             => atbdp_get_option( 'user_dashboard', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'signin_signup_page' => [
+                    'signin_signup_page'                         => [
                         'label'             => __( 'Sign In & Signup Page', 'directorist' ),
                         'type'              => 'select',
                         'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_signin_signup]</div>' ),
@@ -2300,276 +2300,276 @@ Please remember that your order may be canceled if you do not make your payment 
                         'showDefaultOption' => true,
                         'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'author_profile_page' => [
-                        'label' => __( 'User Profile Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_author_profile]</div>' ),
-                        'value' => atbdp_get_option( 'author_profile', 'atbdp_general' ),
+                    'author_profile_page'                        => [
+                        'label'             => __( 'User Profile Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_author_profile]</div>' ),
+                        'value'             => atbdp_get_option( 'author_profile', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'all_categories_page' => [
-                        'label' => __( 'All Categories Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_all_categories]</div>' ),
-                        'value' => atbdp_get_option( 'all_categories', 'atbdp_general' ),
+                    'all_categories_page'                        => [
+                        'label'             => __( 'All Categories Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_all_categories]</div>' ),
+                        'value'             => atbdp_get_option( 'all_categories', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'single_category_page' => [
-                        'label' => __( 'Single Category Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_category]</div>' ),
-                        'value' => atbdp_get_option( 'single_category_page', 'atbdp_general' ),
+                    'single_category_page'                       => [
+                        'label'             => __( 'Single Category Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_category]</div>' ),
+                        'value'             => atbdp_get_option( 'single_category_page', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
-                        'show-if' => [
-                            'where' => 'enable_archive_template',
+                        'options'           => $this->get_pages_vl_arrays(),
+                        'show-if'           => [
+                            'where'      => 'enable_archive_template',
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => false],
                             ],
                         ],
                     ],
-                    'all_locations_page' => [
-                        'label' => __( 'All Locations Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_all_locations]</div>' ),
-                        'value' => atbdp_get_option( 'all_locations', 'atbdp_general' ),
+                    'all_locations_page'                         => [
+                        'label'             => __( 'All Locations Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_all_locations]</div>' ),
+                        'value'             => atbdp_get_option( 'all_locations', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'single_location_page' => [
-                        'label' => __( 'Single Location Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_location]</div>' ),
-                        'value' => atbdp_get_option( 'single_location_page', 'atbdp_general' ),
+                    'single_location_page'                       => [
+                        'label'             => __( 'Single Location Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_location]</div>' ),
+                        'value'             => atbdp_get_option( 'single_location_page', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
-                        'show-if' => [
-                            'where' => 'enable_archive_template',
+                        'options'           => $this->get_pages_vl_arrays(),
+                        'show-if'           => [
+                            'where'      => 'enable_archive_template',
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => false],
                             ],
                         ],
                     ],
-                    'single_tag_page' => [
-                        'label' => __( 'Single Tag Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_tag]</div>' ),
-                        'value' => atbdp_get_option( 'single_tag_page', 'atbdp_general' ),
+                    'single_tag_page'                            => [
+                        'label'             => __( 'Single Tag Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_tag]</div>' ),
+                        'value'             => atbdp_get_option( 'single_tag_page', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
-                        'show-if' => [
-                            'where' => 'enable_archive_template',
+                        'options'           => $this->get_pages_vl_arrays(),
+                        'show-if'           => [
+                            'where'      => 'enable_archive_template',
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => false],
                             ],
                         ],
                     ],
-                    'custom_registration' => [
-                        'label' => __( 'Registration Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_custom_registration]</div>' ),
-                        'value' => atbdp_get_option( 'custom_registration', 'atbdp_general' ),
+                    'custom_registration'                        => [
+                        'label'             => __( 'Registration Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_custom_registration]</div>' ),
+                        'value'             => atbdp_get_option( 'custom_registration', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'user_login' => [
-                        'label' => __( 'Login Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_user_login]</div>' ),
-                        'value' => atbdp_get_option( 'user_login', 'atbdp_general' ),
+                    'user_login'                                 => [
+                        'label'             => __( 'Login Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_user_login]</div>' ),
+                        'value'             => atbdp_get_option( 'user_login', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'search_listing' => [
-                        'label' => __( 'Listing Search Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_search_listing]</div>' ),
-                        'value' => atbdp_get_option( 'search_listing', 'atbdp_general' ),
+                    'search_listing'                             => [
+                        'label'             => __( 'Listing Search Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_search_listing]</div>' ),
+                        'value'             => atbdp_get_option( 'search_listing', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'search_result_page' => [
-                        'label' => __( 'Listing Search Result Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_search_result]</div>' ),
-                        'value' => atbdp_get_option( 'search_result_page', 'atbdp_general' ),
+                    'search_result_page'                         => [
+                        'label'             => __( 'Listing Search Result Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_search_result]</div>' ),
+                        'value'             => atbdp_get_option( 'search_result_page', 'atbdp_general' ),
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'checkout_page' => [
-                        'label' => __( 'Checkout Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_checkout]</div>' ),
-                        'value' => '',
+                    'checkout_page'                              => [
+                        'label'             => __( 'Checkout Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_checkout]</div>' ),
+                        'value'             => '',
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'payment_receipt_page' => [
-                        'label' => __( 'Payment/Order Receipt Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_payment_receipt]</div>' ),
-                        'value' => '',
+                    'payment_receipt_page'                       => [
+                        'label'             => __( 'Payment/Order Receipt Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_payment_receipt]</div>' ),
+                        'value'             => '',
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'transaction_failure_page' => [
-                        'label' => __( 'Transaction Failure Page', 'directorist' ),
-                        'type'  => 'select',
-                        'description' => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_transaction_failure]</div>' ),
-                        'value' => '',
+                    'transaction_failure_page'                   => [
+                        'label'             => __( 'Transaction Failure Page', 'directorist' ),
+                        'type'              => 'select',
+                        'description'       => sprintf( __( 'Following shortcode must be in the selected page %s', 'directorist' ), '<div class="atbdp_shortcodes" style="color: #ff4500;">[directorist_transaction_failure]</div>' ),
+                        'value'             => '',
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'privacy_policy' => [
-                        'label' => __( 'Privacy Policy Page', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => '',
+                    'privacy_policy'                             => [
+                        'label'             => __( 'Privacy Policy Page', 'directorist' ),
+                        'type'              => 'select',
+                        'value'             => '',
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
-                    'terms_conditions' => [
-                        'label' => __( 'Terms & Conditions Page', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => '',
+                    'terms_conditions'                           => [
+                        'label'             => __( 'Terms & Conditions Page', 'directorist' ),
+                        'type'              => 'select',
+                        'value'             => '',
                         'showDefaultOption' => true,
-                        'options' => $this->get_pages_vl_arrays(),
+                        'options'           => $this->get_pages_vl_arrays(),
                     ],
 
                     // seo settings
-                    'atbdp_enable_seo' => [
+                    'atbdp_enable_seo'                           => [
                         'type'  => 'toggle',
                         'label' => __( 'Enable SEO', 'directorist' ),
                         'value' => true,
                     ],
-                    'add_listing_page_meta_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Add Listing Page Meta Title', 'directorist' ),
-                        'description'   => __( 'Default the title of the page set as frontpage.', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'add_listing_page_meta_desc'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Add Listing Page Meta Description', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'all_listing_meta_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'All Listing Page Meta Title', 'directorist' ),
-                        'description'   => __( 'Default the title of the page set as frontpage.', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'all_listing_meta_desc'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'All Listing Page Meta Description', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'dashboard_meta_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'User Dashboard Page Meta Title', 'directorist' ),
+                    'add_listing_page_meta_title'                => [
+                        'type'        => 'text',
+                        'label'       => __( 'Add Listing Page Meta Title', 'directorist' ),
                         'description' => __( 'Default the title of the page set as frontpage.', 'directorist' ),
-                        'value'         => '',
+                        'value'       => '',
                     ],
-                    'dashboard_meta_desc'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Dashboard Page Meta Description', 'directorist' ),
-                        'value'         => '',
+                    'add_listing_page_meta_desc'                 => [
+                        'type'  => 'text',
+                        'label' => __( 'Add Listing Page Meta Description', 'directorist' ),
+                        'value' => '',
                     ],
-                    'author_profile_meta_title' => [
-                        'type'          => 'text',
-                        'label'         => __( 'Author Page Meta Title', 'directorist' ),
-                        'description'   => __( 'Default the title of the page set as frontpage.', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'author_page_meta_desc'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Author Page Meta Description', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'category_meta_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Category Page Meta Title', 'directorist' ),
+                    'all_listing_meta_title'                     => [
+                        'type'        => 'text',
+                        'label'       => __( 'All Listing Page Meta Title', 'directorist' ),
                         'description' => __( 'Default the title of the page set as frontpage.', 'directorist' ),
-                        'value'         => '',
+                        'value'       => '',
                     ],
-                    'category_meta_desc'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Category Page Meta Description', 'directorist' ),
-                        'value'         => '',
+                    'all_listing_meta_desc'                      => [
+                        'type'  => 'text',
+                        'label' => __( 'All Listing Page Meta Description', 'directorist' ),
+                        'value' => '',
                     ],
-                    'single_category_meta_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Single Category Page Meta Title', 'directorist' ),
-                        'description'   => __( 'Default the title of the category.', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'single_category_meta_desc'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Single Category Page Meta Description', 'directorist' ),
-                        'description'   => __( 'Leave it blank to set category\'s description as meta description of this page', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'all_locations_meta_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'All Locations Page Meta Title', 'directorist' ),
-                        'description'   => __( 'Default the title of the page set as frontpage.', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'all_locations_meta_desc'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'All Locations Page Meta Description', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'single_locations_meta_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Single Location Page Meta Title', 'directorist' ),
-                        'description'   => __( 'Default the title of the location.', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'single_locations_meta_desc'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Single Locations Page Meta Description', 'directorist' ),
-                        'description'   => __( 'Leave it blank to set location\'s description as meta description of this page', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'registration_meta_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Registration Page Meta Title', 'directorist' ),
-                        'description'   => __( 'Default the title of the page set as frontpage.', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'registration_meta_desc'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Registration Page Meta Description', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'login_meta_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Login Page Meta Title', 'directorist' ),
-                        'description'   => __( 'Default the title of the page set as frontpage.', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'login_meta_desc'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Login Page Meta Description', 'directorist' ),
-                        'value'         => '',
-                    ],
-                    'homepage_meta_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Search Home Page Meta Title', 'directorist' ),
+                    'dashboard_meta_title'                       => [
+                        'type'        => 'text',
+                        'label'       => __( 'User Dashboard Page Meta Title', 'directorist' ),
                         'description' => __( 'Default the title of the page set as frontpage.', 'directorist' ),
-                        'value'         => '',
+                        'value'       => '',
                     ],
-                    'homepage_meta_desc'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Search Home Page Meta Description', 'directorist' ),
-                        'value'         => '',
+                    'dashboard_meta_desc'                        => [
+                        'type'  => 'text',
+                        'label' => __( 'Dashboard Page Meta Description', 'directorist' ),
+                        'value' => '',
                     ],
-                    'meta_title_for_search_result' => [
-                        'label' => __( 'Search Result Page Meta Title', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'searched_value',
+                    'author_profile_meta_title'                  => [
+                        'type'        => 'text',
+                        'label'       => __( 'Author Page Meta Title', 'directorist' ),
+                        'description' => __( 'Default the title of the page set as frontpage.', 'directorist' ),
+                        'value'       => '',
+                    ],
+                    'author_page_meta_desc'                      => [
+                        'type'  => 'text',
+                        'label' => __( 'Author Page Meta Description', 'directorist' ),
+                        'value' => '',
+                    ],
+                    'category_meta_title'                        => [
+                        'type'        => 'text',
+                        'label'       => __( 'Category Page Meta Title', 'directorist' ),
+                        'description' => __( 'Default the title of the page set as frontpage.', 'directorist' ),
+                        'value'       => '',
+                    ],
+                    'category_meta_desc'                         => [
+                        'type'  => 'text',
+                        'label' => __( 'Category Page Meta Description', 'directorist' ),
+                        'value' => '',
+                    ],
+                    'single_category_meta_title'                 => [
+                        'type'        => 'text',
+                        'label'       => __( 'Single Category Page Meta Title', 'directorist' ),
+                        'description' => __( 'Default the title of the category.', 'directorist' ),
+                        'value'       => '',
+                    ],
+                    'single_category_meta_desc'                  => [
+                        'type'        => 'text',
+                        'label'       => __( 'Single Category Page Meta Description', 'directorist' ),
+                        'description' => __( 'Leave it blank to set category\'s description as meta description of this page', 'directorist' ),
+                        'value'       => '',
+                    ],
+                    'all_locations_meta_title'                   => [
+                        'type'        => 'text',
+                        'label'       => __( 'All Locations Page Meta Title', 'directorist' ),
+                        'description' => __( 'Default the title of the page set as frontpage.', 'directorist' ),
+                        'value'       => '',
+                    ],
+                    'all_locations_meta_desc'                    => [
+                        'type'  => 'text',
+                        'label' => __( 'All Locations Page Meta Description', 'directorist' ),
+                        'value' => '',
+                    ],
+                    'single_locations_meta_title'                => [
+                        'type'        => 'text',
+                        'label'       => __( 'Single Location Page Meta Title', 'directorist' ),
+                        'description' => __( 'Default the title of the location.', 'directorist' ),
+                        'value'       => '',
+                    ],
+                    'single_locations_meta_desc'                 => [
+                        'type'        => 'text',
+                        'label'       => __( 'Single Locations Page Meta Description', 'directorist' ),
+                        'description' => __( 'Leave it blank to set location\'s description as meta description of this page', 'directorist' ),
+                        'value'       => '',
+                    ],
+                    'registration_meta_title'                    => [
+                        'type'        => 'text',
+                        'label'       => __( 'Registration Page Meta Title', 'directorist' ),
+                        'description' => __( 'Default the title of the page set as frontpage.', 'directorist' ),
+                        'value'       => '',
+                    ],
+                    'registration_meta_desc'                     => [
+                        'type'  => 'text',
+                        'label' => __( 'Registration Page Meta Description', 'directorist' ),
+                        'value' => '',
+                    ],
+                    'login_meta_title'                           => [
+                        'type'        => 'text',
+                        'label'       => __( 'Login Page Meta Title', 'directorist' ),
+                        'description' => __( 'Default the title of the page set as frontpage.', 'directorist' ),
+                        'value'       => '',
+                    ],
+                    'login_meta_desc'                            => [
+                        'type'  => 'text',
+                        'label' => __( 'Login Page Meta Description', 'directorist' ),
+                        'value' => '',
+                    ],
+                    'homepage_meta_title'                        => [
+                        'type'        => 'text',
+                        'label'       => __( 'Search Home Page Meta Title', 'directorist' ),
+                        'description' => __( 'Default the title of the page set as frontpage.', 'directorist' ),
+                        'value'       => '',
+                    ],
+                    'homepage_meta_desc'                         => [
+                        'type'  => 'text',
+                        'label' => __( 'Search Home Page Meta Description', 'directorist' ),
+                        'value' => '',
+                    ],
+                    'meta_title_for_search_result'               => [
+                        'label'   => __( 'Search Result Page Meta Title', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'searched_value',
                         'options' => [
                             [
                                 'value' => 'searched_value',
@@ -2581,30 +2581,30 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'search_result_meta_title'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Custom Meta Title', 'directorist' ),
-                        'description'   => __( 'Default the title of the page set as frontpage.', 'directorist' ),
-                        'value'         => '',
-                        'show-if' => [
-                            'where' => "meta_title_for_search_result",
+                    'search_result_meta_title'                   => [
+                        'type'        => 'text',
+                        'label'       => __( 'Custom Meta Title', 'directorist' ),
+                        'description' => __( 'Default the title of the page set as frontpage.', 'directorist' ),
+                        'value'       => '',
+                        'show-if'     => [
+                            'where'      => "meta_title_for_search_result",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'custom'],
                             ],
                         ],
                     ],
-                    'search_result_meta_desc'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Search Result Page Meta Description', 'directorist' ),
-                        'value'         => '',
+                    'search_result_meta_desc'                    => [
+                        'type'  => 'text',
+                        'label' => __( 'Search Result Page Meta Description', 'directorist' ),
+                        'value' => '',
                     ],
                     //currency settings
-                    'g_currency_note'    => [
-                        'type'          => 'note',
-                        'title'         => __( 'Note:', 'directorist' ),
+                    'g_currency_note'                            => [
+                        'type'        => 'note',
+                        'title'       => __( 'Note:', 'directorist' ),
                         'description' => __( 'Customize how prices are displayed on your site. To accept payments in a different currency, visit Monetization → General Settings', 'directorist' ),
                     ],
-                    'g_currency' => [
+                    'g_currency'                                 => [
                         'type'        => 'text',
                         'label'       => __( 'Currency Code', 'directorist' ),
                         'description' => sprintf(
@@ -2613,12 +2613,12 @@ Please remember that your order may be canceled if you do not make your payment 
                         ),
                         'value'       => 'USD',
                     ],
-                    'g_currency_position' => [
-                        'label'        => __( 'Currency Position', 'directorist' ),
+                    'g_currency_position'                        => [
+                        'label'       => __( 'Currency Position', 'directorist' ),
                         'type'        => 'select',
                         'value'       => 'before',
                         'description' => __( "Select where you'd like the currency symbol to appear. The default is before the amount (e.g., $5)", 'directorist' ),
-                        'options' => [
+                        'options'     => [
                             [
                                 'value' => 'before',
                                 'label' => __( '$5 - Before', 'directorist' ),
@@ -2630,10 +2630,10 @@ Please remember that your order may be canceled if you do not make your payment 
                         ],
                     ],
                     // categories settings
-                    'display_categories_as' => [
-                        'label'        => __( 'Default View', 'directorist' ),
-                        'type'        => 'select',
-                        'value'       => 'grid',
+                    'display_categories_as'                      => [
+                        'label'   => __( 'Default View', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'grid',
                         'options' => [
                             [
                                 'value' => 'grid',
@@ -2645,12 +2645,12 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'categories_column_number' => [
-                        'label' => __( 'Number of  Columns', 'directorist' ),
+                    'categories_column_number'                   => [
+                        'label'       => __( 'Number of  Columns', 'directorist' ),
                         'description' => __( 'Set how many columns to display on categories page.', 'directorist' ),
                         'type'        => 'select',
                         'value'       => '4',
-                        'options' => [
+                        'options'     => [
                             [
                                 'value' => 1,
                                 'label' => 1,
@@ -2677,7 +2677,7 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'categories_depth_number' => [
+                    'categories_depth_number'                    => [
                         'label'       => __( 'Sub-category Depth', 'directorist' ),
                         'description' => __( 'Set how many sub-categories to display.', 'directorist' ),
                         'type'        => 'number',
@@ -2685,16 +2685,16 @@ Please remember that your order may be canceled if you do not make your payment 
                         'min'         => '1',
                         'step'        => '1',
                         'show-if'     => [
-                            'where' => "display_categories_as",
+                            'where'      => "display_categories_as",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'list'],
                             ],
                         ],
                     ],
-                    'order_category_by' => [
-                        'label'        => __( 'Order By', 'directorist' ),
-                        'type'        => 'select',
-                        'value'       => 'id',
+                    'order_category_by'                          => [
+                        'label'   => __( 'Order By', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'id',
                         'options' => [
                             [
                                 'value' => 'id',
@@ -2714,10 +2714,10 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'sort_category_by' => [
-                        'label'       => __( 'Sort By', 'directorist' ),
-                        'type'        => 'select',
-                        'value'       => 'asc',
+                    'sort_category_by'                           => [
+                        'label'   => __( 'Sort By', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'asc',
                         'options' => [
                             [
                                 'value' => 'asc',
@@ -2729,21 +2729,21 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'display_listing_count' => [
-                        'label'         => __( 'Display Listing Count', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => true,
+                    'display_listing_count'                      => [
+                        'label' => __( 'Display Listing Count', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => true,
                     ],
-                    'hide_empty_categories' => [
-                        'label'         => __( 'Hide Empty Categories', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'hide_empty_categories'                      => [
+                        'label' => __( 'Hide Empty Categories', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => false,
                     ],
                     // locations settings
-                    'display_locations_as' => [
-                        'label'        => __( 'Default View', 'directorist' ),
-                        'type'        => 'select',
-                        'value'       => 'grid',
+                    'display_locations_as'                       => [
+                        'label'   => __( 'Default View', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'grid',
                         'options' => [
                             [
                                 'value' => 'grid',
@@ -2755,12 +2755,12 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'locations_column_number' => [
-                        'label' => __( 'Number of  Columns', 'directorist' ),
+                    'locations_column_number'                    => [
+                        'label'       => __( 'Number of  Columns', 'directorist' ),
                         'description' => __( 'Set how many columns to display on locations page.', 'directorist' ),
                         'type'        => 'select',
                         'value'       => '4',
-                        'options' => [
+                        'options'     => [
                             [
                                 'value' => 1,
                                 'label' => 1,
@@ -2787,7 +2787,7 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'locations_depth_number' => [
+                    'locations_depth_number'                     => [
                         'label'       => __( 'Sub-location Depth', 'directorist' ),
                         'description' => __( 'Set how many sub-locations to display.', 'directorist' ),
                         'type'        => 'number',
@@ -2795,16 +2795,16 @@ Please remember that your order may be canceled if you do not make your payment 
                         'min'         => '1',
                         'step'        => '1',
                         'show-if'     => [
-                            'where' => "display_locations_as",
+                            'where'      => "display_locations_as",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => 'list'],
                             ],
                         ],
                     ],
-                    'order_location_by' => [
-                        'label'        => __( 'Order By', 'directorist' ),
-                        'type'        => 'select',
-                        'value'       => 'id',
+                    'order_location_by'                          => [
+                        'label'   => __( 'Order By', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'id',
                         'options' => [
                             [
                                 'value' => 'id',
@@ -2824,10 +2824,10 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'sort_location_by' => [
-                        'label'       => __( 'Sort By', 'directorist' ),
-                        'type'        => 'select',
-                        'value'       => 'asc',
+                    'sort_location_by'                           => [
+                        'label'   => __( 'Sort By', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'asc',
                         'options' => [
                             [
                                 'value' => 'asc',
@@ -2839,496 +2839,496 @@ Please remember that your order may be canceled if you do not make your payment 
                             ],
                         ],
                     ],
-                    'display_location_listing_count' => [
-                        'label'         => __( 'Display Listing Count', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => true,
+                    'display_location_listing_count'             => [
+                        'label' => __( 'Display Listing Count', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => true,
                     ],
-                    'hide_empty_locations' => [
-                        'label'         => __( 'Hide Empty Locations', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'hide_empty_locations'                       => [
+                        'label' => __( 'Hide Empty Locations', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => false,
                     ],
                     // registration settings
-                    'new_user_registration' => [
-                        'label'         => __( 'Enable Registration', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => true,
+                    'new_user_registration'                      => [
+                        'label' => __( 'Enable Registration', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => true,
                     ],
-                    'enable_email_verification' => [
-                        'label'         => __( 'Enable Email Verification', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
-                        'description'   => sprintf( __( 'Enable email verification to verify user email during registration. To view the verification status navigate to Users → %s.', 'directorist' ), "<a href='" . admin_url( 'users.php' ) . "'>" . __( 'All Users', 'directorist' ) . "</a>" )
+                    'enable_email_verification'                  => [
+                        'label'       => __( 'Enable Email Verification', 'directorist' ),
+                        'type'        => 'toggle',
+                        'value'       => false,
+                        'description' => sprintf( __( 'Enable email verification to verify user email during registration. To view the verification status navigate to Users → %s.', 'directorist' ), "<a href='" . admin_url( 'users.php' ) . "'>" . __( 'All Users', 'directorist' ) . "</a>" )
                     ],
-                    'reg_username'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Label', 'directorist' ),
-                        'value'         => __( 'Username', 'directorist' ),
+                    'reg_username'                               => [
+                        'type'  => 'text',
+                        'label' => __( 'Label', 'directorist' ),
+                        'value' => __( 'Username', 'directorist' ),
                     ],
-                    'display_password_reg' => [
-                        'label'         => __( 'Enable', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => true,
+                    'display_password_reg'                       => [
+                        'label' => __( 'Enable', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => true,
                     ],
-                    'reg_password'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Label', 'directorist' ),
-                        'value'         => __( 'Password', 'directorist' ),
+                    'reg_password'                               => [
+                        'type'    => 'text',
+                        'label'   => __( 'Label', 'directorist' ),
+                        'value'   => __( 'Password', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_password_reg",
+                            'where'      => "display_password_reg",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'require_password_reg' => [
-                        'label'         => __( 'Required', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => true,
+                    'require_password_reg'                       => [
+                        'label'   => __( 'Required', 'directorist' ),
+                        'type'    => 'toggle',
+                        'value'   => true,
                         'show-if' => [
-                            'where' => "display_password_reg",
+                            'where'      => "display_password_reg",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'reg_email'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Label', 'directorist' ),
-                        'value'         => __( 'Email', 'directorist' ),
+                    'reg_email'                                  => [
+                        'type'  => 'text',
+                        'label' => __( 'Label', 'directorist' ),
+                        'value' => __( 'Email', 'directorist' ),
                     ],
-                    'display_website_reg' => [
-                        'label'         => __( 'Enable', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'display_website_reg'                        => [
+                        'label' => __( 'Enable', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => false,
                     ],
-                    'reg_website'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Label', 'directorist' ),
-                        'value'         => __( 'Website', 'directorist' ),
+                    'reg_website'                                => [
+                        'type'    => 'text',
+                        'label'   => __( 'Label', 'directorist' ),
+                        'value'   => __( 'Website', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_website_reg",
+                            'where'      => "display_website_reg",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'require_website_reg' => [
-                        'label'         => __( 'Required', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'require_website_reg'                        => [
+                        'label'   => __( 'Required', 'directorist' ),
+                        'type'    => 'toggle',
+                        'value'   => false,
                         'show-if' => [
-                            'where' => "display_website_reg",
+                            'where'      => "display_website_reg",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_fname_reg' => [
-                        'label'         => __( 'Enable', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'display_fname_reg'                          => [
+                        'label' => __( 'Enable', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => false,
                     ],
-                    'reg_fname'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Label', 'directorist' ),
-                        'value'         => __( 'First Name', 'directorist' ),
+                    'reg_fname'                                  => [
+                        'type'    => 'text',
+                        'label'   => __( 'Label', 'directorist' ),
+                        'value'   => __( 'First Name', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_fname_reg",
+                            'where'      => "display_fname_reg",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'require_fname_reg' => [
-                        'label'         => __( 'Required', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'require_fname_reg'                          => [
+                        'label'   => __( 'Required', 'directorist' ),
+                        'type'    => 'toggle',
+                        'value'   => false,
                         'show-if' => [
-                            'where' => "display_fname_reg",
+                            'where'      => "display_fname_reg",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_lname_reg' => [
-                        'label'         => __( 'Enable', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'display_lname_reg'                          => [
+                        'label' => __( 'Enable', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => false,
                     ],
-                    'reg_lname'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Label', 'directorist' ),
-                        'value'         => __( 'Last Name', 'directorist' ),
+                    'reg_lname'                                  => [
+                        'type'    => 'text',
+                        'label'   => __( 'Label', 'directorist' ),
+                        'value'   => __( 'Last Name', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_lname_reg",
+                            'where'      => "display_lname_reg",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'require_lname_reg' => [
-                        'label'         => __( 'Required', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'require_lname_reg'                          => [
+                        'label'   => __( 'Required', 'directorist' ),
+                        'type'    => 'toggle',
+                        'value'   => false,
                         'show-if' => [
-                            'where' => "display_lname_reg",
+                            'where'      => "display_lname_reg",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_bio_reg' => [
-                        'label'         => __( 'Enable', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'display_bio_reg'                            => [
+                        'label' => __( 'Enable', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => false,
                     ],
-                    'reg_bio'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Label', 'directorist' ),
-                        'value'         => __( 'About/bio', 'directorist' ),
+                    'reg_bio'                                    => [
+                        'type'    => 'text',
+                        'label'   => __( 'Label', 'directorist' ),
+                        'value'   => __( 'About/bio', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_bio_reg",
+                            'where'      => "display_bio_reg",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'require_bio_reg' => [
-                        'label'         => __( 'Required', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'require_bio_reg'                            => [
+                        'label'   => __( 'Required', 'directorist' ),
+                        'type'    => 'toggle',
+                        'value'   => false,
                         'show-if' => [
-                            'where' => "display_bio_reg",
+                            'where'      => "display_bio_reg",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'registration_privacy' => [
-                        'label'         => __( 'Enable', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => true,
+                    'registration_privacy'                       => [
+                        'label' => __( 'Enable', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => true,
                     ],
-                    'registration_privacy_label'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Label', 'directorist' ),
-                        'value'         => __( 'I agree to the', 'directorist' ),
+                    'registration_privacy_label'                 => [
+                        'type'    => 'text',
+                        'label'   => __( 'Label', 'directorist' ),
+                        'value'   => __( 'I agree to the', 'directorist' ),
                         'show-if' => [
-                            'where' => "registration_privacy",
+                            'where'      => "registration_privacy",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'registration_privacy_label_link'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Linking Text', 'directorist' ),
-                        'value'         => __( 'Privacy & Policy', 'directorist' ),
+                    'registration_privacy_label_link'            => [
+                        'type'    => 'text',
+                        'label'   => __( 'Linking Text', 'directorist' ),
+                        'value'   => __( 'Privacy & Policy', 'directorist' ),
                         'show-if' => [
-                            'where' => "registration_privacy",
+                            'where'      => "registration_privacy",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'regi_terms_condition' => [
-                        'label'         => __( 'Enable', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => true,
+                    'regi_terms_condition'                       => [
+                        'label' => __( 'Enable', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => true,
                     ],
-                    'regi_terms_label'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Label', 'directorist' ),
-                        'value'         => __( 'I agree with all', 'directorist' ),
+                    'regi_terms_label'                           => [
+                        'type'    => 'text',
+                        'label'   => __( 'Label', 'directorist' ),
+                        'value'   => __( 'I agree with all', 'directorist' ),
                         'show-if' => [
-                            'where' => "regi_terms_condition",
+                            'where'      => "regi_terms_condition",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'regi_terms_label_link'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Linking Text', 'directorist' ),
-                        'value'         => __( 'terms & conditions', 'directorist' ),
+                    'regi_terms_label_link'                      => [
+                        'type'    => 'text',
+                        'label'   => __( 'Linking Text', 'directorist' ),
+                        'value'   => __( 'terms & conditions', 'directorist' ),
                         'show-if' => [
-                            'where' => "regi_terms_condition",
+                            'where'      => "regi_terms_condition",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_user_type' => [
-                        'label'         => __( 'Enable', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'display_user_type'                          => [
+                        'label' => __( 'Enable', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => false,
                     ],
-                    'reg_signup'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Text', 'directorist' ),
-                        'value'         => __( 'Sign Up', 'directorist' ),
+                    'reg_signup'                                 => [
+                        'type'  => 'text',
+                        'label' => __( 'Text', 'directorist' ),
+                        'value' => __( 'Sign Up', 'directorist' ),
                     ],
-                    'display_login' => [
-                        'label'         => __( 'Enable', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => true,
+                    'display_login'                              => [
+                        'label' => __( 'Enable', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => true,
                     ],
-                    'login_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Text', 'directorist' ),
-                        'value'         => __( 'Already have an account?', 'directorist' ),
+                    'login_text'                                 => [
+                        'type'    => 'text',
+                        'label'   => __( 'Text', 'directorist' ),
+                        'value'   => __( 'Already have an account?', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_login",
+                            'where'      => "display_login",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'log_linkingmsg'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Linking Text', 'directorist' ),
-                        'value'         => __( 'Login', 'directorist' ),
+                    'log_linkingmsg'                             => [
+                        'type'    => 'text',
+                        'label'   => __( 'Linking Text', 'directorist' ),
+                        'value'   => __( 'Login', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_login",
+                            'where'      => "display_login",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'auto_login' => [
-                        'label'         => __( 'Auto Login after Registration', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'auto_login'                                 => [
+                        'label' => __( 'Auto Login after Registration', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => false,
                     ],
-                    'redirection_after_reg' => [
-                        'label' => __( 'Redirection after Registration', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => get_directorist_option( 'signin_signup_page' ),
+                    'redirection_after_reg'                      => [
+                        'label'   => __( 'Redirection after Registration', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => get_directorist_option( 'signin_signup_page' ),
                         'options' => $this->get_pages_with_prev_page(),
                     ],
                     // login settings
-                    'log_username'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Label', 'directorist' ),
-                        'value'         => __( 'Username or Email Address', 'directorist' ),
+                    'log_username'                               => [
+                        'type'  => 'text',
+                        'label' => __( 'Label', 'directorist' ),
+                        'value' => __( 'Username or Email Address', 'directorist' ),
                     ],
-                    'log_password'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Label', 'directorist' ),
-                        'value'         => __( 'Password', 'directorist' ),
+                    'log_password'                               => [
+                        'type'  => 'text',
+                        'label' => __( 'Label', 'directorist' ),
+                        'value' => __( 'Password', 'directorist' ),
                     ],
-                    'display_rememberme' => [
-                        'label'         => __( 'Enable', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => true,
+                    'display_rememberme'                         => [
+                        'label' => __( 'Enable', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => true,
                     ],
-                    'log_rememberme'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Label', 'directorist' ),
-                        'value'         => __( 'Remember Me', 'directorist' ),
+                    'log_rememberme'                             => [
+                        'type'    => 'text',
+                        'label'   => __( 'Label', 'directorist' ),
+                        'value'   => __( 'Remember Me', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_rememberme",
+                            'where'      => "display_rememberme",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'log_button'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Text', 'directorist' ),
-                        'value'         => __( 'Log In', 'directorist' ),
+                    'log_button'                                 => [
+                        'type'  => 'text',
+                        'label' => __( 'Text', 'directorist' ),
+                        'value' => __( 'Log In', 'directorist' ),
                     ],
-                    'display_signup' => [
-                        'label'         => __( 'Enable', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => true,
+                    'display_signup'                             => [
+                        'label' => __( 'Enable', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => true,
                     ],
-                    'reg_text'    => [
-                        'type'          => 'textarea',
-                        'label'         => __( 'Text', 'directorist' ),
-                        'value'         => __( "Don't have an account?", 'directorist' ),
+                    'reg_text'                                   => [
+                        'type'    => 'textarea',
+                        'label'   => __( 'Text', 'directorist' ),
+                        'value'   => __( "Don't have an account?", 'directorist' ),
                         'show-if' => [
-                            'where' => "display_signup",
+                            'where'      => "display_signup",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'reg_linktxt'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Linking Text', 'directorist' ),
-                        'value'         => __( 'Sign Up', 'directorist' ),
+                    'reg_linktxt'                                => [
+                        'type'    => 'text',
+                        'label'   => __( 'Linking Text', 'directorist' ),
+                        'value'   => __( 'Sign Up', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_signup",
+                            'where'      => "display_signup",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'display_recpass' => [
-                        'label'         => __( 'Enable', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => true,
+                    'display_recpass'                            => [
+                        'label' => __( 'Enable', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => true,
                     ],
-                    'recpass_text'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Name', 'directorist' ),
-                        'value'         => __( 'Recover Password', 'directorist' ),
+                    'recpass_text'                               => [
+                        'type'    => 'text',
+                        'label'   => __( 'Name', 'directorist' ),
+                        'value'   => __( 'Recover Password', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_recpass",
+                            'where'      => "display_recpass",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'recpass_desc'    => [
-                        'type'          => 'textarea',
-                        'label'         => __( 'Description', 'directorist' ),
-                        'value'         => __( 'Lost your password? Please enter your email address. You will receive a link to create a new password via email.', 'directorist' ),
+                    'recpass_desc'                               => [
+                        'type'    => 'textarea',
+                        'label'   => __( 'Description', 'directorist' ),
+                        'value'   => __( 'Lost your password? Please enter your email address. You will receive a link to create a new password via email.', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_recpass",
+                            'where'      => "display_recpass",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'recpass_username'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Email Label', 'directorist' ),
-                        'value'         => __( 'E-mail', 'directorist' ),
+                    'recpass_username'                           => [
+                        'type'    => 'text',
+                        'label'   => __( 'Email Label', 'directorist' ),
+                        'value'   => __( 'E-mail', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_recpass",
+                            'where'      => "display_recpass",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'recpass_placeholder'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Username or Email Placeholder', 'directorist' ),
-                        'value'         => __( 'eg. mail@example.com', 'directorist' ),
+                    'recpass_placeholder'                        => [
+                        'type'    => 'text',
+                        'label'   => __( 'Username or Email Placeholder', 'directorist' ),
+                        'value'   => __( 'eg. mail@example.com', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_recpass",
+                            'where'      => "display_recpass",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'recpass_button'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Button Text', 'directorist' ),
-                        'value'         => __( 'Get New Password', 'directorist' ),
+                    'recpass_button'                             => [
+                        'type'    => 'text',
+                        'label'   => __( 'Button Text', 'directorist' ),
+                        'value'   => __( 'Get New Password', 'directorist' ),
                         'show-if' => [
-                            'where' => "display_recpass",
+                            'where'      => "display_recpass",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'redirection_after_login' => [
-                        'label' => __( 'Redirection after Login', 'directorist' ),
-                        'type'  => 'select',
-                        'value' => 'previous_page',
+                    'redirection_after_login'                    => [
+                        'label'   => __( 'Redirection after Login', 'directorist' ),
+                        'type'    => 'select',
+                        'value'   => 'previous_page',
                         'options' => $this->get_pages_with_prev_page(),
                     ],
                     // email general settings
-                    'disable_email_notification' => [
-                        'label'         => __( 'Disable all Email Notifications', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => false,
+                    'disable_email_notification'                 => [
+                        'label' => __( 'Disable all Email Notifications', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => false,
                     ],
-                    'email_from_name'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Sender Name for Emails', 'directorist' ),
-                        'description'    => __( 'The name that will appear as the sender in emails generated by Directorist.', 'directorist' ),
-                        'value'         => get_option( 'blogname' ),
-                        'show-if' => [
-                            'where' => "disable_email_notification",
+                    'email_from_name'                            => [
+                        'type'        => 'text',
+                        'label'       => __( 'Sender Name for Emails', 'directorist' ),
+                        'description' => __( 'The name that will appear as the sender in emails generated by Directorist.', 'directorist' ),
+                        'value'       => get_option( 'blogname' ),
+                        'show-if'     => [
+                            'where'      => "disable_email_notification",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => false],
                             ],
                         ],
                     ],
-                    'email_from_email'   => [
-                        'type'           => 'text',
-                        'label'          => __( 'Sender Email Address', 'directorist' ),
-                        'description'    => __( 'The email address that will appear as the sender in emails generated by Directorist.', 'directorist' ),
-                        'value'          => get_option( 'admin_email' ),
-                        'show-if'        => [
-                            'where' => "disable_email_notification",
+                    'email_from_email'                           => [
+                        'type'        => 'text',
+                        'label'       => __( 'Sender Email Address', 'directorist' ),
+                        'description' => __( 'The email address that will appear as the sender in emails generated by Directorist.', 'directorist' ),
+                        'value'       => get_option( 'admin_email' ),
+                        'show-if'     => [
+                            'where'      => "disable_email_notification",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => false],
                             ],
                         ],
                     ],
-                    'admin_email_lists'     => [
-                        'type'              => 'textarea',
-                        'label'             => __( 'Admin Email Address(es) for Notifications', 'directorist' ),
-                        'description'       => __( 'Enter one or more email addresses (comma-separated) where admin notifications will be sent. Example: admin1@example.com, admin2@example.com.', 'directorist' ),
-                        'value'             => get_option( 'admin_email' ),
-                        'show-if'           => [
-                            'where' => "disable_email_notification",
+                    'admin_email_lists'                          => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Admin Email Address(es) for Notifications', 'directorist' ),
+                        'description' => __( 'Enter one or more email addresses (comma-separated) where admin notifications will be sent. Example: admin1@example.com, admin2@example.com.', 'directorist' ),
+                        'value'       => get_option( 'admin_email' ),
+                        'show-if'     => [
+                            'where'      => "disable_email_notification",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => false],
                             ],
                         ],
                     ],
-                    'notify_admin' => [
+                    'notify_admin'                               => [
                         'label'       => __( 'Notify the Admin when Any of the Selected Event Happens', 'directorist' ),
                         'type'        => 'checkbox',
                         'value'       =>  $this->default_events_to_notify_admin(),
                         'options'     => $this->events_to_notify_admin(),
                         'description' => __( 'Select the situation when you would like to send an email to the Admin', 'directorist' ),
-                        'show-if' => [
-                            'where' => "disable_email_notification",
+                        'show-if'     => [
+                            'where'      => "disable_email_notification",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => false],
                             ],
                         ],
                     ],
-                    'notify_user' => [
+                    'notify_user'                                => [
                         'label'       => __( 'Notify the Listing Owner when Any of the Selected Event Happens', 'directorist' ),
                         'type'        => 'checkbox',
                         'value'       => $this->default_events_to_notify_user(),
                         'options'     => $this->events_to_notify_user(),
                         'description' => __( 'Select the situation when you would like to send an email to the Listing', 'directorist' ),
-                        'show-if' => [
-                            'where' => "disable_email_notification",
+                        'show-if'     => [
+                            'where'      => "disable_email_notification",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => false],
                             ],
                         ],
                     ],
                     // email templates settings
-                    'allow_email_header' => [
-                        'label'         => __( 'Email Header', 'directorist' ),
-                        'type'          => 'toggle',
-                        'value'         => true,
+                    'allow_email_header'                         => [
+                        'label' => __( 'Email Header', 'directorist' ),
+                        'type'  => 'toggle',
+                        'value' => true,
                     ],
-                    'email_header_color'    => [
-                        'type'           => 'color',
-                        'label'          => __( 'Email Header Color', 'directorist' ),
-                        'value'          => '#8569fb',
+                    'email_header_color'                         => [
+                        'type'    => 'color',
+                        'label'   => __( 'Email Header Color', 'directorist' ),
+                        'value'   => '#8569fb',
                         'show-if' => [
-                            'where' => "allow_email_header",
+                            'where'      => "allow_email_header",
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'email_sub_new_listing'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user when a listing is submitted/received.', 'directorist' ),
-                        'value'          => __( '[==SITE_NAME==] : Listing "==LISTING_TITLE==" Received', 'directorist' ),
+                    'email_sub_new_listing'                      => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user when a listing is submitted/received.', 'directorist' ),
+                        'value'       => __( '[==SITE_NAME==] : Listing "==LISTING_TITLE==" Received', 'directorist' ),
                     ],
-                    'email_tmpl_new_listing'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
+                    'email_tmpl_new_listing'                     => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
                         'description' => __( 'Edit the email template for sending to the user when a listing is submitted/received. HTML content is allowed too.', 'directorist' ),
-                        'value'          => __(
+                        'value'       => __(
                             "
                     Dear ==NAME==,
 
@@ -3340,17 +3340,17 @@ Please remember that your order may be canceled if you do not make your payment 
                     ", 'directorist'
                         ),
                     ],
-                    'email_sub_pub_listing'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user when a listing is approved/published.', 'directorist' ),
-                        'value'          => __( '[==SITE_NAME==] : Listing "==LISTING_TITLE==" published', 'directorist' ),
+                    'email_sub_pub_listing'                      => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user when a listing is approved/published.', 'directorist' ),
+                        'value'       => __( '[==SITE_NAME==] : Listing "==LISTING_TITLE==" published', 'directorist' ),
                     ],
-                    'email_tmpl_pub_listing'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Edit the email template for sending to the user when a listing is approved/published. HTML content is allowed too.', 'directorist' ),
-                        'value'          => __(
+                    'email_tmpl_pub_listing'                     => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Edit the email template for sending to the user when a listing is approved/published. HTML content is allowed too.', 'directorist' ),
+                        'value'       => __(
                             "
                     Dear ==NAME==,
                     Congratulations! Your listing '==LISTING_TITLE==' has been approved/published. Now it is publicly available at ==LISTING_URL==
@@ -3360,13 +3360,13 @@ Please remember that your order may be canceled if you do not make your payment 
                     ", 'directorist'
                         ),
                     ],
-                    'email_sub_rejected_listing' => [
+                    'email_sub_rejected_listing'                 => [
                         'type'        => 'text',
                         'label'       => __( 'Email Subject', 'directorist' ),
                         'description' => __( 'Edit the subject for sending to the user when a listing is rejected.', 'directorist' ),
                         'value'       => __( 'Your listing was rejected', 'directorist' ),
                     ],
-                    'email_tmpl_rejected_listing' => [
+                    'email_tmpl_rejected_listing'                => [
                         'type'        => 'textarea',
                         'label'       => __( 'Email Body', 'directorist' ),
                         'description' => __( 'Edit the email template for sending to the user when a listing is rejected. HTML content is allowed too. Use ==REJECTION_REASON== to include the reason.', 'directorist' ),
@@ -3389,17 +3389,17 @@ Best regards,
 ==SITE_NAME==", 'directorist'
                         ),
                     ],
-                    'email_sub_edit_listing'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user when a listing is edited.', 'directorist' ),
-                        'value'          => __( '[==SITE_NAME==] : Listing "==LISTING_TITLE==" Edited', 'directorist' ),
+                    'email_sub_edit_listing'                     => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user when a listing is edited.', 'directorist' ),
+                        'value'       => __( '[==SITE_NAME==] : Listing "==LISTING_TITLE==" Edited', 'directorist' ),
                     ],
-                    'email_tmpl_edit_listing'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Edit the email template for sending to the user when a listing is edited. HTML content is allowed too.', 'directorist' ),
-                        'value'          => __(
+                    'email_tmpl_edit_listing'                    => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Edit the email template for sending to the user when a listing is edited. HTML content is allowed too.', 'directorist' ),
+                        'value'       => __(
                             "
                     Dear ==NAME==,
                     Congratulations! Your listing '==LISTING_TITLE==' has been edited. It is publicly available at ==LISTING_URL==
@@ -3409,17 +3409,17 @@ Best regards,
                     ", 'directorist'
                         ),
                     ],
-                    'email_sub_to_expire_listing'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user when a listing is ABOUT TO EXPIRE.', 'directorist' ),
-                        'value'          => __( '[==SITE_NAME==] : Your Listing "==LISTING_TITLE==" is about to expire.', 'directorist' ),
+                    'email_sub_to_expire_listing'                => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user when a listing is ABOUT TO EXPIRE.', 'directorist' ),
+                        'value'       => __( '[==SITE_NAME==] : Your Listing "==LISTING_TITLE==" is about to expire.', 'directorist' ),
                     ],
-                    'email_tmpl_to_expire_listing'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Edit the email template for sending to the user when a listing is ABOUT TO EXPIRE. HTML content is allowed too.', 'directorist' ),
-                        'value'          => __(
+                    'email_tmpl_to_expire_listing'               => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Edit the email template for sending to the user when a listing is ABOUT TO EXPIRE. HTML content is allowed too.', 'directorist' ),
+                        'value'       => __(
                             "
                     Dear ==NAME==,
                     Your listing '==LISTING_TITLE==' is about to expire. It will expire on ==EXPIRATION_DATE==. You can renew it at ==RENEWAL_LINK==
@@ -3429,17 +3429,17 @@ Best regards,
                     ", 'directorist'
                         ),
                     ],
-                    'email_sub_expired_listing'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user when a Listing HAS EXPIRED.', 'directorist' ),
-                        'value'          => __( "[==SITE_NAME==] : Your Listing '==LISTING_TITLE==' has expired.", 'directorist' ),
+                    'email_sub_expired_listing'                  => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user when a Listing HAS EXPIRED.', 'directorist' ),
+                        'value'       => __( "[==SITE_NAME==] : Your Listing '==LISTING_TITLE==' has expired.", 'directorist' ),
                     ],
-                    'email_tmpl_expired_listing'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Edit the email template for sending to the user when a Listing HAS EXPIRED. HTML content is allowed too.', 'directorist' ),
-                        'value'          => __(
+                    'email_tmpl_expired_listing'                 => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Edit the email template for sending to the user when a Listing HAS EXPIRED. HTML content is allowed too.', 'directorist' ),
+                        'value'       => __(
                             "
                     Dear ==NAME==,
                     Your listing '==LISTING_TITLE==' has expired on ==EXPIRATION_DATE==. You can renew it at ==RENEWAL_LINK==
@@ -3449,17 +3449,17 @@ Best regards,
                     ", 'directorist'
                         ),
                     ],
-                    'email_sub_to_renewal_listing'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user to renew his/her listings.', 'directorist' ),
-                        'value'          => __( '[==SITE_NAME==] : A Reminder to Renew your listing "==LISTING_TITLE=="', 'directorist' ),
+                    'email_sub_to_renewal_listing'               => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user to renew his/her listings.', 'directorist' ),
+                        'value'       => __( '[==SITE_NAME==] : A Reminder to Renew your listing "==LISTING_TITLE=="', 'directorist' ),
                     ],
-                    'email_tmpl_to_renewal_listing'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Edit the email template for sending to the user to renew his/her listings. HTML content is allowed too.', 'directorist' ),
-                        'value'          => __(
+                    'email_tmpl_to_renewal_listing'              => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Edit the email template for sending to the user to renew his/her listings. HTML content is allowed too.', 'directorist' ),
+                        'value'       => __(
                             "
                     Dear ==NAME==,
 
@@ -3470,17 +3470,17 @@ Best regards,
                     ", 'directorist'
                         ),
                     ],
-                    'email_sub_renewed_listing'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user his/her listings has renewed successfully.', 'directorist' ),
-                        'value'          => __( '[==SITE_NAME==] : Your Listing "==LISTING_TITLE==" Has Renewed', 'directorist' ),
+                    'email_sub_renewed_listing'                  => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user his/her listings has renewed successfully.', 'directorist' ),
+                        'value'       => __( '[==SITE_NAME==] : Your Listing "==LISTING_TITLE==" Has Renewed', 'directorist' ),
                     ],
-                    'email_tmpl_renewed_listing'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Edit the email template for sending to the user his/her listings has renewed successfully. HTML content is allowed too.', 'directorist' ),
-                        'value'          => __(
+                    'email_tmpl_renewed_listing'                 => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Edit the email template for sending to the user his/her listings has renewed successfully. HTML content is allowed too.', 'directorist' ),
+                        'value'       => __(
                             "
                     Dear ==NAME==,
 
@@ -3493,17 +3493,17 @@ Best regards,
                     ", 'directorist'
                         ),
                     ],
-                    'email_sub_deleted_listing'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user when his/her listings has deleted successfully.', 'directorist' ),
-                        'value'          => __( '[==SITE_NAME==] : Your Listing "==LISTING_TITLE==" Has Been Deleted', 'directorist' ),
+                    'email_sub_deleted_listing'                  => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user when his/her listings has deleted successfully.', 'directorist' ),
+                        'value'       => __( '[==SITE_NAME==] : Your Listing "==LISTING_TITLE==" Has Been Deleted', 'directorist' ),
                     ],
-                    'email_tmpl_deleted_listing'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Edit the email template for sending to the user when his/her listings has deleted successfully. HTML content is allowed too.', 'directorist' ),
-                        'value'          => __(
+                    'email_tmpl_deleted_listing'                 => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Edit the email template for sending to the user when his/her listings has deleted successfully. HTML content is allowed too.', 'directorist' ),
+                        'value'       => __(
                             "
                     Dear ==NAME==,
 
@@ -3514,17 +3514,17 @@ Best regards,
                     ", 'directorist'
                         ),
                     ],
-                    'email_sub_new_order'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user when an order is created.', 'directorist' ),
-                        'value'          => __( '[==SITE_NAME==] : Your Order (#==ORDER_ID==) Received.', 'directorist' ),
+                    'email_sub_new_order'                        => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user when an order is created.', 'directorist' ),
+                        'value'       => __( '[==SITE_NAME==] : Your Order (#==ORDER_ID==) Received.', 'directorist' ),
                     ],
-                    'email_tmpl_new_order'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Edit the email template for sending to the user when an order is created.', 'directorist' ),
-                        'value'          => __(
+                    'email_tmpl_new_order'                       => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Edit the email template for sending to the user when an order is created.', 'directorist' ),
+                        'value'       => __(
                             "
                     Dear ==NAME==,
 
@@ -3544,17 +3544,17 @@ Best regards,
                     ", 'directorist'
                         ),
                     ],
-                    'email_sub_offline_new_order'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user when an order is created using offline payment like bank transfer.', 'directorist' ),
-                        'value'          => __( '[==SITE_NAME==] : Your Order (#==ORDER_ID==) Received.', 'directorist' ),
+                    'email_sub_offline_new_order'                => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user when an order is created using offline payment like bank transfer.', 'directorist' ),
+                        'value'       => __( '[==SITE_NAME==] : Your Order (#==ORDER_ID==) Received.', 'directorist' ),
                     ],
-                    'email_tmpl_offline_new_order'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Edit the email template for sending to the user when an order is created using offline payment like bank transfer.', 'directorist' ),
-                        'value'          => sprintf(
+                    'email_tmpl_offline_new_order'               => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Edit the email template for sending to the user when an order is created using offline payment like bank transfer.', 'directorist' ),
+                        'value'       => sprintf(
                             __(
                                 "
                     Dear ==NAME==,
@@ -3579,17 +3579,17 @@ Best regards,
                             ), get_directorist_option( 'bank_transfer_instruction' )
                         ),
                     ],
-                    'email_sub_completed_order'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user when an order is completed', 'directorist' ),
-                        'value'          => __( '[==SITE_NAME==] : Congratulation! Your Order #==ORDER_ID== Completed.', 'directorist' ),
+                    'email_sub_completed_order'                  => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user when an order is completed', 'directorist' ),
+                        'value'       => __( '[==SITE_NAME==] : Congratulation! Your Order #==ORDER_ID== Completed.', 'directorist' ),
                     ],
-                    'email_tmpl_completed_order'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Edit the email template for sending to the user when an order is completed.', 'directorist' ),
-                        'value'          => __(
+                    'email_tmpl_completed_order'                 => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Edit the email template for sending to the user when an order is completed.', 'directorist' ),
+                        'value'       => __(
                             "
                     Dear ==NAME==,
 
@@ -3609,17 +3609,17 @@ Best regards,
                     ", 'directorist'
                         ),
                     ],
-                    'email_sub_listing_contact_email'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user when listing contact message send.', 'directorist' ),
-                        'value'          => __( '==SITE_NAME== Contact via ==LISTING_TITLE==', 'directorist' ),
+                    'email_sub_listing_contact_email'            => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user when listing contact message send.', 'directorist' ),
+                        'value'       => __( '==SITE_NAME== Contact via ==LISTING_TITLE==', 'directorist' ),
                     ],
-                    'email_tmpl_listing_contact_email'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Edit the email template for sending to the user when when listing contact message send', 'directorist' ),
-                        'value'          => __(
+                    'email_tmpl_listing_contact_email'           => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Edit the email template for sending to the user when when listing contact message send', 'directorist' ),
+                        'value'       => __(
                             "
                     Dear ==NAME==,
 
@@ -3635,17 +3635,17 @@ Best regards,
                     ", 'directorist'
                         ),
                     ],
-                    'email_sub_registration_confirmation'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user when listing contact message send.', 'directorist' ),
-                        'value'          => __( 'Registration Confirmation!', 'directorist' ),
+                    'email_sub_registration_confirmation'        => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user when listing contact message send.', 'directorist' ),
+                        'value'       => __( 'Registration Confirmation!', 'directorist' ),
                     ],
-                    'email_tmpl_registration_confirmation'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Note: Use ==USER_PASSWORD== to show a temporary password when password field is disable from registration page', 'directorist' ),
-                        'value'          => __(
+                    'email_tmpl_registration_confirmation'       => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Note: Use ==USER_PASSWORD== to show a temporary password when password field is disable from registration page', 'directorist' ),
+                        'value'       => __(
                             '
                     Hi ==USERNAME==,
 
@@ -3655,17 +3655,17 @@ Best regards,
                         ),
                     ],
                     // Email Verification
-                    'email_sub_email_verification'    => [
-                        'type'           => 'text',
-                        'label'          => __( 'Email Subject', 'directorist' ),
-                        'description'    => __( 'Edit the subject for sending to the user when listing contact message send.', 'directorist' ),
-                        'value'          => __( '[==NAME==] Verify Your Email', 'directorist' ),
+                    'email_sub_email_verification'               => [
+                        'type'        => 'text',
+                        'label'       => __( 'Email Subject', 'directorist' ),
+                        'description' => __( 'Edit the subject for sending to the user when listing contact message send.', 'directorist' ),
+                        'value'       => __( '[==NAME==] Verify Your Email', 'directorist' ),
                     ],
-                    'email_tmpl_email_verification'    => [
-                        'type'           => 'textarea',
-                        'label'          => __( 'Email Body', 'directorist' ),
-                        'description'    => __( 'Note: Use ==USER_PASSWORD== to show a temporary password when password field is disable from registration page', 'directorist' ),
-                        'value'          => __(
+                    'email_tmpl_email_verification'              => [
+                        'type'        => 'textarea',
+                        'label'       => __( 'Email Body', 'directorist' ),
+                        'description' => __( 'Note: Use ==USER_PASSWORD== to show a temporary password when password field is disable from registration page', 'directorist' ),
+                        'value'       => __(
                             'Hi ==USERNAME==,
                     Thank you for signing up at ==SITE_NAME==, to complete the registration, please verify your email address.
                     To activate your account simply click on the link below and verify your email address within 24 hours. For your safety, you will not be able to access your account until verification of your email has been completed.
@@ -3676,50 +3676,50 @@ Best regards,
                     ],
                     // single template settings
 
-                    'enable_uninstall'    => [
-                        'type'           => 'toggle',
-                        'label'          => __( 'Remove Data on Uninstall?', 'directorist' ),
+                    'enable_uninstall'                           => [
+                        'type'        => 'toggle',
+                        'label'       => __( 'Remove Data on Uninstall?', 'directorist' ),
                         'description' => __( 'Checked it if you would like Directorist to completely remove all of its data when the plugin is deleted.','directorist' ),
-                        'value'          => false,
+                        'value'       => false,
                     ],
 
-                    'enable_archive_template'    => [
-                        'type'          => 'toggle',
-                        'label'         => __( 'Use WordPress Default Archive', 'directorist' ),
+                    'enable_archive_template'                    => [
+                        'type'        => 'toggle',
+                        'label'       => __( 'Use WordPress Default Archive', 'directorist' ),
                         'description' => __( 'Enable WordPress’s built-in archive pages for categories, locations, and tags. Turning this on will disable Directorist’s custom archive pages.','directorist' ),
-                        'value'         => false
+                        'value'       => false
                     ],
-                    'category_base'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Category URL Slug', 'directorist' ),
+                    'category_base'                              => [
+                        'type'        => 'text',
+                        'label'       => __( 'Category URL Slug', 'directorist' ),
                         'description' => __( 'The text used in your category archive URLs. Example: yourdomain.com/single-category/restaurant/','directorist' ),
-                        'value'         => directorist_get_default_category_base(),
-                        'show-if' => [
-                            'where' => 'enable_archive_template',
+                        'value'       => directorist_get_default_category_base(),
+                        'show-if'     => [
+                            'where'      => 'enable_archive_template',
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'location_base'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Location URL Slug', 'directorist' ),
+                    'location_base'                              => [
+                        'type'        => 'text',
+                        'label'       => __( 'Location URL Slug', 'directorist' ),
                         'description' => __( 'The text used in your location archive URLs. Example: yourdomain.com/single-location/new-york/','directorist' ),
-                        'value'         => directorist_get_default_location_base(),
-                        'show-if' => [
-                            'where' => 'enable_archive_template',
+                        'value'       => directorist_get_default_location_base(),
+                        'show-if'     => [
+                            'where'      => 'enable_archive_template',
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
                         ],
                     ],
-                    'tag_base'    => [
-                        'type'          => 'text',
-                        'label'         => __( 'Tag URL Slug', 'directorist' ),
+                    'tag_base'                                   => [
+                        'type'        => 'text',
+                        'label'       => __( 'Tag URL Slug', 'directorist' ),
                         'description' => __( 'The text used in your tag archive URLs. Example: yourdomain.com/single-tag/popular/','directorist' ),
-                        'value'         => directorist_get_default_tag_base(),
-                        'show-if' => [
-                            'where' => 'enable_archive_template',
+                        'value'       => directorist_get_default_tag_base(),
+                        'show-if'     => [
+                            'where'      => 'enable_archive_template',
                             'conditions' => [
                                 ['key' => 'value', 'compare' => '=', 'value' => true],
                             ],
@@ -3730,18 +3730,18 @@ Best regards,
 
             $this->layouts = apply_filters(
                 'atbdp_listing_type_settings_layout', [
-                    'listing_settings' => [
-                        'label' => __( 'Listings', 'directorist' ),
-                        'icon' => '<i class="fa fa-list directorist_Blue"></i>',
+                    'listing_settings'      => [
+                        'label'   => __( 'Listings', 'directorist' ),
+                        'icon'    => '<i class="fa fa-list directorist_Blue"></i>',
                         'submenu' => apply_filters(
                             'atbdp_listing_settings_submenu', [
-                                'general' => [
-                                    'label' => __( 'General', 'directorist' ),
-                                    'icon' => '<i class="fa fa-sliders-h"></i>',
+                                'general'              => [
+                                    'label'    => __( 'General', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-sliders-h"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_listing_settings_general_sections', [
-                                            'general_top_settings' => [
-                                                'fields'      => [
+                                            'general_top_settings'     => [
+                                                'fields' => [
                                         // 'all_listing_layout',
                                                     'enable_multi_directory',
                                                     'guest_listings',
@@ -3749,40 +3749,40 @@ Best regards,
                                                     'guest_email_placeholder',
                                                 ],
                                             ],
-                                            'registration' => [
-                                                'title'       => __( 'Registration', 'directorist' ),
-                                                'fields'      => [
+                                            'registration'             => [
+                                                'title'  => __( 'Registration', 'directorist' ),
+                                                'fields' => [
                                                     'new_user_registration', 'enable_email_verification'
                                                 ],
                                             ],
-                                            'listings_view' => [
-                                                'title'       => __( 'Listings View', 'directorist' ),
-                                                'fields'      => [
+                                            'listings_view'            => [
+                                                'title'  => __( 'Listings View', 'directorist' ),
+                                                'fields' => [
                                                     'count_loggedin_user', 
                                                     'dynamic_view_count_cache',
                                                 ],
                                             ],
-                                            'listings_currency' => [
-                                                'title'       => __( 'Listing Currency', 'directorist' ),
-                                                'fields'      => [
+                                            'listings_currency'        => [
+                                                'title'  => __( 'Listing Currency', 'directorist' ),
+                                                'fields' => [
                                                     'g_currency_note', 'g_currency', 'g_currency_position'
                                                 ],
                                             ],
-                                            'listings_renewal' => [
-                                                'title'       => __( 'Listings Renewal', 'directorist' ),
-                                                'fields'      => [
+                                            'listings_renewal'         => [
+                                                'title'  => __( 'Listings Renewal', 'directorist' ),
+                                                'fields' => [
                                                     'email_to_expire_day', 'email_renewal_day',
                                                 ],
                                             ],
                                             'expired_listings_actions' => [
-                                                'title'       => __( 'Expired Listings Management', 'directorist' ),
-                                                'fields'      => [
+                                                'title'  => __( 'Expired Listings Management', 'directorist' ),
+                                                'fields' => [
                                                     'delete_expired_listing_permanently', 'delete_expired_listings_after',
                                                 ],
                                             ],
-                                            'listings_archive' => [
-                                                'title'       => __( 'Taxonomy Archive', 'directorist' ),
-                                                'fields'      => [
+                                            'listings_archive'         => [
+                                                'title'  => __( 'Taxonomy Archive', 'directorist' ),
+                                                'fields' => [
                                                     'enable_archive_template',
                                                     'category_base',
                                                     'location_base',
@@ -3792,14 +3792,14 @@ Best regards,
                                         ]
                                     ),
                                 ],
-                                'listings_page' => [
-                                    'label' => __( 'All Listings', 'directorist' ),
-                                    'icon' => '<i class="fa fa-archive"></i>',
+                                'listings_page'        => [
+                                    'label'    => __( 'All Listings', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-archive"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_listing_settings_listings_page_sections', [
                                             'layout_search' => [
-                                                'title'       => __( ' Layout & Search', 'directorist' ),
-                                                'fields'      => [
+                                                'title'  => __( ' Layout & Search', 'directorist' ),
+                                                'fields' => [
                                                     'all_listing_layout',
                                                     'all_listing_columns',
                                                     'all_listing_page_items',
@@ -3811,9 +3811,9 @@ Best regards,
                                                     'listings_apply_text',
                                                 ],
                                             ],
-                                            'header' => [
-                                                'title'       => __( 'Header', 'directorist' ),
-                                                'fields'      => [
+                                            'header'        => [
+                                                'title'  => __( 'Header', 'directorist' ),
+                                                'fields' => [
                                                     'display_listings_header',
                                                     'listing_filters_button',
                                                     'listings_filter_button_text',
@@ -3827,8 +3827,8 @@ Best regards,
                                                 ],
                                             ],
                                             'preview_image' => [
-                                                'title'       => __( 'Preview Image', 'directorist' ),
-                                                'fields'      => [
+                                                'title'  => __( 'Preview Image', 'directorist' ),
+                                                'fields' => [
                                                     'preview_image_quality',
                                                     'way_to_show_preview',
                                                     'crop_width',
@@ -3841,35 +3841,35 @@ Best regards,
                                         ]
                                     ),
                                 ],
-                                'single_listing' => [
-                                    'label' => __( 'Single Listing', 'directorist' ),
-                                    'icon' => '<i class="fa fa-info"></i>',
+                                'single_listing'       => [
+                                    'label'    => __( 'Single Listing', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-info"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_listing_settings_listing_page_sections', [
-                                            'listing_template_view' => [
-                                                'title'       => __( 'Listing Template and View', 'directorist' ),
-                                                'fields'      => [
+                                            'listing_template_view'   => [
+                                                'title'  => __( 'Listing Template and View', 'directorist' ),
+                                                'fields' => [
                                                     'single_listing_template', 'disable_single_listing', 'restrict_single_listing_for_logged_in_user',
                                                 ],
                                             ],
-                                            'listing_permalink' => [
-                                                'title'       => __( 'Listing Permalink', 'directorist' ),
-                                                'fields'      => [
+                                            'listing_permalink'       => [
+                                                'title'  => __( 'Listing Permalink', 'directorist' ),
+                                                'fields' => [
                                                     'atbdp_listing_slug',
                                                     'single_listing_slug_with_directory_type',
                                                 ],
                                             ],
                                             'submission_confirmation' => [
-                                                'title'       => __( 'Submission Confirmations', 'directorist' ),
-                                                'fields'      => [
+                                                'title'  => __( 'Submission Confirmations', 'directorist' ),
+                                                'fields' => [
                                                     'submission_confirmation',
                                                     'pending_confirmation_msg',
                                                     'publish_confirmation_msg',
                                                 ],
                                             ],
-                                            'slider_image' => [
-                                                'title'       => __( 'Slider Image', 'directorist' ),
-                                                'fields'      => [
+                                            'slider_image'            => [
+                                                'title'  => __( 'Slider Image', 'directorist' ),
+                                                'fields' => [
                                                     'dsiplay_slider_single_page',
                                                     'single_slider_image_size',
                                                     'single_slider_background_type',
@@ -3882,17 +3882,17 @@ Best regards,
                                     ),
                                 ],
                                 'categories_locations' => [
-                                    'label' => __( 'Category & Location', 'directorist' ),
-                                    'icon' => '<i class="fa fa-list-alt"></i>',
+                                    'label'    => __( 'Category & Location', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-list-alt"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_categories_settings_sections', [
                                             'categories_settings' => [
-                                                'title'       => __( 'Categories Page', 'directorist' ),
-                                                'fields'      => [
+                                                'title'  => __( 'Categories Page', 'directorist' ),
+                                                'fields' => [
                                                     'display_categories_as', 'categories_column_number', 'categories_depth_number', 'order_category_by', 'sort_category_by', 'display_listing_count', 'hide_empty_categories'
                                                 ],
                                             ],
-                                            'locations_settings' => [
+                                            'locations_settings'  => [
                                                 'title'       => __( 'Locations Page', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
@@ -3903,12 +3903,12 @@ Best regards,
                                     ),
                                 ],
 
-                                'map' => [
-                                    'label' => __( 'Map', 'directorist' ),
-                                    'icon' => '<i class="fa fa-map"></i>',
+                                'map'                  => [
+                                    'label'    => __( 'Map', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-map"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_listing_settings_map_sections', [
-                                            'map_settings' => [
+                                            'map_settings'    => [
                                                 'title'       => __( 'Map', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
@@ -3925,9 +3925,9 @@ Best regards,
                                         ]
                                     ),
                                 ],
-                                'badge' => [
-                                    'label' => __( 'Badges', 'directorist' ),
-                                    'icon' => '<i class="fa fa-certificate"></i>',
+                                'badge'                => [
+                                    'label'    => __( 'Badges', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-certificate"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_listing_settings_badge_sections', [
                                             'badge_management' => [
@@ -3937,21 +3937,21 @@ Best regards,
                                                     'badge_display_type',
                                                 ],
                                             ],
-                                            'new_badge' => [
+                                            'new_badge'        => [
                                                 'title'       => __( 'New Badge', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'new_badge_text', 'new_listing_day', 'new_back_color',
                                                 ],
                                             ],
-                                            'popular_badge' => [
+                                            'popular_badge'    => [
                                                 'title'       => __( 'Popular Badge', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'popular_badge_text', 'listing_popular_by', 'views_for_popular', 'average_review_for_popular', 'popular_back_color',
                                                 ],
                                             ],
-                                            'featured_badge' => [
+                                            'featured_badge'   => [
                                                 'title'       => __( 'Featured Badge', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
@@ -3965,12 +3965,12 @@ Best regards,
                         ),
                     ],
 
-                    'page_settings' => [
-                        'label' => __( 'Page Setup', 'directorist' ),
-                        'icon' => '<i class="fa fa-desktop directorist_wordpress"></i>',
+                    'page_settings'         => [
+                        'label'    => __( 'Page Setup', 'directorist' ),
+                        'icon'     => '<i class="fa fa-desktop directorist_wordpress"></i>',
                         'sections' => apply_filters(
                             'atbdp_listing_settings_page_settings_sections', [
-                                'upgrade_pages' => [
+                                'upgrade_pages'     => [
                                     'title'       => __( 'Upgrade/Regenerate Pages', 'directorist' ),
                                     'description' => '',
                                     'fields'      => [
@@ -3990,31 +3990,31 @@ Best regards,
                         ),
                     ],
 
-                    'search_settings' => [
-                        'label' => __( 'Search', 'directorist' ),
-                        'icon' => '<i class="fa fa-search directorist_warning"></i>',
+                    'search_settings'       => [
+                        'label'   => __( 'Search', 'directorist' ),
+                        'icon'    => '<i class="fa fa-search directorist_warning"></i>',
                         'submenu' => apply_filters(
                             'atbdp_email_settings_submenu', [
-                                'search_form' => [
-                                    'label' => __( 'Search Listing', 'directorist' ),
-                                    'icon' => '<i class="fa fa-search"></i>',
+                                'search_form'   => [
+                                    'label'    => __( 'Search Listing', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-search"></i>',
                                     'sections' => apply_filters(
                                         'directorist_search_setting_sections', [
-                                            'search_bar' => [
-                                                'title'       => __( 'Search Bar', 'directorist' ),
-                                                'fields'      => [
+                                            'search_bar'        => [
+                                                'title'  => __( 'Search Bar', 'directorist' ),
+                                                'fields' => [
                                                     'search_title', 'search_subtitle', 'search_listing_text',
                                                 ],
                                             ],
-                                            'search_filters' => [
-                                                'title'       => __( 'Filters', 'directorist' ),
-                                                'fields'      => [
+                                            'search_filters'    => [
+                                                'title'  => __( 'Filters', 'directorist' ),
+                                                'fields' => [
                                                     'search_more_filter', 'search_more_filters', 'search_filters', 'search_reset_text', 'search_apply_filter',
                                                 ],
                                             ],
                                             'poplar_categories' => [
-                                                'title'       => __( 'Popular Categories', 'directorist' ),
-                                                'fields'      => [
+                                                'title'  => __( 'Popular Categories', 'directorist' ),
+                                                'fields' => [
                                                     'show_popular_category', 'popular_cat_title', 'popular_cat_num',
                                                 ],
                                             ],
@@ -4023,13 +4023,13 @@ Best regards,
                                 ],
 
                                 'search_result' => [
-                                    'label' => __( 'Search Result', 'directorist' ),
-                                    'icon' => '<i class="fa fa-check"></i>',
+                                    'label'    => __( 'Search Result', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-check"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_reg_settings_sections', [
                                             'search_result_layout' => [
-                                                'title'       => __( 'Layout & Search', 'directorist' ),
-                                                'fields'      => [
+                                                'title'  => __( 'Layout & Search', 'directorist' ),
+                                                'fields' => [
                                                     'search_result_layout',
                                                     'search_listing_columns',
                                                     'search_posts_num',
@@ -4041,8 +4041,8 @@ Best regards,
                                                 ],
                                             ],
                                             'search_result_header' => [
-                                                'title'       => __( 'Header', 'directorist' ),
-                                                'fields'      => [
+                                                'title'  => __( 'Header', 'directorist' ),
+                                                'fields' => [
                                                     'search_header',
                                                     'search_result_filters_button_display',
                                                     'search_result_filter_button_text',
@@ -4062,73 +4062,73 @@ Best regards,
                         ),
                     ],
 
-                    'user_settings' => [
-                        'label' => __( 'User', 'directorist' ),
-                        'icon' => '<i class="fa fa-users-cog directorist_green"></i>',
+                    'user_settings'         => [
+                        'label'   => __( 'User', 'directorist' ),
+                        'icon'    => '<i class="fa fa-users-cog directorist_green"></i>',
                         'submenu' => apply_filters(
                             'atbdp_user_settings_submenu', [
                                 'registration_form' => [
-                                    'label' => __( 'Registration Form', 'directorist' ),
-                                    'icon' => '<i class="fa fa-envelope-open"></i>',
+                                    'label'    => __( 'Registration Form', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-envelope-open"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_reg_settings_sections', [
-                                            'username' => [
+                                            'username'        => [
                                                 'title'       => __( 'Username', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'reg_username'
                                                 ],
                                             ],
-                                            'password' => [
+                                            'password'        => [
                                                 'title'       => __( 'Password', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'display_password_reg', 'reg_password', 'require_password_reg'
                                                 ],
                                             ],
-                                            'email' => [
+                                            'email'           => [
                                                 'title'       => __( 'Email', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'reg_email'
                                                 ],
                                             ],
-                                            'website' => [
+                                            'website'         => [
                                                 'title'       => __( 'Website', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'display_website_reg', 'reg_website', 'require_website_reg'
                                                 ],
                                             ],
-                                            'first_name' => [
+                                            'first_name'      => [
                                                 'title'       => __( 'First Name', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'display_fname_reg', 'reg_fname', 'require_fname_reg'
                                                 ],
                                             ],
-                                            'last_name' => [
+                                            'last_name'       => [
                                                 'title'       => __( 'Last Name', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'display_lname_reg', 'reg_lname', 'require_lname_reg'
                                                 ],
                                             ],
-                                            'about' => [
+                                            'about'           => [
                                                 'title'       => __( 'About/Bio', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'display_bio_reg', 'reg_bio', 'require_bio_reg'
                                                 ],
                                             ],
-                                            'user_type' => [
+                                            'user_type'       => [
                                                 'title'       => __( 'User Type Registration', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'display_user_type'
                                                 ],
                                             ],
-                                            'privacy_policy' => [
+                                            'privacy_policy'  => [
                                                 'title'       => __( 'Privacy Policy', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
@@ -4143,21 +4143,21 @@ Best regards,
                                                 ],
                                             ],
 
-                                            'signup_button' => [
+                                            'signup_button'   => [
                                                 'title'       => __( 'Sign Up Button', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'reg_signup'
                                                 ],
                                             ],
-                                            'login_message' => [
+                                            'login_message'   => [
                                                 'title'       => __( 'Login Message', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'display_login', 'login_text', 'log_linkingmsg'
                                                 ],
                                             ],
-                                            'redirection' => [
+                                            'redirection'     => [
                                                 'title'       => '',
                                                 'description' => '',
                                                 'fields'      => [
@@ -4167,19 +4167,19 @@ Best regards,
                                         ]
                                     ),
                                 ],
-                                'login_form' => [
-                                    'label' => __( 'Login Form', 'directorist' ),
-                                    'icon' => '<i class="fa fa-mail-bulk"></i>',
+                                'login_form'        => [
+                                    'label'    => __( 'Login Form', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-mail-bulk"></i>',
                                     'sections' => apply_filters(
                                         'directorist_login_form_templates_settings_sections', [
-                                            'username' => [
+                                            'username'            => [
                                                 'title'       => __( 'Username', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'log_username'
                                                 ],
                                             ],
-                                            'password' => [
+                                            'password'            => [
                                                 'title'       => __( 'Password', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
@@ -4193,28 +4193,28 @@ Best regards,
                                                     'display_rememberme', 'log_rememberme'
                                                 ],
                                             ],
-                                            'login_button' => [
+                                            'login_button'        => [
                                                 'title'       => __( 'Login Button', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'log_button'
                                                 ],
                                             ],
-                                            'signup_message' => [
+                                            'signup_message'      => [
                                                 'title'       => __( 'Sign Up Message', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'display_signup', 'reg_text', 'reg_linktxt'
                                                 ],
                                             ],
-                                            'recover_password' => [
+                                            'recover_password'    => [
                                                 'title'       => __( 'Recover Password', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'display_recpass', 'recpass_text', 'recpass_desc', 'recpass_username', 'recpass_placeholder', 'recpass_button'
                                                 ],
                                             ],
-                                            'login_redirect' => [
+                                            'login_redirect'      => [
                                                 'title'       => '',
                                                 'description' => '',
                                                 'fields'      => [
@@ -4226,24 +4226,24 @@ Best regards,
                                     ),
                                 ],
 
-                                'user_dashboard' => [
-                                    'label' => __( 'Dashboard', 'directorist' ),
-                                    'icon' => '<i class="fa fa-chart-bar"></i>',
+                                'user_dashboard'    => [
+                                    'label'    => __( 'Dashboard', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-chart-bar"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_listing_settings_user_dashboard_sections', [
                                             'general_dashboard' => [
-                                                'fields'      => [
+                                                'fields' => [
                                                     'my_profile_tab', 'my_profile_tab_text', 'fav_listings_tab', 'fav_listings_tab_text'
                                                 ],
                                             ],
-                                            'author_dashboard' => [
+                                            'author_dashboard'  => [
                                                 'title'       => __( 'Author Dashboard', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'my_listing_tab', 'my_listing_tab_text', 'user_listings_pagination', 'user_listings_per_page', 'submit_listing_button'
                                                 ],
                                             ],
-                                            'user_dashboard' => [
+                                            'user_dashboard'    => [
                                                 'title'       => __( 'User Dashboard', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
@@ -4253,9 +4253,9 @@ Best regards,
                                         ]
                                     ),
                                 ],
-                                'all_authors' => [
-                                    'label' => __( 'All Authors', 'directorist' ),
-                                    'icon' => '<i class="fa fa-users"></i>',
+                                'all_authors'       => [
+                                    'label'    => __( 'All Authors', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-users"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_listing_settings_user_dashboard_sections', [
                                             'all_authors' => [
@@ -4272,26 +4272,26 @@ Best regards,
                         ),
                     ],
 
-                    'email_settings' => [
-                        'label' => __( 'Email', 'directorist' ),
-                        'icon' => '<i class="fa fa-envelope directorist_Blue"></i>',
+                    'email_settings'        => [
+                        'label'   => __( 'Email', 'directorist' ),
+                        'icon'    => '<i class="fa fa-envelope directorist_Blue"></i>',
                         'submenu' => apply_filters(
                             'atbdp_email_settings_submenu', [
-                                'email_general' => [
-                                    'label' => __( 'General', 'directorist' ),
-                                    'icon' => '<i class="fa fa-envelope-open directorist_info"></i>',
+                                'email_general'   => [
+                                    'label'    => __( 'General', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-envelope-open directorist_info"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_reg_settings_sections', [
-                                            'sender_details' => [
-                                                'title'       => __( 'Sender Details', 'directorist' ),
-                                                'fields'      => [
+                                            'sender_details'     => [
+                                                'title'  => __( 'Sender Details', 'directorist' ),
+                                                'fields' => [
                                                     'email_from_name',
                                                     'email_from_email',
                                                 ],
                                             ],
                                             'email_notification' => [
-                                                'title'       => __( 'Email Notifications', 'directorist' ),
-                                                'fields'      => [
+                                                'title'  => __( 'Email Notifications', 'directorist' ),
+                                                'fields' => [
                                                     'disable_email_notification', 'admin_email_lists', 'notify_admin', 'notify_user'
                                                 ],
                                             ],
@@ -4299,95 +4299,95 @@ Best regards,
                                     ),
                                 ],
                                 'email_templates' => [
-                                    'label' => __( 'Templates', 'directorist' ),
-                                    'icon' => '<i class="fa fa-mail-bulk directorist_info"></i>',
+                                    'label'    => __( 'Templates', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-mail-bulk directorist_info"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_email_templates_settings_sections', [
-                                            'general' => [
+                                            'general'                   => [
                                                 'title'       => __( 'General', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'allow_email_header', 'email_header_color'
                                                 ],
                                             ],
-                                            'new_listing' => [
+                                            'new_listing'               => [
                                                 'title'       => __( 'For New Listing', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'email_note', 'email_sub_new_listing', 'email_tmpl_new_listing'
                                                 ],
                                             ],
-                                            'approved_listings' => [
+                                            'approved_listings'         => [
                                                 'title'       => __( 'For Approved/Published Listings', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'email_sub_pub_listing', 'email_tmpl_pub_listing'
                                                 ],
                                             ],
-                                            'edited_listings' => [
+                                            'edited_listings'           => [
                                                 'title'       => __( 'For Edited Listings', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'email_sub_edit_listing', 'email_tmpl_edit_listing'
                                                 ],
                                             ],
-                                            'about_expire_listings' => [
+                                            'about_expire_listings'     => [
                                                 'title'       => __( 'For About To Expire Listings', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'email_sub_to_expire_listing', 'email_tmpl_to_expire_listing'
                                                 ],
                                             ],
-                                            'expired_listings' => [
+                                            'expired_listings'          => [
                                                 'title'       => __( 'For Expired Listings', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'email_sub_expired_listing', 'email_tmpl_expired_listing'
                                                 ],
                                             ],
-                                            'remind_renewal_listings' => [
+                                            'remind_renewal_listings'   => [
                                                 'title'       => __( 'For Renewal Listings (Remind To Renew)', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'email_sub_to_renewal_listing', 'email_tmpl_to_renewal_listing'
                                                 ],
                                             ],
-                                            'after_renewed_listings' => [
+                                            'after_renewed_listings'    => [
                                                 'title'       => __( 'For Renewed Listings (After Renewed)', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'email_sub_renewed_listing', 'email_tmpl_renewed_listing'
                                                 ],
                                             ],
-                                            'deleted_listings' => [
+                                            'deleted_listings'          => [
                                                 'title'       => __( 'For Deleted/Trashed Listings', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'email_sub_deleted_listing', 'email_tmpl_deleted_listing'
                                                 ],
                                             ],
-                                            'new_order_created' => [
+                                            'new_order_created'         => [
                                                 'title'       => __( 'For New Order (Created)', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'email_sub_new_order', 'email_tmpl_new_order'
                                                 ],
                                             ],
-                                            'new_order_offline_bank' => [
+                                            'new_order_offline_bank'    => [
                                                 'title'       => __( 'For New Order (Created Using Offline Bank Transfer)', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'email_sub_offline_new_order', 'email_tmpl_offline_new_order'
                                                 ],
                                             ],
-                                            'completed_order' => [
+                                            'completed_order'           => [
                                                 'title'       => __( 'For Completed Order', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
                                                     'email_sub_completed_order', 'email_tmpl_completed_order'
                                                 ],
                                             ],
-                                            'listing_contact_email' => [
+                                            'listing_contact_email'     => [
                                                 'title'       => __( 'For Listing Contact Email', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
@@ -4401,7 +4401,7 @@ Best regards,
                                                     'email_sub_registration_confirmation', 'email_tmpl_registration_confirmation'
                                                 ],
                                             ],
-                                            'email_verification' => [
+                                            'email_verification'        => [
                                                 'title'       => __( 'Email Verification', 'directorist' ),
                                                 'description' => '',
                                                 'fields'      => [
@@ -4416,16 +4416,16 @@ Best regards,
                     ],
 
                     'monetization_settings' => [
-                        'label' => __( 'Monetization', 'directorist' ),
-                        'icon' => '<i class="fa fa-credit-card directorist_info"></i>',
+                        'label'   => __( 'Monetization', 'directorist' ),
+                        'icon'    => '<i class="fa fa-credit-card directorist_info"></i>',
                         'submenu' => apply_filters(
                             'atbdp_monetization_settings_submenu', [
                                 'monetization_general' => [
-                                    'label' => __( 'General Settings', 'directorist' ),
-                                    'icon' => '<i class="fa fa-home"></i>',
+                                    'label'    => __( 'General Settings', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-home"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_listing_settings_monetization_general_sections', [
-                                            'general' => [
+                                            'general'  => [
                                                 'description' => '',
                                                 'fields'      => [
                                                     'enable_monetization',
@@ -4445,13 +4445,13 @@ Best regards,
                                         ]
                                     ),
                                 ],
-                                'featured_listings' => [
-                                    'label' => __( 'Featured Listings', 'directorist' ),
-                                    'icon' => '<i class="fa fa-arrow-up"></i>',
+                                'featured_listings'    => [
+                                    'label'    => __( 'Featured Listings', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-arrow-up"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_listing_settings_featured_sections', [
                                             'featured' => [
-                                                'fields'      => [
+                                                'fields' => [
                                                     'enable_featured_listing',
                                                     'featured_listing_desc',
                                                     'featured_listing_price',
@@ -4461,13 +4461,13 @@ Best regards,
                                         ]
                                     ),
                                 ],
-                                'gateway' => [
-                                    'label' => __( 'Payment Gateways', 'directorist' ),
-                                    'icon' => '<i class="fa fa-bezier-curve"></i>',
+                                'gateway'              => [
+                                    'label'    => __( 'Payment Gateways', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-bezier-curve"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_listing_settings_gateway_sections', [
                                             'gateway_general' => [
-                                                'fields'      => [
+                                                'fields' => [
                                                     'default_gateway',
                                                     'active_gateways',
                                                 ],
@@ -4475,13 +4475,13 @@ Best regards,
                                         ]
                                     ),
                                 ],
-                                'offline_gateway' => [
-                                    'label' => __( 'Bank Transfer', 'directorist' ),
-                                    'icon' => '<i class="fa fa-university"></i>',
+                                'offline_gateway'      => [
+                                    'label'    => __( 'Bank Transfer', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-university"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_listing_settings_offline_gateway_sections', [
                                             'offline_gateway_general' => [
-                                                'fields'      => [
+                                                'fields' => [
                                                     'offline_payment_note',
                                                     'bank_transfer_title',
                                                     'bank_transfer_description',
@@ -4495,9 +4495,9 @@ Best regards,
                         ),
                     ],
 
-                    'personalization' => [
-                        'label' => __( 'Personalization', 'directorist' ),
-                        'icon' => '<i class="fa fa-paint-brush directorist_success"></i>',
+                    'personalization'       => [
+                        'label'    => __( 'Personalization', 'directorist' ),
+                        'icon'     => '<i class="fa fa-paint-brush directorist_success"></i>',
                         'sections' => apply_filters(
                             'atbdp_style_settings_controls', [
                                 'brand_color_section' =>  [
@@ -4509,13 +4509,13 @@ Best regards,
                                     )
                                 ],
                                 'button_type_section' => [
-                                    'title' => __( 'Button', 'directorist' ),
+                                    'title'  => __( 'Button', 'directorist' ),
                                     'fields' => [
                                         'button_type', 'button_primary_example', 'button_primary_color', 'button_primary_bg_color', 'button_secondary_example', 'button_secondary_color', 'button_secondary_bg_color'
                                     ]
                                 ],
-                                'map_marker_section' => [
-                                    'title' => __( 'All Listings Map Marker', 'directorist' ),
+                                'map_marker_section'  => [
+                                    'title'  => __( 'All Listings Map Marker', 'directorist' ),
                                     'fields' => apply_filters(
                                         'atbdp_map_marker_color', [
                                             'marker_shape_color',
@@ -4527,14 +4527,14 @@ Best regards,
                         )
                     ],
 
-                    'extension_settings' => [
-                        'label' => __( 'Extensions', 'directorist' ),
-                        'icon' => '<i class="fa fa-magic directorist_danger"></i>',
+                    'extension_settings'    => [
+                        'label'   => __( 'Extensions', 'directorist' ),
+                        'icon'    => '<i class="fa fa-magic directorist_danger"></i>',
                         'submenu' => apply_filters(
                             'atbdp_extension_settings_submenu', [
                                 'extensions_general' => [
-                                    'label' => __( 'Extensions General', 'directorist' ),
-                                    'icon' => '<i class="fa fa-home"></i>',
+                                    'label'    => __( 'Extensions General', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-home"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_extension_settings_controls', [
                                             'general_settings' => [
@@ -4551,22 +4551,22 @@ Best regards,
                         ),
                     ],
 
-                    'import_export' => [
-                        'label' => __( 'Import and Export', 'directorist' ),
-                        'icon' => '<i class="fa fa-tools directorist_info"></i>',
-                        'sections'    => apply_filters(
+                    'import_export'         => [
+                        'label'    => __( 'Import and Export', 'directorist' ),
+                        'icon'     => '<i class="fa fa-tools directorist_info"></i>',
+                        'sections' => apply_filters(
                             'atbdp_listings_import_controls', [
                                 'import_methods' => [
-                                    'title'      => __( 'Listings', 'directorist' ),
-                                    'fields'     => apply_filters(
+                                    'title'  => __( 'Listings', 'directorist' ),
+                                    'fields' => apply_filters(
                                         'atbdp_csv_import_settings_fields', [
                                             'listing_import_button', 'listing_export_button',
                                         ]
                                     ),
                                 ],
                                 'export_methods' => [
-                                    'title'      => __( 'Settings', 'directorist' ),
-                                    'fields'     => apply_filters(
+                                    'title'  => __( 'Settings', 'directorist' ),
+                                    'fields' => apply_filters(
                                         'atbdp_csv_export_settings_fields', [
                                             'import_settings', 'export_settings', 'restore_default_settings'
                                         ]
@@ -4576,18 +4576,18 @@ Best regards,
                         ),
                     ],
 
-                    'advanced' => [
-                        'label' => __( 'Advanced', 'directorist' ),
-                        'icon' => '<i class="fa fa-filter directorist_wordpress"></i>',
+                    'advanced'              => [
+                        'label'   => __( 'Advanced', 'directorist' ),
+                        'icon'    => '<i class="fa fa-filter directorist_wordpress"></i>',
                         'submenu' => apply_filters(
                             'atbdp_advanced_submenu', [
-                                'seo_settings' => [
-                                    'label' => __( 'Title & Meta (SEO)', 'directorist' ),
-                                    'icon' => '<i class="fa fa-bolt"></i>',
+                                'seo_settings'  => [
+                                    'label'    => __( 'Title & Meta (SEO)', 'directorist' ),
+                                    'icon'     => '<i class="fa fa-bolt"></i>',
                                     'sections' => apply_filters(
                                         'atbdp_seo_settings_sections', [
                                             'title_metas' => [
-                                                'fields'      => [
+                                                'fields' => [
                                                     'atbdp_enable_seo', 'add_listing_page_meta_title', 'add_listing_page_meta_desc', 'all_listing_meta_title', 'all_listing_meta_desc', 'dashboard_meta_title', 'dashboard_meta_desc', 'author_profile_meta_title', 'author_page_meta_desc', 'category_meta_title', 'category_meta_desc', 'single_category_meta_title', 'single_category_meta_desc', 'all_locations_meta_title', 'all_locations_meta_desc', 'single_locations_meta_title', 'single_locations_meta_desc', 'registration_meta_title', 'registration_meta_desc', 'login_meta_title', 'login_meta_desc', 'homepage_meta_title', 'homepage_meta_desc', 'meta_title_for_search_result', 'search_result_meta_title', 'search_result_meta_desc'
                                                 ],
                                             ],
@@ -4595,24 +4595,24 @@ Best regards,
                                     ),
                                 ],
                                 'miscellaneous' => [
-                                    'label'     => __( 'Miscellaneous', 'directorist' ),
-                                    'icon' => '<i class="fas fa-thumbtack"></i>',
-                                    'sections'  => apply_filters(
+                                    'label'    => __( 'Miscellaneous', 'directorist' ),
+                                    'icon'     => '<i class="fas fa-thumbtack"></i>',
+                                    'sections' => apply_filters(
                                         'atbdp_caching_controls', [
-                                            'caching' => [
-                                                'title' => __( 'Caching', 'directorist' ),
-                                                'fields'      => [
+                                            'caching'   => [
+                                                'title'  => __( 'Caching', 'directorist' ),
+                                                'fields' => [
                                                     'atbdp_enable_cache', 'atbdp_reset_cache',
                                                 ],
                                             ],
                                             'debugging' => [
-                                                'title' => __( 'Debugging', 'directorist' ),
-                                                'fields'      => [
+                                                'title'  => __( 'Debugging', 'directorist' ),
+                                                'fields' => [
                                                     'script_debugging',
                                                 ],
                                             ],
                                             'uninstall' => [
-                                                'title' => __( 'Uninstall', 'directorist' ),
+                                                'title'  => __( 'Uninstall', 'directorist' ),
                                                 'fields' => [ 'enable_uninstall' ]
                                             ],
                                         ]
@@ -4627,10 +4627,10 @@ Best regards,
 
             $this->config = [
                 'fields_theme' => 'butterfly',
-                'submission' => [
-                    'url' => admin_url( 'admin-ajax.php' ),
+                'submission'   => [
+                    'url'  => admin_url( 'admin-ajax.php' ),
                     'with' => [
-                        'action' => 'save_settings_data',
+                        'action'            => 'save_settings_data',
                         'directorist_nonce' => wp_create_nonce( directorist_get_nonce_key() ),
                     ],
                 ],
@@ -4735,7 +4735,7 @@ Best regards,
          * @since 3.0.0
          */
         function get_pages_vl_arrays() {
-            $pages = get_pages();
+            $pages         = get_pages();
             $pages_options = [];
             if ( $pages ) {
                 foreach ( $pages as $page ) {
@@ -4773,8 +4773,8 @@ Best regards,
          * @since 3.0.0
          */
         function get_pages_with_prev_page() {
-            $pages = get_pages();
-            $pages_options = [];
+            $pages           = get_pages();
+            $pages_options   = [];
             $pages_options[] = [ 'value' => 'previous_page', 'label' => 'Previous Page' ];
             if ( $pages ) {
                 foreach ( $pages as $page ) {

@@ -24,7 +24,7 @@ if ( ! class_exists( 'ATBDP_Installation' ) ) :
          * @var array
          */
         private static $db_updates = [
-            '7.1.0' => [
+            '7.1.0'  => [
                 'directorist_710_migrate_reviews_table_to_comments_table',
                 'directorist_710_migrate_posts_table_to_comments_table',
                 'directorist_710_review_rating_clear_transients',
@@ -44,18 +44,18 @@ if ( ! class_exists( 'ATBDP_Installation' ) ) :
                 'directorist_7123_remove_upload_files_cap',
                 'directorist_7123_update_db_version',
             ],
-            '8.0.0' => [
+            '8.0.0'  => [
                 'directorist_800_update_db_version',
             ],
-            '8.3.0' => [
+            '8.3.0'  => [
                 'directorist_830_sync_listing_author_and_order_author',
                 'directorist_830_update_db_version',
             ],
-            '8.5.0' => [
+            '8.5.0'  => [
                 'directorist_850_migrate_archive_base',
                 'directorist_850_update_db_version',
             ],
-            '8.8.0' => [
+            '8.8.0'  => [
                 'directorist_880_migrate_legacy_orders',
                 'directorist_880_update_db_version',
             ],
@@ -92,7 +92,7 @@ if ( ! class_exists( 'ATBDP_Installation' ) ) :
             // Insert atbdp_roles_mapped option to the db to prevent mapping meta cap
             add_option( 'atbdp_roles_mapped', true );
 
-            $atbdp_option = get_option( 'atbdp_option' );
+            $atbdp_option       = get_option( 'atbdp_option' );
             $atpdp_setup_wizard = apply_filters( 'atbdp_setup_wizard', true );
 
             if ( ! $atbdp_option && $atpdp_setup_wizard ) {

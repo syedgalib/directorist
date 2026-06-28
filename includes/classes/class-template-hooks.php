@@ -68,7 +68,7 @@ class Directorist_Template_Hooks {
 
     public function allow_style_attr( $allow_css, $css_test_string ) {
         $parts = explode( ':', $css_test_string, 2 );
-        $attr = trim( $parts[0] );
+        $attr  = trim( $parts[0] );
 
         if ( $attr === '--directorist-icon' ) {
             return true;

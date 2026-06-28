@@ -14,7 +14,7 @@ class All_Tags extends \WP_Widget {
         $id_base        = 'bdtw_widget';
         $name           = esc_html__( 'Directorist - Tags', 'directorist' );
         $widget_options =             [
-            'classname' => 'directorist-widget',
+            'classname'   => 'directorist-widget',
             'description' => esc_html__( 'You can show listing tags by this widget', 'directorist' ),
         ];
 
@@ -23,67 +23,67 @@ class All_Tags extends \WP_Widget {
 
     public function form( $instance ) {
         $defaults = [
-            'title'                 => esc_html__( 'Tags', 'directorist' ),
-            'display_as'            => 'list',
-            'order_by'              => 'id',
-            'order'                 => 'asc',
-            'max_number'            => '',
-            'hide_empty'            => 0,
-            'show_count'            => 0,
-            'display_single_tag'    => 0,
+            'title'              => esc_html__( 'Tags', 'directorist' ),
+            'display_as'         => 'list',
+            'order_by'           => 'id',
+            'order'              => 'asc',
+            'max_number'         => '',
+            'hide_empty'         => 0,
+            'show_count'         => 0,
+            'display_single_tag' => 0,
         ];
 
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         $fields = [
-            'title'       => [
-                'label'   => esc_html__( 'Title:', 'directorist' ),
-                'type'    => 'text',
+            'title'              => [
+                'label' => esc_html__( 'Title:', 'directorist' ),
+                'type'  => 'text',
             ],
-            'display_as' => [
+            'display_as'         => [
                 'label'   => esc_html__( 'View as:', 'directorist' ),
                 'type'    => 'select',
                 'options' => [
-                    'list'      => esc_html__( 'List', 'directorist' ),
-                    'dropdown'  => esc_html__( 'Dropdown', 'directorist' )
+                    'list'     => esc_html__( 'List', 'directorist' ),
+                    'dropdown' => esc_html__( 'Dropdown', 'directorist' )
                 ]
             ],
-            'order_by' => [
+            'order_by'           => [
                 'label'   => esc_html__( 'Order By:', 'directorist' ),
                 'type'    => 'select',
                 'options' => [
-                    'id'      => esc_html__( 'Id', 'directorist' ),
-                    'count'   => esc_html__( 'Count', 'directorist' ),
-                    'name'    => esc_html__( 'Name', 'directorist' ),
-                    'slug'    => esc_html__( 'Slug', 'directorist' )
+                    'id'    => esc_html__( 'Id', 'directorist' ),
+                    'count' => esc_html__( 'Count', 'directorist' ),
+                    'name'  => esc_html__( 'Name', 'directorist' ),
+                    'slug'  => esc_html__( 'Slug', 'directorist' )
                 ]
             ],
-            'order' => [
+            'order'              => [
                 'label'   => esc_html__( 'Sort By:', 'directorist' ),
                 'type'    => 'select',
                 'options' => [
-                    'asc'    => esc_html__( 'Ascending', 'directorist' ),
-                    'desc'   => esc_html__( 'Descending', 'directorist' ),
+                    'asc'  => esc_html__( 'Ascending', 'directorist' ),
+                    'desc' => esc_html__( 'Descending', 'directorist' ),
                 ]
             ],
-            'max_number'       => [
-                'label'   => esc_html__( 'Maximum Number:', 'directorist' ),
-                'type'    => 'text',
+            'max_number'         => [
+                'label' => esc_html__( 'Maximum Number:', 'directorist' ),
+                'type'  => 'text',
             ],
-            'hide_empty' => [
-                'label'   => esc_html__( 'Hide empty tags', 'directorist' ),
-                'type'    => 'checkbox',
-                'value'   => 1,
+            'hide_empty'         => [
+                'label' => esc_html__( 'Hide empty tags', 'directorist' ),
+                'type'  => 'checkbox',
+                'value' => 1,
             ],
-            'show_count' => [
-                'label'   => esc_html__( 'Display listing counts', 'directorist' ),
-                'type'    => 'checkbox',
-                'value'   => 1,
+            'show_count'         => [
+                'label' => esc_html__( 'Display listing counts', 'directorist' ),
+                'type'  => 'checkbox',
+                'value' => 1,
             ],
             'display_single_tag' => [
-                'label'   => esc_html__( 'Display single listing tags', 'directorist' ),
-                'type'    => 'checkbox',
-                'value'   => 1,
+                'label' => esc_html__( 'Display single listing tags', 'directorist' ),
+                'type'  => 'checkbox',
+                'value' => 1,
             ],
         ];
 
@@ -114,24 +114,24 @@ class All_Tags extends \WP_Widget {
 
         echo wp_kses_post( $args['before_widget'] );
 
-        $title = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Tags', 'directorist' );
+        $title        = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Tags', 'directorist' );
         $widget_title = $args['before_title'] . apply_filters( 'widget_title', $title ) . $args['after_title'];
         echo wp_kses_post( $widget_title );
 
         $query_args = [
-            'template'               => ! empty( $instance['display_as'] ) ? sanitize_text_field( $instance['display_as'] ) : 'list',
-            'parent'                 => ! empty( $instance['parent'] ) ? (int) $instance['parent'] : 0,
-            'term_id'                => ! empty( $instance['parent'] ) ? (int) $instance['parent'] : 0,
-            'hide_empty'             => ! empty( $instance['hide_empty'] ) ? 1 : 0,
-            'orderby'                => ! empty( $instance['order_by'] ) ? sanitize_text_field( $instance['order_by'] ) : 'id',
-            'order'                  => ! empty( $instance['order'] ) ? sanitize_text_field( $instance['order'] ) : 'asc',
-            'show_count'             => ! empty( $instance['show_count'] ) ? 1 : 0,
-            'display_single_tag'     => ! empty( $instance['display_single_tag'] ) ? 1 : 0,
-            'pad_counts'             => true,
-            'immediate_category'     => ! empty( $instance['immediate_category'] ) ? 1 : 0,
-            'max_number'             => ! empty( $instance['max_number'] ) ? $instance['max_number'] : '',
-            'active_term_id'         => 0,
-            'ancestors'              => []
+            'template'           => ! empty( $instance['display_as'] ) ? sanitize_text_field( $instance['display_as'] ) : 'list',
+            'parent'             => ! empty( $instance['parent'] ) ? (int) $instance['parent'] : 0,
+            'term_id'            => ! empty( $instance['parent'] ) ? (int) $instance['parent'] : 0,
+            'hide_empty'         => ! empty( $instance['hide_empty'] ) ? 1 : 0,
+            'orderby'            => ! empty( $instance['order_by'] ) ? sanitize_text_field( $instance['order_by'] ) : 'id',
+            'order'              => ! empty( $instance['order'] ) ? sanitize_text_field( $instance['order'] ) : 'asc',
+            'show_count'         => ! empty( $instance['show_count'] ) ? 1 : 0,
+            'display_single_tag' => ! empty( $instance['display_single_tag'] ) ? 1 : 0,
+            'pad_counts'         => true,
+            'immediate_category' => ! empty( $instance['immediate_category'] ) ? 1 : 0,
+            'max_number'         => ! empty( $instance['max_number'] ) ? $instance['max_number'] : '',
+            'active_term_id'     => 0,
+            'ancestors'          => []
         ];
 
         if ( $query_args['immediate_category'] ) {
@@ -139,12 +139,12 @@ class All_Tags extends \WP_Widget {
             $term_slug = get_query_var( ATBDP_TAGS );
 
             if ( '' != $term_slug ) {
-                $term = get_term_by( 'slug', $term_slug, ATBDP_TAGS );
+                $term                         = get_term_by( 'slug', $term_slug, ATBDP_TAGS );
                 $query_args['active_term_id'] = $term->term_id;
 
-                $query_args['ancestors'] = get_ancestors( $query_args['active_term_id'], 'atbdp_tags' );
+                $query_args['ancestors']   = get_ancestors( $query_args['active_term_id'], 'atbdp_tags' );
                 $query_args['ancestors'][] = $query_args['active_term_id'];
-                $query_args['ancestors'] = array_unique( $query_args['ancestors'] );
+                $query_args['ancestors']   = array_unique( $query_args['ancestors'] );
             }
 
         }
@@ -163,7 +163,7 @@ class All_Tags extends \WP_Widget {
     public function directorist_tags_list( $settings ) {
         if ( $settings['display_single_tag'] ) {
             $terms = get_the_terms( get_the_ID(), ATBDP_TAGS );
-            $html = '';
+            $html  = '';
 
             if ( ! empty( $terms ) ) {
                 $html .= '<ul>';
@@ -199,7 +199,7 @@ class All_Tags extends \WP_Widget {
                 return;
             }
 
-            $html = '';
+            $html  = '';
             $html .= '<ul>';
 
             foreach ( $terms as $term ) {
@@ -228,7 +228,7 @@ class All_Tags extends \WP_Widget {
         $term_slug = get_query_var( ATBDP_TAGS );
         if ( $settings['display_single_tag'] ) {
             $terms = get_the_terms( get_the_ID(), ATBDP_TAGS );
-            $html = '';
+            $html  = '';
             if ( ! empty( $terms ) ) {
 
                 foreach ( $terms as $term ) {

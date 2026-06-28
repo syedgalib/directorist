@@ -7,13 +7,13 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 $conditional_logic_attr = $listing_form->get_conditional_logic_attributes( $data );
-$field_key = (string) $data['field_key'];
-$editor_id = strtolower( preg_replace( '/[^a-z0-9_]/', '_', str_replace( '-', '_', $field_key ) ) );
-$editor_id = ( $editor_id ? 'directorist_html_' . $editor_id : 'directorist_html_field' ) . '_' . substr( md5( $field_key ), 0, 8 );
-$is_required = ! empty( $data['required'] );
-$placeholder = isset( $data['placeholder'] ) ? (string) $data['placeholder'] : '';
-$field_object = \Directorist\Fields\Fields::create( $data );
-$allowed_html = \Directorist\Fields\HTML_Field::allowed_html( $field_object );
+$field_key              = (string) $data['field_key'];
+$editor_id              = strtolower( preg_replace( '/[^a-z0-9_]/', '_', str_replace( '-', '_', $field_key ) ) );
+$editor_id              = ( $editor_id ? 'directorist_html_' . $editor_id : 'directorist_html_field' ) . '_' . substr( md5( $field_key ), 0, 8 );
+$is_required            = ! empty( $data['required'] );
+$placeholder            = isset( $data['placeholder'] ) ? (string) $data['placeholder'] : '';
+$field_object           = \Directorist\Fields\Fields::create( $data );
+$allowed_html           = \Directorist\Fields\HTML_Field::allowed_html( $field_object );
 ?>
 
 <div class="directorist-form-group directorist-custom-field-html directorist-form-description-field"<?php echo $conditional_logic_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped in get_conditional_logic_attributes() ?>>
@@ -23,7 +23,7 @@ $allowed_html = \Directorist\Fields\HTML_Field::allowed_html( $field_object );
 
     wp_enqueue_media();
 
-    $editor_settings = apply_filters(
+    $editor_settings                             = apply_filters(
         'atbdp_add_listing_wp_editor_settings',
         [
             'textarea_name' => $field_key,
@@ -36,8 +36,8 @@ $allowed_html = \Directorist\Fields\HTML_Field::allowed_html( $field_object );
             ],
         ]
     );
-    $editor_settings['media_buttons'] = true;
-    $editor_settings['tinymce'] = isset( $editor_settings['tinymce'] ) && is_array( $editor_settings['tinymce'] ) ? $editor_settings['tinymce'] : [];
+    $editor_settings['media_buttons']            = true;
+    $editor_settings['tinymce']                  = isset( $editor_settings['tinymce'] ) && is_array( $editor_settings['tinymce'] ) ? $editor_settings['tinymce'] : [];
     $editor_settings['tinymce']['content_style'] = trim( ( $editor_settings['tinymce']['content_style'] ?? '' ) . ' body { padding: 0 !important; box-sizing: border-box; }' );
 
     $editor_value = wp_kses( (string) $data['value'], $allowed_html );

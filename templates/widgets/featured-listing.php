@@ -12,13 +12,13 @@ use Directorist\Review\Markup;
 $f_listing_num = ! empty( $instance['f_listing_num'] ) ? $instance['f_listing_num'] : 5;
 
 $featured_args = [
-    'post_type' => ATBDP_POST_TYPE,
-    'post_status' => 'publish',
+    'post_type'      => ATBDP_POST_TYPE,
+    'post_status'    => 'publish',
     'posts_per_page' => (int) $f_listing_num,
-    'meta_query' => [
+    'meta_query'     => [
         [
-            'key' => '_featured',
-            'value' => 1,
+            'key'     => '_featured',
+            'value'   => 1,
             'compare' => '='
         ]
     ]
@@ -33,7 +33,7 @@ $featured_args = [
 apply_filters( "directorist_widget_featured_listings_query_arguments", $featured_args );
 
 $featured_listings = new WP_Query( $featured_args );
-$default_icon = 'las la-tags';
+$default_icon      = 'las la-tags';
 ?>
 <div class="directorist-card__body">
     <div class="directorist-widget-listing">
@@ -44,15 +44,15 @@ $default_icon = 'las la-tags';
                 $review_rating = directorist_get_listing_rating( get_the_ID() );
                 $review_count  = directorist_get_listing_review_count( get_the_ID() );
                 /* translators: %s: Number of reviews */
-                $review_text   = sprintf( _n( '%s review', '%s reviews', $review_count, 'directorist' ), number_format_i18n( $review_count ) );
+                $review_text = sprintf( _n( '%s review', '%s reviews', $review_count, 'directorist' ), number_format_i18n( $review_count ) );
                 // get only one parent or high level term object
-                $listing_img = directorist_get_listing_gallery_images( get_the_ID() );
+                $listing_img     = directorist_get_listing_gallery_images( get_the_ID() );
                 $listing_prv_img = directorist_get_listing_preview_image( get_the_ID() );
                 $listing_reviews = get_post_meta( get_the_ID(), '_directorist_reviews', true );
-                $price = get_post_meta( get_the_ID(), '_price', true );
-                $price_range = get_post_meta( get_the_ID(), '_price_range', true );
+                $price           = get_post_meta( get_the_ID(), '_price', true );
+                $price_range     = get_post_meta( get_the_ID(), '_price_range', true );
                 $listing_pricing = get_post_meta( get_the_ID(), '_atbd_listing_pricing', true );
-                $cats = get_the_terms( get_the_ID(), ATBDP_CATEGORY );
+                $cats            = get_the_terms( get_the_ID(), ATBDP_CATEGORY );
                 ?>
                 <div class="directorist-widget-listing__single">
                     <div class="directorist-widget-listing__image">

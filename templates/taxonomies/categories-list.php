@@ -13,7 +13,7 @@ if ( '5' == $taxonomy->columns ) {
     $columns = $columns . '-5';
 }
 
-$taxonomy->atts['type'] = 'category';
+$taxonomy->atts['type']           = 'category';
 $taxonomy->atts['directory_type'] = isset( $_GET['directory_type'] ) && ! empty( $_GET['directory_type'] ) ? sanitize_text_field( wp_unslash( $_GET['directory_type'] ) ) : '';
 
 ?>
@@ -31,8 +31,8 @@ $taxonomy->atts['directory_type'] = isset( $_GET['directory_type'] ) && ! empty(
                         <?php
                         foreach ( $categories as $category ) {
                             $toggle_class = $category['has_child'] ? 'directorist-taxonomy-list__toggle' : '';
-                            $toggle_icon = $category['has_child'] ? 'las la-angle-down' : '';
-                            $has_icon = $category['icon_class'] ? 'directorist-taxonomy-list__card--icon' : '';
+                            $toggle_icon  = $category['has_child'] ? 'las la-angle-down' : '';
+                            $has_icon     = $category['icon_class'] ? 'directorist-taxonomy-list__card--icon' : '';
                             ?>
                             <div class="<?php Helper::directorist_column( $columns ); ?> directorist-taxonomy-list-one">
                                 <div class="directorist-taxonomy-list">

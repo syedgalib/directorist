@@ -157,10 +157,10 @@ class Metabox {
     }
 
     public static function render_rating_meta_field( $comment ) {
-        $listing       = Directorist_Single_Listing::instance( $comment->comment_post_ID );
-        $section_data  = $listing->get_review_section_data();
-        $builder       = Builder::get( $section_data['section_data'] );
-        $rating         = Comment_Meta::get_rating( $comment->comment_ID, 0 );
+        $listing      = Directorist_Single_Listing::instance( $comment->comment_post_ID );
+        $section_data = $listing->get_review_section_data();
+        $builder      = Builder::get( $section_data['section_data'] );
+        $rating       = Comment_Meta::get_rating( $comment->comment_ID, 0 );
 
         if ( $builder->is_rating_type_single() ) :
             $r = floor( $rating ); ?>

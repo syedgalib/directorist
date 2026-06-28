@@ -14,7 +14,7 @@ class Author_Info extends \WP_Widget {
         $id_base        = 'bdsi_widget';
         $name           = esc_html__( 'Directorist - Author Info', 'directorist' );
         $widget_options =             [
-            'classname' => 'directorist-widget',
+            'classname'   => 'directorist-widget',
             'description' => esc_html__( 'You can show author info by this widget', 'directorist' ),
         ];
 
@@ -23,15 +23,15 @@ class Author_Info extends \WP_Widget {
 
     public function form( $instance ) {
         $defaults = [
-            'title'           => esc_html__( 'Author Info', 'directorist' ),
+            'title' => esc_html__( 'Author Info', 'directorist' ),
         ];
 
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         $fields = [
-            'title'       => [
-                'label'   => esc_html__( 'Title:', 'directorist' ),
-                'type'    => 'text',
+            'title' => [
+                'label' => esc_html__( 'Title:', 'directorist' ),
+                'type'  => 'text',
             ],
         ];
 
@@ -41,7 +41,7 @@ class Author_Info extends \WP_Widget {
     public function update( $new_instance, $old_instance ) {
         $instance = [];
 
-        $instance['title']            = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
+        $instance['title'] = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
 
         return $instance;
     }
@@ -50,7 +50,7 @@ class Author_Info extends \WP_Widget {
         if ( is_singular( ATBDP_POST_TYPE ) ) {
             echo wp_kses_post( $args['before_widget'] );
 
-            $title = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Author Info', 'directorist' );
+            $title        = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Author Info', 'directorist' );
             $widget_title = $args['before_title'] . apply_filters( 'widget_title', $title ) . $args['after_title'];
             echo wp_kses_post( $widget_title );
 

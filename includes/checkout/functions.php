@@ -22,9 +22,9 @@ function atbdp_is_checkout() {
 
     global $wp_query;
 
-    $is_object_set = isset( $wp_query->queried_object );
+    $is_object_set    = isset( $wp_query->queried_object );
     $is_object_id_set = isset( $wp_query->queried_object_id );
-    $is_checkout = is_page( get_directorist_option( 'purchase_page' ) );
+    $is_checkout      = is_page( get_directorist_option( 'purchase_page' ) );
 
     if ( ! $is_object_set ) {
 
@@ -211,8 +211,8 @@ function atbdp_listen_for_failed_payments() {
     if ( ! empty( $failed_page ) && is_page( $failed_page ) && ! empty( $_GET['payment-id'] ) ) {
 
         $payment_id = absint( wp_unslash( $_GET['payment-id'] ) );
-        $payment = get_post( $payment_id );
-        $status = atbdp_get_payment_status( $payment );
+        $payment    = get_post( $payment_id );
+        $status     = atbdp_get_payment_status( $payment );
 
         if ( $status && 'pending' === strtolower( $status ) ) {
 
@@ -264,7 +264,7 @@ function atbdp_is_email_banned( $email = '' ) {
         return false;
     }
 
-    $email = strtolower( $email );
+    $email         = strtolower( $email );
     $banned_emails = atbdp_get_banned_emails();
 
     if ( ! is_array( $banned_emails ) || empty( $banned_emails ) ) {
@@ -329,7 +329,7 @@ function atbdp_validate_card_number_format( $number = 0 ) {
 
     if ( true === $is_valid_format ) {
         // We've passed our method check, onto card specific checks
-        $card_type = atbdp_detect_cc_type( $number );
+        $card_type       = atbdp_detect_cc_type( $number );
         $is_valid_format = ! empty( $card_type ) ? true : false;
     }
 
@@ -401,53 +401,53 @@ function atbdp_detect_cc_type( $number ) {
 
     $card_types = [
         [
-            'name' => 'amex',
-            'pattern' => '/^3[4|7]/',
+            'name'         => 'amex',
+            'pattern'      => '/^3[4|7]/',
             'valid_length' => [15],
         ],
         [
-            'name' => 'diners_club_carte_blanche',
-            'pattern' => '/^30[0-5]/',
+            'name'         => 'diners_club_carte_blanche',
+            'pattern'      => '/^30[0-5]/',
             'valid_length' => [14],
         ],
         [
-            'name' => 'diners_club_international',
-            'pattern' => '/^36/',
+            'name'         => 'diners_club_international',
+            'pattern'      => '/^36/',
             'valid_length' => [14],
         ],
         [
-            'name' => 'jcb',
-            'pattern' => '/^35(2[89]|[3-8][0-9])/',
+            'name'         => 'jcb',
+            'pattern'      => '/^35(2[89]|[3-8][0-9])/',
             'valid_length' => [16],
         ],
         [
-            'name' => 'laser',
-            'pattern' => '/^(6304|670[69]|6771)/',
+            'name'         => 'laser',
+            'pattern'      => '/^(6304|670[69]|6771)/',
             'valid_length' => [16, 17, 18, 19],
         ],
         [
-            'name' => 'visa_electron',
-            'pattern' => '/^(4026|417500|4508|4844|491(3|7))/',
+            'name'         => 'visa_electron',
+            'pattern'      => '/^(4026|417500|4508|4844|491(3|7))/',
             'valid_length' => [16],
         ],
         [
-            'name' => 'visa',
-            'pattern' => '/^4/',
+            'name'         => 'visa',
+            'pattern'      => '/^4/',
             'valid_length' => [16],
         ],
         [
-            'name' => 'mastercard',
-            'pattern' => '/^5[1-5]/',
+            'name'         => 'mastercard',
+            'pattern'      => '/^5[1-5]/',
             'valid_length' => [16],
         ],
         [
-            'name' => 'maestro',
-            'pattern' => '/^(5018|5020|5038|6304|6759|676[1-3])/',
+            'name'         => 'maestro',
+            'pattern'      => '/^(5018|5020|5038|6304|6759|676[1-3])/',
             'valid_length' => [12, 13, 14, 15, 16, 17, 18, 19],
         ],
         [
-            'name' => 'discover',
-            'pattern' => '/^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)/',
+            'name'         => 'discover',
+            'pattern'      => '/^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)/',
             'valid_length' => [16],
         ],
     ];

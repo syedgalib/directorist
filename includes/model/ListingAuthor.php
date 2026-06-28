@@ -56,7 +56,7 @@ class Directorist_Listing_Author {
 
     // extract_user_id
     public function extract_user_id( $user_id = '' ) {
-        $user_id = urldecode( $user_id ); //decode the URL to remove encoded spaces, special characters
+        $user_id           = urldecode( $user_id ); //decode the URL to remove encoded spaces, special characters
         $extracted_user_id = ( is_numeric( $user_id ) ) ? $user_id : get_current_user_id();
 
         if ( is_string( $user_id ) && ! empty( $user_id ) ) {
@@ -92,8 +92,8 @@ class Directorist_Listing_Author {
     }
 
     public function get_current_listing_type() {
-        $listing_types      = $this->get_listing_types();
-        $current = ! empty( $listing_types ) ? array_key_first( $listing_types ) : '';
+        $listing_types = $this->get_listing_types();
+        $current       = ! empty( $listing_types ) ? array_key_first( $listing_types ) : '';
 
         if ( ! empty( $_GET['directory_type' ] ) ) {
             $current = sanitize_text_field( wp_unslash( $_GET['directory_type' ] ) );
@@ -110,7 +110,7 @@ class Directorist_Listing_Author {
         }
 
         if ( ! is_numeric( $current ) ) {
-            $term = get_term_by( 'slug', $current, ATBDP_TYPE );
+            $term    = get_term_by( 'slug', $current, ATBDP_TYPE );
             $current = ( ! empty( $term ) ) ? $term->term_id : 0;
         }
 
@@ -140,7 +140,7 @@ class Directorist_Listing_Author {
                 $average = directorist_get_listing_rating( $listings_id );
 
                 if ( $average > 0 ) {
-                    $reviews_sum    += $average;
+                    $reviews_sum   += $average;
                     $reviews_count += 1;
                 }
             }
@@ -194,7 +194,7 @@ class Directorist_Listing_Author {
         if ( ! empty( $category ) ) {
             $args['tax_query'] = $category;
         }
-        $meta_queries   = [];
+        $meta_queries = [];
 
         if ( ! empty( $this->current_listing_type ) ) {
             $meta_queries['meta_query'] = [
@@ -244,20 +244,20 @@ class Directorist_Listing_Author {
     }
 
     public function member_since_text() {
-        $author_id = $this->id;
-        $user_registered = get_the_author_meta( 'user_registered', $author_id );
+        $author_id         = $this->id;
+        $user_registered   = get_the_author_meta( 'user_registered', $author_id );
         $member_since_text = sprintf( __( 'Member since %s ago', 'directorist' ), human_time_diff( strtotime( $user_registered ), current_time( 'timestamp' ) ) );
         return $member_since_text;
     }
 
     public function review_count_html() {
-        $review_count = $this->total_review;
+        $review_count      = $this->total_review;
         $review_count_html = sprintf( _nx( '%s Review', '%s Reviews', $review_count, 'author review count', 'directorist' ), $review_count );
         return $review_count_html;
     }
 
     public function listing_count_html() {
-        $listing_count = ! empty( $this->all_listings ) ? $this->all_listings->total : '';
+        $listing_count      = ! empty( $this->all_listings ) ? $this->all_listings->total : '';
         $listing_count_html = sprintf( _nx( '<span>%s</span> Listing', '<span>%s</span> Listings', $listing_count, 'author review count', 'directorist' ), $listing_count );
         return $listing_count_html;
     }
@@ -267,7 +267,7 @@ class Directorist_Listing_Author {
     }
 
     public function rating_count() {
-        $rating = $this->rating;
+        $rating       = $this->rating;
         $rating_count = sprintf( '<span>%s</span>', $rating, 'directorist' );
         return $rating_count;
     }

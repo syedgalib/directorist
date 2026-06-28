@@ -14,7 +14,7 @@ class Featured_Listing extends \WP_Widget {
         $id_base        = 'bdfl_widget';
         $name           = esc_html__( 'Directorist - Featured Listings', 'directorist' );
         $widget_options =             [
-            'classname' => 'directorist-widget',
+            'classname'   => 'directorist-widget',
             'description' => esc_html__( 'You can show featured listings by this widget', 'directorist' ),
         ];
 
@@ -23,26 +23,26 @@ class Featured_Listing extends \WP_Widget {
 
     public function form( $instance ) {
         $defaults = [
-            'title'               => esc_html__( 'Featured Listings', 'directorist' ),
-            'f_listing_num'       => 5,
-            'single_only'         => 1,
+            'title'         => esc_html__( 'Featured Listings', 'directorist' ),
+            'f_listing_num' => 5,
+            'single_only'   => 1,
         ];
 
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         $fields = [
-            'title'       => [
-                'label'   => esc_html__( 'Title:', 'directorist' ),
-                'type'    => 'text',
+            'title'         => [
+                'label' => esc_html__( 'Title:', 'directorist' ),
+                'type'  => 'text',
             ],
             'f_listing_num' => [
-                'label'   => esc_html__( 'Number of Listings', 'directorist' ),
-                'type'    => 'text',
+                'label' => esc_html__( 'Number of Listings', 'directorist' ),
+                'type'  => 'text',
             ],
-            'single_only' => [
-                'label'   => esc_html__( 'Display only on single listing', 'directorist' ),
-                'type'    => 'checkbox',
-                'value'   => 1,
+            'single_only'   => [
+                'label' => esc_html__( 'Display only on single listing', 'directorist' ),
+                'type'  => 'checkbox',
+                'value' => 1,
             ],
         ];
 
@@ -52,9 +52,9 @@ class Featured_Listing extends \WP_Widget {
     public function update( $new_instance, $old_instance ) {
         $instance = [];
 
-        $instance['title']            = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
-        $instance['f_listing_num']    = ! empty( $new_instance['f_listing_num'] ) ? sanitize_text_field( $new_instance['f_listing_num'] ) : 5;
-        $instance['single_only']        = ! empty( $new_instance['single_only'] ) ? 1 : 0;
+        $instance['title']         = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
+        $instance['f_listing_num'] = ! empty( $new_instance['f_listing_num'] ) ? sanitize_text_field( $new_instance['f_listing_num'] ) : 5;
+        $instance['single_only']   = ! empty( $new_instance['single_only'] ) ? 1 : 0;
 
         return $instance;
     }
@@ -67,7 +67,7 @@ class Featured_Listing extends \WP_Widget {
 
         echo wp_kses_post( $args['before_widget'] );
 
-        $title = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Featured Listings', 'directorist' );
+        $title        = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Featured Listings', 'directorist' );
         $widget_title = $args['before_title'] . apply_filters( 'widget_title', $title ) . $args['after_title'];
         echo wp_kses_post( $widget_title );
 

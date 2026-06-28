@@ -33,7 +33,7 @@ $conditional_logic_attr = $listing_form->get_conditional_logic_attributes( $data
                     'quicktags'     => true,
                     'editor_height' => 200,
                     'tinymce'       => array(
-                        'plugins'    => 'lists,link,wordpress,paste,textcolor,fullscreen,hr',
+                        'plugins' => 'lists,link,wordpress,paste,textcolor,fullscreen,hr',
                     ),
                 ]
             )

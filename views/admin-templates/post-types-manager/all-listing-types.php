@@ -64,7 +64,7 @@
         <div class="directorist_builder-body">
             <div class="directorist_builder__content">
                 <?php
-                    $all_items =  wp_count_terms( [ 'taxonomy' => 'atbdp_listing_types' ] );
+                    $all_items     =  wp_count_terms( [ 'taxonomy' => 'atbdp_listing_types' ] );
                     $listing_types = get_terms(
                         apply_filters(
                             'directorist_directory_index_query', [
@@ -136,10 +136,10 @@
                         <div class="directorist_table-body directorist_builder__list" id="directorist_builder__list">
                             <?php if ( $listing_types ) {
                                 foreach ( $listing_types as $index => $listing_type ) {
-                                    $default = get_term_meta( $listing_type->term_id, '_default', true );
-                                    $edit_link = admin_url( 'edit.php?post_type=at_biz_dir&page=atbdp-directory-types&listing_type_id=' . absint( $listing_type->term_id ) . '&action=edit' );
-                                    $delete_link = admin_url( 'admin-post.php?listing_type_id=' . absint( $listing_type->term_id ) . '&action=delete_listing_type' );
-                                    $delete_link = wp_nonce_url( $delete_link, 'delete_listing_type' );
+                                    $default      = get_term_meta( $listing_type->term_id, '_default', true );
+                                    $edit_link    = admin_url( 'edit.php?post_type=at_biz_dir&page=atbdp-directory-types&listing_type_id=' . absint( $listing_type->term_id ) . '&action=edit' );
+                                    $delete_link  = admin_url( 'admin-post.php?listing_type_id=' . absint( $listing_type->term_id ) . '&action=delete_listing_type' );
+                                    $delete_link  = wp_nonce_url( $delete_link, 'delete_listing_type' );
                                     $created_time = get_term_meta( $listing_type->term_id, '_created_date', true );
                                     ?>
                             <div class="directorist_table-row directory-type-row directorist_builder__list__item" data-term-id="<?php echo esc_attr( $listing_type->term_id ); ?>" data-order="<?php echo esc_attr( $index ); ?>">

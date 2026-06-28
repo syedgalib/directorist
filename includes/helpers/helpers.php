@@ -64,7 +64,6 @@ function directorist_permalink(): ATBDP_Permalink {
     return $instance;
 }
 
-
 function directorist_payment_failure_url( array $query_args = [] ) {
     return add_query_arg( $query_args, ATBDP_Permalink::get_transaction_failure_page_link() );
 }
@@ -101,8 +100,7 @@ function directorist_compute_fixed_or_percent_amount( ?string $type = null, ?flo
 function directorist_order_payable( OrderDTO $order_dto ) {
     $payable = $order_dto->get_sub_total();
 
-    if (
-        $order_dto->is_initialized( 'coupon_discount' ) &&
+    if ( $order_dto->is_initialized( 'coupon_discount' ) &&
         $order_dto->is_initialized( 'coupon_discount_type' )
     ) {
         $discount = directorist_compute_fixed_or_percent_amount(
@@ -114,8 +112,7 @@ function directorist_order_payable( OrderDTO $order_dto ) {
         $payable = max( 0, $payable - $discount );
     }
 
-    if (
-        $payable > 0 &&
+    if ( $payable > 0 &&
         $order_dto->is_initialized( 'tax_rate' ) &&
         $order_dto->is_initialized( 'tax_type' )
     ) {

@@ -19,15 +19,15 @@ class Directorist_Author_Profile extends Custom_Widget_Base {
     public function az_fields() {
         $fields = [
             [
-                'mode'    => 'section_start',
-                'id'      => 'sec_general',
-                'label'   => __( 'General', 'directorist' ),
+                'mode'  => 'section_start',
+                'id'    => 'sec_general',
+                'label' => __( 'General', 'directorist' ),
             ],
             [
-                'type'      => Controls_Manager::SWITCHER,
-                'id'        => 'user',
-                'label'     => __( 'Only For Logged In User?', 'directorist' ),
-                'default'   => 'no',
+                'type'    => Controls_Manager::SWITCHER,
+                'id'      => 'user',
+                'label'   => __( 'Only For Logged In User?', 'directorist' ),
+                'default' => 'no',
             ],
             [
                 'mode' => 'section_end',

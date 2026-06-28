@@ -89,8 +89,8 @@ class Listings_Controller extends Posts_Controller {
             $this->namespace,
             '/' . $this->rest_base . '/(?P<id>[\d]+)/update-status',
             [
-                'args'   => [
-                    'id' => [
+                'args' => [
+                    'id'     => [
                         'description' => __( 'Unique identifier for the resource.', 'directorist' ),
                         'type'        => 'integer',
                     ],
@@ -135,7 +135,7 @@ class Listings_Controller extends Posts_Controller {
                 continue;
             }
 
-            $data = $this->prepare_item_for_response( $object, $request );
+            $data      = $this->prepare_item_for_response( $object, $request );
             $objects[] = $this->prepare_response_for_collection( $data );
         }
 
@@ -241,7 +241,7 @@ class Listings_Controller extends Posts_Controller {
         // Set featured query.
         $is_featured = false;
         if ( isset( $request['featured'] ) && $request['featured'] ) {
-            $is_featured = true;
+            $is_featured             = true;
             $meta_query['_featured'] = [
                 'key'     => '_featured',
                 'value'   => 1,
@@ -432,13 +432,13 @@ class Listings_Controller extends Posts_Controller {
             $meta_query['phone'] = array(
                 'relation' => 'OR',
                 array(
-                    'key' => '_phone2',
-                    'value' => $request['phone'],
+                    'key'     => '_phone2',
+                    'value'   => $request['phone'],
                     'compare' => 'LIKE'
                 ),
                 array(
-                    'key' => '_phone',
-                    'value' => $request['phone'],
+                    'key'     => '_phone',
+                    'value'   => $request['phone'],
                     'compare' => 'LIKE'
                 )
             );
@@ -484,7 +484,7 @@ class Listings_Controller extends Posts_Controller {
 
         if ( ! empty( $meta_query ) ) {
             $meta_query[]['relation'] = 'AND';
-            $args['meta_query'] = $meta_query;
+            $args['meta_query']       = $meta_query;
         }
 
         if ( ! empty( $tax_query ) ) {
@@ -537,7 +537,7 @@ class Listings_Controller extends Posts_Controller {
             return new WP_Error( "directorist_rest_invalid_{$this->post_type}_id", __( 'Invalid ID.', 'directorist' ), array( 'status' => 404 ) );
         }
 
-        $data = $this->prepare_item_for_response( $post, $request );
+        $data     = $this->prepare_item_for_response( $post, $request );
         $response = rest_ensure_response( $data );
 
         // if ( $this->public ) {
@@ -587,8 +587,8 @@ class Listings_Controller extends Posts_Controller {
         $this->request = $request;
         $data          = $this->get_listing_data( $object, $request, $context );
 
-        $data     = $this->add_additional_fields_to_object( $data, $request );
-        $data     = $this->filter_response_by_context( $data, $context );
+        $data = $this->add_additional_fields_to_object( $data, $request );
+        $data = $this->filter_response_by_context( $data, $context );
 
         $response = rest_ensure_response( $data );
         $response->add_links( $this->prepare_links( $object, $request ) );
@@ -699,7 +699,7 @@ class Listings_Controller extends Posts_Controller {
      * @return array
      */
     protected function get_listing_data( $listing, $request, $context = 'view' ) {
-        $fields  = $this->get_fields_for_response( $request );
+        $fields = $this->get_fields_for_response( $request );
 
         $base_data = array();
         foreach ( $fields as $field ) {
@@ -882,7 +882,7 @@ class Listings_Controller extends Posts_Controller {
                 continue;
             }
             $data[] = array(
-                'id' => $link['id'],
+                'id'  => $link['id'],
                 'url' => $link['url']
             );
         }
@@ -907,8 +907,8 @@ class Listings_Controller extends Posts_Controller {
         $logic          = get_directorist_type_option( $directory_type, 'similar_listings_logics', 'OR' );
         $relationship   = ( in_array( $logic, array( 'AND', 'OR' ) ) ? $logic : 'OR' );
 
-        $categories   = directorist_get_object_terms( $listing_id, ATBDP_CATEGORY, 'term_id' );
-        $tags         = directorist_get_object_terms( $listing_id, ATBDP_TAGS, 'term_id' );
+        $categories = directorist_get_object_terms( $listing_id, ATBDP_CATEGORY, 'term_id' );
+        $tags       = directorist_get_object_terms( $listing_id, ATBDP_TAGS, 'term_id' );
 
         $args = array(
             'post_type'      => ATBDP_POST_TYPE,
@@ -930,7 +930,7 @@ class Listings_Controller extends Posts_Controller {
         );
 
         if ( ! empty( $same_author ) ) {
-            $args['author']  = get_post_field( 'post_author', $listing_id );
+            $args['author'] = get_post_field( 'post_author', $listing_id );
         }
 
         $meta_queries = array();
@@ -946,7 +946,7 @@ class Listings_Controller extends Posts_Controller {
             'compare' => '=',
         );
 
-        $meta_queries = apply_filters( 'atbdp_related_listings_meta_queries', $meta_queries );
+        $meta_queries       = apply_filters( 'atbdp_related_listings_meta_queries', $meta_queries );
         $count_meta_queries = count( $meta_queries );
         if ( $count_meta_queries ) {
             $args['meta_query'] = ( $count_meta_queries > 1 ) ? array_merge( array('relation' => 'AND'), $meta_queries ) : $meta_queries;
@@ -998,64 +998,64 @@ class Listings_Controller extends Posts_Controller {
      * @return array
      */
     public function get_item_schema() {
-        $schema         = array(
+        $schema = array(
             '$schema'    => 'http://json-schema.org/draft-04/schema#',
             'title'      => $this->post_type,
             'type'       => 'object',
             'properties' => array(
-                'id'                    => array(
+                'id'                   => array(
                     'description' => __( 'Unique identifier for the resource.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'name'                  => array(
+                'name'                 => array(
                     'description' => __( 'Listing name.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'slug'                  => array(
+                'slug'                 => array(
                     'description' => __( 'Listing slug.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'permalink'             => array(
+                'permalink'            => array(
                     'description' => __( 'Listing URL.', 'directorist' ),
                     'type'        => 'string',
                     'format'      => 'uri',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'date_created'          => array(
+                'date_created'         => array(
                     'description' => __( "The date the listing was created, in the site's timezone.", 'directorist' ),
                     'type'        => 'date-time',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'date_created_gmt'      => array(
+                'date_created_gmt'     => array(
                     'description' => __( 'The date the listing was created, as GMT.', 'directorist' ),
                     'type'        => 'date-time',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'date_modified'         => array(
+                'date_modified'        => array(
                     'description' => __( "The date the listing was last modified, in the site's timezone.", 'directorist' ),
                     'type'        => 'date-time',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'date_modified_gmt'     => array(
+                'date_modified_gmt'    => array(
                     'description' => __( 'The date the listing was last modified, as GMT.', 'directorist' ),
                     'type'        => 'date-time',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'description'           => array(
+                'description'          => array(
                     'description' => __( 'Listing description.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'short_description'     => array(
+                'short_description'    => array(
                     'description' => __( 'Listing short description.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
@@ -1065,12 +1065,12 @@ class Listings_Controller extends Posts_Controller {
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'phone'                  => array(
+                'phone'                => array(
                     'description' => __( 'Phone number 1.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'phone_2'                  => array(
+                'phone_2'              => array(
                     'description' => __( 'Phone number 2.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
@@ -1080,25 +1080,25 @@ class Listings_Controller extends Posts_Controller {
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'email'                  => array(
+                'email'                => array(
                     'description' => __( 'Email address.', 'directorist' ),
                     'type'        => 'string',
                     'format'      => 'email',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'website'                => array(
+                'website'              => array(
                     'description' => __( 'Website url.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'social_links'             => array(
+                'social_links'         => array(
                     'description' => __( 'List of social media links.', 'directorist' ),
                     'type'        => 'array',
                     'context'     => array( 'view', 'edit' ),
                     'items'       => array(
                         'type'       => 'object',
                         'properties' => array(
-                            'id'   => array(
+                            'id'  => array(
                                 'description' => __( 'Social media name', 'directorist' ),
                                 'type'        => 'string',
                                 'context'     => array( 'view', 'edit' ),
@@ -1111,13 +1111,13 @@ class Listings_Controller extends Posts_Controller {
                         ),
                     ),
                 ),
-                'views_count'              => array(
+                'views_count'          => array(
                     'description' => __( 'Visitors view count.', 'directorist' ),
                     'type'        => 'integer',
                     'default'     => 0,
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'map_hidden'              => array(
+                'map_hidden'           => array(
                     'description' => __( 'Map visibility status status.', 'directorist' ),
                     'type'        => 'boolean',
                     'default'     => false,
@@ -1128,40 +1128,40 @@ class Listings_Controller extends Posts_Controller {
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'latitude'              => array(
+                'latitude'             => array(
                     'description' => __( 'Address location latitude.', 'directorist' ),
                     'type'        => 'number',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'longitude'              => array(
+                'longitude'            => array(
                     'description' => __( 'Address location longitude.', 'directorist' ),
                     'type'        => 'number',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'pricing_type'              => array(
+                'pricing_type'         => array(
                     'description' => __( 'Pricing type.', 'directorist' ),
                     'type'        => 'string',
                       // 'enum'        => array( 'price', 'range' ),
-                    'context' => array( 'view', 'edit' ),
+                    'context'     => array( 'view', 'edit' ),
                 ),
-                'price'              => array(
+                'price'                => array(
                     'description' => __( 'Listing price.', 'directorist' ),
                     'type'        => 'number',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'price_range'              => array(
+                'price_range'          => array(
                     'description' => __( 'Listing price range.', 'directorist' ),
                     'type'        => 'string',
                     'enum'        => array( 'skimming', 'moderate', 'economy', 'bellow_economy' ),
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'owner_contact_hidden'              => array(
+                'owner_contact_hidden' => array(
                     'description' => __( 'Listing owner contact form visibility status.', 'directorist' ),
                     'type'        => 'boolean',
                     'default'     => false,
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'video_url'              => array(
+                'video_url'            => array(
                     'description' => __( 'Video url.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
@@ -1171,29 +1171,29 @@ class Listings_Controller extends Posts_Controller {
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'directory' => array(
+                'directory'            => array(
                     'description' => __( 'Multi directory type id.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'date_expired'              => array(
+                'date_expired'         => array(
                     'description' => __( 'Expiration date.', 'directorist' ),
                     'type'        => 'date-time',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'never_expired'              => array(
+                'never_expired'        => array(
                     'description' => __( 'Never expired status.', 'directorist' ),
                     'type'        => 'boolen',
                     'default'     => false,
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'featured'              => array(
+                'featured'             => array(
                     'description' => __( 'Featured listing.', 'directorist' ),
                     'type'        => 'boolean',
                     'default'     => false,
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'new'              => array(
+                'new'                  => array(
                     'description' => __( 'New listing.', 'directorist' ),
                     'type'        => 'boolean',
                     'default'     => false,
@@ -1207,39 +1207,39 @@ class Listings_Controller extends Posts_Controller {
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'status'     => array(
+                'status'               => array(
                     'description' => __( 'Listing status.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'reviews_allowed'       => array(
+                'reviews_allowed'      => array(
                     'description' => __( 'Allow reviews.', 'directorist' ),
                     'type'        => 'boolean',
                     'default'     => true,
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'average_rating'        => array(
+                'average_rating'       => array(
                     'description' => __( 'Reviews average rating.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'rating_count'          => array(
+                'rating_count'         => array(
                     'description' => __( 'Amount of reviews that the listing have.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'related_ids'           => array(
+                'related_ids'          => array(
                     'description' => __( 'List of related listings IDs.', 'directorist' ),
                     'type'        => 'array',
                     'items'       => array(
                         'type' => 'integer',
                     ),
-                    'context'  => array( 'view', 'edit' ),
-                    'readonly' => true,
+                    'context'     => array( 'view', 'edit' ),
+                    'readonly'    => true,
                 ),
-                'categories'            => array(
+                'categories'           => array(
                     'description' => __( 'List of categories.', 'directorist' ),
                     'type'        => 'array',
                     'context'     => array( 'view', 'edit' ),
@@ -1272,7 +1272,7 @@ class Listings_Controller extends Posts_Controller {
                         ),
                     ),
                 ),
-                'tags'                  => array(
+                'tags'                 => array(
                     'description' => __( 'List of tags.', 'directorist' ),
                     'type'        => 'array',
                     'context'     => array( 'view', 'edit' ),
@@ -1299,7 +1299,7 @@ class Listings_Controller extends Posts_Controller {
                         ),
                     ),
                 ),
-                'locations'                  => array(
+                'locations'            => array(
                     'description' => __( 'List of locations.', 'directorist' ),
                     'type'        => 'array',
                     'context'     => array( 'view', 'edit' ),
@@ -1326,7 +1326,7 @@ class Listings_Controller extends Posts_Controller {
                         ),
                     ),
                 ),
-                'images'                => array(
+                'images'               => array(
                     'description' => __( 'List of images.', 'directorist' ),
                     'type'        => 'array',
                     'context'     => array( 'view', 'edit' ),
@@ -1386,17 +1386,17 @@ class Listings_Controller extends Posts_Controller {
                         ),
                     ),
                 ),
-                'menu_order'            => array(
+                'menu_order'           => array(
                     'description' => __( 'Menu order, used to custom sort listings.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'author'            => array(
+                'author'               => array(
                     'description' => __( 'Listing author id.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'plan' => array(
+                'plan'                 => array(
                     'description' => __( 'Listing plan id.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
@@ -1417,46 +1417,46 @@ class Listings_Controller extends Posts_Controller {
 
         $params['context']['default'] = 'view';
 
-        $params['exclude'] = array(
+        $params['exclude']     = array(
             'description'       => __( 'Ensure result set excludes specific IDs.', 'directorist' ),
             'type'              => 'string',
             'sanitize_callback' => 'wp_parse_id_list',
-            'validate_callback'  => 'rest_validate_request_arg',
+            'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['include'] = array(
+        $params['include']     = array(
             'description'       => __( 'Limit result set to specific IDs.', 'directorist' ),
             'type'              => 'string',
             'sanitize_callback' => 'wp_parse_id_list',
-            'validate_callback'  => 'rest_validate_request_arg',
+            'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['offset'] = array(
-            'description'        => __( 'Offset the result set by a specific number of items.', 'directorist' ),
-            'type'               => 'integer',
-            'sanitize_callback'  => 'absint',
-            'validate_callback'  => 'rest_validate_request_arg',
+        $params['offset']      = array(
+            'description'       => __( 'Offset the result set by a specific number of items.', 'directorist' ),
+            'type'              => 'integer',
+            'sanitize_callback' => 'absint',
+            'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['order'] = array(
-            'default'            => 'desc',
-            'description'        => __( 'Order sort attribute ascending or descending.', 'directorist' ),
-            'enum'               => array( 'asc', 'desc' ),
-            'sanitize_callback'  => 'sanitize_key',
-            'type'               => 'string',
-            'validate_callback'  => 'rest_validate_request_arg',
+        $params['order']       = array(
+            'default'           => 'desc',
+            'description'       => __( 'Order sort attribute ascending or descending.', 'directorist' ),
+            'enum'              => array( 'asc', 'desc' ),
+            'sanitize_callback' => 'sanitize_key',
+            'type'              => 'string',
+            'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['orderby'] = array(
-            'default'            => 'date',
-            'description'        => __( 'Sort collection by object attribute.', 'directorist' ),
-            'enum'               => array_keys( $this->get_orderby_possibles() ),
-            'sanitize_callback'  => 'sanitize_key',
-            'type'               => 'string',
-            'validate_callback'  => 'rest_validate_request_arg',
+        $params['orderby']     = array(
+            'default'           => 'date',
+            'description'       => __( 'Sort collection by object attribute.', 'directorist' ),
+            'enum'              => array_keys( $this->get_orderby_possibles() ),
+            'sanitize_callback' => 'sanitize_key',
+            'type'              => 'string',
+            'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['slug'] = array(
+        $params['slug']        = array(
             'description'       => __( 'Limit result set to listings with a specific slug.', 'directorist' ),
             'type'              => 'string',
             'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['status'] = array(
+        $params['status']      = array(
             'default'           => 'publish',
             'description'       => __( 'Limit result set to listings assigned a specific status.', 'directorist' ),
             'type'              => 'string',
@@ -1464,35 +1464,35 @@ class Listings_Controller extends Posts_Controller {
             'sanitize_callback' => 'sanitize_key',
             'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['featured'] = array(
+        $params['featured']    = array(
             'description'       => __( 'Limit result set to featured listings.', 'directorist' ),
             'type'              => 'boolean',
             'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['categories'] = array(
+        $params['categories']  = array(
             'description'       => __( 'Limit result set to listings assigned a specific category ID.', 'directorist' ),
             'type'              => 'string',
             'sanitize_callback' => 'wp_parse_id_list',
             'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['tags'] = array(
+        $params['tags']        = array(
             'description'       => __( 'Limit result set to listings assigned a specific tag ID.', 'directorist' ),
             'type'              => 'string',
             'sanitize_callback' => 'wp_parse_id_list',
             'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['locations'] = array(
+        $params['locations']   = array(
             'description'       => __( 'Limit result set to listings assigned a specific location ID.', 'directorist' ),
             'type'              => 'string',
             'sanitize_callback' => 'wp_parse_id_list',
             'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['min_price'] = array(
+        $params['min_price']   = array(
             'description'       => __( 'Limit result set to listings based on a minimum price.', 'directorist' ),
             'type'              => 'integer',
             'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['max_price'] = array(
+        $params['max_price']   = array(
             'description'       => __( 'Limit result set to listings based on maximum price.', 'directorist' ),
             'type'              => 'integer',
             'validate_callback' => 'rest_validate_request_arg',
@@ -1503,12 +1503,12 @@ class Listings_Controller extends Posts_Controller {
             'enum'              => array( 'skimming', 'moderate', 'economy', 'bellow_economy' ),
             'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['rating'] = array(
+        $params['rating']      = array(
             'description'       => __( 'Limit result set to specified rating.', 'directorist' ),
             'type'              => 'integer',
             'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['radius'] = array(
+        $params['radius']      = array(
             'description'       => __( 'Limit result set to listings based on radius search.', 'directorist' ),
             'type'              => 'object',
             'properties'        => array(
@@ -1520,20 +1520,20 @@ class Listings_Controller extends Posts_Controller {
                     'type'     => 'string',
                     'required' => true,
                 ),
-                'distance' => array(
+                'distance'  => array(
                     'type'     => 'string',
                     'required' => true,
                 )
             ),
             'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['directory'] = array(
+        $params['directory']   = array(
             'description'       => __( 'Limit result set to listings to sepecific directory type.', 'directorist' ),
             'type'              => 'integar',
             'sanitize_callback' => 'absint',
             'validate_callback' => 'rest_validate_request_arg',
         );
-        $params['author'] = array(
+        $params['author']      = array(
             'description'       => __( 'Limit result set to listings specific to author ID.', 'directorist' ),
             'type'              => 'integer',
             'sanitize_callback' => 'absint',

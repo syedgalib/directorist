@@ -16,7 +16,7 @@ use \Directorist\Helper;
                     <?php
                     // show the user instruction for banking gateway
                     if ( isset( $o_metas['_payment_gateway'] ) && 'bank_transfer' == $o_metas['_payment_gateway'][0] && 'created' == $o_metas['_payment_status'][0] ) {
-                        $ins = get_directorist_option( 'bank_transfer_instruction' );
+                        $ins    = get_directorist_option( 'bank_transfer_instruction' );
                         $output = ! empty( $ins ) ? '<p class="directorist-payment-instructions">' . ATBDP()->email->replace_in_content( $ins, @$order_id, @$o_metas['_listing_id'][0] ) . '</p>' : '';
                         echo wp_kses_post( $output );
                     }
@@ -70,12 +70,12 @@ use \Directorist\Helper;
                                     <td>
                                     <?php
                                     if ( ! empty( $o_metas['_amount'] ) ) {
-                                        $amount =  $o_metas['_amount'][0] ;
-                                        $amount = atbdp_format_payment_amount( $amount );
-                                        $before = '';
-                                        $after = '';
+                                        $amount                             =  $o_metas['_amount'][0] ;
+                                        $amount                             = atbdp_format_payment_amount( $amount );
+                                        $before                             = '';
+                                        $after                              = '';
                                         ( 'after' == $c_position ) ? $after = $symbol : $before = $symbol;
-                                        $output = $before . $amount . $after;
+                                        $output                             = $before . $amount . $after;
                                             echo wp_kses_post( $output );
                                     }
                                     ?>
@@ -116,7 +116,7 @@ use \Directorist\Helper;
                                         <td>
                                             <?php
                                             if ( ! empty( $order_item['price'] ) ) {
-                                                $price = $order_item['price'];
+                                                $price  = $order_item['price'];
                                                 $output = $before . atbdp_format_payment_amount( $order_item['price'] ) . $after;
                                                 echo wp_kses_post( $output );
                                                 do_action( 'atbdp_payment_receipt_after_total_price', $o_metas );
@@ -152,7 +152,7 @@ use \Directorist\Helper;
                                     <td>
                                         <?php
                                         $grand_total = ! empty( $discount ) ? $total - $discount : $total;
-                                        $output = $before . atbdp_format_payment_amount( $grand_total ) . $after ;
+                                        $output      = $before . atbdp_format_payment_amount( $grand_total ) . $after ;
                                         ?>
                                         <?php echo wp_kses_post( $output ); ?>
                                     </td>
@@ -163,7 +163,7 @@ use \Directorist\Helper;
                     <?php } ?>
                 </div>
                 <?php
-                $url = apply_filters( 'atbdp_payment_receipt_button_link', ATBDP_Permalink::get_dashboard_page_link(), $order_id );
+                $url  = apply_filters( 'atbdp_payment_receipt_button_link', ATBDP_Permalink::get_dashboard_page_link(), $order_id );
                 $text = apply_filters( 'atbdp_payment_receipt_button_text', __( 'View your listings', 'directorist' ), $order_id );
                 ?>
                 <div class="directorist-text-center directorist-mt-30"><a href="<?php echo esc_url( $url ); ?>" class="directorist-btn directorist-btn-lg directorist-btn-view-listing"><?php  echo esc_attr( $text ); ?></a></div>

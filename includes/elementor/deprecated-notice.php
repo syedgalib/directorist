@@ -10,25 +10,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class DeprecatedNotice {
-    public string $parent_label        = 'Addonskit for Elementor';
+    public string $parent_label = 'Addonskit for Elementor';
 
-    public string $core_plugin         = 'Directorist';
+    public string $core_plugin = 'Directorist';
 
-    public string $addon_slug          = 'addonskit-for-elementor/addonskit-for-elementor.php';
+    public string $addon_slug = 'addonskit-for-elementor/addonskit-for-elementor.php';
 
-    public string $addon_url           = 'https://wordpress.org/plugins/addonskit-for-elementor/';
+    public string $addon_url = 'https://wordpress.org/plugins/addonskit-for-elementor/';
 
     public ?string $addon_requires_php = '7.4';
 
-    public ?string $addon_requires_wp  = '6.0';
+    public ?string $addon_requires_wp = '6.0';
 
-    public bool $is_installed          = false;
+    public bool $is_installed = false;
 
-    public bool $is_active             = false;
+    public bool $is_active = false;
 
-    public bool $is_valid              = false;
+    public bool $is_valid = false;
 
-    public string $min_addon_version   = '8.0';
+    public string $min_addon_version = '8.0';
 
     public function __construct() {
         $parent_path        = WP_PLUGIN_DIR . "/{$this->addon_slug}";

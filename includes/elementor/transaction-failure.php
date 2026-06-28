@@ -19,14 +19,14 @@ class Directorist_Transaction_Failure extends Custom_Widget_Base {
     public function az_fields() {
         $fields = [
             [
-                'mode'    => 'section_start',
-                'id'      => 'sec_general',
-                'label'   => __( 'General', 'directorist' ),
+                'mode'  => 'section_start',
+                'id'    => 'sec_general',
+                'label' => __( 'General', 'directorist' ),
             ],
             [
-                'type'      => Controls_Manager::HEADING,
-                'id'        => 'sec_heading',
-                'label'     => $this->az_texts['transaction'],
+                'type'  => Controls_Manager::HEADING,
+                'id'    => 'sec_heading',
+                'label' => $this->az_texts['transaction'],
             ],
             [
                 'mode' => 'section_end',

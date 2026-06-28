@@ -55,7 +55,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
         }
 
         public static function get_listing_slug() {
-            $listing_slug = 'directory/%' . ATBDP_DIRECTORY_TYPE . '%';
+            $listing_slug        = 'directory/%' . ATBDP_DIRECTORY_TYPE . '%';
             $custom_listing_slug = get_directorist_option( 'atbdp_listing_slug', 'directory' );
 
             if ( ! empty( $custom_listing_slug ) ) {
@@ -71,7 +71,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          */
         public static function get_search_result_page_link() {
             $link = home_url();
-            $id = get_directorist_option( 'search_result_page' ); // get the page id of the search page.
+            $id   = get_directorist_option( 'search_result_page' ); // get the page id of the search page.
 
             if ( atbdp_required_polylang_url() && $id && pll_get_post( $id ) ) {
                 $link = get_permalink( pll_get_post( $id ) );
@@ -90,13 +90,13 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return string
          */
         public static function get_user_profile_page_link( $author_id, $directory_type = '' ) {
-            $link = home_url();
+            $link    = home_url();
             $page_id = get_directorist_option( 'author_profile_page' );
 
             if ( $page_id ) {
                 $link = get_permalink( $page_id );
                 if ( '' != get_option( 'permalink_structure' ) ) {
-                    $author = get_user_by( 'id', $author_id );
+                    $author    = get_user_by( 'id', $author_id );
                     $author_id = ( $author ) ? $author->user_login : $author_id;
 
                     if ( ! empty( $directory_type ) && directorist_is_multi_directory_enabled() ) {
@@ -200,7 +200,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return string
          */
         public static function get_transaction_failure_page_link() {
-            $link = home_url();
+            $link    = home_url();
             $page_id = get_directorist_option( 'transaction_failure_page' );
 
             if ( $page_id ) {
@@ -216,7 +216,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return string
          */
         public static function get_registration_page_link( $query_vars = [] ) {
-            $link = home_url();
+            $link    = home_url();
             $page_id = get_directorist_option( 'signin_signup_page' ); // get the page id of the custom registration page.
 
             if ( $page_id ) {
@@ -252,7 +252,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @since 5.0
          */
         public static function get_directorist_listings_page_link( $query_vars = [] ) {
-            $link = home_url();
+            $link    = home_url();
             $page_id = get_directorist_option( 'all_listing_page' );
 
             if ( $page_id ) {
@@ -282,7 +282,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return string
          */
         public static function get_login_page_url( $query_vars = [] ) {
-            $link = home_url() . '/login';
+            $link    = home_url() . '/login';
             $page_id = get_directorist_option( 'signin_signup_page' );
 
             if ( $page_id ) {
@@ -301,8 +301,8 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return string
          */
         public static function get_add_listing_page_link() {
-            $link = home_url();
-            $id = get_directorist_option( 'add_listing_page' );
+            $link            = home_url();
+            $id              = get_directorist_option( 'add_listing_page' );
             if ( $id ) $link = get_permalink( $id );
             return apply_filters( 'atbdp_add_listing_page_url', $link );
         }
@@ -312,13 +312,13 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return string
          */
         public static function get_add_listing_page_link_with_plan( $plan_id ) {
-            $link = home_url();
+            $link    = home_url();
             $page_id = get_directorist_option( 'add_listing_page' );
 
             if ( $page_id ) {
                 $args = [
                     'listing_type' => isset( $_GET['directory_type'] ) ? sanitize_text_field( wp_unslash( $_GET['directory_type'] ) ) : '',
-                    'plan' => $plan_id,
+                    'plan'         => $plan_id,
                 ];
                 $link = get_permalink( $page_id );
                 $link = add_query_arg( $args, $link );
@@ -332,7 +332,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return string
          */
         public static function get_fee_plan_page_link() {
-            $link = home_url();
+            $link    = home_url();
             $page_id = get_directorist_option( 'pricing_plans' );
 
             if ( $page_id ) {
@@ -348,7 +348,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return string
          */
         public static function get_privacy_policy_page_url() {
-            $link = home_url();
+            $link    = home_url();
             $page_id = get_directorist_option( 'privacy_policy' );
 
             if ( $page_id ) {
@@ -364,7 +364,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return string
          */
         public static function get_terms_and_conditions_page_url() {
-            $link = home_url();
+            $link    = home_url();
             $page_id = get_directorist_option( 'terms_conditions' );
 
             if ( $page_id ) {
@@ -381,7 +381,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return string
          */
         public static function get_edit_listing_page_link( $listing_id ) {
-            $link = home_url();
+            $link    = home_url();
             $page_id = get_directorist_option( 'add_listing_page' );
 
             if ( $page_id ) {
@@ -421,7 +421,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
         public static function get_category_archive( $cat, $field = 'slug' ) {
             $link = add_query_arg(
                 [
-                    'q' => '',
+                    'q'      => '',
                     'in_cat' => $cat->{$field}
                 ],
                 self::get_search_result_page_link()
@@ -497,7 +497,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
                 $link    = get_term_link( $term );
             } else {
                 $page_id = get_directorist_option( 'single_location_page' );
-                $link = '/';
+                $link    = '/';
 
                 if ( $page_id ) {
                     if ( atbdp_required_polylang_url() ) {
@@ -506,12 +506,12 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
                         if ( $translation_page ) {
 
                             $args = [
-                                'location'          => $term->slug,
-                                'directory_type'    => $directory_type,
+                                'location'       => $term->slug,
+                                'directory_type' => $directory_type,
                             ];
 
                             $translatted_page_link = get_permalink( $translation_page );
-                            $link = add_query_arg( $args, $translatted_page_link );
+                            $link                  = add_query_arg( $args, $translatted_page_link );
 
                             return apply_filters( 'atbdp_single_location', $link, $page_id, $term, $directory_type );
 
@@ -550,7 +550,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
                 $link    = get_term_link( $term );
             } else {
                 $page_id = get_directorist_option( 'single_tag_page' );
-                $link = '/';
+                $link    = '/';
 
                 if ( $page_id ) {
                     if ( atbdp_required_polylang_url() ) {
@@ -558,12 +558,12 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
 
                         if ( $translation_page ) {
                             $args = [
-                                'location'          => $term->slug,
-                                'directory_type'    => $directory_type,
+                                'location'       => $term->slug,
+                                'directory_type' => $directory_type,
                             ];
 
                             $translatted_page_link = get_permalink( $translation_page );
-                            $link = add_query_arg( $args, $translatted_page_link );
+                            $link                  = add_query_arg( $args, $translatted_page_link );
 
                             return apply_filters( 'atbdp_single_tag', $link, $page_id, $term, $directory_type );
                         }
@@ -596,7 +596,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
         public static function get_location_archive( $loc, $field = 'slug' ) {
             $link = add_query_arg(
                 [
-                    'q' => '',
+                    'q'      => '',
                     'in_loc' => $loc->{$field}
                 ],
                 self::get_search_result_page_link()
@@ -613,7 +613,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
         public static function get_tag_archive( $tag, $field = 'slug' ) {
             $link = add_query_arg(
                 [
-                    'q' => '',
+                    'q'      => '',
                     'in_tag' => $tag->{$field}
                 ],
                 self::get_search_result_page_link()
@@ -630,7 +630,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return   string                 Payment receipt page URL.
          */
         public static function get_payment_receipt_page_link( $order_id ) {
-            $link = home_url(); // default url
+            $link    = home_url(); // default url
             $page_id = get_directorist_option( 'payment_receipt_page' );
 
             if ( $page_id ) {
@@ -642,7 +642,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
                     $link = add_query_arg(
                         [
                             'atbdp_action' => 'order',
-                            'atbdp_order' => $order_id
+                            'atbdp_order'  => $order_id
                         ],
                         $link
                     );
@@ -661,7 +661,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return   string                   It returns Checkout page URL.
          */
         public static function get_checkout_page_link( $listing_id ) {
-            $link = home_url(); // default url
+            $link    = home_url(); // default url
             $page_id = get_directorist_option( 'checkout_page' );
 
             if ( $page_id ) {
@@ -672,7 +672,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
                 } else {
                     $link = add_query_arg(
                         [
-                            'atbdp_action' => 'submission',
+                            'atbdp_action'     => 'submission',
                             'atbdp_listing_id' => $listing_id
                         ],
                         $link
@@ -740,7 +740,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
          * @return   string                   It returns IPN Notify URL
          */
         public static function get_ipn_notify_page_link( $order_id ) {
-            $link = home_url(); // default url
+            $link    = home_url(); // default url
             $page_id = get_directorist_option( 'checkout_page' );
 
             if ( $page_id ) {
@@ -751,7 +751,7 @@ if ( ! class_exists( 'ATBDP_Permalink' ) ) :
                 } else {
                     $link = add_query_arg(
                         [
-                            'atbdp_action' => 'paypal-ipn',
+                            'atbdp_action'   => 'paypal-ipn',
                             'atbdp_order_id' => $order_id
                         ],
                         $link

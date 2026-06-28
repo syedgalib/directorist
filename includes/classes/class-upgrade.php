@@ -148,7 +148,7 @@ class ATBDP_Upgrade
             $search_form_fields = array();
         }
 
-        $migrated_fields   = array();
+        $migrated_fields    = array();
         $submission_updated = false;
         $search_updated     = false;
 
@@ -188,7 +188,7 @@ class ATBDP_Upgrade
 
                 $submission_form_fields['fields'][ $field_key ] = $field;
                 $migrated_fields[ $field_key ]                  = $category_id;
-                $submission_updated                              = true;
+                $submission_updated                             = true;
             }
 
             if ( $submission_updated ) {
@@ -231,7 +231,7 @@ class ATBDP_Upgrade
                 $search_field['conditional_logic'] = $search_conditional_logic;
 
                 $search_form_fields['fields'][ $search_field_key ] = $search_field;
-                $search_updated                                      = true;
+                $search_updated                                    = true;
             }
 
             if ( $search_updated ) {
@@ -294,7 +294,7 @@ class ATBDP_Upgrade
             $field['conditional_logic'] = $conditional_logic;
 
             $fields[ $field_key ] = $field;
-            $updated = true;
+            $updated              = true;
         }
 
         return $updated;
@@ -439,11 +439,11 @@ class ATBDP_Upgrade
         );
 
         if ( $account ) {
-            $options['signin_signup_page']      = (int) $account;
-            $options['marker_shape_color']      = '#444752';
-            $options['marker_icon_color']       = '#ffffff';
-            $options['all_listing_layout']      = 'no_sidebar';
-            $options['search_result_layout']    = 'no_sidebar';
+            $options['signin_signup_page']   = (int) $account;
+            $options['marker_shape_color']   = '#444752';
+            $options['marker_icon_color']    = '#ffffff';
+            $options['all_listing_layout']   = 'no_sidebar';
+            $options['search_result_layout'] = 'no_sidebar';
 
             update_option( 'atbdp_option', $options );
         }
@@ -511,17 +511,17 @@ class ATBDP_Upgrade
             if ( $description ) {
 
                 $contents['fields']['description'] = [
-                    "icon" => "las la-tag",
-                    "widget_group" => "preset_widgets",
-                    "widget_name" => "description",
+                    "icon"                => "las la-tag",
+                    "widget_group"        => "preset_widgets",
+                    "widget_name"         => "description",
                     "original_widget_key" => "description",
-                    "widget_key" => "description"
+                    "widget_key"          => "description"
                 ];
 
                 $details = [
-                    "type" => "general_group",
-                    "label" => "Description",
-                    "fields" => [
+                    "type"       => "general_group",
+                    "label"      => "Description",
+                    "fields"     => [
                         "description"
                     ],
                     "section_id" => "1627188303" . $directory_type->term_id
@@ -541,24 +541,24 @@ class ATBDP_Upgrade
 
                 if ( 'quick_actions' === $section_name ) {
                     $quick_widget = [
-                        "type" => "placeholder_group",
+                        "type"           => "placeholder_group",
                         "placeholderKey" => "quick-widgets-placeholder",
-                        "placeholders" => [
+                        "placeholders"   => [
                             [
-                                "type" => "placeholder_group",
-                                "placeholderKey" => "quick-info-placeholder",
+                                "type"            => "placeholder_group",
+                                "placeholderKey"  => "quick-info-placeholder",
                                 "selectedWidgets" => [
                                     [
-                                        "type" => "button",
-                                        "label" => "Back",
+                                        "type"        => "button",
+                                        "label"       => "Back",
                                         "widget_name" => "back",
-                                        "widget_key" => "back"
+                                        "widget_key"  => "back"
                                     ]
                                 ]
                             ],
                             [
-                                "type" => "placeholder_group",
-                                "placeholderKey" => "quick-action-placeholder",
+                                "type"            => "placeholder_group",
+                                "placeholderKey"  => "quick-action-placeholder",
                                 "selectedWidgets" => $widgets,
                             ]
                         ]
@@ -570,16 +570,16 @@ class ATBDP_Upgrade
 
                 if ( 'thumbnail' === $section_name ) {
                     $footer_thumbnail = ! empty( $widgets[0]['footer_thumbail'] ) ? $widgets[0]['footer_thumbail'] : true;
-                    $slider_widget = [
-                        "type" => "placeholder_item",
-                        "placeholderKey" => "slider-placeholder",
+                    $slider_widget    = [
+                        "type"            => "placeholder_item",
+                        "placeholderKey"  => "slider-placeholder",
                         "selectedWidgets" => [
                             [
-                                "type" => "thumbnail",
-                                "label" => "Listing Image/Slider",
+                                "type"        => "thumbnail",
+                                "label"       => "Listing Image/Slider",
                                 "widget_name" => "slider",
-                                "widget_key" => "slider",
-                                'options'  => [
+                                "widget_key"  => "slider",
+                                'options'     => [
                                     'title'  => __( 'Listings Slider Settings', 'directorist' ),
                                     'fields' => [
                                         'footer_thumbnail' => [
@@ -599,19 +599,19 @@ class ATBDP_Upgrade
                 if ( 'quick_info' === $section_name ) {
 
                     $title_widget = [
-                        "type" => "placeholder_item",
-                        "placeholderKey" => "listing-title-placeholder",
+                        "type"            => "placeholder_item",
+                        "placeholderKey"  => "listing-title-placeholder",
                         "selectedWidgets" => [
                             [
-                                "type" => "title",
-                                "label" => "Listing Title",
+                                "type"        => "title",
+                                "label"       => "Listing Title",
                                 "widget_name" => "title",
-                                "widget_key" => "title",
-                                'options' => [
-                                    'title' => __( "Listing Title Settings", "directorist" ),
+                                "widget_key"  => "title",
+                                'options'     => [
+                                    'title'  => __( "Listing Title Settings", "directorist" ),
                                     'fields' => [
                                         'enable_tagline' => [
-                                            'type' => "toggle",
+                                            'type'  => "toggle",
                                             'label' => __( "Tagline", "directorist" ),
                                             'value' => $tagline,
                                         ],
@@ -624,8 +624,8 @@ class ATBDP_Upgrade
                     array_push( $new_structure, $title_widget );
 
                     $more_widget = [
-                        "type" => "placeholder_item",
-                        "placeholderKey" => "more-widgets-placeholder",
+                        "type"            => "placeholder_item",
+                        "placeholderKey"  => "more-widgets-placeholder",
                         "selectedWidgets" => $widgets,
                     ];
 
@@ -713,13 +713,13 @@ class ATBDP_Upgrade
             return;
         }
 
-        $is_multiple = count( $deprecated_items ) > 1;
-        $title       = $is_multiple ? __( 'Deprecated Directorist items require upgrades', 'directorist' ) : __( 'Deprecated Directorist item requires an upgrade', 'directorist' );
-        $description = $is_multiple
+        $is_multiple    = count( $deprecated_items ) > 1;
+        $title          = $is_multiple ? __( 'Deprecated Directorist items require upgrades', 'directorist' ) : __( 'Deprecated Directorist item requires an upgrade', 'directorist' );
+        $description    = $is_multiple
             ? __( 'Directorist detected deprecated themes or extensions that are not compatible with this version. Upgrade them to the compatible versions listed below.', 'directorist' )
             : __( 'Directorist detected a deprecated theme or extension that is not compatible with this version. Upgrade it to the compatible version listed below.', 'directorist' );
-        $toggle_id   = wp_unique_id( 'directorist-deprecated-items-' );
-        $content_id  = $toggle_id . '-content';
+        $toggle_id      = wp_unique_id( 'directorist-deprecated-items-' );
+        $content_id     = $toggle_id . '-content';
         $has_extensions = false;
         $has_themes     = false;
 
@@ -1037,11 +1037,11 @@ class ATBDP_Upgrade
             return;
         }
 
-        $response_body  = self::promo_remote_get();
-        $display        = ! empty( $response_body->promo_2_display ) ? $response_body->promo_2_display : '';
-        $text           = ! empty( $response_body->promo_2_text ) ? $response_body->promo_2_text : '';
-        $version        = ! empty( $response_body->promo_2_version ) ? $response_body->promo_2_version : '';
-        $link           = ! empty( $response_body->get_now_button_link ) ? self::promo_link( $response_body->get_now_button_link ) : '';
+        $response_body = self::promo_remote_get();
+        $display       = ! empty( $response_body->promo_2_display ) ? $response_body->promo_2_display : '';
+        $text          = ! empty( $response_body->promo_2_text ) ? $response_body->promo_2_text : '';
+        $version       = ! empty( $response_body->promo_2_version ) ? $response_body->promo_2_version : '';
+        $link          = ! empty( $response_body->get_now_button_link ) ? self::promo_link( $response_body->get_now_button_link ) : '';
 
         $closed_version = get_user_meta( get_current_user_id(), 'directorist_promo2_closed_version', true );
 
@@ -1054,7 +1054,7 @@ class ATBDP_Upgrade
         $dismiss_url = add_query_arg(
             [
                 'directorist_promo2_closed_version' => $version,
-                'directorist_promo_nonce'          => wp_create_nonce( 'directorist_promo_nonce' ),
+                'directorist_promo_nonce'           => wp_create_nonce( 'directorist_promo_nonce' ),
             ],
             atbdp_get_current_url()
         );
@@ -1128,7 +1128,7 @@ class ATBDP_Upgrade
             $wp_rollback
         );
 
-        $notice = '<div class="notice notice-warning is-dismissible directorist-plugin-updater-notice" style="padding-top: 5px;padding-bottom: 5px;">' . $text . '</div>';
+        $notice        = '<div class="notice notice-warning is-dismissible directorist-plugin-updater-notice" style="padding-top: 5px;padding-bottom: 5px;">' . $text . '</div>';
         $notice_script = <<<SCRIPT
 		<script>
 		document.querySelectorAll('.directorist-update-extension').forEach(anchor => {
@@ -1152,8 +1152,8 @@ SCRIPT;
             return;
         }
 
-        $text = '';
-        $link = 'https://directorist.com/blog/directorist-version-8-0/';
+        $text            = '';
+        $link            = 'https://directorist.com/blog/directorist-version-8-0/';
         $membership_page = admin_url( 'edit.php?post_type=at_biz_dir&page=atbdp-extension' );
 
         $wp_rollback = admin_url( 'plugin-install.php?s=rollback&tab=search&type=term' );
@@ -1175,7 +1175,7 @@ SCRIPT;
             return;
         }
 
-        $this->directorist_notices      = get_option( 'directorist_notices' );
+        $this->directorist_notices = get_option( 'directorist_notices' );
 
         if ( isset( $_GET['close-directorist-promo-version'] ) ) {
             if ( empty( $_GET['directorist_promo_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['directorist_promo_nonce'] ) ), 'directorist_promo_nonce' ) ) {

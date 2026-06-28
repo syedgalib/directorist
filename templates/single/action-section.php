@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$listing_id   = $listing->id;
-$action_data  = [];
+$listing_id  = $listing->id;
+$action_data = [];
 
 // Collect action data and check if any action has a value.
 foreach ( $actions as $action ) {
@@ -78,14 +78,14 @@ if ( empty( $action_data ) ) {
 
             // ── Phone / WhatsApp ─────────────────────
             case 'phone':
-                $phone      = $data['value'];
+                $phone       = $data['value'];
                 $is_whatsapp = $listing->has_whatsapp( $action );
-                $phone_args = [
+                $phone_args  = [
                     'number'   => $phone,
                     'whatsapp' => $is_whatsapp,
                 ];
-                $phone_link = Helper::phone_link( $phone_args );
-                $phone_icon = ! empty( $action['icon'] ) ? $action['icon'] : 'las la-phone';
+                $phone_link  = Helper::phone_link( $phone_args );
+                $phone_icon  = ! empty( $action['icon'] ) ? $action['icon'] : 'las la-phone';
 
                 if ( $is_whatsapp ) :
                     $phone_label = ! empty( $action['form_data']['label'] )

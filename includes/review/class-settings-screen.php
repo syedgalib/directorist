@@ -20,24 +20,24 @@ class Settings_Screen {
     public static function register_layout( $layout ) {
         if ( ! isset( $layout['listing_settings']['submenu']['review'] ) ) {
             $layout['listing_settings']['submenu']['review'] = [
-                'label' => __( 'Review', 'directorist' ),
-                'icon' => '<i class="fa fa-star"></i>',
+                'label'    => __( 'Review', 'directorist' ),
+                'icon'     => '<i class="fa fa-star"></i>',
                 'sections' => apply_filters(
                     'atbdp_listing_settings_review_sections', [
-                        'review_options' => [
-                            'title' => __( 'Review Options', 'directorist' ),
+                        'review_options'     => [
+                            'title'  => __( 'Review Options', 'directorist' ),
                             'fields' => [
                                 'enable_review', 'enable_owner_review', 'guest_review', 'review_enable_reply'
                             ],
                         ],
                         'moderation_options' => [
-                            'title' => __( 'Moderation Option', 'directorist' ),
+                            'title'  => __( 'Moderation Option', 'directorist' ),
                             'fields' => [
                                 'approve_immediately'
                             ],
                         ],
-                        'display_settings' => [
-                            'title' => __( 'Display Setting', 'directorist' ),
+                        'display_settings'   => [
+                            'title'  => __( 'Display Setting', 'directorist' ),
                             'fields' => [
                                 'review_num'
                             ],
@@ -52,7 +52,7 @@ class Settings_Screen {
 
     public static function get_fields() {
         return [
-            'enable_review' => [
+            'enable_review'       => [
                 'type'        => 'toggle',
                 'label'       => __( 'Enable User Reviews', 'directorist' ),
                 'description' => __( 'Let customers and listing owners leave reviews on listings.', 'directorist' ),
@@ -74,7 +74,7 @@ class Settings_Screen {
                     ],
                 ],
             ],
-            'guest_review' => [
+            'guest_review'        => [
                 'type'        => 'toggle',
                 'label'       => __( 'Enable Guest Reviews', 'directorist' ),
                 'description' => __( 'Allow non-logged-in users to leave reviews (subject to moderation).', 'directorist' ),
@@ -91,11 +91,11 @@ class Settings_Screen {
                 ],
             ],
             'approve_immediately' => [
-                'type'    => 'toggle',
-                'label'   => __( 'Auto-Approve Reviews', 'directorist' ),
+                'type'        => 'toggle',
+                'label'       => __( 'Auto-Approve Reviews', 'directorist' ),
                 'description' => __( 'Automatically approve all submitted reviews without moderation.', 'directorist' ),
-                'value'   => true,
-                'show-if' => [
+                'value'       => true,
+                'show-if'     => [
                     'where'      => 'enable_review',
                     'conditions' => [
                         [
@@ -184,7 +184,7 @@ class Settings_Screen {
             //      ],
             //  ],
             // ],
-            'review_num' => [
+            'review_num'          => [
                 'label'       => __( 'Reviews Per Page', 'directorist' ),
                 'description' => __( 'Set how many reviews to display per page (For the best performance, we suggest keeping it under 10)', 'directorist' ),
                 'type'        => 'number',

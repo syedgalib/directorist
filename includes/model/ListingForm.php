@@ -481,17 +481,17 @@ class Directorist_Listing_Form {
 
     public function social_item_template( $index = '', $social_info = '' ) {
         if ( ! $social_info ) {
-            $index = 'socialindex';
+            $index       = 'socialindex';
             $social_info = [
-                'id'   => '',
-                'url'  => '',
+                'id'  => '',
+                'url' => '',
             ];
         }
 
         $args = [
-            'listing_form'   => $this,
-            'index'          => $index,
-            'social_info'    => $social_info,
+            'listing_form' => $this,
+            'index'        => $index,
+            'social_info'  => $social_info,
         ];
 
         Helper::get_template( 'listing-form/social-item', $args );
@@ -553,7 +553,7 @@ class Directorist_Listing_Form {
     }
 
     public function field_label_template( $data, $label_id = '' ) {
-        $key = ! empty( $data['field_key'] ) ? $data['field_key'] : 'random-' . rand();
+        $key  = ! empty( $data['field_key'] ) ? $data['field_key'] : 'random-' . rand();
         $args = [
             'listing_form' => $this,
             'data'         => $data,
@@ -800,7 +800,7 @@ class Directorist_Listing_Form {
         }
 
         $field_data['value'] = $value;
-        $field_data['form'] = $this;
+        $field_data['form']  = $this;
 
         $args = [
             'listing_form' => $this,
@@ -837,7 +837,7 @@ class Directorist_Listing_Form {
         // }
 
         $listing_id = (int) $this->get_add_listing_id();
-        $value = '';
+        $value      = '';
 
         $field_data['lazy_load'] = false;
 
@@ -880,8 +880,8 @@ class Directorist_Listing_Form {
         $template = apply_filters( 'directorist_field_template', $template, $field_data, $this->get_current_listing_type() );
 
         $args = [
-            'listing_form'  => $this,
-            'data'          => $field_data,
+            'listing_form' => $this,
+            'data'         => $field_data,
         ];
 
         if ( is_admin() ) {
@@ -1034,7 +1034,7 @@ class Directorist_Listing_Form {
     }
 
     public function render_shortcode( $atts ) {
-        $atts = shortcode_atts( ['directory_type' => ''], $atts );
+        $atts                 = shortcode_atts( ['directory_type' => ''], $atts );
         self::$directory_type = $atts['directory_type'] ? explode( ',', $atts['directory_type'] ) : '';
 
         $guest_submission = directorist_is_guest_submission_enabled();

@@ -14,11 +14,11 @@ $conditional_logic_attr = $listing_form->get_conditional_logic_attributes( $data
 <div class="directorist-form-group directorist-form-button-field" <?php echo $conditional_logic_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped in get_conditional_logic_attributes() ?>>
 
     <?php
-    $button_value = is_array( $data['value'] ) ? $data['value'] : [];
-    $button_text = isset( $button_value['button_text'] ) ? $button_value['button_text'] : '';
-    $button_url_label = isset( $button_value['button_url_label'] ) ? $button_value['button_url_label'] : '';
+    $button_value            = is_array( $data['value'] ) ? $data['value'] : [];
+    $button_text             = isset( $button_value['button_text'] ) ? $button_value['button_text'] : '';
+    $button_url_label        = isset( $button_value['button_url_label'] ) ? $button_value['button_url_label'] : '';
     $button_text_placeholder = isset( $data['button_text_placeholder'] ) ? $data['button_text_placeholder'] : '';
-    $button_url_placeholder = isset( $data['button_url_placeholder'] ) ? $data['button_url_placeholder'] : '';
+    $button_url_placeholder  = isset( $data['button_url_placeholder'] ) ? $data['button_url_placeholder'] : '';
     ?>
 
         <div class="directorist-form-button-field__text">

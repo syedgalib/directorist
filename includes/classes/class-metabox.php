@@ -37,8 +37,8 @@ class ATBDP_Metabox {
             );
         }
 
-        $term_id        = ! empty( $_POST['directory_type'] ) ? (int) directorist_clean( wp_unslash( $_POST['directory_type'] ) ) : '';
-        $listing_id     = ! empty( $_POST['listing_id'] ) ? directorist_clean( wp_unslash( $_POST['listing_id'] ) ) : '';
+        $term_id    = ! empty( $_POST['directory_type'] ) ? (int) directorist_clean( wp_unslash( $_POST['directory_type'] ) ) : '';
+        $listing_id = ! empty( $_POST['listing_id'] ) ? directorist_clean( wp_unslash( $_POST['listing_id'] ) ) : '';
 
         // listing meta fields
         ob_start();
@@ -75,19 +75,19 @@ class ATBDP_Metabox {
 
         wp_send_json_success(
             [
-                'listing_meta_fields'       => $listing_meta_fields,
-                'listing_categories'        => $listing_categories,
-                'listing_pop_categories'    => $listing_pop_categories,
-                'listing_locations'         => $listing_locations,
-                'listing_pop_locations'     => $listing_pop_locations,
-                'required_js_scripts'       => $required_script_src,
-                'listing_expiration'        => $listing_expiration
+                'listing_meta_fields'    => $listing_meta_fields,
+                'listing_categories'     => $listing_categories,
+                'listing_pop_categories' => $listing_pop_categories,
+                'listing_locations'      => $listing_locations,
+                'listing_pop_locations'  => $listing_pop_locations,
+                'required_js_scripts'    => $required_script_src,
+                'listing_expiration'     => $listing_expiration
             ] 
         );
     }
 
     public function render_listing_taxonomies( $listing_id, $term_id, $taxonomy_id, $parent_id = 0 ) {
-        $args = [
+        $args          = [
             'taxonomy'     => $taxonomy_id,
             'hide_empty'   => 0,
             'hierarchical' => true,
@@ -130,19 +130,19 @@ class ATBDP_Metabox {
     }
 
     public function render_listing_pop_taxonomies( $listing_id, $term_id, $taxonomy_id ) {
-        $args = [
-            'hide_empty' => 0,
+        $args          = [
+            'hide_empty'   => 0,
             'hierarchical' => false
         ];
-        $saving_terms   = get_the_terms( $listing_id, $taxonomy_id );
-        $saving_values    = [];
+        $saving_terms  = get_the_terms( $listing_id, $taxonomy_id );
+        $saving_values = [];
         if ( $saving_terms ) {
             foreach ( $saving_terms as $saving_term ) {
                 $saving_values[] = $saving_term->term_id;
             }
         }
         $args['taxonomy'] = $taxonomy_id;
-        $terms = get_terms( $args );
+        $terms            = get_terms( $args );
 
         if ( $terms ) {
             foreach ( $terms as $term ) {
@@ -331,19 +331,19 @@ class ATBDP_Metabox {
 
     public function render_expire_date( $listing_id, $term_id ) {
         // show expiration date and featured listing.
-        $directory_type         = isset( $term_id ) ? $term_id : default_directory_type();
-        $expiration             = directorist_get_default_expiration( $directory_type );
-        $expire_in_days         = ! empty( $expiration ) ? $expiration : '90';
-        $f_active               = directorist_is_featured_listing_enabled();
-        $never_expire           = get_post_meta( $listing_id, '_never_expire', true );
-        $never_expire           = ! empty( $never_expire ) ? (int) $never_expire : '';
+        $directory_type = isset( $term_id ) ? $term_id : default_directory_type();
+        $expiration     = directorist_get_default_expiration( $directory_type );
+        $expire_in_days = ! empty( $expiration ) ? $expiration : '90';
+        $f_active       = directorist_is_featured_listing_enabled();
+        $never_expire   = get_post_meta( $listing_id, '_never_expire', true );
+        $never_expire   = ! empty( $never_expire ) ? (int) $never_expire : '';
 
-        $e_d                    = get_post_meta( $listing_id, '_expiry_date', true );
-        $e_d                    = ! empty( $e_d ) ? $e_d : calc_listing_expiry_date( '', $expire_in_days, $directory_type );
-        $expiry_date            = atbdp_parse_mysql_date( $e_d );
+        $e_d         = get_post_meta( $listing_id, '_expiry_date', true );
+        $e_d         = ! empty( $e_d ) ? $e_d : calc_listing_expiry_date( '', $expire_in_days, $directory_type );
+        $expiry_date = atbdp_parse_mysql_date( $e_d );
 
-        $featured               = get_post_meta( $listing_id, '_featured', true );
-        $listing_type           = get_post_meta( $listing_id, '_listing_type', true );
+        $featured     = get_post_meta( $listing_id, '_featured', true );
+        $listing_type = get_post_meta( $listing_id, '_listing_type', true );
         // TODO: Status has been migrated, remove related code.
         // $listing_status         = get_post_meta( $listing_id, '_listing_status', true);
         $listing_status         = get_post_status( $listing_id );
@@ -387,10 +387,10 @@ class ATBDP_Metabox {
     public function listing_form_info_meta( $post ) {
         wp_enqueue_script( 'atbdp-google-map-front' );
         wp_enqueue_script( 'atbdp-markerclusterer' );
-        $all_types      = directory_types();
-        $default        = default_directory_type();
-        $current_type   = directorist_get_listing_directory( $post->ID );
-        $value          = $current_type ? $current_type : $default;
+        $all_types    = directory_types();
+        $default      = default_directory_type();
+        $current_type = directorist_get_listing_directory( $post->ID );
+        $value        = $current_type ? $current_type : $default;
         wp_nonce_field( 'listing_info_action', 'listing_info_nonce' );
 
         $show_directory_type_nav = directorist_is_multi_directory_enabled() && ( count( $all_types ) > 1 );
@@ -428,7 +428,7 @@ class ATBDP_Metabox {
     public function build_form_data( $type ) {
         $form_data              = [];
         $submission_form_fields = get_term_meta( $type, 'submission_form_fields', true );
-        $excluded_fields = [ 'title', 'description', 'location', 'category', 'tag', 'privacy_policy', 'terms_conditions' ];
+        $excluded_fields        = [ 'title', 'description', 'location', 'category', 'tag', 'privacy_policy', 'terms_conditions' ];
 
         if ( ! empty( $submission_form_fields['groups'] ) ) {
             foreach ( $submission_form_fields['groups'] as $group ) {
@@ -497,19 +497,19 @@ class ATBDP_Metabox {
 
         if ( ATBDP_POST_TYPE != $post->post_type ) return; // vail if it is not our post type
         // show expiration date and featured listing.
-        $directory_type         = default_directory_type();
-        $expiration             = directorist_get_default_expiration( $directory_type );
-        $expire_in_days         = ! empty( $expiration ) ? $expiration : '90';
-        $f_active               = directorist_is_featured_listing_enabled();
-        $never_expire           = get_post_meta( $post->ID, '_never_expire', true );
-        $never_expire           = ! empty( $never_expire ) ? (int) $never_expire : '';
+        $directory_type = default_directory_type();
+        $expiration     = directorist_get_default_expiration( $directory_type );
+        $expire_in_days = ! empty( $expiration ) ? $expiration : '90';
+        $f_active       = directorist_is_featured_listing_enabled();
+        $never_expire   = get_post_meta( $post->ID, '_never_expire', true );
+        $never_expire   = ! empty( $never_expire ) ? (int) $never_expire : '';
 
-        $e_d                    = get_post_meta( $post->ID, '_expiry_date', true );
-        $e_d                    = ! empty( $e_d ) ? $e_d : calc_listing_expiry_date( '', $expire_in_days );
-        $expiry_date            = atbdp_parse_mysql_date( $e_d );
+        $e_d         = get_post_meta( $post->ID, '_expiry_date', true );
+        $e_d         = ! empty( $e_d ) ? $e_d : calc_listing_expiry_date( '', $expire_in_days );
+        $expiry_date = atbdp_parse_mysql_date( $e_d );
 
-        $featured               = get_post_meta( $post->ID, '_featured', true );
-        $listing_type           = get_post_meta( $post->ID, '_listing_type', true );
+        $featured     = get_post_meta( $post->ID, '_featured', true );
+        $listing_type = get_post_meta( $post->ID, '_listing_type', true );
         // TODO: Status has been migrated, remove related code.
         // $listing_status         = get_post_meta($post->ID, '_listing_status', true);
         $listing_status         = get_post_status( $post->ID );
@@ -542,10 +542,10 @@ class ATBDP_Metabox {
             return;
         }
 
-        $directory_id           = ! empty( $_POST['directory_type'] ) ? directorist_clean( wp_unslash( $_POST['directory_type'] ) ) : directorist_get_default_directory();
-        $listing_categories     = ! empty( $_POST['tax_input'][ ATBDP_CATEGORY ] ) ? directorist_clean( wp_unslash( $_POST['tax_input'][ ATBDP_CATEGORY ] ) ) : [];
-        $listing_locations      = ! empty( $_POST['tax_input'][ ATBDP_LOCATION ] ) ? directorist_clean( wp_unslash( $_POST['tax_input'][ ATBDP_LOCATION ] ) ) : [];
-        $meta_data              = [];
+        $directory_id       = ! empty( $_POST['directory_type'] ) ? directorist_clean( wp_unslash( $_POST['directory_type'] ) ) : directorist_get_default_directory();
+        $listing_categories = ! empty( $_POST['tax_input'][ ATBDP_CATEGORY ] ) ? directorist_clean( wp_unslash( $_POST['tax_input'][ ATBDP_CATEGORY ] ) ) : [];
+        $listing_locations  = ! empty( $_POST['tax_input'][ ATBDP_LOCATION ] ) ? directorist_clean( wp_unslash( $_POST['tax_input'][ ATBDP_LOCATION ] ) ) : [];
+        $meta_data          = [];
 
         if ( $directory_id ) {
             $directory_term = get_term_by( is_numeric( $directory_id ) ? 'id' : 'slug', $directory_id, ATBDP_TYPE );
@@ -589,13 +589,13 @@ class ATBDP_Metabox {
             $field_key = ! empty( $value['field_key'] ) ? $value['field_key'] : '';
 
             if ( ! in_array( $field_key, [ 'listing_title', 'listing_content', 'tax_input' ], true ) ) {
-                $meta_field_key = '_' . $field_key;
+                $meta_field_key               = '_' . $field_key;
                 $meta_data[ $meta_field_key ] = isset( $_POST[ $field_key ] ) ? wp_unslash( $_POST[ $field_key ] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             }
         }
 
         $meta_data['_directory_type'] = $directory_id;
-        $should_update_directory = apply_filters( 'directorist_should_update_directory_type', (bool) $meta_data['_directory_type'] );
+        $should_update_directory      = apply_filters( 'directorist_should_update_directory_type', (bool) $meta_data['_directory_type'] );
 
         if ( $should_update_directory ) {
             wp_set_object_terms( $post_id, $directory_id, ATBDP_TYPE );
@@ -659,7 +659,7 @@ class ATBDP_Metabox {
                     [
                         'ID'          => $post_id,
                         'post_status' => $listing_status,   // update the status to private so that we do not run this func a second time
-                        'meta_input' => [
+                        'meta_input'  => [
                         // Used it for backward compatibility.
                             '_listing_status' => 'post_status',
                         ],

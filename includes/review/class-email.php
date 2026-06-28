@@ -79,7 +79,7 @@ class Email {
         $message = __( "Dear User,<br /><br />A new review at {listing_url}.<br /><br />Name: {sender_name}<br />Email: {sender_email}<br />Review: {message}", 'directorist' );
         $message = strtr( $message, $placeholders );
 
-        $headers = "From: {$review->comment_author_email} <{$review->comment_author_email}>\r\n";
+        $headers  = "From: {$review->comment_author_email} <{$review->comment_author_email}>\r\n";
         $headers .= "Reply-To: {$review->comment_author_email}\r\n";
 
         return ATBDP()->email->send_mail( $user->user_email, $subject, $message, $headers );
@@ -95,12 +95,12 @@ class Email {
             return false;
         }
 
-        $post          = get_post( $review->comment_post_ID );
-        $site_name     = get_bloginfo( 'name' );
-        $site_url      = get_bloginfo( 'url' );
-        $listing_title = get_the_title( $post->ID );
-        $listing_url   = get_the_permalink( $post->ID );
-        $listing_url   = sprintf( '<a href="%s">%s</a>', $listing_url, $listing_url );
+        $post           = get_post( $review->comment_post_ID );
+        $site_name      = get_bloginfo( 'name' );
+        $site_url       = get_bloginfo( 'url' );
+        $listing_title  = get_the_title( $post->ID );
+        $listing_url    = get_the_permalink( $post->ID );
+        $listing_url    = sprintf( '<a href="%s">%s</a>', $listing_url, $listing_url );
         $comment_author = empty( $review->comment_author ) ? $review->comment_author_email : $review->comment_author;
 
         $to = get_directorist_option( 'admin_email_lists' );
@@ -111,15 +111,15 @@ class Email {
 
         $subject = "[$site_name] New review at $listing_title";
         /* translators: %1$s: Listing URL, %2$s: Comment author name, %3$s: Comment author email, %4$s: Review content */
-        $message = sprintf(
+        $message  = sprintf(
             __( 'Dear Admin,<br /><br />A new review at %1$s.<br /><br />Name: %2$s<br />Email: %3$s<br />Review: %4$s', 'directorist' ),
             $listing_url,
             esc_html( $comment_author ),
             esc_html( $review->comment_author_email ),
             esc_html( $review->comment_content )
         );
-        $message = atbdp_email_html( $subject, $message );
-        $headers = "From: {$review->comment_author_email} <{$review->comment_author_email}>\r\n";
+        $message  = atbdp_email_html( $subject, $message );
+        $headers  = "From: {$review->comment_author_email} <{$review->comment_author_email}>\r\n";
         $headers .= "Reply-To: {$review->comment_author_email}\r\n";
 
         return ATBDP()->email->send_mail( $to, $subject, $message, $headers );

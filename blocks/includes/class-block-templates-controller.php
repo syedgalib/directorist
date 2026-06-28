@@ -288,7 +288,7 @@ class Block_Templates_Controller {
             $check_query_args['post_name__in'] = $slugs;
         }
 
-        $check_query         = new \WP_Query( $check_query_args );
+        $check_query                 = new \WP_Query( $check_query_args );
         $saved_directorist_templates = $check_query->posts;
 
         return array_map(

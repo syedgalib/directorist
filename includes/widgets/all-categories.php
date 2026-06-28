@@ -14,7 +14,7 @@ class All_Categories extends \WP_Widget {
         $id_base        = 'bdcw_widget';
         $name           = esc_html__( 'Directorist - Categories', 'directorist' );
         $widget_options =             [
-            'classname' => 'directorist-widget',
+            'classname'   => 'directorist-widget',
             'description' => esc_html__( 'You can show Categories by this widget', 'directorist' ),
         ];
 
@@ -23,73 +23,73 @@ class All_Categories extends \WP_Widget {
 
     public function form( $instance ) {
         $defaults = [
-            'title'                 => esc_html__( 'Directorist Categories', 'directorist' ),
-            'display_as'            => 'list',
-            'order_by'              => 'id',
-            'order'                 => 'asc',
-            'max_number'            => '',
-            'immediate_category'    => 1,
-            'hide_empty'            => 1,
-            'show_count'            => 1,
-            'single_only'           => 1,
+            'title'              => esc_html__( 'Directorist Categories', 'directorist' ),
+            'display_as'         => 'list',
+            'order_by'           => 'id',
+            'order'              => 'asc',
+            'max_number'         => '',
+            'immediate_category' => 1,
+            'hide_empty'         => 1,
+            'show_count'         => 1,
+            'single_only'        => 1,
         ];
 
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         $fields = [
-            'title'       => [
-                'label'   => esc_html__( 'Title:', 'directorist' ),
-                'type'    => 'text',
+            'title'              => [
+                'label' => esc_html__( 'Title:', 'directorist' ),
+                'type'  => 'text',
             ],
-            'display_as' => [
+            'display_as'         => [
                 'label'   => esc_html__( 'View as:', 'directorist' ),
                 'type'    => 'select',
                 'options' => [
-                    'list'      => esc_html__( 'List', 'directorist' ),
-                    'dropdown'  => esc_html__( 'Dropdown', 'directorist' )
+                    'list'     => esc_html__( 'List', 'directorist' ),
+                    'dropdown' => esc_html__( 'Dropdown', 'directorist' )
                 ]
             ],
-            'order_by' => [
+            'order_by'           => [
                 'label'   => esc_html__( 'Order By:', 'directorist' ),
                 'type'    => 'select',
                 'options' => [
-                    'id'      => esc_html__( 'Id', 'directorist' ),
-                    'count'   => esc_html__( 'Count', 'directorist' ),
-                    'name'    => esc_html__( 'Name', 'directorist' ),
-                    'slug'    => esc_html__( 'Slug', 'directorist' )
+                    'id'    => esc_html__( 'Id', 'directorist' ),
+                    'count' => esc_html__( 'Count', 'directorist' ),
+                    'name'  => esc_html__( 'Name', 'directorist' ),
+                    'slug'  => esc_html__( 'Slug', 'directorist' )
                 ]
             ],
-            'order' => [
+            'order'              => [
                 'label'   => esc_html__( 'Sort By:', 'directorist' ),
                 'type'    => 'select',
                 'options' => [
-                    'asc'    => esc_html__( 'Ascending', 'directorist' ),
-                    'desc'   => esc_html__( 'Descending', 'directorist' ),
+                    'asc'  => esc_html__( 'Ascending', 'directorist' ),
+                    'desc' => esc_html__( 'Descending', 'directorist' ),
                 ]
             ],
-            'max_number'       => [
-                'label'   => esc_html__( 'Maximum Number:', 'directorist' ),
-                'type'    => 'text',
+            'max_number'         => [
+                'label' => esc_html__( 'Maximum Number:', 'directorist' ),
+                'type'  => 'text',
             ],
             'immediate_category' => [
-                'label'   => esc_html__( 'Show all the top-level categories only', 'directorist' ),
-                'type'    => 'checkbox',
-                'value'   => 1,
+                'label' => esc_html__( 'Show all the top-level categories only', 'directorist' ),
+                'type'  => 'checkbox',
+                'value' => 1,
             ],
-            'hide_empty' => [
-                'label'   => esc_html__( 'Hide empty categories', 'directorist' ),
-                'type'    => 'checkbox',
-                'value'   => 1,
+            'hide_empty'         => [
+                'label' => esc_html__( 'Hide empty categories', 'directorist' ),
+                'type'  => 'checkbox',
+                'value' => 1,
             ],
-            'show_count' => [
-                'label'   => esc_html__( 'Display listing counts', 'directorist' ),
-                'type'    => 'checkbox',
-                'value'   => 1,
+            'show_count'         => [
+                'label' => esc_html__( 'Display listing counts', 'directorist' ),
+                'type'  => 'checkbox',
+                'value' => 1,
             ],
-            'single_only' => [
-                'label'   => esc_html__( 'Display only on single listing', 'directorist' ),
-                'type'    => 'checkbox',
-                'value'   => 1,
+            'single_only'        => [
+                'label' => esc_html__( 'Display only on single listing', 'directorist' ),
+                'type'  => 'checkbox',
+                'value' => 1,
             ],
         ];
 
@@ -120,26 +120,26 @@ class All_Categories extends \WP_Widget {
 
         echo wp_kses_post( $args['before_widget'] );
 
-        $title = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Directorist Categories', 'directorist' );
+        $title        = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Directorist Categories', 'directorist' );
         $widget_title = $args['before_title'] . apply_filters( 'widget_title', $title ) . $args['after_title'];
 
         echo wp_kses_post( $widget_title );
 
 
         $query_args = [
-            'template'       => ! empty( $instance['display_as'] ) ? sanitize_text_field( $instance['display_as'] ) : 'list',
-            'parent'         => ! empty( $instance['parent'] ) ? (int) $instance['parent'] : 0,
-            'term_id'        => ! empty( $instance['parent'] ) ? (int) $instance['parent'] : 0,
-            'hide_empty'     => ! empty( $instance['hide_empty'] ) ? 1 : 0,
-            'orderby'        => ! empty( $instance['order_by'] ) ? sanitize_text_field( $instance['order_by'] ) : 'id',
-            'order'          => ! empty( $instance['order'] ) ? sanitize_text_field( $instance['order'] ) : 'asc',
-            'max_number'     => ! empty( $instance['max_number'] ) ? $instance['max_number'] : '',
-            'show_count'     => ! empty( $instance['show_count'] ) ? 1 : 0,
-            'single_only'    => ! empty( $instance['single_only'] ) ? 1 : 0,
-            'pad_counts'     => true,
+            'template'           => ! empty( $instance['display_as'] ) ? sanitize_text_field( $instance['display_as'] ) : 'list',
+            'parent'             => ! empty( $instance['parent'] ) ? (int) $instance['parent'] : 0,
+            'term_id'            => ! empty( $instance['parent'] ) ? (int) $instance['parent'] : 0,
+            'hide_empty'         => ! empty( $instance['hide_empty'] ) ? 1 : 0,
+            'orderby'            => ! empty( $instance['order_by'] ) ? sanitize_text_field( $instance['order_by'] ) : 'id',
+            'order'              => ! empty( $instance['order'] ) ? sanitize_text_field( $instance['order'] ) : 'asc',
+            'max_number'         => ! empty( $instance['max_number'] ) ? $instance['max_number'] : '',
+            'show_count'         => ! empty( $instance['show_count'] ) ? 1 : 0,
+            'single_only'        => ! empty( $instance['single_only'] ) ? 1 : 0,
+            'pad_counts'         => true,
             'immediate_category' => ! empty( $instance['immediate_category'] ) ? 1 : 0,
-            'active_term_id' => 0,
-            'ancestors'      => []
+            'active_term_id'     => 0,
+            'ancestors'          => []
         ];
 
 
@@ -148,12 +148,12 @@ class All_Categories extends \WP_Widget {
             $term_slug = get_query_var( ATBDP_CATEGORY );
 
             if ( '' != $term_slug ) {
-                $term = get_term_by( 'slug', $term_slug, ATBDP_CATEGORY );
+                $term                         = get_term_by( 'slug', $term_slug, ATBDP_CATEGORY );
                 $query_args['active_term_id'] = $term->term_id;
 
-                $query_args['ancestors'] = get_ancestors( $query_args['active_term_id'], 'atbdp_categories' );
+                $query_args['ancestors']   = get_ancestors( $query_args['active_term_id'], 'atbdp_categories' );
                 $query_args['ancestors'][] = $query_args['active_term_id'];
-                $query_args['ancestors'] = array_unique( $query_args['ancestors'] );
+                $query_args['ancestors']   = array_unique( $query_args['ancestors'] );
             }
 
         }
@@ -190,23 +190,23 @@ class All_Categories extends \WP_Widget {
             'number'       => ! empty( $settings['max_number'] ) ? $settings['max_number'] : ''
         ];
 
-        $terms = get_terms( $args );
-        $parent = $args['parent'];
+        $terms       = get_terms( $args );
+        $parent      = $args['parent'];
         $child_class = ! empty( $parent ) ? 'directorist-taxonomy-list__sub-item' : 'directorist-widget-taxonomy directorist-widget-category';
-        $html = '';
+        $html        = '';
         if ( count( $terms ) > 0 ) {
-            $i = 1;
+            $i     = 1;
             $html .= '<div class="' . $child_class . '">';
             foreach ( $terms as $term ) {
-                $settings['term_id']    = $term->term_id;
-                $child_category         = get_term_children( $term->term_id, ATBDP_CATEGORY );
-                $plus_icon              = ( ! empty( $child_category ) && empty( $parent ) ) ? directorist_icon( 'las la-angle-down', false ) : '';
-                $icon                   = get_term_meta( $term->term_id,'category_icon',true );
-                $child_icon             = empty( $parent )  ? directorist_icon( $icon, false ) : '';
-                $child_icon_class       = $child_icon ? 'directorist-taxonomy-list__icon' : 'directorist-taxonomy-list__icon-default';
-                $children               = get_term_children( $term->term_id, ATBDP_CATEGORY );
-                $has_icon               = $parent ? '' : 'directorist-taxonomy-list__card--icon';
-                $has_child_class = '';
+                $settings['term_id'] = $term->term_id;
+                $child_category      = get_term_children( $term->term_id, ATBDP_CATEGORY );
+                $plus_icon           = ( ! empty( $child_category ) && empty( $parent ) ) ? directorist_icon( 'las la-angle-down', false ) : '';
+                $icon                = get_term_meta( $term->term_id,'category_icon',true );
+                $child_icon          = empty( $parent )  ? directorist_icon( $icon, false ) : '';
+                $child_icon_class    = $child_icon ? 'directorist-taxonomy-list__icon' : 'directorist-taxonomy-list__icon-default';
+                $children            = get_term_children( $term->term_id, ATBDP_CATEGORY );
+                $has_icon            = $parent ? '' : 'directorist-taxonomy-list__card--icon';
+                $has_child_class     = '';
 
                 if ( empty( $children ) ) {
                     $has_child_class = '';
@@ -227,11 +227,11 @@ class All_Categories extends \WP_Widget {
                 $html .= '<span class="' . $child_icon_class . '">' . $child_icon . '</span>';
                 $html .= '<span class="directorist-taxonomy-list__name">' . $term->name . '</span>';
                 if ( ! empty( $settings['show_count'] ) ) {
-                    $expired_listings = atbdp_get_expired_listings( ATBDP_CATEGORY, $term->term_id );
+                    $expired_listings  = atbdp_get_expired_listings( ATBDP_CATEGORY, $term->term_id );
                     $number_of_expired = $expired_listings->post_count;
                     $number_of_expired = ! empty( $number_of_expired ) ? $number_of_expired : '0';
-                    $total = ( $count ) ? ( $count - $number_of_expired ) : $count;
-                    $html .= '<span class="directorist-taxonomy-list__count"> (' . $total . ') </span>';
+                    $total             = ( $count ) ? ( $count - $number_of_expired ) : $count;
+                    $html             .= '<span class="directorist-taxonomy-list__count"> (' . $total . ') </span>';
                 }
                 if ( empty( $settings['immediate_category'] ) && empty( $settings['hide_empty'] ) ) {
                     $html .= $plus_icon ? '<span class="directorist-taxonomy-list__toggler">' . $plus_icon . '</span>' : '';
@@ -269,12 +269,12 @@ class All_Categories extends \WP_Widget {
             'number'       => ! empty( $settings['max_number'] ) ? $settings['max_number'] : ''
         ];
 
-        $terms = get_terms( $args );
-        $parent = $args['parent'];
+        $terms       = get_terms( $args );
+        $parent      = $args['parent'];
         $child_class = ! empty( $parent ) ? 'directorist-taxonomy-list__sub-item' : '';
-        $html = '';
+        $html        = '';
         if ( count( $terms ) > 0 ) {
-            $i = 1;
+            $i     = 1;
             $html .= '<ul class="' . $child_class . '">';
             foreach ( $terms as $term ) {
                 $settings['term_id'] = $term->term_id;
@@ -282,7 +282,7 @@ class All_Categories extends \WP_Widget {
                 $plus_icon           = ( ! empty( $child_category ) ) ? directorist_icon( 'las la-plus', false ) : '';
                 $icon                = get_term_meta( $term->term_id,'category_icon',true );
                 $child_icon          = empty( $parent )  ? directorist_icon( $icon, false ) : '';
-                $has_icon               = $parent ? '' : 'directorist-taxonomy-list__card--icon';
+                $has_icon            = $parent ? '' : 'directorist-taxonomy-list__card--icon';
 
                 $has_child_class = '';
                 if ( empty( $child_category ) ) {
@@ -302,11 +302,11 @@ class All_Categories extends \WP_Widget {
                 $html .= '<a href="' . \ATBDP_Permalink::atbdp_get_category_page( $term ) . '" class="' . $has_child_class . ' ' . $child_icon . '">';
                 $html .= '<span class="directorist-taxonomy-list__name">' . $term->name . '</span>';
                 if ( ! empty( $settings['show_count'] ) ) {
-                    $expired_listings = atbdp_get_expired_listings( ATBDP_CATEGORY, $term->term_id );
+                    $expired_listings  = atbdp_get_expired_listings( ATBDP_CATEGORY, $term->term_id );
                     $number_of_expired = $expired_listings->post_count;
                     $number_of_expired = ! empty( $number_of_expired ) ? $number_of_expired : '0';
-                    $total = ( $count ) ? ( $count - $number_of_expired ) : $count;
-                    $html .= '<span class="directorist-taxonomy-list__count"> (' . $total . ') </span>';
+                    $total             = ( $count ) ? ( $count - $number_of_expired ) : $count;
+                    $html             .= '<span class="directorist-taxonomy-list__count"> (' . $total . ') </span>';
                 }
                 $html .= $plus_icon ? '<span class="directorist-taxonomy-list__sub-item-toggler"></span>' : '';
                 $html .= '</a>';

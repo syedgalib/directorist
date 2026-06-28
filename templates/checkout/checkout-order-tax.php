@@ -10,19 +10,19 @@
         <span class="directorist-summery-label directorist-row-label--order-tax-rate">
             <?php esc_html_e( 'Tax', 'directorist-pricing-plans' ); ?>
             <?php
-                if ( OrderTaxType::PERCENT === $type ) {
-                    echo sprintf(
-                        /* translators: %s: tax rate percentage */
-                        esc_html__( '( %s%% )', 'directorist-pricing-plans' ),
-                        esc_html( $rate )
-                    );
-                } else {
-                    echo sprintf(
-                        /* translators: %s: formatted tax amount */
-                        esc_html__( '( %s )', 'directorist-pricing-plans' ),
-                        directorist_price( $rate )
-                    );
-                }
+            if ( OrderTaxType::PERCENT === $type ) {
+                echo sprintf(
+                    /* translators: %s: tax rate percentage */
+                    esc_html__( '( %s%% )', 'directorist-pricing-plans' ),
+                    esc_html( $rate )
+                );
+            } else {
+                echo sprintf(
+                    /* translators: %s: formatted tax amount */
+                    esc_html__( '( %s )', 'directorist-pricing-plans' ),
+                    directorist_price( $rate )
+                );
+            }
             ?>
         </span>
     </td>

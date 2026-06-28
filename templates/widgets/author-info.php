@@ -12,13 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
     <div class="directorist-single-author-info">
         <?php
-        $listing_id = get_the_ID();
-        $author_id = get_post_field( 'post_author', $listing_id );
-        $author_name = get_the_author_meta( 'display_name', $author_id );
+        $listing_id      = get_the_ID();
+        $author_id       = get_post_field( 'post_author', $listing_id );
+        $author_name     = get_the_author_meta( 'display_name', $author_id );
         $user_registered = get_the_author_meta( 'user_registered', $author_id );
-        $u_pro_pic = get_user_meta( $author_id, 'pro_pic', true );
-        $u_pro_pic = ! empty( $u_pro_pic ) ? wp_get_attachment_image_src( $u_pro_pic, 'thumbnail' ) : '';
-        $avatar_img = get_avatar( $author_id, apply_filters( 'atbdp_avatar_size', 32 ) );
+        $u_pro_pic       = get_user_meta( $author_id, 'pro_pic', true );
+        $u_pro_pic       = ! empty( $u_pro_pic ) ? wp_get_attachment_image_src( $u_pro_pic, 'thumbnail' ) : '';
+        $avatar_img      = get_avatar( $author_id, apply_filters( 'atbdp_avatar_size', 32 ) );
         ?>
         <div class="directorist-single-author-avatar">
             <figure class="directorist-single-author-avatar-inner">
@@ -42,13 +42,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         <ul>
             <?php
             $address = esc_attr( get_user_meta( $author_id, 'address', true ) );
-            $phone = esc_attr( get_user_meta( $author_id, 'atbdp_phone', true ) );
-            $email = get_the_author_meta( 'user_email', $author_id );
+            $phone   = esc_attr( get_user_meta( $author_id, 'atbdp_phone', true ) );
+            $email   = get_the_author_meta( 'user_email', $author_id );
             $website = get_the_author_meta( 'user_url', $author_id );;
             $facebook = get_user_meta( $author_id, 'atbdp_facebook', true );
-            $twitter = get_user_meta( $author_id, 'atbdp_twitter', true );
+            $twitter  = get_user_meta( $author_id, 'atbdp_twitter', true );
             $linkedIn = get_user_meta( $author_id, 'atbdp_linkedin', true );
-            $youtube = get_user_meta( $author_id, 'atbdp_youtube', true );
+            $youtube  = get_user_meta( $author_id, 'atbdp_youtube', true );
             if ( ! empty( $address ) ) { ?>
                 <li>
                     <?php directorist_icon( 'fas fa-map-marker-alt' ); ?>
@@ -66,8 +66,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
             <?php } ?>
 
             <?php
-            $display_email      = get_user_meta( $author_id, 'directorist_display_author_email', true );
-            $email_show         = ! empty( $display_email ) ? $display_email : 'public';
+            $display_email = get_user_meta( $author_id, 'directorist_display_author_email', true );
+            $email_show    = ! empty( $display_email ) ? $display_email : 'public';
             if ( 'public' === $email_show ) {
                 if ( ! empty( $email ) ) {
                     ?>

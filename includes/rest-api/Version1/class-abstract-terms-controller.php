@@ -298,13 +298,13 @@ abstract class Terms_Controller extends Abstract_Controller {
                 }
             } else {
                 $prepared_args['taxonomy'] = $taxonomy;
-                $query_result = get_terms( $prepared_args );
+                $query_result              = get_terms( $prepared_args );
 
                 $count_args = $prepared_args;
                 unset( $count_args['number'] );
                 unset( $count_args['offset'] );
                 $count_args['taxonomy'] = $taxonomy;
-                $total_terms = wp_count_terms( $count_args );
+                $total_terms            = wp_count_terms( $count_args );
 
                 // Ensure we don't return results when offset is out of bounds.
                 // See https://core.trac.wordpress.org/ticket/35935.
@@ -515,8 +515,8 @@ abstract class Terms_Controller extends Abstract_Controller {
      * @return WP_REST_Request|WP_Error
      */
     public function update_item( $request ) {
-        $taxonomy      = $this->taxonomy;
-        $id            = (int) $request['id'];
+        $taxonomy = $this->taxonomy;
+        $id       = (int) $request['id'];
 
         do_action( 'directorist_rest_before_query', 'update_term_item', $request, $id, $taxonomy );
 

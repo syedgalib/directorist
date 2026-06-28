@@ -61,8 +61,8 @@ trait Icon_Helper {
             return '';
         }
 
-        $filename              = str_replace( 'fa-', '', $name );
-        $filename              = $filename . '.svg';
+        $filename = str_replace( 'fa-', '', $name );
+        $filename = $filename . '.svg';
 
         $far_file = 'font-awesome/svgs/regular/' . $filename;
         $fas_file = 'font-awesome/svgs/solid/' . $filename;
@@ -106,7 +106,7 @@ trait Icon_Helper {
             return '';
         }
 
-        $filename              = str_replace( 'la-', '', $name );
+        $filename = str_replace( 'la-', '', $name );
 
         $lar_file = 'line-awesome/svgs/' . $filename . '.svg';
         $las_file = 'line-awesome/svgs/' . $filename . '-solid.svg';

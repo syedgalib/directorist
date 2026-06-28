@@ -51,12 +51,12 @@ class Listings_Controller extends Legacy_Listings_Controller {
                                 'required'    => directorist_is_multi_directory_enabled(),
                                 'default'     => directorist_get_default_directory()
                             ),
-                            'plan' => array(
+                            'plan'      => array(
                                 'description' => __( 'Plan id.', 'directorist' ),
                                 'type'        => 'integer',
                                 'default'     => 0,
                             ),
-                            'order' => array(
+                            'order'     => array(
                                 'description' => __( 'Order id.', 'directorist' ),
                                 'type'        => 'integer',
                                 'default'     => 0,
@@ -99,30 +99,30 @@ class Listings_Controller extends Legacy_Listings_Controller {
 
     protected function get_schema_to_post_fields_map() {
         return array(
-            'title' => array(
+            'title'              => array(
                 'title' => 'listing_title',
             ),
-            'description' => array(
+            'description'        => array(
                 'description' => 'listing_content',
             ),
-            'location' => array(
+            'location'           => array(
                 'locations' => ATBDP_LOCATION,
             ),
-            'category' => array(
+            'category'           => array(
                 'categories' => ATBDP_CATEGORY,
             ),
-            'tag' => array(
+            'tag'                => array(
                 'tags' => ATBDP_TAGS,
             ),
             'hide_contact_owner' => array(
                 'contact_form_hidden' => 'hide_contact_owner',
             ),
-            'pricing' => array(
+            'pricing'            => array(
                 'price_type'  => 'atbd_listing_pricing',
                 'price'       => 'price',
                 'price_range' => 'price_range',
             ),
-            'map' => array(
+            'map'                => array(
                 'map_hidden' => 'hide_map',
                 'latitude'   => 'manual_lat',
                 'longitude'  => 'manual_lng',
@@ -327,7 +327,7 @@ class Listings_Controller extends Legacy_Listings_Controller {
      * @return array
      */
     protected function get_listing_data( $listing, $request, $context = 'view' ) {
-        $fields  = $this->get_fields_for_response( $request );
+        $fields = $this->get_fields_for_response( $request );
 
         $base_data = array();
 
@@ -489,12 +489,12 @@ class Listings_Controller extends Legacy_Listings_Controller {
                     break;
 
                 case 'url':
-                    $field_value       = get_post_meta( $listing->ID, '_' . $field_key, true );
+                    $field_value        = get_post_meta( $listing->ID, '_' . $field_key, true );
                     $data[ $field_key ] = ( 'view' === $context ? esc_url( $field_value ) : esc_url_raw( $field_value ) );
                     break;
 
                 case 'textarea':
-                    $field_value       = get_post_meta( $listing->ID, '_' . $field_key, true );
+                    $field_value        = get_post_meta( $listing->ID, '_' . $field_key, true );
                     $data[ $field_key ] = esc_textarea( $field_value );
                     break;
 
@@ -505,9 +505,9 @@ class Listings_Controller extends Legacy_Listings_Controller {
                     break;
 
                 case 'map':
-                    $data['map_hidden']  = (bool) get_post_meta( $listing->ID, '_hide_map', true );
-                    $data['latitude']  = directorist_clean( get_post_meta( $listing->ID, '_manual_lat', true ) );
-                    $data['longitude'] = directorist_clean( get_post_meta( $listing->ID, '_manual_lng', true ) );
+                    $data['map_hidden'] = (bool) get_post_meta( $listing->ID, '_hide_map', true );
+                    $data['latitude']   = directorist_clean( get_post_meta( $listing->ID, '_manual_lat', true ) );
+                    $data['longitude']  = directorist_clean( get_post_meta( $listing->ID, '_manual_lng', true ) );
                     break;
                 
                 case 'html':
@@ -576,11 +576,11 @@ class Listings_Controller extends Legacy_Listings_Controller {
             }
 
             $images[] = array(
-                'id'                => (int) $attachment_id,
-                'src'               => $image_url,
-                'name'              => get_the_title( $attachment_id ),
-                'alt'               => get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ),
-                'position'          => (int) $position,
+                'id'       => (int) $attachment_id,
+                'src'      => $image_url,
+                'name'     => get_the_title( $attachment_id ),
+                'alt'      => get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ),
+                'position' => (int) $position,
             );
         }
 
@@ -598,28 +598,28 @@ class Listings_Controller extends Legacy_Listings_Controller {
         }
 
         $fields = array(
-            'title'                => array(
+            'title'               => array(
                 'description' => __( 'Listing title.', 'directorist' ),
                 'type'        => 'string',
                 'context'     => array( 'view', 'edit' ),
                 'required'    => true,
             ),
-            'tagline'              => array(
+            'tagline'             => array(
                 'description' => __( 'Tagline.', 'directorist' ),
                 'type'        => 'string',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'description'           => array(
+            'description'         => array(
                 'description' => __( 'Listing description.', 'directorist' ),
                 'type'        => 'string',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'excerpt'     => array(
+            'excerpt'             => array(
                 'description' => __( 'Listing short description.', 'directorist' ),
                 'type'        => 'string',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'categories' => array(
+            'categories'          => array(
                 'description' => __( 'List of categories.', 'directorist' ),
                 'type'        => 'array',
                 'context'     => array( 'view', 'edit' ),
@@ -652,7 +652,7 @@ class Listings_Controller extends Legacy_Listings_Controller {
                     ),
                 ),
             ),
-            'tags' => array(
+            'tags'                => array(
                 'description' => __( 'List of tags.', 'directorist' ),
                 'type'        => 'array',
                 'context'     => array( 'view', 'edit' ),
@@ -679,7 +679,7 @@ class Listings_Controller extends Legacy_Listings_Controller {
                     ),
                 ),
             ),
-            'locations' => array(
+            'locations'           => array(
                 'description' => __( 'List of locations.', 'directorist' ),
                 'type'        => 'array',
                 'context'     => array( 'view', 'edit' ),
@@ -706,14 +706,14 @@ class Listings_Controller extends Legacy_Listings_Controller {
                     ),
                 ),
             ),
-            'social'             => array(
+            'social'              => array(
                 'description' => __( 'List of social links.', 'directorist' ),
                 'type'        => 'array',
                 'context'     => array( 'view', 'edit' ),
                 'items'       => array(
                     'type'       => 'object',
                     'properties' => array(
-                        'id'   => array(
+                        'id'  => array(
                             'description' => __( 'Social media name', 'directorist' ),
                             'type'        => 'string',
                             'context'     => array( 'view', 'edit' ),
@@ -726,18 +726,18 @@ class Listings_Controller extends Legacy_Listings_Controller {
                     ),
                 ),
             ),
-            'price_type'              => array(
+            'price_type'          => array(
                 'description' => __( 'Price type.', 'directorist' ),
                 'type'        => 'string',
                 'context'     => array( 'view', 'edit' ),
                 'enum'        => array( 'price', 'range' ),
             ),
-            'price'              => array(
+            'price'               => array(
                 'description' => __( 'Price amount.', 'directorist' ),
                 'type'        => 'number',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'price_range'              => array(
+            'price_range'         => array(
                 'description' => __( 'Price range.', 'directorist' ),
                 'type'        => 'string',
                 'enum'        => array( 'skimming', 'moderate', 'economy', 'bellow_economy' ),
@@ -749,92 +749,92 @@ class Listings_Controller extends Legacy_Listings_Controller {
                 'default'     => false,
                 'context'     => array( 'view', 'edit' ),
             ),
-            'zip'                  => array(
+            'zip'                 => array(
                 'description' => __( 'Zip code.', 'directorist' ),
                 'type'        => 'string',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'address'              => array(
+            'address'             => array(
                 'description' => __( 'Listing address.', 'directorist' ),
                 'type'        => 'string',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'map_hidden'              => array(
+            'map_hidden'          => array(
                 'description' => __( 'Map visibility status.', 'directorist' ),
                 'type'        => 'boolean',
                 'default'     => false,
                 'context'     => array( 'view', 'edit' ),
             ),
-            'latitude'              => array(
+            'latitude'            => array(
                 'description' => __( 'Address location latitude.', 'directorist' ),
                 'type'        => 'number',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'longitude'              => array(
+            'longitude'           => array(
                 'description' => __( 'Address location longitude.', 'directorist' ),
                 'type'        => 'number',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'phone'                  => array(
+            'phone'               => array(
                 'description' => __( 'Phone number 1.', 'directorist' ),
                 'type'        => 'string',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'phone2'                  => array(
+            'phone2'              => array(
                 'description' => __( 'Phone number 2.', 'directorist' ),
                 'type'        => 'string',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'fax'                  => array(
+            'fax'                 => array(
                 'description' => __( 'Fax number.', 'directorist' ),
                 'type'        => 'string',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'email'                  => array(
+            'email'               => array(
                 'description' => __( 'Email address.', 'directorist' ),
                 'type'        => 'string',
                 'format'      => 'email',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'website'                => array(
+            'website'             => array(
                 'description' => __( 'Website url.', 'directorist' ),
                 'type'        => 'string',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'videourl'              => array(
+            'videourl'            => array(
                 'description' => __( 'Video url.', 'directorist' ),
                 'type'        => 'string',
                 'context'     => array( 'view', 'edit' ),
             ),
-            'listing_img'            => array(
+            'listing_img'         => array(
                 'description' => __( 'Listing images.', 'directorist' ),
                 'type'        => 'array',
                 'context'     => array( 'view', 'edit' ),
                 'items'       => array(
                     'type'       => array( 'object', 'string', 'integer' ),
                     'properties' => array(
-                        'id'                => array(
+                        'id'       => array(
                             'description' => __( 'Image ID.', 'directorist' ),
                             'type'        => 'integer',
                             'context'     => array( 'view', 'edit' ),
                         ),
-                        'src'               => array(
+                        'src'      => array(
                             'description' => __( 'Image URL.', 'directorist' ),
                             'type'        => 'string',
                             'format'      => 'uri',
                             'context'     => array( 'view', 'edit' ),
                         ),
-                        'name'              => array(
+                        'name'     => array(
                             'description' => __( 'Image name.', 'directorist' ),
                             'type'        => 'string',
                             'context'     => array( 'view', 'edit' ),
                         ),
-                        'alt'               => array(
+                        'alt'      => array(
                             'description' => __( 'Image alternative text.', 'directorist' ),
                             'type'        => 'string',
                             'context'     => array( 'view', 'edit' ),
                         ),
-                        'position'          => array(
+                        'position' => array(
                             'description' => __( 'Image position. 0 means that the image is featured.', 'directorist' ),
                             'type'        => 'integer',
                             'context'     => array( 'view', 'edit' ),
@@ -842,7 +842,7 @@ class Listings_Controller extends Legacy_Listings_Controller {
                     ),
                 ),
             ),
-            '[field_key]'   => array(
+            '[field_key]'         => array(
                 'description' => __( 'Field key: value.', 'directorist' ),
                 'type'        => array( 'string', 'array', 'integer', 'boolean' ),
                 'context'     => array( 'view', 'edit' ),
@@ -858,132 +858,132 @@ class Listings_Controller extends Legacy_Listings_Controller {
             );
         }
 
-        $schema         = array(
+        $schema = array(
             '$schema'    => 'http://json-schema.org/draft-04/schema#',
             'title'      => $this->post_type,
             'type'       => 'object',
             'properties' => array(
-                'id'                    => array(
+                'id'                => array(
                     'description' => __( 'Unique identifier for the resource.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'slug'                  => array(
+                'slug'              => array(
                     'description' => __( 'Listing slug.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'permalink'             => array(
+                'permalink'         => array(
                     'description' => __( 'Listing URL.', 'directorist' ),
                     'type'        => 'string',
                     'format'      => 'uri',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'date_created'          => array(
+                'date_created'      => array(
                     'description' => __( "The date the listing was created, in the site's timezone.", 'directorist' ),
                     'type'        => 'date-time',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'date_created_gmt'      => array(
+                'date_created_gmt'  => array(
                     'description' => __( 'The date the listing was created, as GMT.', 'directorist' ),
                     'type'        => 'date-time',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'date_modified'         => array(
+                'date_modified'     => array(
                     'description' => __( "The date the listing was last modified, in the site's timezone.", 'directorist' ),
                     'type'        => 'date-time',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'date_modified_gmt'     => array(
+                'date_modified_gmt' => array(
                     'description' => __( 'The date the listing was last modified, as GMT.', 'directorist' ),
                     'type'        => 'date-time',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'views_count'              => array(
+                'views_count'       => array(
                     'description' => __( 'Visitors view count.', 'directorist' ),
                     'type'        => 'integer',
                     'default'     => 0,
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'directory' => array(
+                'directory'         => array(
                     'description' => __( 'Directory id.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'date_expired'              => array(
+                'date_expired'      => array(
                     'description' => __( 'Expiration date.', 'directorist' ),
                     'type'        => 'date-time',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'never_expired'              => array(
+                'never_expired'     => array(
                     'description' => __( 'Never expired status.', 'directorist' ),
                     'type'        => 'boolen',
                     'default'     => false,
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'featured'              => array(
+                'featured'          => array(
                     'description' => __( 'Featured listing.', 'directorist' ),
                     'type'        => 'boolean',
                     'default'     => false,
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'new'              => array(
+                'new'               => array(
                     'description' => __( 'New listing.', 'directorist' ),
                     'type'        => 'boolean',
                     'default'     => false,
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'popular'              => array(
+                'popular'           => array(
                     'description' => __( 'Popular listing.', 'directorist' ),
                     'type'        => 'boolean',
                     'default'     => false,
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'status'     => array(
+                'status'            => array(
                     'description' => __( 'Listing status.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'reviews_allowed'       => array(
+                'reviews_allowed'   => array(
                     'description' => __( 'Allow reviews.', 'directorist' ),
                     'type'        => 'boolean',
                     'default'     => true,
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'average_rating'        => array(
+                'average_rating'    => array(
                     'description' => __( 'Reviews average rating.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'rating_count'          => array(
+                'rating_count'      => array(
                     'description' => __( 'Amount of reviews that the listing have.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'related_ids'           => array(
+                'related_ids'       => array(
                     'description' => __( 'List of related listings IDs.', 'directorist' ),
                     'type'        => 'array',
                     'items'       => array(
                         'type' => 'integer',
                     ),
-                    'context'  => array( 'view', 'edit' ),
-                    'readonly' => true,
+                    'context'     => array( 'view', 'edit' ),
+                    'readonly'    => true,
                 ),
-                'menu_order'            => array(
+                'menu_order'        => array(
                     'description' => __( 'Menu order, used to custom sort listings.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
@@ -995,22 +995,22 @@ class Listings_Controller extends Legacy_Listings_Controller {
                     'context'     => array( 'view', 'edit' ),
                     'readonly'    => true,
                 ),
-                'plan' => array(
+                'plan'              => array(
                     'description' => __( 'Listing plan id.', 'directorist' ),
                     'type'        => 'integer',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'privacy_policy' => array(
+                'privacy_policy'    => array(
                     'description' => __( 'Agree to listing privacy policy.', 'directorist' ),
                     'type'        => 'boolean',
                     'context'     => array( 'edit' ),
                 ),
-                'terms_conditions' => array(
+                'terms_conditions'  => array(
                     'description' => __( 'Agree to terms and conditions.', 'directorist' ),
                     'type'        => 'boolean',
                     'context'     => array( 'edit' ),
                 ),
-                'fields'             => array(
+                'fields'            => array(
                     'description' => __( 'Fields data.', 'directorist' ),
                     'type'        => 'object',
                     'context'     => array( 'view', 'edit' ),

@@ -10,8 +10,8 @@ use \Directorist\Helper;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 $phone_args = [
-    'number'    => $value,
-    'whatsapp'  => $listings->has_whatsapp( $data ),
+    'number'   => $value,
+    'whatsapp' => $listings->has_whatsapp( $data ),
 ];
 ?>
 

@@ -180,8 +180,8 @@ class Walker extends Walker_Comment {
                             $args,
                             [
                                 'edit_text' => sprintf( __( '%s Edit', 'directorist' ), directorist_icon( 'fas fa-pencil-alt', false ) ),
-                                'depth'      => $depth,
-                                'max_depth'  => $args['max_depth']
+                                'depth'     => $depth,
+                                'max_depth' => $args['max_depth']
                             ]
                         )
                     );

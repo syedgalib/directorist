@@ -13,7 +13,7 @@ if ( '5' == $taxonomy->columns ) {
     $columns = $columns . '-5';
 }
 
-$taxonomy->atts['type'] = 'location';
+$taxonomy->atts['type']           = 'location';
 $taxonomy->atts['directory_type'] = isset( $_GET['directory_type'] ) && ! empty( $_GET['directory_type'] ) ? sanitize_text_field( wp_unslash( $_GET['directory_type'] ) ) : '';
 ?>
 <div id="directorist" class="atbd_wrapper directorist-w-100">

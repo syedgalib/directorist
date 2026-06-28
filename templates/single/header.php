@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 <section class="directorist-single-listing-header">
     <?php
     $args = [
-        'listing' => $listing,
-        'display_title' => $display_title,
+        'listing'         => $listing,
+        'display_title'   => $display_title,
         'display_tagline' => $display_tagline,
     ];
     foreach ( $listing->header_data as $data ) {

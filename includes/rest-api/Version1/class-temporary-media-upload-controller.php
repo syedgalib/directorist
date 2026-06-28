@@ -254,24 +254,24 @@ class Temporary_Media_Upload_Controller extends Abstract_Controller {
      * @return array
      */
     public function get_item_schema() {
-        $schema         = array(
+        $schema = array(
             '$schema'    => 'http://json-schema.org/draft-04/schema#',
             'title'      => 'Temporary Media',
             'type'       => 'object',
             'properties' => array(
-                'name' => array(
+                'name'      => array(
                     'description' => __( 'Media file name.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view' ),
                     'readonly'    => true,
                 ),
-                'file' => array(
+                'file'      => array(
                     'description' => __( 'Media file slug.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view' ),
                     'readonly'    => true,
                 ),
-                'field' => array(
+                'field'     => array(
                     'description' => __( 'Field key.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),

@@ -12,7 +12,7 @@ trait Multi_Directory_Helper {
             'fields_value'   => [],
             'is_json'        => false
         ];
-        $args = array_merge( $default, $args );
+        $args    = array_merge( $default, $args );
 
         $has_term_id = false;
         if ( ! empty( $args['term_id'] ) ) {
@@ -143,7 +143,7 @@ trait Multi_Directory_Helper {
             'fields_value'   => [],
             'is_json'        => false
         ];
-        $args = array_merge( $default, $args );
+        $args    = array_merge( $default, $args );
 
         $response = [
             'status' => [
@@ -173,7 +173,7 @@ trait Multi_Directory_Helper {
 
         if ( $has_invalid_data ) {
             $response['status']['status_log']['invalid_data'] = [
-                'type' => 'error',
+                'type'    => 'error',
                 'message' => __( 'The data is invalid', 'directorist' ),
             ];
 
@@ -234,7 +234,7 @@ trait Multi_Directory_Helper {
 
         unset( $fields['name'] );
 
-        $term = get_term( $args['term_id'], ATBDP_DIRECTORY_TYPE );
+        $term     = get_term( $args['term_id'], ATBDP_DIRECTORY_TYPE );
         $old_name = $term->name;
 
         $has_diffrent_name = $old_name !== $directory_name;
@@ -310,7 +310,7 @@ trait Multi_Directory_Helper {
         if ( ! empty( $search_form_fields['groups'] ) ) {
             foreach ( $search_form_fields['groups'] as &$group ) {
                 if ( ! empty( $group['fields'] ) && is_array( $group['fields'] ) ) {
-                    $original_count = count( $group['fields'] );
+                    $original_count  = count( $group['fields'] );
                     $group['fields'] = array_filter(
                         $group['fields'], function( $field ) use ( $search_form_fields ) {
                             return isset( $search_form_fields['fields'][ $field ] );

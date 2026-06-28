@@ -232,7 +232,7 @@ class Helper {
 
             case 'taxonomy':
                 if ( $screen == 'term' || $screen == 'edit-tags' ) {
-                    $taxonomies   = [ 'at_biz_dir-category', 'at_biz_dir-location', 'at_biz_dir-tags' ];
+                    $taxonomies = [ 'at_biz_dir-category', 'at_biz_dir-location', 'at_biz_dir-tags' ];
                     if ( isset( $_GET['taxonomy'] ) && in_array( $_GET['taxonomy'], $taxonomies ) ) {
                         $status = true;
                     }

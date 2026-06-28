@@ -8,7 +8,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 $address_data = $listing->get_address( $data );
-$address = ( is_string( $address_data ) ) ? $address_data : '';
+$address      = ( is_string( $address_data ) ) ? $address_data : '';
 ?>
 
 <div class="directorist-single-info directorist-single-info-address">

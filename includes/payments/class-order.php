@@ -98,20 +98,20 @@ class ATBDP_Order
      */
     public static function get_order_details( $order_id ) {
         if ( empty( $order_id ) ) return __( 'No Order ID Provided', 'directorist' );
-        $c_position = get_directorist_option( 'payment_currency_position' );
-        $currency = atbdp_get_payment_currency();
-        $symbol = atbdp_currency_symbol( $currency );
+        $c_position  = get_directorist_option( 'payment_currency_position' );
+        $currency    = atbdp_get_payment_currency();
+        $symbol      = atbdp_currency_symbol( $currency );
         $order_items = apply_filters( 'atbdp_order_items_data', [], $order_id ); // this is the hook that an extension can hook to, to add new items on checkout page.eg. plan
 
-        $featured = get_post_meta( $order_id, '_featured', true );
+        $featured   = get_post_meta( $order_id, '_featured', true );
         $listing_id = get_post_meta( $order_id, '_listing_id', true );
         if ( $featured ) {
             $order_items[] = atbdp_get_featured_settings_array();
         }
 
         // fix currency symbol position
-        $before = '';
-        $after = '';
+        $before                             = '';
+        $after                              = '';
         ( 'after' == $c_position ) ? $after = $symbol : $before = $symbol;
 
         ob_start();
@@ -175,43 +175,43 @@ class ATBDP_Order
     public function register_custom_post_type() {
 
         $mitization_active = directorist_is_monetization_enabled();
-        $labels = [
-            'name' => _x( 'Order History', 'Post Type General Name', 'directorist' ),
-            'singular_name' => _x( 'Order', 'Post Type Singular Name', 'directorist' ),
-            'menu_name' => __( 'Order History', 'directorist' ),
-            'name_admin_bar' => __( 'Order', 'directorist' ),
-            'all_items' => __( 'Order History', 'directorist' ),
-            'add_new_item' => __( 'Add New Order', 'directorist' ),
-            'add_new' => __( 'Add New', 'directorist' ),
-            'new_item' => __( 'New Order', 'directorist' ),
-            'edit_item' => __( 'Edit Order', 'directorist' ),
-            'update_item' => __( 'Update Order', 'directorist' ),
-            'view_item' => __( 'View Order', 'directorist' ),
-            'search_items' => __( 'Search Order', 'directorist' ),
-            'not_found' => __( 'No orders found', 'directorist' ),
+        $labels            = [
+            'name'               => _x( 'Order History', 'Post Type General Name', 'directorist' ),
+            'singular_name'      => _x( 'Order', 'Post Type Singular Name', 'directorist' ),
+            'menu_name'          => __( 'Order History', 'directorist' ),
+            'name_admin_bar'     => __( 'Order', 'directorist' ),
+            'all_items'          => __( 'Order History', 'directorist' ),
+            'add_new_item'       => __( 'Add New Order', 'directorist' ),
+            'add_new'            => __( 'Add New', 'directorist' ),
+            'new_item'           => __( 'New Order', 'directorist' ),
+            'edit_item'          => __( 'Edit Order', 'directorist' ),
+            'update_item'        => __( 'Update Order', 'directorist' ),
+            'view_item'          => __( 'View Order', 'directorist' ),
+            'search_items'       => __( 'Search Order', 'directorist' ),
+            'not_found'          => __( 'No orders found', 'directorist' ),
             'not_found_in_trash' => __( 'No orders found in Trash', 'directorist' ),
         ];
 
         $args = [
-            'labels' => $labels,
-            'description' => __( 'This order post type will keep track of user\'s order and payment status', 'directorist' ),
-            'supports' => ['title', 'author',],
-            'taxonomies' => [''],
-            'hierarchical' => false,
-            'public' => true,
-            'show_ui' => current_user_can( 'manage_atbdp_options' ) ? ( ! empty( $mitization_active ) ? true : false ) : false, // show the menu only to the admin
-            'show_in_menu' => current_user_can( 'manage_atbdp_options' ) ? 'edit.php?post_type=' . ATBDP_POST_TYPE : false,
-            'show_in_admin_bar' => true,
-            'capabilities' => [
+            'labels'              => $labels,
+            'description'         => __( 'This order post type will keep track of user\'s order and payment status', 'directorist' ),
+            'supports'            => ['title', 'author',],
+            'taxonomies'          => [''],
+            'hierarchical'        => false,
+            'public'              => true,
+            'show_ui'             => current_user_can( 'manage_atbdp_options' ) ? ( ! empty( $mitization_active ) ? true : false ) : false, // show the menu only to the admin
+            'show_in_menu'        => current_user_can( 'manage_atbdp_options' ) ? 'edit.php?post_type=' . ATBDP_POST_TYPE : false,
+            'show_in_admin_bar'   => true,
+            'capabilities'        => [
                 'create_posts' => false,
             ],
-            'show_in_nav_menus' => true,
-            'can_export' => true,
-            'has_archive' => true,
+            'show_in_nav_menus'   => true,
+            'can_export'          => true,
+            'has_archive'         => true,
             'exclude_from_search' => true,
-            'publicly_queryable' => true,
-            'capability_type' => 'at_biz_dir',
-            'map_meta_cap' => true,
+            'publicly_queryable'  => true,
+            'capability_type'     => 'at_biz_dir',
+            'map_meta_cap'        => true,
         ];
 
         register_post_type( 'atbdp_orders', $args );
@@ -309,7 +309,7 @@ class ATBDP_Order
         if ( 'edit.php' == $pagenow && 'atbdp_orders' == $post_type && ! empty( $st ) ) {
             // Filter by post meta "payment_status"
             if ( '' != $st && 'all' != $st ) {
-                $query->query_vars['meta_key'] = '_payment_status';
+                $query->query_vars['meta_key']   = '_payment_status';
                 $query->query_vars['meta_value'] = sanitize_key( $st );
             }
 
@@ -328,15 +328,15 @@ class ATBDP_Order
     public function add_new_order_columns( $columns ) {
 
         $columns = [
-            'cb' => '<input type="checkbox" />', // Render a checkbox instead of text
-            'ID' => __( 'Order ID', 'directorist' ),
-            'details' => __( 'Details', 'directorist' ),
-            'amount' => __( 'Amount', 'directorist' ),
-            'type' => __( 'Payment Type', 'directorist' ),
+            'cb'             => '<input type="checkbox" />', // Render a checkbox instead of text
+            'ID'             => __( 'Order ID', 'directorist' ),
+            'details'        => __( 'Details', 'directorist' ),
+            'amount'         => __( 'Amount', 'directorist' ),
+            'type'           => __( 'Payment Type', 'directorist' ),
             'transaction_id' => __( 'Transaction ID', 'directorist' ),
-            'customer' => __( 'Customer', 'directorist' ),
-            'date' => __( 'Date', 'directorist' ),
-            'status' => __( 'Order Status', 'directorist' ),
+            'customer'       => __( 'Customer', 'directorist' ),
+            'date'           => __( 'Date', 'directorist' ),
+            'status'         => __( 'Order Status', 'directorist' ),
         ];
 
         return $columns = apply_filters( 'atbdp_add_new_order_column', $columns );
@@ -388,11 +388,11 @@ class ATBDP_Order
                 break;
             case 'amount' :
                 $amount = get_post_meta( $post_id, '_amount', true );
-                $value = atbdp_format_payment_amount( $amount ); // add a currency sign before the price
+                $value  = atbdp_format_payment_amount( $amount ); // add a currency sign before the price
                 $before = ''; $after = '';
-                $c_position      = get_directorist_option( 'payment_currency_position' );
-                $currency        = atbdp_get_payment_currency();
-                $symbol          = atbdp_currency_symbol( $currency );
+                $c_position                         = get_directorist_option( 'payment_currency_position' );
+                $currency                           = atbdp_get_payment_currency();
+                $symbol                             = atbdp_currency_symbol( $currency );
                 ( 'after' == $c_position ) ? $after = $symbol : $before = $symbol;
                 echo esc_html( $before . $value . $after );
                 break;
@@ -419,7 +419,7 @@ class ATBDP_Order
                 echo esc_html( $user_info->user_email );
                 break;
             case 'date' :
-                $date = strtotime( $post->post_date );
+                $date  = strtotime( $post->post_date );
                 $value = date_i18n( get_option( 'date_format' ), $date );
 
                 echo esc_attr( $value );
@@ -446,13 +446,13 @@ class ATBDP_Order
      * @return   array    Array of all the sortable columns
      */
     public function get_sortable_columns() {
-        $columns = [
-            'ID' => 'ID',
-            'amount' => 'amount',
-            'type' => 'type',
+        $columns        = [
+            'ID'       => 'ID',
+            'amount'   => 'amount',
+            'type'     => 'type',
             'customer' => 'customer',
-            'date' => 'date',
-            'status' => 'status',
+            'date'     => 'date',
+            'status'   => 'status',
         ];
         return $columns = apply_filters( 'atbdp_order_table_shortable_colums', $columns );
     }
@@ -473,7 +473,7 @@ class ATBDP_Order
 
             // Get the action
             $wp_list_table = _get_list_table( 'WP_Posts_List_Table' );
-            $action = $wp_list_table->current_action();
+            $action        = $wp_list_table->current_action();
 
             $allowed_actions = array_keys( atbdp_get_payment_bulk_actions() );
             if ( ! in_array( $action, $allowed_actions ) ) return;
@@ -489,10 +489,10 @@ class ATBDP_Order
             if ( empty( $post_ids ) ) return;
 
             // This is based on wp-admin/edit.php
-            $sendback = remove_query_arg( array_merge( $allowed_actions, ['untrashed', 'deleted', 'ids'] ), wp_get_referer() );
+            $sendback                    = remove_query_arg( array_merge( $allowed_actions, ['untrashed', 'deleted', 'ids'] ), wp_get_referer() );
             if ( ! $sendback ) $sendback = admin_url( "edit.php?post_type=$post_type" );
 
-            $pagenum = $wp_list_table->get_pagenum();
+            $pagenum  = $wp_list_table->get_pagenum();
             $sendback = add_query_arg( 'paged', $pagenum, $sendback );
 
             $modified = 0;
@@ -537,8 +537,8 @@ class ATBDP_Order
                 update_post_meta( $listing_id, '_featured', 0 );
             } else if ( in_array( $old_status, $non_complete_statuses ) && 'completed' == $new_status ) {
                 update_post_meta( $listing_id, '_featured', 1 );
-                $my_post = [];
-                $my_post['ID'] = $listing_id;
+                $my_post                = [];
+                $my_post['ID']          = $listing_id;
                 $my_post['post_status'] = $new_l_status;
                 if ( ! is_fee_manager_active() ) {
                     wp_update_post( $my_post );
@@ -573,7 +573,7 @@ class ATBDP_Order
 
         if ( 'edit.php' == $pagenow && 'atbdp_orders' == $post_type ) {
 
-            $message = '';
+            $message         = '';
             $allowed_actions = array_keys( atbdp_get_payment_bulk_actions() );
 
             foreach ( $allowed_actions as $action ) {
@@ -611,7 +611,7 @@ class ATBDP_Order
                     $vars,
                     [
                         'meta_key' => 'amount',
-                        'orderby' => 'meta_value_num'
+                        'orderby'  => 'meta_value_num'
                     ]
                 );
             }

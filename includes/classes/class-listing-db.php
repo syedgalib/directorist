@@ -30,8 +30,8 @@ if ( ! class_exists( 'ATBDP_Listing_DB' ) ) :
         public function atbdp_delete_attachment( $id ) {
 
             if ( 'at_biz_dir' === get_post_type( $id ) ) {
-                $listing_img = directorist_get_listing_gallery_images( $id );
-                $listing_img = ! empty( $listing_img ) ? $listing_img : [];
+                $listing_img     = directorist_get_listing_gallery_images( $id );
+                $listing_img     = ! empty( $listing_img ) ? $listing_img : [];
                 $listing_prv_img = directorist_get_listing_preview_image( $id );
 
                 if ( is_array( $listing_img ) ) {
@@ -58,7 +58,7 @@ if ( ! class_exists( 'ATBDP_Listing_DB' ) ) :
 
         public function get_listing_order_by_featured() {
             $args = [
-                'post_type' => ATBDP_POST_TYPE,
+                'post_type'     => ATBDP_POST_TYPE,
                 'post_per_page' => -1
             ];
         }
@@ -69,7 +69,7 @@ if ( ! class_exists( 'ATBDP_Listing_DB' ) ) :
          * @return WP_Query   it returns an object of the WP_Query class with the items/listings on success and false on failure.
          */
         public function get_listing_by_user( $user_id = 0 ) {
-            $pagination = get_directorist_option( 'user_listings_pagination',1 );
+            $pagination        = get_directorist_option( 'user_listings_pagination',1 );
             $listingS_per_page = get_directorist_option( 'user_listings_per_page',9 );
 
             //for pagination

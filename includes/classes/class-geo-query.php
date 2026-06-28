@@ -66,7 +66,7 @@ if ( ! class_exists( 'ATBDP_GJSGeoQuery' ) ) {
         
                 // Prepare SQL with BETWEEN for min and max distance
                 $new_sql = '( atbdp_geo_query_lat.meta_key = %s AND atbdp_geo_query_lng.meta_key = %s AND ' . $haversine . ' BETWEEN %f AND %f )';
-                $sql .= $wpdb->prepare( $new_sql, $lat_field, $lng_field, $min_distance, $max_distance );
+                $sql    .= $wpdb->prepare( $new_sql, $lat_field, $lng_field, $min_distance, $max_distance );
             }
         
             return $sql;
@@ -119,8 +119,8 @@ if ( ! class_exists( 'ATBDP_GJSGeoQuery' ) ) {
             }
             $lat_field = 'atbdp_geo_query_lat.meta_value';
             $lng_field = 'atbdp_geo_query_lng.meta_value';
-            $lat = 0;
-            $lng = 0;
+            $lat       = 0;
+            $lng       = 0;
             if ( isset( $atbdp_geo_query['latitude'] ) ) {
                 $lat = $atbdp_geo_query['latitude'];
             }

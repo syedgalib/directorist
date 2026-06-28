@@ -18,21 +18,21 @@ if ( ! class_exists( 'ATBDP_Title_Update' ) ) :
                     // Change Location page title
                     if ( $post->ID == $LOC_page_ID ) {
                         if ( $slug = get_query_var( 'atbdp_location' ) ) {
-                            $term = get_term_by( 'slug', $slug, ATBDP_LOCATION );
+                            $term  = get_term_by( 'slug', $slug, ATBDP_LOCATION );
                             $title = ! empty( $term ) ? $term->name : '';
                         }
                     }
                     // Change Category page title
                     if ( $post->ID == $CAT_page_ID ) {
                         if ( $slug = get_query_var( 'atbdp_category' ) ) {
-                            $term = get_term_by( 'slug', $slug, ATBDP_CATEGORY );
+                            $term  = get_term_by( 'slug', $slug, ATBDP_CATEGORY );
                             $title = ! empty( $term ) ? $term->name : '';
                         }
                     }
                     // Change Tag page title
                     if ( $post->ID == $Tag_page_ID ) {
                         if ( $slug = get_query_var( 'atbdp_tag' ) ) {
-                            $term = get_term_by( 'slug', $slug, ATBDP_TAGS );
+                            $term  = get_term_by( 'slug', $slug, ATBDP_TAGS );
                             $title = ! empty( $term ) ? $term->name : '';
                         }
                     }

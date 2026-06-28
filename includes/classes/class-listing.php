@@ -38,7 +38,7 @@ if ( ! class_exists( 'ATBDP_Listing' ) ) :
         public function __construct() {
             $this->include_files();
             $this->add_listing = new ATBDP_Add_Listing;
-            $this->db = new ATBDP_Listing_DB;
+            $this->db          = new ATBDP_Listing_DB;
             // for search functionality
             // add_action('pre_get_posts', array($this, 'modify_search_query'), 1, 10);
             // remove adjacent_posts_rel_link_wp_head for accurate post views
@@ -79,7 +79,7 @@ if ( ! class_exists( 'ATBDP_Listing' ) ) :
                 $type = ! empty( $_GET['post_type'] ) ? directorist_clean( wp_unslash( $_GET['post_type'] ) ) : '';
             }
             if ( 'at_biz_dir' == $type && is_admin() && $pagenow == 'edit.php' && isset( $_GET['directory_type'] ) && ! empty( $_GET['directory_type'] ) ) {
-                $value = ! empty( $_GET['directory_type'] ) ? directorist_clean( wp_unslash( $_GET['directory_type'] ) ) : '';
+                $value     = ! empty( $_GET['directory_type'] ) ? directorist_clean( wp_unslash( $_GET['directory_type'] ) ) : '';
                 $tax_query = [
                     'relation' => 'AND',
                     [
@@ -255,9 +255,9 @@ if ( ! class_exists( 'ATBDP_Listing' ) ) :
             };
 
             $directory_type = directorist_get_listing_directory( $listing_id );
-            $post_status = get_term_meta( $directory_type, 'new_listing_status', true );
+            $post_status    = get_term_meta( $directory_type, 'new_listing_status', true );
 
-            $order_meta = get_post_meta( $order_id );
+            $order_meta     = get_post_meta( $order_id );
             $payment_status = $order_meta['_payment_status'][0];
 
             if ( 'completed' !== $payment_status ) {
@@ -265,7 +265,7 @@ if ( ! class_exists( 'ATBDP_Listing' ) ) :
             }
 
             $args = [
-                'ID' => $listing_id,
+                'ID'          => $listing_id,
                 'post_status' => $post_status,
             ];
 
@@ -347,7 +347,7 @@ if ( ! class_exists( 'ATBDP_Listing' ) ) :
             if ( ! is_admin() && $query->is_main_query() && $query->is_archive() ) {
                 global $wp_query;
                 $post_type = get_query_var( 'post_type' );
-                $s = get_query_var( 's' );
+                $s         = get_query_var( 's' );
                 $post_type = ( ! empty( $post_type ) ) ? $post_type : ( ! empty( $query->post_type ) ? $query->post_type : 'any' );
 
                 if ( $query->is_search() && $post_type == ATBDP_POST_TYPE ) {
@@ -378,7 +378,7 @@ if ( ! class_exists( 'ATBDP_Listing' ) ) :
                 wp_send_json_error(
                     [
                         'error' => __( 'Invalid request.', 'directorist' ),
-                        'data' => $_REQUEST,
+                        'data'  => $_REQUEST,
                     ],
                     400
                 );

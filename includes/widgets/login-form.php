@@ -14,7 +14,7 @@ class Login_Form extends \WP_Widget {
         $id_base        = 'bdlf_widget';
         $name           = esc_html__( 'Directorist - Login Form', 'directorist' );
         $widget_options =             [
-            'classname' => 'directorist-widget',
+            'classname'   => 'directorist-widget',
             'description' => esc_html__( 'You can show login form for logged out users by this widget', 'directorist' ),
         ];
 
@@ -23,21 +23,21 @@ class Login_Form extends \WP_Widget {
 
     public function form( $instance ) {
         $defaults = [
-            'title'           => esc_html__( 'Login Form', 'directorist' ),
-            'single_only'     => 1,
+            'title'       => esc_html__( 'Login Form', 'directorist' ),
+            'single_only' => 1,
         ];
 
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         $fields = [
             'title'       => [
-                'label'   => esc_html__( 'Title:', 'directorist' ),
-                'type'    => 'text',
+                'label' => esc_html__( 'Title:', 'directorist' ),
+                'type'  => 'text',
             ],
             'single_only' => [
-                'label'   => esc_html__( 'Display only on single listing', 'directorist' ),
-                'type'    => 'checkbox',
-                'value'   => 1,
+                'label' => esc_html__( 'Display only on single listing', 'directorist' ),
+                'type'  => 'checkbox',
+                'value' => 1,
             ],
         ];
 
@@ -47,8 +47,8 @@ class Login_Form extends \WP_Widget {
     public function update( $new_instance, $old_instance ) {
         $instance = [];
 
-        $instance['title']            = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
-        $instance['single_only']      = ! empty( $new_instance['single_only'] ) ? 1 : 0;
+        $instance['title']       = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
+        $instance['single_only'] = ! empty( $new_instance['single_only'] ) ? 1 : 0;
 
         return $instance;
     }
@@ -59,7 +59,7 @@ class Login_Form extends \WP_Widget {
 
         echo wp_kses_post( $args['before_widget'] );
 
-        $title = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Login Form', 'directorist' );
+        $title        = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Login Form', 'directorist' );
         $widget_title = $args['before_title'] . apply_filters( 'widget_title', $title ) . $args['after_title'];
         echo wp_kses_post( $widget_title );
 

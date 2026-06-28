@@ -34,7 +34,7 @@ class Custom_Widget_Base extends Widget_Base {
             'transaction' => __( 'This widget works only in Transaction Failure page. It has no additional elementor settings.', 'directorist' ),
         ];
 
-        $this->az_dir      = dirname( ( new \ReflectionClass( $this ) )->getFileName() );
+        $this->az_dir = dirname( ( new \ReflectionClass( $this ) )->getFileName() );
         parent::__construct( $data, $args );
     }
 
@@ -96,7 +96,7 @@ class Custom_Widget_Base extends Widget_Base {
             } elseif ( isset( $field['mode'] ) && $field['mode'] == 'tab_end' ) {
                 $this->end_controls_tab();
             } elseif ( isset( $field['mode'] ) && $field['mode'] == 'group' ) {
-                $type = $field['type'];
+                $type          = $field['type'];
                 $field['name'] = $field['id'];
                 unset( $field['mode'] );
                 unset( $field['type'] );

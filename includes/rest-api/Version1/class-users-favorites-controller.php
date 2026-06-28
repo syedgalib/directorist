@@ -52,12 +52,12 @@ class User_Favorites_Controller extends Abstract_Controller {
 
         register_rest_route(
             $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d]+)', array(
-                'args' => array(
+                'args'   => array(
                     'user_id' => array(
                         'description' => __( 'User id.', 'directorist' ),
                         'type'        => 'integer',
                     ),
-                    'id' => array(
+                    'id'      => array(
                         'description' => __( 'Listing id.', 'directorist' ),
                         'type'        => 'integer',
                     ),

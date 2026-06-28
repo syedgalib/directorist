@@ -5,15 +5,15 @@ namespace Directorist\Multi_Directory;
 class Multi_Directory_Manager {
     use Multi_Directory_Helper;
 
-    public static $fields  = [];
+    public static $fields = [];
 
     public static $layouts = [];
 
-    public static $config  = [];
+    public static $config = [];
 
     public static $options = [];
 
-    public static $migration  = null;
+    public static $migration = null;
 
     public function __construct() {
         self::$migration = new Multi_Directory_Migration( [ 'multi_directory_manager' => $this ] );
@@ -40,9 +40,9 @@ class Multi_Directory_Manager {
     }
 
     public static function builder_data_backup( $term_id ) {
-        $submission_form_fields     = get_term_meta( $term_id , 'submission_form_fields', true );
-        $single_listings_contents   = get_term_meta( $term_id, 'single_listings_contents', true );
-        $single_listing_header      = get_term_meta( $term_id, 'single_listing_header', true );
+        $submission_form_fields   = get_term_meta( $term_id , 'submission_form_fields', true );
+        $single_listings_contents = get_term_meta( $term_id, 'single_listings_contents', true );
+        $single_listing_header    = get_term_meta( $term_id, 'single_listing_header', true );
 
         // Fetch existing backup data from the option
         $existing_backup_data = get_option( 'directorist_builder_backup_data', [] );
@@ -52,9 +52,9 @@ class Multi_Directory_Manager {
 
         if ( ! empty( $submission_form_fields ) && ! empty( $single_listings_contents ) && ! empty( $single_listing_header ) ) {
             $existing_backup_data[$term_id] = [
-                'submission_form_fields'    => $submission_form_fields,
-                'single_listings_contents'  => $single_listings_contents,
-                'single_listing_header'     => $single_listing_header,
+                'submission_form_fields'   => $submission_form_fields,
+                'single_listings_contents' => $single_listings_contents,
+                'single_listing_header'    => $single_listing_header,
             ];
             // Convert the backup data to JSON format
             $json_backup_data = wp_json_encode( $existing_backup_data );
@@ -108,7 +108,7 @@ class Multi_Directory_Manager {
                 'widget_key'        => 'review_comment',
                 'widget_group'      => 'other_widgets',
             ],
-            'review_email' => [
+            'review_email'   => [
                 'label'             => 'review_email_label',
                 'placeholder'       => 'review_email_placeholder',
                 'widget_name'       => 'review',
@@ -116,7 +116,7 @@ class Multi_Directory_Manager {
                 'widget_key'        => 'review_email',
                 'widget_group'      => 'other_widgets',
             ],
-            'review_name' => [
+            'review_name'    => [
                 'label'             => 'review_name_label',
                 'placeholder'       => 'review_name_placeholder',
                 'widget_name'       => 'review',
@@ -289,7 +289,7 @@ class Multi_Directory_Manager {
             // Add the new field to the fields array
             $submission_form['fields']['terms_privacy'] = $terms_privacy_field;
             // Add the 'terms_privacy' field to the last group in the 'groups' array
-            $last_group_key = array_key_last( $submission_form['groups'] ); // Get the last group key
+            $last_group_key                                           = array_key_last( $submission_form['groups'] ); // Get the last group key
             $submission_form['groups'][ $last_group_key ]['fields'][] = 'terms_privacy'; // Add to the last group's fields
         }
 
@@ -307,7 +307,7 @@ class Multi_Directory_Manager {
 
         foreach ( $directory_types as $directory_type ) {
             $single_listings_contents = get_term_meta( $directory_type->term_id, 'single_listings_contents', true );
-            $need_to_update = false;
+            $need_to_update           = false;
 
             if ( empty( $single_listings_contents ) ) {
                 continue;
@@ -319,16 +319,16 @@ class Multi_Directory_Manager {
 
             foreach ( $single_listings_contents['groups'] as $group_index => $group ) {
                 $has_section_id = ( ! empty( $group['section_id'] ) ) ? true : false;
-                $renew = ( $has_section_id ) ? false : true;
-                $renew = apply_filters( 'directorist_renew_single_listing_section_id', $renew );
+                $renew          = ( $has_section_id ) ? false : true;
+                $renew          = apply_filters( 'directorist_renew_single_listing_section_id', $renew );
 
                 if ( ! $renew ) {
                     continue;
                 }
 
-                $group['section_id'] = $group_index + 1;
+                $group['section_id']                                = $group_index + 1;
                 $single_listings_contents['groups'][ $group_index ] = $group;
-                $need_to_update = true;
+                $need_to_update                                     = true;
             }
 
             if ( $need_to_update ) {
@@ -349,7 +349,7 @@ class Multi_Directory_Manager {
         ];
 
         $default_directory = get_directorist_option( 'atbdp_default_derectory', '' );
-        $terms = directorist_get_directories( $args );
+        $terms             = directorist_get_directories( $args );
 
         if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
             $default_directory = $terms[0]->term_id;
@@ -360,7 +360,7 @@ class Multi_Directory_Manager {
 
     // setup_migration
     public function setup_migration() {
-        $migrated = get_option( 'atbdp_migrated', false );
+        $migrated       = get_option( 'atbdp_migrated', false );
         $need_migration = ( empty( $migrated ) && ! self::has_multidirectory() && self::has_old_listings_data() ) ? true : false;
 
         if ( $need_migration ) {
@@ -402,8 +402,8 @@ class Multi_Directory_Manager {
             ]
         );
 
-        $has_listings          = $get_listings->post_count;
-        $has_custom_fields     = $get_custom_fields->post_count;
+        $has_listings      = $get_listings->post_count;
+        $has_custom_fields = $get_custom_fields->post_count;
 
         return ( $has_listings || $has_custom_fields ) ? true : false;
     }
@@ -438,7 +438,7 @@ class Multi_Directory_Manager {
     // run_force_migration
     public function run_force_migration() {
         $general_directory = term_exists( 'General', 'atbdp_listing_types' );
-        $args = [];
+        $args              = [];
 
         if ( $general_directory ) {
             $args[ 'term_id' ] = $general_directory['term_id'];
@@ -500,10 +500,10 @@ class Multi_Directory_Manager {
             wp_send_json(
                 [
                     'status' => [
-                        'success' => false,
+                        'success'    => false,
                         'status_log' => [
                             'nonce_is_missing' => [
-                                'type' => 'error',
+                                'type'    => 'error',
                                 'message' => __( 'Something is wrong! Please refresh and retry.', 'directorist' ),
                             ],
                         ],
@@ -516,10 +516,10 @@ class Multi_Directory_Manager {
             wp_send_json(
                 [
                     'status' => [
-                        'success' => false,
+                        'success'    => false,
                         'status_log' => [
                             'access_denied' => [
-                                'type' => 'error',
+                                'type'    => 'error',
                                 'message' => __( 'You are not allowed to access this resource', 'directorist' ),
                             ],
                         ],
@@ -544,7 +544,7 @@ class Multi_Directory_Manager {
         // Validate file
         if ( empty( $json_file ) ) {
             $response['status']['status_log']['file_is_missing'] = [
-                'type' => 'error',
+                'type'    => 'error',
                 'message' => __( 'File is missing', 'directorist' ),
             ];
 
@@ -555,7 +555,7 @@ class Multi_Directory_Manager {
         $file_contents = file_get_contents( $json_file['tmp_name'] );
         if ( empty( $file_contents ) ) {
             $response['status']['status_log']['invalid_data'] = [
-                'type' => 'error',
+                'type'    => 'error',
                 'message' => __( 'The data is invalid', 'directorist' ),
             ];
 
@@ -570,7 +570,7 @@ class Multi_Directory_Manager {
 
         // If dierctory name is numeric update the term instead of creating
         if ( is_numeric( $directory_name ) ) {
-            $term_id = (int) $directory_name;
+            $term_id        = (int) $directory_name;
             $directory_name = '';
         }
 
@@ -590,8 +590,8 @@ class Multi_Directory_Manager {
 
     // cptm_fields_before_update
     public function cptm_fields_before_update( $fields ) {
-        $new_fields     = $fields;
-        $fields_group   = self::$config['fields_group'];
+        $new_fields   = $fields;
+        $fields_group = self::$config['fields_group'];
 
         foreach ( $fields_group as $group_name => $group_fields ) {
             $grouped_fields_value = [];
@@ -626,10 +626,10 @@ class Multi_Directory_Manager {
             wp_send_json(
                 [
                     'status' => [
-                        'success' => false,
+                        'success'    => false,
                         'status_log' => [
                             'nonce_is_missing' => [
-                                'type' => 'error',
+                                'type'    => 'error',
                                 'message' => __( 'Something is wrong! Please refresh and retry.', 'directorist' ),
                             ],
                         ],
@@ -642,10 +642,10 @@ class Multi_Directory_Manager {
             wp_send_json(
                 [
                     'status' => [
-                        'success' => false,
+                        'success'    => false,
                         'status_log' => [
                             'access_denied' => [
-                                'type' => 'error',
+                                'type'    => 'error',
                                 'message' => __( 'You are not allowed to access this resource', 'directorist' ),
                             ],
                         ],
@@ -658,10 +658,10 @@ class Multi_Directory_Manager {
             wp_send_json(
                 [
                     'status' => [
-                        'success' => false,
+                        'success'    => false,
                         'status_log' => [
                             'name_is_missing' => [
-                                'type' => 'error',
+                                'type'    => 'error',
                                 'message' => __( 'Name is missing', 'directorist' ),
                             ],
                         ],
@@ -708,7 +708,7 @@ class Multi_Directory_Manager {
         }
 
         if ( directorist_is_multi_directory_enabled() && empty( $term_id ) ) {
-            $redirect_url = admin_url( 'edit.php?post_type=at_biz_dir&page=atbdp-directory-types&action=edit&listing_type_id=' . $add_directory['term_id'] );
+            $redirect_url                  = admin_url( 'edit.php?post_type=at_biz_dir&page=atbdp-directory-types&action=edit&listing_type_id=' . $add_directory['term_id'] );
             $add_directory['redirect_url'] = $redirect_url;
         }
 
@@ -781,7 +781,7 @@ class Multi_Directory_Manager {
     public function menu_page_callback__directory_types() {
         $enable_multi_directory = directorist_is_multi_directory_enabled();
 
-        $action = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
+        $action          = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
         $listing_type_id = 0;
 
         $data = [
@@ -834,7 +834,7 @@ class Multi_Directory_Manager {
 
         self::$options['name']['value'] = $term_name;
 
-        $all_term_meta = get_term_meta( $term_id );
+        $all_term_meta  = get_term_meta( $term_id );
         $test_migration = apply_filters( 'atbdp_test_migration', false );
 
         if ( $test_migration ) {
@@ -848,7 +848,7 @@ class Multi_Directory_Manager {
         foreach ( $all_term_meta as $meta_key => $meta_value ) {
             if ( isset( self::$fields[$meta_key] ) ) {
                 $_meta_value = ( ! $test_migration ) ? $meta_value[0] : $meta_value;
-                $value = maybe_unserialize( maybe_unserialize( $_meta_value ) );
+                $value       = maybe_unserialize( maybe_unserialize( $_meta_value ) );
 
                 self::$fields[ $meta_key ]['value'] = $value;
             }
@@ -865,7 +865,7 @@ class Multi_Directory_Manager {
         foreach ( self::$config['fields_group'] as $group_key => $group_fields ) {
             if ( array_key_exists( $group_key, $all_term_meta ) ) {
                 $_group_meta_value = ( ! $test_migration ) ? $all_term_meta[$group_key][0] : $all_term_meta[$group_key];
-                $group_value = maybe_unserialize( maybe_unserialize( $_group_meta_value ) );
+                $group_value       = maybe_unserialize( maybe_unserialize( $_group_meta_value ) );
 
                 foreach ( $group_fields as $field_index => $field_key ) {
 
@@ -917,7 +917,7 @@ class Multi_Directory_Manager {
 
         // Collect all placeholder keys already present in the saved value.
         // Use associative array for O(1) lookup instead of O(n) in_array().
-        $saved_keys = [];
+        $saved_keys   = [];
         $collect_keys = function ( $items ) use ( &$saved_keys, &$collect_keys ) {
             foreach ( $items as $item ) {
                 if ( isset( $item['placeholderKey'] ) ) {
@@ -978,8 +978,8 @@ class Multi_Directory_Manager {
             return;
         }
 
-        $has_changes     = false;
-        $section_types   = [ 'body', 'thumbnail', 'footer' ];
+        $has_changes   = false;
+        $section_types = [ 'body', 'thumbnail', 'footer' ];
 
         // Process each template (grid_view_with_thumbnail, grid_view_without_thumbnail, etc.)
         foreach ( $card_templates as $template_key => $template_config ) {
@@ -993,7 +993,7 @@ class Multi_Directory_Manager {
                 continue;
             }
 
-            $saved_template_data = &$value['template_data'][ $template_key ];
+            $saved_template_data  = &$value['template_data'][ $template_key ];
             $template_has_changes = false;
 
             // Process all section types (body, thumbnail, footer) using the same logic
@@ -1095,7 +1095,7 @@ class Multi_Directory_Manager {
      * @since 3.0.0
      */
     public function get_pages_vl_arrays() {
-        $pages = get_pages();
+        $pages         = get_pages();
         $pages_options = [];
         if ( $pages ) {
             foreach ( $pages as $page ) {

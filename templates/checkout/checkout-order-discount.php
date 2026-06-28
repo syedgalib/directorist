@@ -10,19 +10,19 @@
         <span class="directorist-summery-label directorist-row-label--order-discount-rate">
             <?php esc_html_e( 'Discount', 'directorist-pricing-plans' ); ?>
             <?php
-                if ( DiscountType::PERCENT === $type ) {
-                    echo sprintf(
-                        /* translators: %s: discount rate percentage */
-                        esc_html__( '( %s%% )', 'directorist-pricing-plans' ),
-                        esc_html( $rate )
-                    );
-                } else {
-                    echo sprintf(
-                        /* translators: %s: formatted discount amount */
-                        esc_html__( '( %s )', 'directorist-pricing-plans' ),
-                        directorist_price( $rate )
-                    );
-                }
+            if ( DiscountType::PERCENT === $type ) {
+                echo sprintf(
+                    /* translators: %s: discount rate percentage */
+                    esc_html__( '( %s%% )', 'directorist-pricing-plans' ),
+                    esc_html( $rate )
+                );
+            } else {
+                echo sprintf(
+                    /* translators: %s: formatted discount amount */
+                    esc_html__( '( %s )', 'directorist-pricing-plans' ),
+                    directorist_price( $rate )
+                );
+            }
             ?>
         </span>
     </td>

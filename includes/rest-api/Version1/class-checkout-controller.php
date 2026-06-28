@@ -26,14 +26,14 @@ class Checkout_Controller extends Abstract_Controller {
                     'callback'            => [ $this, 'checkout' ],
                     'permission_callback' => [ $this, 'auth_permissions_check' ],
                     'args'                => [
-                        'checkout_type'     => [
+                        'checkout_type'   => [
                             'description'       => __( 'The type of checkout to be performed.' ),
                             'type'              => 'string',
                             'sanitize_callback' => 'sanitize_text_field',
                             'enum'              => directorist_get_checkout_types(),
                             'required'          => true,
                         ],
-                        'payment_gateway'     => [
+                        'payment_gateway' => [
                             'description'       => __( 'The payment gateway to be used for the checkout.' ),
                             'type'              => 'string',
                             'sanitize_callback' => 'sanitize_text_field',
@@ -53,7 +53,7 @@ class Checkout_Controller extends Abstract_Controller {
                     'callback'            => [ $this, 'retry_payment' ],
                     'permission_callback' => [ $this, 'auth_permissions_check' ],
                     'args'                => [
-                        'order_id'     => [
+                        'order_id' => [
                             'description'       => __( 'The order id to be retried.' ),
                             'type'              => 'integer',
                             'sanitize_callback' => 'absint',

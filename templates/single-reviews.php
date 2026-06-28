@@ -150,7 +150,7 @@ $section_label = isset( $section_data['label'] ) ? $section_data['label'] : '';
             $fields['cookies'] = '';
         }
 
-        $comment_fields = [];
+        $comment_fields           = [];
         $comment_fields['rating'] = '<div class="directorist-review-criteria">' . Markup::get_rating( 0 ) . '</div>';
 
         $comment_fields['content'] = sprintf(

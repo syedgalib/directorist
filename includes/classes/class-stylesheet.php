@@ -88,19 +88,19 @@ if ( ! class_exists( 'ATBDP_Stylesheet' ) ) :
         // style_settings_css
         public static function style_settings_css() {
             do_action( 'include_style_settings' );
-            $button_primary_color             = get_directorist_option( 'button_primary_color', '#ffffff' );
-            $button_primary_bg_color          = get_directorist_option( 'button_primary_bg_color', '#444752' );
-            $button_secondary_color           = get_directorist_option( 'button_secondary_color', '#ffffff' );
-            $button_secondary_bg_color        = get_directorist_option( 'button_secondary_bg_color', '#222222' );
-            $open_back_color                = get_directorist_option( 'open_back_color', '#32cc6f' );
-            $closed_back_color              = get_directorist_option( 'closed_back_color', '#e23636' );
-            $featured_back_color            = get_directorist_option( 'featured_back_color', '#fa8b0c' );
-            $popular_back_color             = get_directorist_option( 'popular_back_color', '#f51957' );
-            $new_back_color                 = get_directorist_option( 'new_back_color', '#2C99FF' );
-            $primary_dark_back_color        = get_directorist_option( 'primary_dark_back_color', '#444752' );
-            $primary_dark_border_color      = get_directorist_option( 'primary_dark_border_color', '#444752' );
-            $marker_shape_color             = get_directorist_option( 'marker_shape_color', '#444752' );
-            $marker_icon_color              = get_directorist_option( 'marker_icon_color', '#444752' );
+            $button_primary_color      = get_directorist_option( 'button_primary_color', '#ffffff' );
+            $button_primary_bg_color   = get_directorist_option( 'button_primary_bg_color', '#444752' );
+            $button_secondary_color    = get_directorist_option( 'button_secondary_color', '#ffffff' );
+            $button_secondary_bg_color = get_directorist_option( 'button_secondary_bg_color', '#222222' );
+            $open_back_color           = get_directorist_option( 'open_back_color', '#32cc6f' );
+            $closed_back_color         = get_directorist_option( 'closed_back_color', '#e23636' );
+            $featured_back_color       = get_directorist_option( 'featured_back_color', '#fa8b0c' );
+            $popular_back_color        = get_directorist_option( 'popular_back_color', '#f51957' );
+            $new_back_color            = get_directorist_option( 'new_back_color', '#2C99FF' );
+            $primary_dark_back_color   = get_directorist_option( 'primary_dark_back_color', '#444752' );
+            $primary_dark_border_color = get_directorist_option( 'primary_dark_border_color', '#444752' );
+            $marker_shape_color        = get_directorist_option( 'marker_shape_color', '#444752' );
+            $marker_icon_color         = get_directorist_option( 'marker_icon_color', '#444752' );
 
             ob_start();
             ?>

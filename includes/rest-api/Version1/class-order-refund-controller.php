@@ -46,10 +46,10 @@ class Order_Refund_Controller extends Abstract_Controller {
                     'callback'            => [ $this, 'show' ],
                     'permission_callback' => [ $this, 'admin_permissions_check' ],
                     'args'                => [
-                        'id'     => [
-                            'description'       => __( 'The order ID.' ),
-                            'type'              => 'integer',
-                            'required'          => true,
+                        'id' => [
+                            'description' => __( 'The order ID.' ),
+                            'type'        => 'integer',
+                            'required'    => true,
                         ],
                     ],
                 ],
@@ -60,10 +60,10 @@ class Order_Refund_Controller extends Abstract_Controller {
                     'args'                => array_merge(
                         $this->store_args(), 
                         [
-                            'id'     => [
-                                'description'       => __( 'The order ID.' ),
-                                'type'              => 'integer',
-                                'required'          => true,
+                            'id' => [
+                                'description' => __( 'The order ID.' ),
+                                'type'        => 'integer',
+                                'required'    => true,
                             ],
                         ],
                     )
@@ -73,10 +73,10 @@ class Order_Refund_Controller extends Abstract_Controller {
                     'callback'            => [ $this, 'delete' ],
                     'permission_callback' => [ $this, 'admin_permissions_check' ],
                     'args'                => [
-                        'id'     => [
-                            'description'       => __( 'The order ID.' ),
-                            'type'              => 'integer',
-                            'required'          => true,
+                        'id' => [
+                            'description' => __( 'The order ID.' ),
+                            'type'        => 'integer',
+                            'required'    => true,
                         ],
                     ],
                 ],
@@ -104,7 +104,7 @@ class Order_Refund_Controller extends Abstract_Controller {
         $repository = new RefundRepository();
 
         try {
-            $id  = $repository->create( $dto );
+            $id = $repository->create( $dto );
         } catch ( Exception $e ) {
             return new WP_Error( 'rest_exception', $e->getMessage() );
         }
@@ -174,13 +174,15 @@ class Order_Refund_Controller extends Abstract_Controller {
 
         $dto = $repository->to_dto( $old_item );
 
-        $dto->set_status($request->get_param("status"));
+        $dto->set_status( $request->get_param( "status" ) );
 
         $repository->update( $dto );
 
-        return rest_ensure_response( [
-            'message' => esc_html__("Status updated successfully")
-        ] );
+        return rest_ensure_response(
+            [
+                'message' => esc_html__( "Status updated successfully" )
+            ] 
+        );
     }
 
     protected function store_args(): array {
@@ -190,19 +192,19 @@ class Order_Refund_Controller extends Abstract_Controller {
                 'type'        => 'integer',
                 'required'    => true,
             ],
-            'amount' => [
+            'amount'   => [
                 'description' => __( 'The listing ID.' ),
                 'type'        => 'integer',
                 'required'    => true,
                 'minimum'     => 1,
             ],
-            'status' => [
+            'status'   => [
                 'description' => __( 'The status of the order.' ),
                 'type'        => 'string',
                 'required'    => true,
                 'enum'        => RefundStatus::all(),
             ],
-            'reason' => [
+            'reason'   => [
                 'description' => __( 'The reason for the refund.' ),
                 'type'        => 'string',
                 'required'    => false,
@@ -219,20 +221,20 @@ class Order_Refund_Controller extends Abstract_Controller {
                 'default'           => 1,
                 'required'          => false,
             ],
-            'per_page'     => [
+            'per_page' => [
                 'description'       => __( 'The number of items per page.' ),
                 'type'              => 'integer',
                 'sanitize_callback' => 'absint',
                 'default'           => 10,
                 'required'          => false,
             ],
-            'search'     => [
+            'search'   => [
                 'description'       => __( 'The search query.' ),
                 'type'              => 'string',
                 'sanitize_callback' => 'sanitize_text_field',
                 'required'          => false,
             ],
-            'order_id'     => [
+            'order_id' => [
                 'description'       => __( 'The order ID.' ),
                 'type'              => 'integer',
                 'sanitize_callback' => 'absint',

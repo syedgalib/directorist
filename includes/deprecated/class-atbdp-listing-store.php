@@ -39,7 +39,7 @@ class ATBDP_Listings_Data_Store {
     // get_listings_ids
     public static function get_listings_ids( array $query_args = [] ) {
         _deprecated_function( __METHOD__, '7.4.3' );
-        $default = [
+        $default    = [
             'post_type'      => ATBDP_POST_TYPE,
             'posts_per_page' => -1,
             'post_status'    => 'publish',

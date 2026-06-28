@@ -42,22 +42,22 @@ class Widget_Init {
 
         // Widgets -- filename=>classname
         $widgets = [
-            'all-listing'                   => 'Directorist_All_Listing',
-            'all-categories'                => 'Directorist_All_Categories',
-            'all-locations'                 => 'Directorist_All_Locations',
-            'category'                      => 'Directorist_Category',
-            'location'                      => 'Directorist_Location',
-            'tag'                           => 'Directorist_Tag',
-            'search-listing'                => 'Directorist_Search_Listing',
-            'search-result'                 => 'Directorist_Search_Result',
-            'add-listing'                   => 'Directorist_Add_Listing',
-            'user-login'                    => 'Directorist_User_Login',
-            'custom-registration'           => 'Directorist_Custom_Registration',
-            'user-dashboard'                => 'Directorist_User_Dashboard',
-            'author-profile'                => 'Directorist_Author_Profile',
-            'transaction-failure'           => 'Directorist_Transaction_Failure',
-            'payment-receipt'               => 'Directorist_Payment_Receipt',
-            'checkout'                      => 'Directorist_Checkout',
+            'all-listing'         => 'Directorist_All_Listing',
+            'all-categories'      => 'Directorist_All_Categories',
+            'all-locations'       => 'Directorist_All_Locations',
+            'category'            => 'Directorist_Category',
+            'location'            => 'Directorist_Location',
+            'tag'                 => 'Directorist_Tag',
+            'search-listing'      => 'Directorist_Search_Listing',
+            'search-result'       => 'Directorist_Search_Result',
+            'add-listing'         => 'Directorist_Add_Listing',
+            'user-login'          => 'Directorist_User_Login',
+            'custom-registration' => 'Directorist_Custom_Registration',
+            'user-dashboard'      => 'Directorist_User_Dashboard',
+            'author-profile'      => 'Directorist_Author_Profile',
+            'transaction-failure' => 'Directorist_Transaction_Failure',
+            'payment-receipt'     => 'Directorist_Payment_Receipt',
+            'checkout'            => 'Directorist_Checkout',
         ];
 
         $this->widgets = apply_filters( 'atbdp_elementor_widgets', $widgets );

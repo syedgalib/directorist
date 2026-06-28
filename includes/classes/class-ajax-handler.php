@@ -164,8 +164,8 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
             if ( ! check_ajax_referer( 'directorist_nonce', 'directorist_nonce', false ) ) {
                 wp_send_json_error(
                     [
-                        'code' => 'invalid_nonce',
-                        'message'  => __( 'Invalid Nonce', 'directorist' )
+                        'code'    => 'invalid_nonce',
+                        'message' => __( 'Invalid Nonce', 'directorist' )
                     ]
                 );
                 exit;
@@ -174,8 +174,8 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
             if ( ! directorist_is_email_verification_enabled() ) {
                 wp_send_json_error(
                     [
-                        'code' => 'invalid_request',
-                        'message'  => __( 'Invalid Request', 'directorist' )
+                        'code'    => 'invalid_request',
+                        'message' => __( 'Invalid Request', 'directorist' )
                     ]
                 );
                 exit;
@@ -185,14 +185,14 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
             if ( ! is_email( $email ) ) {
                 wp_send_json_error(
                     [
-                        'code' => 'invalid_email',
-                        'message'  => __( 'Invalid email address', 'directorist' )
+                        'code'    => 'invalid_email',
+                        'message' => __( 'Invalid email address', 'directorist' )
                     ]
                 );
                 exit;
             }
 
-            $user  = get_user_by( 'email', $email );
+            $user = get_user_by( 'email', $email );
             if ( $user instanceof \WP_User && get_user_meta( $user->ID, 'directorist_user_email_unverified', true ) ) {
                 ATBDP()->email->send_user_confirmation_email( $user );
             }
@@ -216,12 +216,12 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
                 );
             }
             $google_api = get_directorist_option( 'map_api_key' );
-            $zipcode = ! empty( $_POST['zipcode'] ) ? sanitize_text_field( wp_unslash( $_POST['zipcode'] ) ) : '';
-            $url      = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=postcode+' . $zipcode . '&key=' . $google_api;
-            $data     = wp_remote_get( $url );
-            $response = wp_remote_retrieve_body( $data );
-            $json     = $response ? json_decode( $response, true ) : [];
-            $lat_long = ! empty( $json['results'][0]['geometry']['location'] ) ? directorist_clean( $json['results'][0]['geometry']['location'] ) : [];
+            $zipcode    = ! empty( $_POST['zipcode'] ) ? sanitize_text_field( wp_unslash( $_POST['zipcode'] ) ) : '';
+            $url        = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=postcode+' . $zipcode . '&key=' . $google_api;
+            $data       = wp_remote_get( $url );
+            $response   = wp_remote_retrieve_body( $data );
+            $json       = $response ? json_decode( $response, true ) : [];
+            $lat_long   = ! empty( $json['results'][0]['geometry']['location'] ) ? directorist_clean( $json['results'][0]['geometry']['location'] ) : [];
             if ( ! empty( $lat_long ) ) {
                 wp_send_json( $lat_long );
             } else {
@@ -277,7 +277,7 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
 
             ob_start();
             $listings->archive_view_template();
-            $archive_view           = ob_get_clean();
+            $archive_view = ob_get_clean();
 
             $sortby_dropdown = '';
 
@@ -298,17 +298,17 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
 
             wp_send_json(
                 [
-                    'search_result'  => $archive_view,
+                    'search_result'   => $archive_view,
                     'sortby_dropdown' => $sortby_dropdown,
-                    'directory_type' => $listings->render_shortcode(),
-                    'view_as'        => $archive_view,
-                    'count'          => $listings->query_results->total,
-                    'header_title'   => $display_listings_count ? $listings->listings_header_title() : '',
-                    'category_name'  => $category ? $category->name : '',
-                    'location_name'  => $location ? $location->name : '',
+                    'directory_type'  => $listings->render_shortcode(),
+                    'view_as'         => $archive_view,
+                    'count'           => $listings->query_results->total,
+                    'header_title'    => $display_listings_count ? $listings->listings_header_title() : '',
+                    'category_name'   => $category ? $category->name : '',
+                    'location_name'   => $location ? $location->name : '',
 
                     'render_listings' => $render_listings,
-                    'view' => $listings->view
+                    'view'            => $listings->view
                 ]
             );
         }
@@ -579,7 +579,7 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
                 $selector  = isset( $selectors[ $listing_layout ] ) ? $selectors[ $listing_layout ] : 'no_sidebar';
                 $form_type = 'search_result';
             } else {
-                $selector = $selectors['search_home'];
+                $selector  = $selectors['search_home'];
                 $form_type = 'search_form';
             }
 
@@ -1157,9 +1157,9 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
                 wp_send_json_error( [ 'message' => __( 'Ops! something went wrong. Try again.', 'directorist' ) ] );
             }
 
-            $hide_contact_form      = isset( $_POST['directorist_hide_contact_form'] ) ? sanitize_text_field( wp_unslash( $_POST['directorist_hide_contact_form'] ) ) : 'no';
-            $display_author_email   = isset( $_POST['directorist_display_author_email'] ) ? sanitize_text_field( wp_unslash( $_POST['directorist_display_author_email'] ) ) : '';
-            $contact_owner_recipient    = isset( $_POST['directorist_contact_owner_recipient'] ) ? sanitize_text_field( wp_unslash( $_POST['directorist_contact_owner_recipient'] ) ) : '';
+            $hide_contact_form       = isset( $_POST['directorist_hide_contact_form'] ) ? sanitize_text_field( wp_unslash( $_POST['directorist_hide_contact_form'] ) ) : 'no';
+            $display_author_email    = isset( $_POST['directorist_display_author_email'] ) ? sanitize_text_field( wp_unslash( $_POST['directorist_display_author_email'] ) ) : '';
+            $contact_owner_recipient = isset( $_POST['directorist_contact_owner_recipient'] ) ? sanitize_text_field( wp_unslash( $_POST['directorist_contact_owner_recipient'] ) ) : '';
 
             // Save the sanitized value to user meta
             if ( ! empty( $hide_contact_form ) ) {
@@ -1567,11 +1567,11 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
             } else {
                 $to = $user->user_email;
             }
-            $subject  = strtr( $contact_email_subject, $placeholders );
-            $message  = strtr( $contact_email_body, $placeholders );
-            $message  = nl2br( $message );
-            $headers  = ATBDP()->email->get_email_headers( [ 'name' => $name, 'email' => $email ] );
-            $message  = atbdp_email_html( $subject, $message );
+            $subject = strtr( $contact_email_subject, $placeholders );
+            $message = strtr( $contact_email_body, $placeholders );
+            $message = nl2br( $message );
+            $headers = ATBDP()->email->get_email_headers( [ 'name' => $name, 'email' => $email ] );
+            $message = atbdp_email_html( $subject, $message );
             // return true or false, based on the result
             $is_sent = ATBDP()->email->send_mail( $to, $subject, $message, $headers ) ? true : false;
 
@@ -1658,11 +1658,11 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
              */
             $placeholders = apply_filters( 'directorist_contact_admin_email_placeholders', $placeholders, $_POST );
 
-            $send_emails   = ATBDP()->email->get_admin_email_list();
-            $to            = ! empty( $send_emails ) ? $send_emails : get_bloginfo( 'admin_email' );
-            $subject       = __( '{site_name} Contact via {listing_title}', 'directorist' );
-            $subject       = strtr( $subject, $placeholders );
-            $message       = __( "Dear Administrator,<br /><br />A listing on your website {site_name} received a message.<br /><br />Listing URL: {listing_url}<br /><br />Name: {sender_name}<br />Email: {sender_email}<br />Message: {message}<br />Time: {now}<br /><br />This is just a copy of the original email and was already sent to the listing owner. You don't have to reply this unless necessary.", 'directorist' );
+            $send_emails = ATBDP()->email->get_admin_email_list();
+            $to          = ! empty( $send_emails ) ? $send_emails : get_bloginfo( 'admin_email' );
+            $subject     = __( '{site_name} Contact via {listing_title}', 'directorist' );
+            $subject     = strtr( $subject, $placeholders );
+            $message     = __( "Dear Administrator,<br /><br />A listing on your website {site_name} received a message.<br /><br />Listing URL: {listing_url}<br /><br />Name: {sender_name}<br />Email: {sender_email}<br />Message: {message}<br />Time: {now}<br /><br />This is just a copy of the original email and was already sent to the listing owner. You don't have to reply this unless necessary.", 'directorist' );
 
             /**
              * Filter the message for the contact admin email
@@ -1672,12 +1672,12 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
              * @param array $_POST The POST data
              * @return string The message for the contact admin email
              */
-            $message       = apply_filters( 'directorist_contact_admin_email_message', $message, $_POST );
+            $message = apply_filters( 'directorist_contact_admin_email_message', $message, $_POST );
 
-            $message       = strtr( $message, $placeholders );
-            $headers       = "From: {$name} <{$email}>\r\n";
-            $headers      .= "Reply-To: {$email}\r\n";
-            $message       = atbdp_email_html( $subject, $message );
+            $message  = strtr( $message, $placeholders );
+            $headers  = "From: {$name} <{$email}>\r\n";
+            $headers .= "Reply-To: {$email}\r\n";
+            $message  = atbdp_email_html( $subject, $message );
 
             $is_sent = ATBDP()->email->send_mail( $to, $subject, $message, $headers ) ? true : false;
 
@@ -1724,7 +1724,7 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
             if ( ! directorist_verify_nonce() ) {
                 wp_send_json(
                     [
-                        'error' => 1,
+                        'error'   => 1,
                         'message' => __( 'Something is wrong! Please refresh and retry.', 'directorist' )
                     ], 200
                 );
@@ -1740,7 +1740,7 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
             $disable_all_email = get_directorist_option( 'disable_email_notification' );
 
             $error_response = [
-                'error' => 1,
+                'error'   => 1,
                 'message' => __( 'Sorry! Please try again.', 'directorist' )
             ];
 
@@ -1785,7 +1785,7 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
 
             echo wp_json_encode(
                 [
-                    'error' => 0,
+                    'error'   => 0,
                     'message' => __( 'Your message sent successfully.', 'directorist' )
                 ]
             );
@@ -1919,10 +1919,10 @@ if ( ! class_exists( 'ATBDP_Ajax_Handler' ) ) :
 
                 if ( is_array( $term_directory_types ) && in_array( $listing_type_id, $term_directory_types, true ) ) {
                     $options[] = [
-                        'id'    => $term->term_id,
-                        'value' => $term->term_id,
-                        'label' => $term->name,
-                        'name'  => $term->name,
+                        'id'      => $term->term_id,
+                        'value'   => $term->term_id,
+                        'label'   => $term->name,
+                        'name'    => $term->name,
                         'term_id' => $term->term_id,
                     ];
                 }

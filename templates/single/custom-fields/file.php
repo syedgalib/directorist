@@ -7,7 +7,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-$done = str_replace( '|||', '', $value );
+$done     = str_replace( '|||', '', $value );
 $name_arr = explode( '/', $done );
 $filename = end( $name_arr );
 ?>

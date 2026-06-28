@@ -8,12 +8,12 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 $search_form_fields = Directorist\Helper::get_directory_type_term_data( get_the_ID(), 'search_form_fields' );
-$directoriy_type = get_post_meta( get_the_ID(), '_directory_type', true );
-$searchform = new Directorist\Directorist_Listing_Search_Form( 'listing', $directoriy_type );
+$directoriy_type    = get_post_meta( get_the_ID(), '_directory_type', true );
+$searchform         = new Directorist\Directorist_Listing_Search_Form( 'listing', $directoriy_type );
 
 
 if ( is_numeric( $searchform->listing_type ) ) {
-    $term = get_term_by( 'id', $searchform->listing_type, ATBDP_TYPE );
+    $term         = get_term_by( 'id', $searchform->listing_type, ATBDP_TYPE );
     $listing_type = $term->slug;
 }
 ?>

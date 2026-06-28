@@ -42,7 +42,7 @@
 
                                                             $ext_key       = preg_replace( '/\/.+/', '', $extension_base );
                                                             $ext_key_alias = $args['ATBDP_Extensions']->get_extension_alias_key( $ext_key );;
-                                                            $img           = DIRECTORIST_ASSETS . 'images/no-image.png';
+                                                            $img = DIRECTORIST_ASSETS . 'images/no-image.png';
 
                                                         if ( ! empty( $args[ 'extension_list' ][ $ext_key ] ) ) {
                                                             $img = $args['extension_list'][$ext_key]['thumbnail'];

@@ -29,40 +29,40 @@ if ( ! class_exists( 'ATBDP_Formgent' ) ) {
         public function rest_api_init() {
             register_rest_route(
                 'directorist', '/formgent/responses', [
-                    'methods' => 'GET',
-                    'callback' => [ $this, 'get_responses' ],
+                    'methods'             => 'GET',
+                    'callback'            => [ $this, 'get_responses' ],
                     'permission_callback' => [ $this, 'check_permission' ],
                 ]
             );
         
             register_rest_route(
                 'directorist', '/formgent/responses/kpis', [
-                    'methods' => 'GET',
-                    'callback' => [ $this, 'get_kpis' ],
+                    'methods'             => 'GET',
+                    'callback'            => [ $this, 'get_kpis' ],
                     'permission_callback' => [ $this, 'check_permission' ],
                 ]
             );
         
             register_rest_route(
                 'directorist', '/formgent/responses', [
-                    'methods' => 'DELETE',
-                    'callback' => [ $this, 'delete_responses' ],
+                    'methods'             => 'DELETE',
+                    'callback'            => [ $this, 'delete_responses' ],
                     'permission_callback' => [ $this, 'check_permission' ],
                 ]
             );
         
             register_rest_route(
                 'directorist', '/formgent/responses/read', [
-                    'methods' => 'POST',
-                    'callback' => [ $this, 'read_responses' ],
+                    'methods'             => 'POST',
+                    'callback'            => [ $this, 'read_responses' ],
                     'permission_callback' => [ $this, 'check_permission' ],
                 ]
             );
         
             register_rest_route(
                 'directorist', '/formgent/responses/single', [
-                    'methods' => 'GET',
-                    'callback' => [ $this, 'single_response' ],
+                    'methods'             => 'GET',
+                    'callback'            => [ $this, 'single_response' ],
                     'permission_callback' => [ $this, 'check_permission' ],
                 ]
             );
@@ -81,7 +81,7 @@ if ( ! class_exists( 'ATBDP_Formgent' ) ) {
             if ( empty( $user_id ) && isset( $_COOKIE[ LOGGED_IN_COOKIE ] ) ) {
                 // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- wp_validate_auth_cookie() handles sanitization
                 $cookie_value = wp_unslash( $_COOKIE[ LOGGED_IN_COOKIE ] );
-                $user_id = wp_validate_auth_cookie( $cookie_value, 'logged_in' );
+                $user_id      = wp_validate_auth_cookie( $cookie_value, 'logged_in' );
                 if ( $user_id ) {
                     wp_set_current_user( $user_id );
                 }
@@ -112,7 +112,7 @@ if ( ! class_exists( 'ATBDP_Formgent' ) ) {
             $fields_settings = formgent_get_form_fields( $form );
             $fields          = $this->prepare_response_fields( $fields_settings );
 
-            $listing_id = formgent_response_repository()->get_meta_value( $response_id, 'listing_id' );
+            $listing_id        = formgent_response_repository()->get_meta_value( $response_id, 'listing_id' );
             $listing_permalink = '';
 
             if ( ! empty( $listing_id ) ) {
@@ -172,10 +172,10 @@ if ( ! class_exists( 'ATBDP_Formgent' ) ) {
         }
 
         public function get_responses( $request ) {
-            $page = absint( $request->get_param( 'page' ) );
+            $page     = absint( $request->get_param( 'page' ) );
             $per_page = absint( $request->get_param( 'per_page' ) );
         
-            $query = $this->get_responses_query();
+            $query       = $this->get_responses_query();
             $count_query = clone $query;
         
             $responses = $query->select( 'response.*', 'post.post_title as listing_title', 'post.post_author as listing_owner' )->with(
@@ -192,10 +192,10 @@ if ( ! class_exists( 'ATBDP_Formgent' ) ) {
                     } else {
                         // Create a default user object for non-logged-in submissions
                         $response->user = (object) [
-                            'ID' => 0,
-                            'user_email' => '',
+                            'ID'           => 0,
+                            'user_email'   => '',
                             'display_name' => __( 'Guest', 'directorist' ),
-                            'profile_url' => get_avatar_url( '' ),
+                            'profile_url'  => get_avatar_url( '' ),
                         ];
                     }
                     return $response;
@@ -203,33 +203,33 @@ if ( ! class_exists( 'ATBDP_Formgent' ) ) {
             );
         
             return [
-                'total' => $count_query->count(),
+                'total'     => $count_query->count(),
                 'responses' => $responses
             ];
         }
 
         public function get_kpis() {
-            $query = $this->get_responses_query();
-            $count_query = clone $query;
+            $query           = $this->get_responses_query();
+            $count_query     = clone $query;
             $this_week_query = clone $query;
-            $un_read_query = clone $query;
-            $read_query = clone $query;
+            $un_read_query   = clone $query;
+            $read_query      = clone $query;
 
             $this_week_query->where( 'response.created_at', '>=', date( 'Y-m-d', strtotime( 'this week' ) ) );
             $un_read_query->where( 'response.is_read', 0 );
             $read_query->where( 'response.is_read', 1 );
 
             return [
-                'total' => $count_query->count(),
+                'total'     => $count_query->count(),
                 'this_week' => $this_week_query->count(),
-                'unread' => $un_read_query->count(),
-                'read' => $read_query->count(),
+                'unread'    => $un_read_query->count(),
+                'read'      => $read_query->count(),
             ];
         }
 
         protected function prepare_response_fields( array $fields_settings, $parent_name = '', $parent_type = '' ) {
             $registered_fields = formgent_config( 'fields' );
-            $fields = [];
+            $fields            = [];
 
             foreach ( $fields_settings as $field ) {
                 if ( empty( $field['field_type'] ) || empty( $field['name'] ) || empty( $registered_fields[$field['field_type']]['allowed_in_response_table'] ) ) {

@@ -102,8 +102,8 @@ class OrderRepository extends Repository {
         $orders = array_map(
             function( $order ) {
                 if ( ! empty( $order->payment ) ) {
-                    $order->payment_method  = $this->get_payment_method_title( $order->payment->method );
-                    $order->transaction_id  = $order->payment->transaction_id ?? null;
+                    $order->payment_method = $this->get_payment_method_title( $order->payment->method );
+                    $order->transaction_id = $order->payment->transaction_id ?? null;
                 }
 
                 $order->total_amount = directorist_order_total_amount( $order );

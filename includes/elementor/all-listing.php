@@ -18,7 +18,7 @@ class Directorist_All_Listing extends Custom_Widget_Base {
     }
 
     private function az_listing_categories() {
-        $result = [];
+        $result     = [];
         $categories = get_terms( [ 'taxonomy' => ATBDP_CATEGORY ] );
         foreach ( $categories as $category ) {
             $result[$category->slug] = $category->name;
@@ -28,7 +28,7 @@ class Directorist_All_Listing extends Custom_Widget_Base {
 
     private function az_listing_tags() {
         $result = [];
-        $tags = get_terms( [ 'taxonomy' => ATBDP_TAGS ] );
+        $tags   = get_terms( [ 'taxonomy' => ATBDP_TAGS ] );
         foreach ( $tags as $tag ) {
             $result[$tag->slug] = $tag->name;
         }
@@ -36,7 +36,7 @@ class Directorist_All_Listing extends Custom_Widget_Base {
     }
 
     private function az_listing_locations() {
-        $result = [];
+        $result    = [];
         $locations = get_terms( [ 'taxonomy' => ATBDP_LOCATION ] );
         foreach ( $locations as $location ) {
             $result[$location->slug] = $location->name;
@@ -57,21 +57,21 @@ class Directorist_All_Listing extends Custom_Widget_Base {
     public function az_fields() {
         $fields = [
             [
-                'mode'    => 'section_start',
-                'id'      => 'sec_general',
-                'label'   => __( 'General', 'directorist' ),
+                'mode'  => 'section_start',
+                'id'    => 'sec_general',
+                'label' => __( 'General', 'directorist' ),
             ],
             [
-                'type'      => Controls_Manager::SWITCHER,
-                'id'        => 'header',
-                'label'     => __( 'Show Header?', 'directorist' ),
-                'default'   => 'yes',
+                'type'    => Controls_Manager::SWITCHER,
+                'id'      => 'header',
+                'label'   => __( 'Show Header?', 'directorist' ),
+                'default' => 'yes',
             ],
             [
-                'type'      => Controls_Manager::TEXT,
-                'id'        => 'header_title',
-                'label'     => __( 'Total Listings Found Title', 'directorist' ),
-                'default'   => __( 'Listings Found', 'directorist' ),
+                'type'    => Controls_Manager::TEXT,
+                'id'      => 'header_title',
+                'label'   => __( 'Total Listings Found Title', 'directorist' ),
+                'default' => __( 'Listings Found', 'directorist' ),
             ],
             [
                 'type'      => Controls_Manager::SWITCHER,
@@ -101,46 +101,46 @@ class Directorist_All_Listing extends Custom_Widget_Base {
                 'condition' => [ 'view' => [ 'map' ] ],
             ],
             [
-                'type'    => Controls_Manager::SELECT,
-                'id'      => 'columns',
-                'label'   => __( 'Listings Per Row', 'directorist' ),
-                'options' => [
+                'type'      => Controls_Manager::SELECT,
+                'id'        => 'columns',
+                'label'     => __( 'Listings Per Row', 'directorist' ),
+                'options'   => [
                     '6' => __( '6 Items / Row', 'directorist' ),
                     '4' => __( '4 Items / Row', 'directorist' ),
                     '3' => __( '3 Items / Row', 'directorist' ),
                     '2' => __( '2 Items / Row', 'directorist' ),
                 ],
-                'default' => '3',
+                'default'   => '3',
                 'condition' => [ 'view' => 'grid' ],
             ],
             [
-                'type'      => Controls_Manager::NUMBER,
-                'id'        => 'listing_number',
-                'label'     => __( 'Number of Listings to Show', 'directorist' ),
-                'min'       => 1,
-                'max'       => 100,
-                'step'      => 1,
-                'default'   => 6,
+                'type'    => Controls_Manager::NUMBER,
+                'id'      => 'listing_number',
+                'label'   => __( 'Number of Listings to Show', 'directorist' ),
+                'min'     => 1,
+                'max'     => 100,
+                'step'    => 1,
+                'default' => 6,
             ],
             [
-                'type'      => Controls_Manager::SWITCHER,
-                'id'        => 'preview',
-                'label'     => __( 'Show Preview Image?', 'directorist' ),
-                'default'   => 'yes',
+                'type'    => Controls_Manager::SWITCHER,
+                'id'      => 'preview',
+                'label'   => __( 'Show Preview Image?', 'directorist' ),
+                'default' => 'yes',
             ],
             [
-                'type'     => Controls_Manager::SELECT2,
-                'id'       => 'type',
-                'label'    => __( 'Directory Types', 'directorist' ),
-                'multiple' => true,
-                'options'  => $this->az_listing_types(),
+                'type'      => Controls_Manager::SELECT2,
+                'id'        => 'type',
+                'label'     => __( 'Directory Types', 'directorist' ),
+                'multiple'  => true,
+                'options'   => $this->az_listing_types(),
                 'condition' => directorist_is_multi_directory_enabled() ? '' : ['nocondition' => true],
             ],
             [
-                'type'     => Controls_Manager::SELECT2,
-                'id'       => 'default_type',
-                'label'    => __( 'Default Directory Types', 'directorist' ),
-                'options'  => $this->az_listing_types(),
+                'type'      => Controls_Manager::SELECT2,
+                'id'        => 'default_type',
+                'label'     => __( 'Default Directory Types', 'directorist' ),
+                'options'   => $this->az_listing_types(),
                 'condition' => directorist_is_multi_directory_enabled() ? '' : ['nocondition' => true],
             ],
             [
@@ -165,22 +165,22 @@ class Directorist_All_Listing extends Custom_Widget_Base {
                 'options'  => $this->az_listing_locations(),
             ],
             [
-                'type'      => Controls_Manager::SWITCHER,
-                'id'        => 'featured',
-                'label'     => __( 'Show Featured Only?', 'directorist' ),
-                'default'   => 'no',
+                'type'    => Controls_Manager::SWITCHER,
+                'id'      => 'featured',
+                'label'   => __( 'Show Featured Only?', 'directorist' ),
+                'default' => 'no',
             ],
             [
-                'type'      => Controls_Manager::SWITCHER,
-                'id'        => 'popular',
-                'label'     => __( 'Show Popular Only?', 'directorist' ),
-                'default'   => 'no',
+                'type'    => Controls_Manager::SWITCHER,
+                'id'      => 'popular',
+                'label'   => __( 'Show Popular Only?', 'directorist' ),
+                'default' => 'no',
             ],
             [
-                'type'      => Controls_Manager::SWITCHER,
-                'id'        => 'user',
-                'label'     => __( 'Only For Logged In User?', 'directorist' ),
-                'default'   => 'no',
+                'type'    => Controls_Manager::SWITCHER,
+                'id'      => 'user',
+                'label'   => __( 'Only For Logged In User?', 'directorist' ),
+                'default' => 'no',
             ],
             [
                 'type'    => Controls_Manager::SELECT,
@@ -204,10 +204,10 @@ class Directorist_All_Listing extends Custom_Widget_Base {
                 'default' => 'desc',
             ],
             [
-                'type'      => Controls_Manager::SWITCHER,
-                'id'        => 'show_pagination',
-                'label'     => __( 'Show Pagination?', 'directorist' ),
-                'default'   => 'no',
+                'type'    => Controls_Manager::SWITCHER,
+                'id'      => 'show_pagination',
+                'label'   => __( 'Show Pagination?', 'directorist' ),
+                'default' => 'no',
             ],
             [
                 'mode' => 'section_end',

@@ -208,7 +208,7 @@ function directorist_7100_clean_listing_status_expired_meta() {
     global $wpdb;
 
     $table_name = $wpdb->prefix . 'postmeta';
-    $meta_key = '_listing_status';
+    $meta_key   = '_listing_status';
     $meta_value = 'expired';
 
     $wpdb->query(
@@ -353,26 +353,28 @@ function directorist_880_migrate_legacy_orders() {
     ];
 
     // Query up to 100 eligible posts: exclude _fm_plan_ordered and already-migrated posts.
-    $query = new WP_Query( [
-        'post_type'      => 'atbdp_orders',
-        'post_status'    => ['any', 'trash'],
-        'posts_per_page' => 100,
-        'cache_results'  => false,
-        'no_found_rows'  => false,
-        'orderby'        => 'date',
-        'order'          => 'ASC',
-        'meta_query'     => [
-            'relation' => 'AND',
-            [
-                'key'     => '_fm_plan_ordered',
-                'compare' => 'NOT EXISTS',
+    $query = new WP_Query(
+        [
+            'post_type'      => 'atbdp_orders',
+            'post_status'    => ['any', 'trash'],
+            'posts_per_page' => 100,
+            'cache_results'  => false,
+            'no_found_rows'  => false,
+            'orderby'        => 'date',
+            'order'          => 'ASC',
+            'meta_query'     => [
+                'relation' => 'AND',
+                [
+                    'key'     => '_fm_plan_ordered',
+                    'compare' => 'NOT EXISTS',
+                ],
+                [
+                    'key'     => '_is_migrated',
+                    'compare' => 'NOT EXISTS',
+                ],
             ],
-            [
-                'key'     => '_is_migrated',
-                'compare' => 'NOT EXISTS',
-            ],
-        ],
-    ] );
+        ] 
+    );
 
     if ( ! $query->have_posts() ) {
         return false;
@@ -403,25 +405,25 @@ function directorist_880_migrate_legacy_orders() {
         $inserted = $wpdb->insert(
             $orders_table,
             [
-                'legacy_id'          => $post_id,
-                'subscription_id'    => null,
-                'user_id'            => (int) $post->post_author,
-                'listing_id'         => $listing_id ?: null,
-                'is_featured_listing'=> $is_featured ? 1 : 0,
-                'ref'                => null,
-                'ref_type'           => $is_featured ? 'featured_listing' : null,
-                'amount'             => $amount,
-                'currency'           => $currency,
-                'coupon_code'        => null,
-                'coupon_discount'    => 0.00,
-                'coupon_discount_type'=> null,
-                'tax_rate'           => 0.00,
-                'tax_type'           => null,
-                'sub_total'          => $amount,
-                'status'             => $status,
-                'expires_at'         => null,
-                'created_at'         => $post->post_date,
-                'updated_at'         => $post->post_modified,
+                'legacy_id'            => $post_id,
+                'subscription_id'      => null,
+                'user_id'              => (int) $post->post_author,
+                'listing_id'           => $listing_id ?: null,
+                'is_featured_listing'  => $is_featured ? 1 : 0,
+                'ref'                  => null,
+                'ref_type'             => $is_featured ? 'featured_listing' : null,
+                'amount'               => $amount,
+                'currency'             => $currency,
+                'coupon_code'          => null,
+                'coupon_discount'      => 0.00,
+                'coupon_discount_type' => null,
+                'tax_rate'             => 0.00,
+                'tax_type'             => null,
+                'sub_total'            => $amount,
+                'status'               => $status,
+                'expires_at'           => null,
+                'created_at'           => $post->post_date,
+                'updated_at'           => $post->post_modified,
             ],
             [
                 '%d', // legacy_id
@@ -490,24 +492,26 @@ function directorist_880_migrate_legacy_orders() {
     wp_reset_postdata();
 
     // Check if any eligible posts remain to decide whether to re-queue.
-    $remaining = new WP_Query( [
-        'post_type'      => 'atbdp_orders',
-        'post_status'    => ['any', 'trash'],
-        'posts_per_page' => 1,
-        'no_found_rows'  => false,
-        'fields'         => 'ids',
-        'meta_query'     => [
-            'relation' => 'AND',
-            [
-                'key'     => '_fm_plan_ordered',
-                'compare' => 'NOT EXISTS',
+    $remaining = new WP_Query(
+        [
+            'post_type'      => 'atbdp_orders',
+            'post_status'    => ['any', 'trash'],
+            'posts_per_page' => 1,
+            'no_found_rows'  => false,
+            'fields'         => 'ids',
+            'meta_query'     => [
+                'relation' => 'AND',
+                [
+                    'key'     => '_fm_plan_ordered',
+                    'compare' => 'NOT EXISTS',
+                ],
+                [
+                    'key'     => '_is_migrated',
+                    'compare' => 'NOT EXISTS',
+                ],
             ],
-            [
-                'key'     => '_is_migrated',
-                'compare' => 'NOT EXISTS',
-            ],
-        ],
-    ] );
+        ] 
+    );
 
     return $remaining->found_posts > 0;
 }

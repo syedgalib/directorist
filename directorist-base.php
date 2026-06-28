@@ -228,7 +228,7 @@ final class Directorist_Base {
             self::$instance->beta = false !== stripos( ATBDP_VERSION, 'Beta' );
 
             self::$instance->custom_post = new ATBDP_Custom_Post(); // create custom post
-            self::$instance->taxonomy = new ATBDP_Custom_Taxonomy();
+            self::$instance->taxonomy    = new ATBDP_Custom_Taxonomy();
 
             add_action( 'init', [ self::$instance, 'on_install_update_actions' ] );
             Activation::register_hooks();
@@ -242,21 +242,21 @@ final class Directorist_Base {
             self::$instance->settings_panel = new ATBDP_Settings_Panel();
             self::$instance->settings_panel->run();
 
-            self::$instance->hooks = new ATBDP_Hooks();
-            self::$instance->metabox = new ATBDP_Metabox();
+            self::$instance->hooks        = new ATBDP_Hooks();
+            self::$instance->metabox      = new ATBDP_Metabox();
             self::$instance->ajax_handler = new ATBDP_Ajax_Handler();
-            self::$instance->helper = new ATBDP_Helper();
-            self::$instance->listing = new ATBDP_Listing();
-            self::$instance->user = new ATBDP_User();
-            self::$instance->roles = new ATBDP_Roles();
+            self::$instance->helper       = new ATBDP_Helper();
+            self::$instance->listing      = new ATBDP_Listing();
+            self::$instance->user         = new ATBDP_User();
+            self::$instance->roles        = new ATBDP_Roles();
             if ( class_exists( 'ATBDP_Gateway' ) ) {
                 self::$instance->gateway = new ATBDP_Gateway();
             }
             // self::$instance->order = new ATBDP_Order();
             self::$instance->shortcode = new \Directorist\ATBDP_Shortcode();
-            self::$instance->email = new ATBDP_Email();
-            self::$instance->seo = new ATBDP_SEO();
-            self::$instance->formgent = new ATBDP_Formgent();
+            self::$instance->email     = new ATBDP_Email();
+            self::$instance->seo       = new ATBDP_SEO();
+            self::$instance->formgent  = new ATBDP_Formgent();
             // self::$instance->validator = new ATBDP_Validator;
             // self::$instance->ATBDP_Single_Templates = new ATBDP_Single_Templates;
             self::$instance->tools = new ATBDP_Tools();
@@ -530,13 +530,13 @@ final class Directorist_Base {
         if ( ! is_registered_sidebar( 'right-sidebar-listing' ) ) {
             register_sidebar(
                 [
-                    'name' => apply_filters( 'atbdp_right_sidebar_name', __( 'Directorist - Listing Right Sidebar', 'directorist' ) ),
-                    'id' => 'right-sidebar-listing',
-                    'description' => __( 'Add widgets for the right sidebar on single listing page', 'directorist' ),
+                    'name'          => apply_filters( 'atbdp_right_sidebar_name', __( 'Directorist - Listing Right Sidebar', 'directorist' ) ),
+                    'id'            => 'right-sidebar-listing',
+                    'description'   => __( 'Add widgets for the right sidebar on single listing page', 'directorist' ),
                     'before_widget' => '<div class="directorist-card %2$s">',
-                    'after_widget' => '</div>',
-                    'before_title' => '<div class="directorist-card__header directorist-widget__header"><h3 class="directorist-card__header__title directorist-widget__header__title">',
-                    'after_title' => '</h3></div>',
+                    'after_widget'  => '</div>',
+                    'before_title'  => '<div class="directorist-card__header directorist-widget__header"><h3 class="directorist-card__header__title directorist-widget__header__title">',
+                    'after_title'   => '</h3></div>',
                 ]
             );
         }
@@ -717,28 +717,28 @@ final class Directorist_Base {
 
     public function add_uninstall_menu( $menus ) {
         $menus['uninstall_menu'] = [
-            'title' => __( 'Uninstall', 'directorist' ),
-            'name' => 'uninstall_menu',
-            'icon' => 'font-awesome:fa-window-close',
+            'title'    => __( 'Uninstall', 'directorist' ),
+            'name'     => 'uninstall_menu',
+            'icon'     => 'font-awesome:fa-window-close',
             'controls' => apply_filters(
                 'atbdp_uninstall_settings_controls', [
                     'currency_section' => [
-                        'type' => 'section',
-                        'title' => __( 'Uninstall Settings', 'directorist' ),
+                        'type'   => 'section',
+                        'title'  => __( 'Uninstall Settings', 'directorist' ),
                         'fields' => get_uninstall_settings_submenus(),
                     ],
                 ]
             ),
         ];
-        $menus['csv_import'] = [
-            'title' => __( 'Listings Import', 'directorist' ),
-            'name' => 'csv_import',
-            'icon' => 'font-awesome:fa-upload',
+        $menus['csv_import']     = [
+            'title'    => __( 'Listings Import', 'directorist' ),
+            'name'     => 'csv_import',
+            'icon'     => 'font-awesome:fa-upload',
             'controls' => apply_filters(
                 'atbdp_csv_import_settings_controls', [
                     'currency_section' => [
-                        'type' => 'section',
-                        'title' => __( 'Listings Import', 'directorist' ),
+                        'type'   => 'section',
+                        'title'  => __( 'Listings Import', 'directorist' ),
                         'fields' => get_csv_import_settings_submenus(),
                     ],
                 ]
@@ -830,7 +830,7 @@ final class Directorist_Base {
             require_once ATBDP_INC_DIR . 'modules/appsero/src/Client.php';
         }
 
-        $client = new \Directorist\Appsero\Client( 'd9f81baf-2b03-49b1-b899-b4ee71c1d1b1', 'Directorist', __FILE__ );
+        $client         = new \Directorist\Appsero\Client( 'd9f81baf-2b03-49b1-b899-b4ee71c1d1b1', 'Directorist', __FILE__ );
         $this->insights = $client->insights();
 
         // Active insights
@@ -842,7 +842,6 @@ final class Directorist_Base {
         require_once ATBDP_DIR . 'blocks/init.php';
     }
 } // ends Directorist_Base
-
 
 /**
  * The main function for that returns Directorist_Base

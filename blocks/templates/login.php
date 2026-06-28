@@ -201,7 +201,7 @@ extract( $login_args );
 
             <?php
             //stuff to recover password start
-            $error = '';
+            $error   = '';
             $success = '';
             // check if we're in reset form
             if ( isset( $_POST['action'] ) && 'reset' === $_POST['action'] && directorist_verify_nonce() ) :
@@ -215,7 +215,7 @@ extract( $login_args );
                 } else if ( ! email_exists( $email ) ) {
                     $error = __( 'There is no user registered with that email address.', 'directorist' );
                 } else {
-                    $user      = get_user_by( 'email', $email );
+                    $user = get_user_by( 'email', $email );
                     /* translators: %s: site name */
                     $subject   = esc_html( sprintf( __( '[%s] Reset Your Password', 'directorist' ), get_option( 'blogname', 'display' ) ) );
                     $title     = esc_html__( 'Password Reset Request', 'directorist' );
@@ -237,9 +237,9 @@ extract( $login_args );
 
                     $message = wp_kses(
                         $message, [
-                            'br' => [],
+                            'br'     => [],
                             'strong' => [],
-                            'a' => [
+                            'a'      => [
                                 'href' => []
                             ]
                         ] 

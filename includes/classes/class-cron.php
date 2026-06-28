@@ -179,17 +179,17 @@ if ( ! class_exists( 'ATBDP_Cron' ) ) :
                     'cache_results'  => false,
                     'nopaging'       => true,
                     'meta_query'     => [
-                        'relation'   => 'AND',
+                        'relation'       => 'AND',
                         'renewal_status' => [
-                            'key' => '_listing_status',
-                            'value' => 'renewal',
+                            'key'     => '_listing_status',
+                            'value'   => 'renewal',
                             'compare' => '!=',
                         ],
-                        'never_expire' => [
+                        'never_expire'   => [
                             'key'     => '_never_expire',
                             'compare' => 'NOT EXISTS',
                         ],
-                        'expiry_date' => [
+                        'expiry_date'    => [
                             'key'     => '_expiry_date',
                             'value'   => $renew_email_threshold_date,
                             'compare' => '<=',
@@ -233,12 +233,12 @@ if ( ! class_exists( 'ATBDP_Cron' ) ) :
                 'nopaging'       => true,
                 'post_status'    => 'publish', // get expired post with published status
                 'meta_query'     => [
-                    'relation'   => 'AND',
+                    'relation'     => 'AND',
                     'never_expire' => [
                         'key'     => '_never_expire',
                         'compare' => 'NOT EXISTS',
                     ],
-                    'expiry_date' => [
+                    'expiry_date'  => [
                         'key'     => '_expiry_date',
                         'value'   => current_time( 'mysql' ),
                         'compare' => '<=',                    // eg. expire date 6 <= current date 7 will return the post
@@ -338,13 +338,13 @@ if ( ! class_exists( 'ATBDP_Cron' ) ) :
                 'post_status'    => 'expired',
                 'cache_results'  => false,
                 'nopaging'       => true,
-                'meta_query' => [
-                    'relation' => 'OR',
+                'meta_query'     => [
+                    'relation'     => 'OR',
                     'never_expire' => [
                         'key'     => '_never_expire',
                         'compare' => 'EXISTS',
                     ],
-                    'expiry_date' => [
+                    'expiry_date'  => [
                         'key'     => '_expiry_date',
                         'value'   => current_time( 'mysql' ),
                         'compare' => '>',                     // eg. expire date 6 <= current date 7 will return the post
@@ -390,13 +390,13 @@ if ( ! class_exists( 'ATBDP_Cron' ) ) :
                     'nopaging'       => true,
                     'post_status'    => 'expired',
                     'meta_query'     => [
-                        'relation'   => 'AND',
+                        'relation'              => 'AND',
                         // TODO: Status has been migrated, remove related code.
                         // array(
                         //  'key'   => '_listing_status',
                         //  'value' => 'expired',
                         // ),
-                        'never_expire' => [
+                        'never_expire'          => [
                             'key'     => '_never_expire',
                             'compare' => 'NOT EXISTS',
                         ],
@@ -445,13 +445,13 @@ if ( ! class_exists( 'ATBDP_Cron' ) ) :
                 'nopaging'       => true,
                 'post_status'    => 'expired',
                 'meta_query'     => [
-                    'relation'   => 'AND',
+                    'relation'      => 'AND',
                     // TODO: Status has been migrated, remove related code.
                     // array(
                     //  'key'   => '_listing_status',
                     //  'value' => 'expired',
                     // ),
-                    'never_expire' => [
+                    'never_expire'  => [
                         'key'     => '_never_expire',
                         'compare' => 'NOT EXISTS',
                     ],

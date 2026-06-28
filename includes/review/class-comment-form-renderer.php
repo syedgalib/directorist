@@ -141,13 +141,13 @@ class Comment_Form_Renderer {
     }
 
     public static function get_fields( $comment ) {
-        $fields  = [];
+        $fields = [];
     
         $comment_type = __( 'comment', 'directorist' );
         if ( $comment->comment_type === 'review' ) {
-            $rating = Comment::get_rating( $comment->comment_ID );
+            $rating           = Comment::get_rating( $comment->comment_ID );
             $fields['rating'] = '<div class="directorist-review-criteria directorist-adv-criteria">' . Markup::get_rating( $rating, $comment ) . '</div>';
-            $comment_type = __( 'review', 'directorist' );
+            $comment_type     = __( 'review', 'directorist' );
         }
     
         $fields['content'] =  sprintf(

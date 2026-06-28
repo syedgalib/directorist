@@ -21,39 +21,39 @@ class ATBDP_Shortcode {
             self::$shortcodes = apply_filters(
                 'atbdp_shortcodes', [
                     // Archive
-                    'directorist_all_listing' => [ $this, 'listing_archive' ],
-                    'directorist_category'    => [ $this, 'category_archive' ],
-                    'directorist_tag'         => [ $this, 'tag_archive' ],
-                    'directorist_location'    => [ $this, 'location_archive' ],
+                    'directorist_all_listing'                 => [ $this, 'listing_archive' ],
+                    'directorist_category'                    => [ $this, 'category_archive' ],
+                    'directorist_tag'                         => [ $this, 'tag_archive' ],
+                    'directorist_location'                    => [ $this, 'location_archive' ],
 
                     // Taxonomy
-                    'directorist_all_categories' => [ $this, 'all_categories' ],
-                    'directorist_all_locations'  => [ $this, 'all_locations' ],
+                    'directorist_all_categories'              => [ $this, 'all_categories' ],
+                    'directorist_all_locations'               => [ $this, 'all_locations' ],
 
                     // Search
-                    'directorist_search_listing' => [ $this, 'search_listing' ],
-                    'directorist_search_result'  => [ $this, 'search_result' ],
+                    'directorist_search_listing'              => [ $this, 'search_listing' ],
+                    'directorist_search_result'               => [ $this, 'search_result' ],
 
                     // Author
-                    'directorist_author_profile'      => [ $this, 'author_profile' ],
-                    'directorist_user_dashboard'      => [ $this, 'user_dashboard' ],
-                    'directorist_all_authors'         => [ $this, 'all_authors' ],
-                    'directorist_signin_signup'       => [ $this, 'directorist_signin_signup' ],
-                    'directorist_custom_registration' => [ $this, 'register_registration_shortcode' ],
-                    'directorist_user_login'          => [ $this, 'register_login_shortcode' ],
+                    'directorist_author_profile'              => [ $this, 'author_profile' ],
+                    'directorist_user_dashboard'              => [ $this, 'user_dashboard' ],
+                    'directorist_all_authors'                 => [ $this, 'all_authors' ],
+                    'directorist_signin_signup'               => [ $this, 'directorist_signin_signup' ],
+                    'directorist_custom_registration'         => [ $this, 'register_registration_shortcode' ],
+                    'directorist_user_login'                  => [ $this, 'register_login_shortcode' ],
 
                     // Forms
-                    'directorist_add_listing'         => [ $this, 'add_listing' ],
+                    'directorist_add_listing'                 => [ $this, 'add_listing' ],
 
                     // Checkout
-                    'directorist_payment_receipt'     => [ new \ATBDP_Checkout, 'payment_receipt' ],
-                    'directorist_checkout'            => [ new \ATBDP_Checkout, 'checkout' ],
-                    'directorist_transaction_failure' => [ new \ATBDP_Checkout, 'transaction_failure' ],
+                    'directorist_payment_receipt'             => [ new \ATBDP_Checkout, 'payment_receipt' ],
+                    'directorist_checkout'                    => [ new \ATBDP_Checkout, 'checkout' ],
+                    'directorist_transaction_failure'         => [ new \ATBDP_Checkout, 'transaction_failure' ],
 
                     // Single
-                    'directorist_single_listings_header' => [ $this, 'single_listings_header' ],
-                    'directorist_single_listing_section' => [ $this, 'single_listing_section' ],
-                    'directorist_single_listing_field' => [ $this, 'single_listing_field' ],
+                    'directorist_single_listings_header'      => [ $this, 'single_listings_header' ],
+                    'directorist_single_listing_section'      => [ $this, 'single_listing_section' ],
+                    'directorist_single_listing_field'        => [ $this, 'single_listing_field' ],
 
                     // Single -- legacy shortcode
                     'directorist_listing_top_area'            => '__return_empty_string',
@@ -199,7 +199,7 @@ class ATBDP_Shortcode {
     }
 
     public function listing_archive( $atts ) {
-        $atts = ! empty( $atts ) ? $atts : [];
+        $atts     = ! empty( $atts ) ? $atts : [];
         $listings = new Directorist_Listings( $atts );
 
         if ( empty( $atts[ 'shortcode' ] ) ) {
@@ -248,7 +248,7 @@ class ATBDP_Shortcode {
     }
 
     public function all_categories( $atts ) {
-        $atts = ! empty( $atts ) ? $atts : [];
+        $atts     = ! empty( $atts ) ? $atts : [];
         $taxonomy = new Directorist_Listing_Taxonomy( $atts, 'category' );
 
         $atts[ 'shortcode' ] = 'directorist_all_categories';
@@ -257,7 +257,7 @@ class ATBDP_Shortcode {
     }
 
     public function all_locations( $atts ) {
-        $atts = ! empty( $atts ) ? $atts : [];
+        $atts     = ! empty( $atts ) ? $atts : [];
         $taxonomy = new Directorist_Listing_Taxonomy( $atts, 'location' );
 
         $atts[ 'shortcode' ] = 'directorist_all_locations';
@@ -266,7 +266,7 @@ class ATBDP_Shortcode {
     }
 
     public function search_listing( $atts ) {
-        $atts = ! empty( $atts ) ? $atts : [];
+        $atts         = ! empty( $atts ) ? $atts : [];
         $listing_type = '';
         if ( ! empty( $atts['listing_type'] ) ) {
             $listing_type = $atts['listing_type'];
@@ -279,7 +279,7 @@ class ATBDP_Shortcode {
     }
 
     public function search_result( $atts ) {
-        $atts = ! empty( $atts ) ? $atts : [];
+        $atts     = ! empty( $atts ) ? $atts : [];
         $listings = new Directorist_Listings( $atts, 'search_result' );
 
         $atts[ 'shortcode' ] = 'directorist_search_result';
@@ -288,7 +288,7 @@ class ATBDP_Shortcode {
     }
 
     public function author_profile( $atts ) {
-        $atts = ! empty( $atts ) ? $atts : [];
+        $atts   = ! empty( $atts ) ? $atts : [];
         $author = Directorist_Listing_Author::instance();
 
         $atts[ 'shortcode' ] = 'directorist_author_profile';
@@ -311,7 +311,7 @@ class ATBDP_Shortcode {
     }
 
     public function directorist_signin_signup( $atts ) {
-        $atts = ! empty( $atts ) ? $atts : [];
+        $atts    = ! empty( $atts ) ? $atts : [];
         $account = Directorist_Account::instance();
 
         $atts[ 'shortcode' ] = 'directorist_signin_signup';
@@ -320,9 +320,9 @@ class ATBDP_Shortcode {
     }
 
     public function add_listing( $atts ) {
-        $atts  = ! empty( $atts ) ? $atts : [];
-        $id    = get_query_var( 'atbdp_listing_id', 0 );
-        $id    = empty( $id ) && ! empty( $_REQUEST['edit'] ) ? directorist_clean( wp_unslash( $_REQUEST['edit'] ) ) : $id;
+        $atts = ! empty( $atts ) ? $atts : [];
+        $id   = get_query_var( 'atbdp_listing_id', 0 );
+        $id   = empty( $id ) && ! empty( $_REQUEST['edit'] ) ? directorist_clean( wp_unslash( $_REQUEST['edit'] ) ) : $id;
 
         $forms = Directorist_Listing_Form::instance( $id );
 

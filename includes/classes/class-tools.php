@@ -408,7 +408,7 @@ if ( ! class_exists( 'ATBDP_Tools' ) ) :
                                 directorist_update_term_directory( $term_id, [ $directory_id ], true );
                             }
 
-                            $term_ids[] = $term_id;
+                            $term_ids[]           = $term_id;
                             $terms_cache[ $term ] = $term_id;
                         }
 
@@ -835,7 +835,7 @@ if ( ! class_exists( 'ATBDP_Tools' ) ) :
             if ( ! wp_check_filetype( $file_url )['ext'] ) {
 
                 $headers = [
-                    'Accept'     => 'application/json',
+                    'Accept' => 'application/json',
                 ];
 
                 $config = [
@@ -853,9 +853,9 @@ if ( ! class_exists( 'ATBDP_Tools' ) ) :
                     $response = wp_remote_get( $file_url, $config );
 
                     if ( ! is_wp_error( $response ) ) {
-                        $type = wp_remote_retrieve_header( $response, 'content-type' );
+                        $type      = wp_remote_retrieve_header( $response, 'content-type' );
                         $extension = preg_replace( "/\w+\//", '', $type );
-                        $upload = wp_upload_bits( basename( $file_url . '.' . $extension ), '', wp_remote_retrieve_body( $response ) );
+                        $upload    = wp_upload_bits( basename( $file_url . '.' . $extension ), '', wp_remote_retrieve_body( $response ) );
 
                     }
                 } catch ( Exception $e ) {
@@ -879,7 +879,7 @@ if ( ! class_exists( 'ATBDP_Tools' ) ) :
                 }
             }
             $attachment = [ 'post_title' => basename( $upload['file'] ), 'post_content' => '', 'post_type' => 'attachment', 'post_mime_type' => $type, 'guid' => $upload['url'] ];
-            $id = wp_insert_attachment( $attachment, $upload['file'], $post_id );
+            $id         = wp_insert_attachment( $attachment, $upload['file'], $post_id );
 
             // Ensure the required file is included before calling the function
             if ( ! function_exists( 'wp_generate_attachment_metadata' ) ) {
@@ -932,8 +932,8 @@ if ( ! class_exists( 'ATBDP_Tools' ) ) :
             $this->importable_fields[ 'reviews' ]        = esc_html__( 'Reviews', 'directorist' );
 
             foreach ( $fields as $field ) {
-                $field_key  = ! empty( $field['field_key'] ) ? $field['field_key'] : '';
-                $label      = ! empty( $field['label'] ) ? $field['label'] : '';
+                $field_key = ! empty( $field['field_key'] ) ? $field['field_key'] : '';
+                $label     = ! empty( $field['label'] ) ? $field['label'] : '';
                 if ( 'tax_input[at_biz_dir-location][]'  == $field_key ) {
                     $field_key = 'location'; }
                 if ( 'admin_category_select[]'           == $field_key ) {
@@ -943,7 +943,7 @@ if ( ! class_exists( 'ATBDP_Tools' ) ) :
 
                 if ( isset( $field['widget_name'] ) ) {
                     if ( 'pricing' == $field['widget_name'] ) {
-                        $this->importable_fields[ 'price' ] = esc_html__( 'Price', 'directorist' );
+                        $this->importable_fields[ 'price' ]       = esc_html__( 'Price', 'directorist' );
                         $this->importable_fields[ 'price_range' ] = esc_html__( 'Price Range', 'directorist' );
                         continue;
                     }
@@ -966,8 +966,8 @@ if ( ! class_exists( 'ATBDP_Tools' ) ) :
             $this->setup_importable_fields();
 
             $data = [
-                'columns'  => $importer->get_header(),
-                'fields'   => $this->get_importable_fields(),
+                'columns' => $importer->get_header(),
+                'fields'  => $this->get_importable_fields(),
             ];
 
             ATBDP()->load_template( 'admin-templates/import-export/data-table', $data );

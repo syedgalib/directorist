@@ -79,12 +79,12 @@ class AI_Builder {
             wp_send_json_error( 'You are not authorized.', 401 );
         }
         // phpcs:disable WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-        $prompt     = ! empty( $_POST['prompt'] ) ? sanitize_textarea_field( wp_unslash( $_POST['prompt'] ) ) : '';
-        $keywords   = ! empty( $_POST['keywords'] ) ? static::prepare_keywords( $_POST['keywords'] ) : '';
-        $pinned     = ! empty( $_POST['pinned'] ) ? $_POST['pinned'] : '';
-        $step       = ! empty( $_POST['step'] ) ? absint( $_POST['step'] ) : '';
-        $name       = ! empty( $_POST['name'] ) ? sanitize_text_field( $_POST['name'] ) : '';
-        $fields     = ! empty( $_POST['fields'] ) ? $_POST['fields'] : [];
+        $prompt   = ! empty( $_POST['prompt'] ) ? sanitize_textarea_field( wp_unslash( $_POST['prompt'] ) ) : '';
+        $keywords = ! empty( $_POST['keywords'] ) ? static::prepare_keywords( $_POST['keywords'] ) : '';
+        $pinned   = ! empty( $_POST['pinned'] ) ? $_POST['pinned'] : '';
+        $step     = ! empty( $_POST['step'] ) ? absint( $_POST['step'] ) : '';
+        $name     = ! empty( $_POST['name'] ) ? sanitize_text_field( $_POST['name'] ) : '';
+        $fields   = ! empty( $_POST['fields'] ) ? $_POST['fields'] : [];
 
         if ( 1 === $step ) {
             $response = static::ai_create_keywords( $prompt );
@@ -137,7 +137,7 @@ class AI_Builder {
         }
 
         // Reformat new fields to match the old format and ensure unique field keys for same type fields
-        $type_counts = [];
+        $type_counts      = [];
         $formatted_fields = [];
         foreach ( $new_fields_array as $key => $field ) {
             $type = strtolower( $field['type'] );
@@ -146,7 +146,7 @@ class AI_Builder {
             } else {
                 $type_counts[$type]++;
             }
-            $suffix = $type_counts[$type] > 0 ? '-' . $type_counts[$type] : '';
+            $suffix    = $type_counts[$type] > 0 ? '-' . $type_counts[$type] : '';
             $field_key = "custom-{$type}{$suffix}";
 
             // Handle specific structures for checkbox, radio, and select fields
@@ -170,9 +170,9 @@ class AI_Builder {
             $formatted_fields[$field_key] = array_merge(
                 $field, [
                     'widget_group' => 'custom',
-                    'widget_name' => $type,
-                    'field_key' => $field_key,
-                    'widget_key' => $key,
+                    'widget_name'  => $type,
+                    'field_key'    => $field_key,
+                    'widget_key'   => $key,
                 ]
             );
         }
@@ -183,17 +183,17 @@ class AI_Builder {
             $group_name = $field['group_name'];
             if ( ! isset( $groups[$group_name] ) ) {
                 $groups[$group_name] = [
-                    "type" => "general_group",
-                    "label" => $group_name,
-                    "fields" => [],
-                    "defaultGroupLabel" => "Section",
+                    "type"                          => "general_group",
+                    "label"                         => $group_name,
+                    "fields"                        => [],
+                    "defaultGroupLabel"             => "Section",
                     "disableTrashIfGroupHasWidgets" => [
                         [
-                            "widget_name" => "title",
+                            "widget_name"  => "title",
                             "widget_group" => "preset"
                         ]
                     ],
-                    "icon" => "las la-pen-nib",
+                    "icon"                          => "las la-pen-nib",
                 ];
             }
             $groups[$group_name]['fields'][] = $field_key;
@@ -219,11 +219,11 @@ class AI_Builder {
             array_map(
                 function ( $field ) {
                     return [
-                        'icon' => $field['icon'] ?? '',
-                        'widget_group' => $field['widget_group'],
-                        'widget_name' => $field['widget_name'],
+                        'icon'                => $field['icon'] ?? '',
+                        'widget_group'        => $field['widget_group'],
+                        'widget_name'         => $field['widget_name'],
                         'original_widget_key' => $field['field_key'],
-                        'widget_key' => $field['field_key'],
+                        'widget_key'          => $field['field_key'],
                     ];
                 }, $formatted_fields
             )
@@ -245,15 +245,15 @@ class AI_Builder {
         array_walk(
             $new_fields_array, function ( &$field, $key ) {
                 // Generate the field_key dynamically by type and prefix "custom-"
-                $type = strtolower( $field['type'] );
+                $type      = strtolower( $field['type'] );
                 $field_key = "custom-{$type}";
 
                 $field = array_merge(
                     $field, [
                         'widget_group' => 'custom',
-                        'widget_name' => $type,
-                        'field_key' => $field_key,
-                        'widget_key' => $key,
+                        'widget_name'  => $type,
+                        'field_key'    => $field_key,
+                        'widget_key'   => $key,
                     ]
                 );
             }
@@ -274,17 +274,17 @@ class AI_Builder {
         // Replace old groups with a new group containing the new fields and keeping title and description
         $structure['submission_form_fields']['groups'] = [
             [
-                "type" => "general_group",
-                "label" => "General Information",
-                "fields" => array_merge( ['title', 'description'], array_keys( $new_fields_array ) ),
-                "defaultGroupLabel" => "Section",
+                "type"                          => "general_group",
+                "label"                         => "General Information",
+                "fields"                        => array_merge( ['title', 'description'], array_keys( $new_fields_array ) ),
+                "defaultGroupLabel"             => "Section",
                 "disableTrashIfGroupHasWidgets" => [
                     [
-                        "widget_name" => "title",
+                        "widget_name"  => "title",
                         "widget_group" => "preset"
                     ]
                 ],
-                "icon" => "las la-pen-nib",
+                "icon"                          => "las la-pen-nib",
             ]
         ];
 
@@ -544,9 +544,9 @@ class AI_Builder {
         ];
 
         $groups[] = [
-            'type'   => 'section',
-            'label'  => 'Contact Listings Owner Form',
-            'fields' => [
+            'type'             => 'section',
+            'label'            => 'Contact Listings Owner Form',
+            'fields'           => [
                 'contact_name',
                 'contact_email',
                 'contact_message',
@@ -570,34 +570,34 @@ class AI_Builder {
                     'widget_child_name' => 'contact_message',
                 ],
             ],
-            'widget_group' => 'other_widgets',
-            'widget_name'  => 'contact_listings_owner',
+            'widget_group'     => 'other_widgets',
+            'widget_name'      => 'contact_listings_owner',
         ];
 
         // Contact form fields
         $fields['contact_name'] = [
-            'enable'           => 1,
-            'placeholder'      => 'Name',
-            'widget_group'     => 'other_widgets',
-            'widget_name'      => 'contact_listings_owner',
+            'enable'            => 1,
+            'placeholder'       => 'Name',
+            'widget_group'      => 'other_widgets',
+            'widget_name'       => 'contact_listings_owner',
             'widget_child_name' => 'contact_name',
-            'widget_key'       => 'contact_name',
+            'widget_key'        => 'contact_name',
         ];
 
         $fields['contact_email'] = [
-            'placeholder'      => 'Email',
-            'widget_group'     => 'other_widgets',
-            'widget_name'      => 'contact_listings_owner',
+            'placeholder'       => 'Email',
+            'widget_group'      => 'other_widgets',
+            'widget_name'       => 'contact_listings_owner',
             'widget_child_name' => 'contact_email',
-            'widget_key'       => 'contact_email',
+            'widget_key'        => 'contact_email',
         ];
 
         $fields['contact_message'] = [
-            'placeholder'      => 'Message...',
-            'widget_group'     => 'other_widgets',
-            'widget_name'      => 'contact_listings_owner',
+            'placeholder'       => 'Message...',
+            'widget_group'      => 'other_widgets',
+            'widget_name'       => 'contact_listings_owner',
             'widget_child_name' => 'contact_message',
-            'widget_key'       => 'contact_message',
+            'widget_key'        => 'contact_message',
         ];
 
         // Prepare header
@@ -617,8 +617,8 @@ class AI_Builder {
                 'placeholderKey' => 'quick-widgets-placeholder',
                 'placeholders'   => [
                     [
-                        'type'           => 'placeholder_group',
-                        'placeholderKey' => 'quick-info-placeholder',
+                        'type'            => 'placeholder_group',
+                        'placeholderKey'  => 'quick-info-placeholder',
                         'selectedWidgets' => [
                             [
                                 'type'        => 'button',
@@ -629,8 +629,8 @@ class AI_Builder {
                         ],
                     ],
                     [
-                        'type'           => 'placeholder_group',
-                        'placeholderKey' => 'quick-action-placeholder',
+                        'type'            => 'placeholder_group',
+                        'placeholderKey'  => 'quick-action-placeholder',
                         'selectedWidgets' => [
                             [
                                 'type'        => 'button',
@@ -656,35 +656,35 @@ class AI_Builder {
                     ],
                 ],
             ],
-            'slider-placeholder' => [
-                'type'           => 'placeholder_item',
-                'placeholderKey' => 'slider-placeholder',
+            'slider-placeholder'        => [
+                'type'            => 'placeholder_item',
+                'placeholderKey'  => 'slider-placeholder',
                 'selectedWidgets' => [
                     [
-                        'type'           => 'thumbnail',
-                        'label'          => 'Listing Image/Slider',
-                        'widget_name'    => 'slider',
-                        'widget_key'     => 'slider',
+                        'type'             => 'thumbnail',
+                        'label'            => 'Listing Image/Slider',
+                        'widget_name'      => 'slider',
+                        'widget_key'       => 'slider',
                         'footer_thumbnail' => true,
                     ],
                 ],
             ],
             'listing-title-placeholder' => [
-                'type'           => 'placeholder_item',
-                'placeholderKey' => 'listing-title-placeholder',
+                'type'            => 'placeholder_item',
+                'placeholderKey'  => 'listing-title-placeholder',
                 'selectedWidgets' => [
                     [
-                        'type'          => 'title',
-                        'label'         => 'Listing Title',
-                        'widget_name'   => 'title',
-                        'widget_key'    => 'title',
+                        'type'           => 'title',
+                        'label'          => 'Listing Title',
+                        'widget_name'    => 'title',
+                        'widget_key'     => 'title',
                         'enable_tagline' => true,
                     ],
                 ],
             ],
-            'more-widgets-placeholder' => [
-                'type'           => 'placeholder_item',
-                'placeholderKey' => 'more-widgets-placeholder',
+            'more-widgets-placeholder'  => [
+                'type'            => 'placeholder_item',
+                'placeholderKey'  => 'more-widgets-placeholder',
                 'selectedWidgets' => [
                     [
                         'type'        => 'badge',
@@ -699,12 +699,12 @@ class AI_Builder {
                         'widget_key'  => 'ratings_count',
                     ],
                     [
-                        'type'          => 'badge',
-                        'label'         => 'Badges',
-                        'widget_name'   => 'badges',
-                        'widget_key'    => 'badges',
-                        'new_badge'     => true,
-                        'popular_badge' => true,
+                        'type'           => 'badge',
+                        'label'          => 'Badges',
+                        'widget_name'    => 'badges',
+                        'widget_key'     => 'badges',
+                        'new_badge'      => true,
+                        'popular_badge'  => true,
                         'featured_badge' => true,
                     ],
                     [
@@ -844,9 +844,9 @@ class AI_Builder {
 
     protected static function request( $endpoint = 'keywords', $params = [] ) {
         $headers = [
-            'user-agent'    => 'Directorist\\' . ATBDP_VERSION,
-            'Accept'        => 'application/json',
-            'Content-Type'  => 'application/json'
+            'user-agent'   => 'Directorist\\' . ATBDP_VERSION,
+            'Accept'       => 'application/json',
+            'Content-Type' => 'application/json'
         ];
 
         $config = [

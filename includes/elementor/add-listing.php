@@ -30,9 +30,9 @@ class Directorist_Add_Listing extends Custom_Widget_Base {
     public function az_fields() {
         $fields = [
             [
-                'mode'    => 'section_start',
-                'id'      => 'sec_general',
-                'label'   => __( 'General', 'directorist' ),
+                'mode'  => 'section_start',
+                'id'    => 'sec_general',
+                'label' => __( 'General', 'directorist' ),
             ],
             [
                 'type'      => Controls_Manager::HEADING,
@@ -41,11 +41,11 @@ class Directorist_Add_Listing extends Custom_Widget_Base {
                 'condition' => ! directorist_is_multi_directory_enabled() ? '' : ['nocondition' => true],
             ],
             [
-                'type'     => Controls_Manager::SELECT2,
-                'id'       => 'type',
-                'label'    => __( 'Directory Types', 'directorist' ),
-                'multiple' => true,
-                'options'  => $this->az_listing_types(),
+                'type'      => Controls_Manager::SELECT2,
+                'id'        => 'type',
+                'label'     => __( 'Directory Types', 'directorist' ),
+                'multiple'  => true,
+                'options'   => $this->az_listing_types(),
                 'condition' => directorist_is_multi_directory_enabled() ? '' : ['nocondition' => true],
             ],
             [

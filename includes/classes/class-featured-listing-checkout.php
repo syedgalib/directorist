@@ -13,7 +13,7 @@ use Directorist\Utils\Template;
 class FeaturedListingCheckout {
     const CHECKOUT_TYPE = 'featured_listing';
 
-    public function __construct()  {
+    public function __construct() {
         add_filter( 'directorist_checkout_types', [$this, 'add_checkout_type'] );
         add_filter( 'directorist_order_data', [ $this, 'handle_order_data' ] );
         add_action( 'directorist_after_order_update', [$this, 'handle_after_order_update'] );

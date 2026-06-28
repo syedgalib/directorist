@@ -19,7 +19,7 @@ if ( ! empty( $data['file_type'] ) ) {
     }
 }
 
-$file_size         = ! empty( $data['file_size'] ) ? $data['file_size'] : '2mb';
+$file_size = ! empty( $data['file_size'] ) ? $data['file_size'] : '2mb';
 
 // Get file type icon based on selected file type
 $file_type_icon = 'far fa-image'; // Default icon

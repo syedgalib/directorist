@@ -19,14 +19,14 @@ class Directorist_Checkout extends Custom_Widget_Base {
     public function az_fields() {
         $fields = [
             [
-                'mode'    => 'section_start',
-                'id'      => 'sec_general',
-                'label'   => __( 'General', 'directorist' ),
+                'mode'  => 'section_start',
+                'id'    => 'sec_general',
+                'label' => __( 'General', 'directorist' ),
             ],
             [
-                'type'      => Controls_Manager::HEADING,
-                'id'        => 'sec_heading',
-                'label'     => $this->az_texts['checkout'],
+                'type'  => Controls_Manager::HEADING,
+                'id'    => 'sec_heading',
+                'label' => $this->az_texts['checkout'],
             ],
             [
                 'mode' => 'section_end',

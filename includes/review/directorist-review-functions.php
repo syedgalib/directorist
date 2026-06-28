@@ -135,7 +135,7 @@ function directorist_get_comment_edit_link( $args = [], $comment = null, $post =
         return false;
     }
 
-    $comment_type = ( $comment->comment_type === 'review' ? __( 'review', 'directorist' ) : __( 'comment', 'directorist' ) );
+    $comment_type    = ( $comment->comment_type === 'review' ? __( 'review', 'directorist' ) : __( 'comment', 'directorist' ) );
     $data_attributes = [
         'commentid' => $comment->comment_ID,
         'postid'    => $post->ID,

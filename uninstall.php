@@ -93,7 +93,7 @@ function directorist_uninstall() {
 
 if ( is_multisite() ) {
     $original_blog_id = get_current_blog_id();
-    $sites = get_sites();
+    $sites            = get_sites();
 
     foreach ( $sites as $site ) {
         switch_to_blog( $site->blog_id );

@@ -7,12 +7,12 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-$listing_id              = $listing_form->get_add_listing_id();
-$price                   = get_post_meta( $listing_id, '_price', true );
-$price_range             = get_post_meta( $listing_id, '_price_range', true );
-$price_type              = get_post_meta( $listing_id, '_atbd_listing_pricing', true );
-$allow_decimal           = get_directorist_option( 'allow_decimal', 1 );
-$currency_symbol         = atbdp_currency_symbol( directorist_get_currency() );
+$listing_id      = $listing_form->get_add_listing_id();
+$price           = get_post_meta( $listing_id, '_price', true );
+$price_range     = get_post_meta( $listing_id, '_price_range', true );
+$price_type      = get_post_meta( $listing_id, '_atbd_listing_pricing', true );
+$allow_decimal   = get_directorist_option( 'allow_decimal', 1 );
+$currency_symbol = atbdp_currency_symbol( directorist_get_currency() );
 
 // Get conditional logic attributes using centralized method
 $conditional_logic_attr = $listing_form->get_conditional_logic_attributes( $data );

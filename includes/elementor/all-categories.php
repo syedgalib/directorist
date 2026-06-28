@@ -18,7 +18,7 @@ class Directorist_All_Categories extends Custom_Widget_Base {
     }
 
     private function az_listing_categories() {
-        $result = [];
+        $result     = [];
         $categories = get_terms( [ 'taxonomy' => ATBDP_CATEGORY ] );
         foreach ( $categories as $category ) {
             $result[$category->slug] = $category->name;
@@ -39,23 +39,23 @@ class Directorist_All_Categories extends Custom_Widget_Base {
     public function az_fields() {
         $fields = [
             [
-                'mode'    => 'section_start',
-                'id'      => 'sec_general',
-                'label'   => __( 'General', 'directorist' ),
+                'mode'  => 'section_start',
+                'id'    => 'sec_general',
+                'label' => __( 'General', 'directorist' ),
             ],
             [
-                'type'     => Controls_Manager::SELECT2,
-                'id'       => 'type',
-                'label'    => __( 'Directory Types', 'directorist' ),
-                'multiple' => true,
-                'options'  => $this->az_listing_types(),
+                'type'      => Controls_Manager::SELECT2,
+                'id'        => 'type',
+                'label'     => __( 'Directory Types', 'directorist' ),
+                'multiple'  => true,
+                'options'   => $this->az_listing_types(),
                 'condition' => directorist_is_multi_directory_enabled() ? '' : ['nocondition' => true],
             ],
             [
-                'type'     => Controls_Manager::SELECT2,
-                'id'       => 'default_type',
-                'label'    => __( 'Default Directory Types', 'directorist' ),
-                'options'  => $this->az_listing_types(),
+                'type'      => Controls_Manager::SELECT2,
+                'id'        => 'default_type',
+                'label'     => __( 'Default Directory Types', 'directorist' ),
+                'options'   => $this->az_listing_types(),
                 'condition' => directorist_is_multi_directory_enabled() ? '' : ['nocondition' => true],
             ],
             [
@@ -69,17 +69,17 @@ class Directorist_All_Categories extends Custom_Widget_Base {
                 'default' => 'grid',
             ],
             [
-                'type'    => Controls_Manager::SELECT,
-                'id'      => 'columns',
-                'label'   => __( 'Categories Per Row', 'directorist' ),
-                'options' => [
+                'type'      => Controls_Manager::SELECT,
+                'id'        => 'columns',
+                'label'     => __( 'Categories Per Row', 'directorist' ),
+                'options'   => [
                     '1' => __( '1 Item / Row', 'directorist' ),
                     '2' => __( '2 Items / Row', 'directorist' ),
                     '3' => __( '3 Items / Row', 'directorist' ),
                     '4' => __( '4 Items / Row', 'directorist' ),
                     '6' => __( '6 Items / Row', 'directorist' ),
                 ],
-                'default' => '3',
+                'default'   => '3',
                 'condition' => [ 'view' => [ 'grid' ] ],
             ],
             [
@@ -95,11 +95,11 @@ class Directorist_All_Categories extends Custom_Widget_Base {
                 'default' => 'id',
             ],
             [
-                'type'     => Controls_Manager::SELECT2,
-                'id'       => 'slug',
-                'label'    => __( 'Specify Categories', 'directorist' ),
-                'multiple' => true,
-                'options'  => $this->az_listing_categories(),
+                'type'      => Controls_Manager::SELECT2,
+                'id'        => 'slug',
+                'label'     => __( 'Specify Categories', 'directorist' ),
+                'multiple'  => true,
+                'options'   => $this->az_listing_categories(),
                 'condition' => [ 'order_by' => [ 'slug' ] ],
             ],
             [
@@ -113,19 +113,19 @@ class Directorist_All_Categories extends Custom_Widget_Base {
                 'default' => 'desc',
             ],
             [
-                'type'      => Controls_Manager::NUMBER,
-                'id'        => 'number_cat',
-                'label'     => __( 'Number of Categories to Show', 'directorist' ),
-                'min'       => 1,
-                'max'       => 100,
-                'step'      => 1,
-                'default'   => 6,
+                'type'    => Controls_Manager::NUMBER,
+                'id'      => 'number_cat',
+                'label'   => __( 'Number of Categories to Show', 'directorist' ),
+                'min'     => 1,
+                'max'     => 100,
+                'step'    => 1,
+                'default' => 6,
             ],
             [
-                'type'      => Controls_Manager::SWITCHER,
-                'id'        => 'user',
-                'label'     => __( 'Only For Logged In User?', 'directorist' ),
-                'default'   => 'no',
+                'type'    => Controls_Manager::SWITCHER,
+                'id'      => 'user',
+                'label'   => __( 'Only For Logged In User?', 'directorist' ),
+                'default' => 'no',
             ],
             [
                 'mode' => 'section_end',

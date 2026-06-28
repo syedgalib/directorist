@@ -47,7 +47,7 @@ abstract class Posts_Controller extends Abstract_Controller {
              * @param array $private_query_vars Array of allowed query vars for authorized users.
              *
              */
-            $private = apply_filters( 'directorist_rest_private_query_vars', $wp->private_query_vars );
+            $private    = apply_filters( 'directorist_rest_private_query_vars', $wp->private_query_vars );
             $valid_vars = array_merge( $valid_vars, $private );
         }
         // Define our own in addition to WP's normal vars.

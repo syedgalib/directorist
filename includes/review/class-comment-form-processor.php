@@ -99,7 +99,7 @@ class Comment_Form_Processor {
             Comment::post_rating( $comment_id, $comment_data, $_POST );
             Comment::clear_transients( $comment->comment_post_ID );
 
-            $cpage = isset( $_POST['cpage'] ) ? absint( $_POST['cpage'] ) : 0;
+            $cpage       = isset( $_POST['cpage'] ) ? absint( $_POST['cpage'] ) : 0;
             $redirect_to = get_permalink( $comment->comment_post_ID );
             if ( $cpage ) {
                 $redirect_to = add_query_arg( 'cpage', $cpage, $redirect_to );

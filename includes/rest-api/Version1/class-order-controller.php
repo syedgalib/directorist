@@ -45,10 +45,10 @@ class Order_Controller extends Abstract_Controller {
                     'callback'            => [ $this, 'show' ],
                     'permission_callback' => [ $this, 'admin_permissions_check' ],
                     'args'                => [
-                        'id'     => [
-                            'description'       => __( 'The order ID.' ),
-                            'type'              => 'integer',
-                            'required'          => true,
+                        'id' => [
+                            'description' => __( 'The order ID.' ),
+                            'type'        => 'integer',
+                            'required'    => true,
                         ],
                     ],
                 ],
@@ -59,10 +59,10 @@ class Order_Controller extends Abstract_Controller {
                     'args'                => array_merge(
                         $this->store_args(), 
                         [
-                            'id'     => [
-                                'description'       => __( 'The order ID.' ),
-                                'type'              => 'integer',
-                                'required'          => true,
+                            'id' => [
+                                'description' => __( 'The order ID.' ),
+                                'type'        => 'integer',
+                                'required'    => true,
                             ],
                         ],
                     )
@@ -72,10 +72,10 @@ class Order_Controller extends Abstract_Controller {
                     'callback'            => [ $this, 'delete' ],
                     'permission_callback' => [ $this, 'admin_permissions_check' ],
                     'args'                => [
-                        'id'     => [
-                            'description'       => __( 'The order ID.' ),
-                            'type'              => 'integer',
-                            'required'          => true,
+                        'id' => [
+                            'description' => __( 'The order ID.' ),
+                            'type'        => 'integer',
+                            'required'    => true,
                         ],
                     ],
                 ],
@@ -92,15 +92,15 @@ class Order_Controller extends Abstract_Controller {
                     'permission_callback' => [ $this, 'admin_permissions_check' ],
                     'args'                => [
                         'id'     => [
-                            'description'       => __( 'The order ID.' ),
-                            'type'              => 'integer',
-                            'required'          => true,
+                            'description' => __( 'The order ID.' ),
+                            'type'        => 'integer',
+                            'required'    => true,
                         ],
                         'status' => [
-                            'description'       => __( 'The status of the order.' ),
-                            'type'              => 'string',
-                            'enum'              => OrderStatus::all(),
-                            'required'          => true,
+                            'description' => __( 'The status of the order.' ),
+                            'type'        => 'string',
+                            'enum'        => OrderStatus::all(),
+                            'required'    => true,
                         ],
                     ],
                 ],
@@ -148,7 +148,7 @@ class Order_Controller extends Abstract_Controller {
             ->set_listing_id( $request->get_param( "listing_id" ) )
             ->set_amount( $request->get_param( "amount" ) )
             ->set_currency( $request->get_param( "currency" ) )
-            ->set_status( $request->get_param( "status" ) )            ;
+            ->set_status( $request->get_param( "status" ) );
         
         $id = directorist_order_repository()->create( $dto );
 
@@ -181,7 +181,7 @@ class Order_Controller extends Abstract_Controller {
 
     public function update( WP_REST_Request $request ) {
         $dto = ( new OrderDTO )->set_id( $request->get_param( 'id' ) )
-            ->set_user_id(  $request->get_param( 'user_id'  ) )
+            ->set_user_id( $request->get_param( 'user_id' ) )
             ->set_listing_id( $request->get_param( 'listing_id' ) )
             ->set_status( $request->get_param( 'status' ) );
 
@@ -214,53 +214,55 @@ class Order_Controller extends Abstract_Controller {
 
         $dto = $repository->to_dto( $old_item );
 
-        $dto->set_status($request->get_param("status"));
+        $dto->set_status( $request->get_param( "status" ) );
 
         $repository->update( $dto );
 
-        return rest_ensure_response( [
-            'message' => esc_html__("Status updated successfully")
-        ] );
+        return rest_ensure_response(
+            [
+                'message' => esc_html__( "Status updated successfully" )
+            ] 
+        );
     }
 
     protected function store_args(): array {
         return [
-            'user_id' => [
-                'description'       => __( 'The user ID.' ),
-                'type'              => 'integer',
-                'required'          => true,
+            'user_id'    => [
+                'description' => __( 'The user ID.' ),
+                'type'        => 'integer',
+                'required'    => true,
             ],
             'listing_id' => [
-                'description'       => __( 'The listing ID.' ),
-                'type'              => 'integer',
-                'required'          => false,
+                'description' => __( 'The listing ID.' ),
+                'type'        => 'integer',
+                'required'    => false,
             ],
-            'status' => [
-                'description'       => __( 'The status of the order.' ),
-                'type'              => 'string',
-                'required'          => true,
-                'enum'              => OrderStatus::all(),
+            'status'     => [
+                'description' => __( 'The status of the order.' ),
+                'type'        => 'string',
+                'required'    => true,
+                'enum'        => OrderStatus::all(),
             ]
         ];
     }
 
     protected function index_args(): array {
         return [
-            'page'     => [
+            'page'    => [
                 'description'       => __( 'The page number.' ),
                 'type'              => 'integer',
                 'sanitize_callback' => 'absint',
                 'default'           => 1,
                 'required'          => false,
             ],
-            'perPage'     => [
+            'perPage' => [
                 'description'       => __( 'The number of items per page.' ),
                 'type'              => 'integer',
                 'sanitize_callback' => 'absint',
                 'default'           => 10,
                 'required'          => false,
             ],
-            'search'     => [
+            'search'  => [
                 'description'       => __( 'The search query.' ),
                 'type'              => 'string',
                 'sanitize_callback' => 'sanitize_text_field',

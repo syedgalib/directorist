@@ -9,9 +9,9 @@ use \Directorist\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-$is_action  = ! empty( $before ) && 'div' === $before;
+$is_action   = ! empty( $before ) && 'div' === $before;
 $is_whatsapp = $listings->has_whatsapp( $data );
-$phone_link = Helper::phone_link(
+$phone_link  = Helper::phone_link(
     [
         'number'   => $value,
         'whatsapp' => $is_whatsapp,

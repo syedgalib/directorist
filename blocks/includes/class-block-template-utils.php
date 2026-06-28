@@ -251,10 +251,10 @@ class Block_Template_Utils {
      */
     public static function convert_slug_to_title( $template_slug ) {
         $templates = [
-            'single-' . ATBDP_POST_TYPE => __( 'Single Listing Page', 'directorist' ),
-            'taxonomy-' . ATBDP_CATEGORY  => __( 'Category Archive Page', 'directorist' ),
-            'taxonomy-' . ATBDP_LOCATION  => __( 'Location Archive Page', 'directorist' ),
-            'taxonomy-' . ATBDP_TAGS      => __( 'Tag Archive Page', 'directorist' ),
+            'single-' . ATBDP_POST_TYPE  => __( 'Single Listing Page', 'directorist' ),
+            'taxonomy-' . ATBDP_CATEGORY => __( 'Category Archive Page', 'directorist' ),
+            'taxonomy-' . ATBDP_LOCATION => __( 'Location Archive Page', 'directorist' ),
+            'taxonomy-' . ATBDP_TAGS     => __( 'Tag Archive Page', 'directorist' ),
         ];
 
         if ( isset( $templates[ $template_slug ] ) ) {

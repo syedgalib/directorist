@@ -103,7 +103,7 @@ class Directorist_Setup_Wizard {
         $data['log']        = 'Importing ' . $current_demo['name'] . ' type...';
         $data['percentage'] = $percentage;
 
-        $builder_content  = directorist_get_json_from_url( $builder_file_url );
+        $builder_content = directorist_get_json_from_url( $builder_file_url );
         if ( $builder_content ) {
             $multi_directory_manager->prepare_settings();
             $term = $multi_directory_manager->add_directory(
@@ -143,7 +143,7 @@ class Directorist_Setup_Wizard {
 
     public function render_run_admin_setup_wizard_notice() {
 
-        $setup_wizard = get_option( 'directorist_setup_wizard_completed' );
+        $setup_wizard       = get_option( 'directorist_setup_wizard_completed' );
         $atpdp_setup_wizard = apply_filters( 'atbdp_setup_wizard', true );
         if ( $setup_wizard || ! $atpdp_setup_wizard ) {
             return;
@@ -170,17 +170,17 @@ class Directorist_Setup_Wizard {
         }
 
         $create_pages = [
-            'checkout_page'        => [
-                'post_title'         => 'Checkout',
-                'post_content'       => '[directorist_checkout]',
+            'checkout_page'            => [
+                'post_title'   => 'Checkout',
+                'post_content' => '[directorist_checkout]',
             ],
-            'payment_receipt_page' => [
-                'post_title'         => 'Payment Receipt',
-                'post_content'       => '[directorist_payment_receipt]',
+            'payment_receipt_page'     => [
+                'post_title'   => 'Payment Receipt',
+                'post_content' => '[directorist_payment_receipt]',
             ],
             'transaction_failure_page' => [
-                'post_title'         => 'Transaction Failure',
-                'post_content'       => '[directorist_transaction_failure]',
+                'post_title'   => 'Transaction Failure',
+                'post_content' => '[directorist_transaction_failure]',
             ],
         ];
         $atbdp_option = get_option( 'atbdp_option' );
@@ -189,10 +189,10 @@ class Directorist_Setup_Wizard {
             foreach ( $create_pages as $key => $name ) {
 
                 $args = [
-                    'post_title' => $name['post_title'],
-                    'post_content' => $name['post_content'],
-                    'post_status' => 'publish',
-                    'post_type' => 'page',
+                    'post_title'     => $name['post_title'],
+                    'post_content'   => $name['post_content'],
+                    'post_status'    => 'publish',
+                    'post_type'      => 'page',
                     'comment_status' => 'closed'
                 ];
                 if ( empty( $atbdp_option[$key] ) ) {
@@ -232,20 +232,20 @@ class Directorist_Setup_Wizard {
             );
         }
 
-        $data               = [];
-        $listings_url       = [];
-        $imported           = 0;
-        $failed             = 0;
-        $count              = 0;
-        $file               = isset( $_POST['file'] ) ? sanitize_text_field( wp_unslash( $_POST['file'] ) ) : $file;
-        $total_length       = isset( $_POST['limit'] ) ? sanitize_text_field( wp_unslash( $_POST['limit'] ) ) : 5;
-        $position           = isset( $_POST['position'] ) ? sanitize_text_field( wp_unslash( $_POST['position'] ) ) : 0;
+        $data         = [];
+        $listings_url = [];
+        $imported     = 0;
+        $failed       = 0;
+        $count        = 0;
+        $file         = isset( $_POST['file'] ) ? sanitize_text_field( wp_unslash( $_POST['file'] ) ) : $file;
+        $total_length = isset( $_POST['limit'] ) ? sanitize_text_field( wp_unslash( $_POST['limit'] ) ) : 5;
+        $position     = isset( $_POST['position'] ) ? sanitize_text_field( wp_unslash( $_POST['position'] ) ) : 0;
 
-        $all_posts          = self::read_csv( $file );
+        $all_posts = self::read_csv( $file );
 
-        $posts              = array_slice( $all_posts, $position );
+        $posts = array_slice( $all_posts, $position );
 
-        $limit              = 10;
+        $limit = 10;
 
         $directory_id = ! empty( $type ) ? $type : default_directory_type();
 
@@ -278,7 +278,7 @@ class Directorist_Setup_Wizard {
 
                 foreach ( $post as $key => $value ) {
                     if ( 'category' == $key ) {
-                        $taxonomy = ATBDP_CATEGORY;
+                        $taxonomy    = ATBDP_CATEGORY;
                         $term_exists = get_term_by( 'name', $value, $taxonomy );
                         if ( ! $term_exists ) { // @codingStandardsIgnoreLine.
                             $result = wp_insert_term( $value, $taxonomy );
@@ -291,7 +291,7 @@ class Directorist_Setup_Wizard {
                             wp_set_object_terms( $post_id, $term_exists->term_id, $taxonomy );
                         }
                     } elseif ( 'location' == $key ) {
-                        $taxonomy = ATBDP_LOCATION;
+                        $taxonomy    = ATBDP_LOCATION;
                         $term_exists = get_term_by( 'name', $value, $taxonomy );
                         if ( ! $term_exists ) { // @codingStandardsIgnoreLine.
                             $result = wp_insert_term( $value, $taxonomy );
@@ -304,7 +304,7 @@ class Directorist_Setup_Wizard {
                             wp_set_object_terms( $post_id, $term_exists->term_id, $taxonomy );
                         }
                     } elseif ( 'tag' == $key ) {
-                        $taxonomy = ATBDP_TAGS;
+                        $taxonomy    = ATBDP_TAGS;
                         $term_exists = get_term_by( 'name', $value, $taxonomy );
                         if ( ! $term_exists ) { // @codingStandardsIgnoreLine.
                             $result = wp_insert_term( $value, $taxonomy );
@@ -363,24 +363,24 @@ class Directorist_Setup_Wizard {
                 $count++;
         }
 
-        $data['listings']      = $listings_url;
-        $data['failed']        = $failed;
-        $data['failed']        = $failed;
+        $data['listings'] = $listings_url;
+        $data['failed']   = $failed;
+        $data['failed']   = $failed;
 
         return $data;
     }
 
     public static function read_csv( $file ) {
-        $fp = fopen( $file, 'r' );
+        $fp     = fopen( $file, 'r' );
         $header = fgetcsv( $fp );
 
         // get the rest of the rows
         $data = [];
         while ( $row = fgetcsv( $fp ) ) {
-            $arr = [];
+            $arr       = [];
             foreach ( $header as $i => $col )
             $arr[$col] = $row[$i];
-            $data[] = $arr;
+            $data[]    = $arr;
         }
         return $data;
     }
@@ -481,24 +481,24 @@ class Directorist_Setup_Wizard {
                     'view'    => [ $this, 'directorist_setup_introduction' ],
                     'handler' => [ $this, 'directorist_step_intro_save' ],
                 ],
-                'step-one' => [
+                'step-one'     => [
                     'name'    =>  __( 'Step One', 'directorist' ),
                     'view'    => [ $this, 'directorist_step_one' ],
                     'handler' => [ $this, 'directorist_step_one_save' ],
                 ],
-                'step-two' => [
+                'step-two'     => [
                     'name'    =>  __( 'Step Two', 'directorist' ),
                     'view'    => [ $this, 'directorist_step_two' ],
                     'handler' => [ $this, 'directorist_step_two_save' ],
                 ],
-                'step-three' => [
+                'step-three'   => [
                     'name'    =>  __( 'Step Three', 'directorist' ),
                     'view'    => [ $this, 'directorist_step_three' ],
                     'handler' => [ $this, 'directorist_step_three_save' ],
                 ],
-                'step-four' => [
-                    'name'    =>  __( 'Step Four', 'directorist' ),
-                    'view'    => [ $this, 'directorist_step_four' ],
+                'step-four'    => [
+                    'name' =>  __( 'Step Four', 'directorist' ),
+                    'view' => [ $this, 'directorist_step_four' ],
                 ],
             ]
         );
@@ -574,7 +574,7 @@ class Directorist_Setup_Wizard {
         $_post_data   = wp_unslash( $_POST );
         $atbdp_option = get_option( 'atbdp_option' );
 
-        $atbdp_option['default_latitude'] = ! empty( $_post_data['default_latitude'] ) ? $_post_data['default_latitude'] : '';
+        $atbdp_option['default_latitude']  = ! empty( $_post_data['default_latitude'] ) ? $_post_data['default_latitude'] : '';
         $atbdp_option['default_longitude'] = ! empty( $_post_data['default_longitude'] ) ? $_post_data['default_longitude'] : '';
 
         update_option( 'atbdp_option', $atbdp_option );
@@ -639,14 +639,14 @@ class Directorist_Setup_Wizard {
 
         $_post_data = wp_unslash( $_POST );
 
-        $atbdp_option = get_option( 'atbdp_option' );
-        $pages = ! empty( $_post_data['share_essentials'] ) ? $_post_data['share_essentials'] : '';
-        $atbdp_option['map_api_key'] = ! empty( $_post_data['map_api_key'] ) ? $_post_data['map_api_key'] : '';
-        $atbdp_option['enable_monetization'] = ! empty( $_post_data['featured_listing'] ) ? 1 : false;
-        $atbdp_option['enable_featured_listing'] = ! empty( $_post_data['featured_listing'] ) ? $_post_data['featured_listing'] : '';
-        $atbdp_option['featured_listing_price'] = ! empty( $_post_data['featured_listing_price'] ) ? $_post_data['featured_listing_price'] : '';
-        $atbdp_option['active_gateways'] = ! empty( $_post_data['active_gateways'] ) ? $_post_data['active_gateways'] : [];
-        $atbdp_option['paypal_gateway_title'] = __( 'PayPal', 'directorist' );
+        $atbdp_option                               = get_option( 'atbdp_option' );
+        $pages                                      = ! empty( $_post_data['share_essentials'] ) ? $_post_data['share_essentials'] : '';
+        $atbdp_option['map_api_key']                = ! empty( $_post_data['map_api_key'] ) ? $_post_data['map_api_key'] : '';
+        $atbdp_option['enable_monetization']        = ! empty( $_post_data['featured_listing'] ) ? 1 : false;
+        $atbdp_option['enable_featured_listing']    = ! empty( $_post_data['featured_listing'] ) ? $_post_data['featured_listing'] : '';
+        $atbdp_option['featured_listing_price']     = ! empty( $_post_data['featured_listing_price'] ) ? $_post_data['featured_listing_price'] : '';
+        $atbdp_option['active_gateways']            = ! empty( $_post_data['active_gateways'] ) ? $_post_data['active_gateways'] : [];
+        $atbdp_option['paypal_gateway_title']       = __( 'PayPal', 'directorist' );
         $atbdp_option['paypal_gateway_description'] = __( 'You can make payment using paypal if you choose this payment gateway.', 'directorist' );
 
 
@@ -666,17 +666,17 @@ class Directorist_Setup_Wizard {
         do_action( 'directorist_admin_setup_wizard_save_step_two' );
 
         $create_pages = [
-            'checkout_page'        => [
-                'post_title'         => 'Checkout',
-                'post_content'       => '[directorist_checkout]',
+            'checkout_page'            => [
+                'post_title'   => 'Checkout',
+                'post_content' => '[directorist_checkout]',
             ],
-            'payment_receipt_page' => [
-                'post_title'         => 'Payment Receipt',
-                'post_content'       => '[directorist_payment_receipt]',
+            'payment_receipt_page'     => [
+                'post_title'   => 'Payment Receipt',
+                'post_content' => '[directorist_payment_receipt]',
             ],
             'transaction_failure_page' => [
-                'post_title'         => 'Transaction Failure',
-                'post_content'       => '[directorist_transaction_failure]',
+                'post_title'   => 'Transaction Failure',
+                'post_content' => '[directorist_transaction_failure]',
             ],
         ];
 
@@ -962,28 +962,28 @@ class Directorist_Setup_Wizard {
 
         $ouput_steps = $this->steps;
         array_shift( $ouput_steps );
-        $hide = ! isset( $_GET['step'] ) ? 'atbdp-none' : '';
-        $step = ! empty( $_GET['step'] ) ? sanitize_text_field( wp_unslash( $_GET['step'] ) ) : '';
+        $hide              = ! isset( $_GET['step'] ) ? 'atbdp-none' : '';
+        $step              = ! empty( $_GET['step'] ) ? sanitize_text_field( wp_unslash( $_GET['step'] ) ) : '';
         $introduction_step = empty( $step ) || 'step-one' == $step || 'step-two' == $step || 'step-three' == $step ? 'active' : '';
-        $step_one = ( ! empty( $step ) && ( 'step-one' == $step || 'step-two' == $step || 'step-three' == $step ) ) ? 'active' : '' ;
-        $step_two = ( ! empty( $step ) && ( 'step-two' == $step || 'step-three' == $step ) ) ? 'active' : '' ;
-        $step_three = ( ! empty( $step ) && ( 'step-three' == $step || 'step-three' == $step ) ) ? 'active' : '' ;
+        $step_one          = ( ! empty( $step ) && ( 'step-one' == $step || 'step-two' == $step || 'step-three' == $step ) ) ? 'active' : '' ;
+        $step_two          = ( ! empty( $step ) && ( 'step-two' == $step || 'step-three' == $step ) ) ? 'active' : '' ;
+        $step_three        = ( ! empty( $step ) && ( 'step-three' == $step || 'step-three' == $step ) ) ? 'active' : '' ;
 
-        $header_title = __( 'Choose a directory type', 'directorist' );
+        $header_title  = __( 'Choose a directory type', 'directorist' );
         $active_number = 1;
 
         switch ( $step ) {
             case 'step-one':
                 $active_number = 2;
-                $header_title = __( 'Choose Default Location', 'directorist' );
+                $header_title  = __( 'Choose Default Location', 'directorist' );
                 break;
             case 'step-two':
                 $active_number = 3;
-                $header_title = __( 'Earn with Directorist', 'directorist' );
+                $header_title  = __( 'Earn with Directorist', 'directorist' );
                 break;
             case 'step-three':
                 $active_number = 4;
-                $header_title = __( 'Insert Content', 'directorist' );
+                $header_title  = __( 'Insert Content', 'directorist' );
                 break;
             default:
                 $active_number = 1;

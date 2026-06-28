@@ -161,7 +161,7 @@ class Listings_Actions_Controller extends Abstract_Controller {
      */
     public function prepare_item_for_response( $data, $request ) {
         $context = ! empty( $request['context'] ) ? $request['context'] : 'view';
-        $schema = $this->get_item_schema();
+        $schema  = $this->get_item_schema();
 
         $data = array_intersect_key( $request->get_params(), $schema['properties'] );
         $data = $this->add_additional_fields_to_object( $data, $request );
@@ -193,17 +193,17 @@ class Listings_Actions_Controller extends Abstract_Controller {
             'title'      => 'listings-actions',
             'type'       => 'object',
             'properties' => array(
-                'id' => array(
+                'id'      => array(
                     'description' => __( 'Action name.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'name' => array(
+                'name'    => array(
                     'description' => __( 'Action initiator name.', 'directorist' ),
                     'type'        => 'string',
                     'context'     => array( 'view', 'edit' ),
                 ),
-                'email' => array(
+                'email'   => array(
                     'description' => __( 'Action email.', 'directorist' ),
                     'type'        => 'string',
                     'format'      => 'email',
@@ -243,7 +243,7 @@ class Listings_Actions_Controller extends Abstract_Controller {
             '{sender_email}'  => $user->user_email,
             '{message}'       => $message
         );
-        $send_email = get_directorist_option( 'admin_email_lists' );
+        $send_email   = get_directorist_option( 'admin_email_lists' );
 
         $to = ! empty( $send_email ) ? $send_email : get_bloginfo( 'admin_email' );
 
@@ -253,8 +253,8 @@ class Listings_Actions_Controller extends Abstract_Controller {
         $message = __( "Dear Administrator,<br /><br />This is an email abuse report for a listing at {listing_url}.<br /><br />Name: {sender_name}<br />Email: {sender_email}<br />Message: {message}", 'directorist' );
         $message = strtr( $message, $placeholders );
 
-        $message = atbdp_email_html( $subject, $message );
-        $headers = "From: {$user->display_name} <{$user->user_email}>\r\n";
+        $message  = atbdp_email_html( $subject, $message );
+        $headers  = "From: {$user->display_name} <{$user->user_email}>\r\n";
         $headers .= "Reply-To: {$user->user_email}\r\n";
 
         // return true or false, based on the result
@@ -304,12 +304,12 @@ class Listings_Actions_Controller extends Abstract_Controller {
         } else {
             $to = $user->user_email;
         }
-        $subject = strtr( $contact_email_subject, $placeholders );
-        $message = strtr( $contact_email_body, $placeholders );
-        $message = nl2br( $message );
-        $headers = "From: {$name} <{$site_email}>\r\n";
+        $subject  = strtr( $contact_email_subject, $placeholders );
+        $message  = strtr( $contact_email_body, $placeholders );
+        $message  = nl2br( $message );
+        $headers  = "From: {$name} <{$site_email}>\r\n";
         $headers .= "Reply-To: {$email}\r\n";
-        $message = atbdp_email_html( $subject, $message );
+        $message  = atbdp_email_html( $subject, $message );
 
         // return true or false, based on the result
         return (bool) ATBDP()->email->send_mail( $to, $subject, $message, $headers );

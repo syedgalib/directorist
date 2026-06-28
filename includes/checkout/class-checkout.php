@@ -188,26 +188,26 @@ class ATBDP_Checkout {
             // let's add featured listing data
             $featured_active = apply_filters( 'atbdp_featured_active_checkout', directorist_is_featured_listing_enabled() );
             if ( $featured_active && ! is_fee_manager_active() ) {
-                $title = get_the_title( $listing_id );
-                $desc = get_directorist_option( 'featured_listing_desc' );
-                $price = get_directorist_option( 'featured_listing_price' );
+                $title       = get_the_title( $listing_id );
+                $desc        = get_directorist_option( 'featured_listing_desc' );
+                $price       = get_directorist_option( 'featured_listing_price' );
                 $form_data[] = [
-                    'type' => 'header',
-                    'title' => $title,
-                    'name' => 'feature',
-                    'value' => 1,
+                    'type'     => 'header',
+                    'title'    => $title,
+                    'name'     => 'feature',
+                    'value'    => 1,
                     'selected' => 1,
-                    'desc' => $desc,
-                    'price' => $price,
+                    'desc'     => $desc,
+                    'price'    => $price,
                 ];
                 $form_data[] = [
-                    'type' => 'checkbox',
-                    'name' => 'feature',
-                    'value' => 1,
+                    'type'     => 'checkbox',
+                    'name'     => 'feature',
+                    'value'    => 1,
                     'selected' => 1,
-                    'title' => $title,
-                    'desc' => $desc,
-                    'price' => $price,
+                    'title'    => $title,
+                    'desc'     => $desc,
+                    'price'    => $price,
                 ];
             }
             // if data is empty then vail,
@@ -216,7 +216,7 @@ class ATBDP_Checkout {
             }
             // pass the data using a data var, so that we can add to it more item later.
             $data = [
-                'form_data' => apply_filters( 'atbdp_checkout_form_final_data', $form_data, $listing_id ),
+                'form_data'  => apply_filters( 'atbdp_checkout_form_final_data', $form_data, $listing_id ),
                 'listing_id' => $listing_id,
             ];
             // prepare all the variables required by the checkout page.
@@ -228,13 +228,13 @@ class ATBDP_Checkout {
             $before     = '';
             $after      = '';
             $args       = [
-                'form_data'     => $form_data,
-                'listing_id'    => $listing_id,
-                'c_position'    => $c_position,
-                'currency'      => $currency,
-                'symbol'        => $symbol,
-                'before'        => $before,
-                'after'         => $after,
+                'form_data'  => $form_data,
+                'listing_id' => $listing_id,
+                'c_position' => $c_position,
+                'currency'   => $currency,
+                'symbol'     => $symbol,
+                'before'     => $before,
+                'after'      => $after,
             ];
 
             \Directorist\Helper::add_shortcode_comment( 'directorist_checkout' );
@@ -269,14 +269,14 @@ class ATBDP_Checkout {
 
         $listing_id = $meta['_listing_id'];
 
-        $data = apply_filters( 'atbdp_payment_receipt_data', [], $order_id, $listing_id );
-        $data = ! empty( $data ) ? $data : [];
+        $data  = apply_filters( 'atbdp_payment_receipt_data', [], $order_id, $listing_id );
+        $data  = ! empty( $data ) ? $data : [];
         $order = get_post( $order_id ); // we need that order to use its time
-        $data = array_merge(
+        $data  = array_merge(
             $data, [
-                'order' => $order,
+                'order'    => $order,
                 'order_id' => $order_id,
-                'o_metas' => $meta,
+                'o_metas'  => $meta,
             ]
         );
 
@@ -284,23 +284,23 @@ class ATBDP_Checkout {
         $order_items = apply_filters( 'atbdp_order_items', [], $order_id, $listing_id, $data ); // this is the hook that an extension can hook to, to add new items on checkout page.eg. plan
         // let's add featured listing data if the order has featured listing in it
         if ( directorist_is_featured_listing_enabled() && ! empty( $meta['_featured'] ) ) {
-            $title = get_directorist_option( 'featured_listing_title', __( 'Featured', 'directorist' ) );
-            $desc = get_directorist_option( 'featured_listing_desc' );
-            $price = get_directorist_option( 'featured_listing_price' );
+            $title         = get_directorist_option( 'featured_listing_title', __( 'Featured', 'directorist' ) );
+            $desc          = get_directorist_option( 'featured_listing_desc' );
+            $price         = get_directorist_option( 'featured_listing_price' );
             $order_items[] = [
                 'title' => $title,
-                'desc' => $desc,
+                'desc'  => $desc,
                 'price' => $price,
             ];
         }
         $data['order_items'] = $order_items;
 
         ob_start();
-        $data['c_position']     = get_directorist_option( 'payment_currency_position' );
-        $data['currency']         = atbdp_get_payment_currency();
+        $data['c_position']      = get_directorist_option( 'payment_currency_position' );
+        $data['currency']        = atbdp_get_payment_currency();
         $data['symbol']          = atbdp_currency_symbol( atbdp_get_payment_currency() );
-        $data['container_fluid']  = 'container-fluid';
-        $data['order_id']         = ( ! empty( $order_id ) ) ? $order_id : '';
+        $data['container_fluid'] = 'container-fluid';
+        $data['order_id']        = ( ! empty( $order_id ) ) ? $order_id : '';
 
         \Directorist\Helper::add_shortcode_comment( 'directorist_payment_receipt' );
         \Directorist\Helper::get_template( 'payment/payment-receipt', apply_filters( 'directorist_payment_receipt_data', $data, $order_id ) );
@@ -318,10 +318,10 @@ class ATBDP_Checkout {
         // create an order
         $order_id = wp_insert_post(
             [
-                'post_content' => '',
-                'post_title' => sprintf( 'Order for the listing ID #%d', $listing_id ),
-                'post_status' => 'publish',
-                'post_type' => 'atbdp_orders',
+                'post_content'   => '',
+                'post_title'     => sprintf( 'Order for the listing ID #%d', $listing_id ),
+                'post_status'    => 'publish',
+                'post_type'      => 'atbdp_orders',
                 'comment_status' => false,
             ]
         );
@@ -410,9 +410,9 @@ class ATBDP_Checkout {
             /*complete Free listing Order */
             $this->complete_free_order(
                 [
-                    'ID' => $order_id,
+                    'ID'             => $order_id,
                     'transaction_id' => wp_generate_password( 15, false ),
-                    'listing_id' => $listing_id
+                    'listing_id'     => $listing_id
                 ]
             );
             $redirect_url = apply_filters( 'atbdp_payment_receipt_page_link', ATBDP_Permalink::get_payment_receipt_page_link( $order_id ), $order_id );

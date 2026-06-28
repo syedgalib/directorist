@@ -29,16 +29,16 @@ function directorist_get_conditional_logic_field( array $args = [] ) {
 
 return apply_filters(
     'atbdp_form_preset_widgets', [
-        'title' => [
+        'title'         => [
             'label'    => __( 'Title', 'directorist' ),
             'icon'     => 'las la-text-height',
             'canTrash' => false,
             'options'  => [
-                'type' => [
+                'type'              => [
                     'type'  => 'hidden',
                     'value' => 'text',
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'listing_title',
                     'rules' => [
@@ -46,17 +46,17 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Title',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => '',
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => true,
@@ -65,12 +65,12 @@ return apply_filters(
             ],
         ],
 
-        'description' => [
+        'description'   => [
             'label'   => __( 'Description', 'directorist' ),
             'icon'    => 'la la-align-left',
             'show'    => true,
             'options' => [
-                'type' => [
+                'type'              => [
                     'type'    => 'select',
                     'label'   => __( 'Type', 'directorist' ),
                     'value'   => 'wp_editor',
@@ -85,7 +85,7 @@ return apply_filters(
                         ],
                     ]
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'listing_content',
                     'rules' => [
@@ -93,12 +93,12 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Description',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'    => 'text',
                     'label'   => __( 'Placeholder', 'directorist' ),
                     'value'   => '',
@@ -109,13 +109,13 @@ return apply_filters(
                         ],
                     ],
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'name'  => 'required',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
@@ -124,16 +124,16 @@ return apply_filters(
             ]
         ],
 
-        'tagline' => [
+        'tagline'       => [
             'label'   => __( 'Tagline', 'directorist' ),
             'icon'    => 'las la-text-height',
             'show'    => true,
             'options' => [
-                'type' => [
+                'type'              => [
                     'type'  => 'hidden',
                     'value' => 'text',
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'tagline',
                     'rules' => [
@@ -141,22 +141,22 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Tagline',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => '',
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
@@ -166,11 +166,11 @@ return apply_filters(
             ],
         ],
 
-        'pricing' => [
+        'pricing'       => [
             'label'   => __( 'Pricing', 'directorist' ),
             'icon'    => 'la la-file-invoice-dollar',
             'options' => [
-                'field_key' => [
+                'field_key'                    => [
                     'type'  => 'hidden',
                     'value' => 'pricing',
                     'rules' => [
@@ -178,15 +178,15 @@ return apply_filters(
                         'required' => false,
                     ]
                 ],
-                'label' => [
+                'label'                        => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Pricing',
                 ],
-                'pricing_type' => [
-                    'type'  => 'select',
-                    'label' => __( 'Select Pricing Type', 'directorist' ),
-                    'value' => 'both',
+                'pricing_type'                 => [
+                    'type'    => 'select',
+                    'label'   => __( 'Select Pricing Type', 'directorist' ),
+                    'value'   => 'both',
                   // 'show-default-option' => true,
                     'options' => [
                         ['value' => 'both', 'label' => 'Both'],
@@ -194,7 +194,7 @@ return apply_filters(
                         ['value' => 'price_range', 'label' => 'Price Range'],
                     ],
                 ],
-                'price_range_label' => [
+                'price_range_label'            => [
                     'type'    => 'text',
                     'show_if' => [
                         'where'      => "self.pricing_type",
@@ -204,10 +204,10 @@ return apply_filters(
                             ['key' => 'value', 'compare' => '=', 'value' => 'price_range'],
                         ],
                     ],
-                    'label' => __( 'Price Range Label', 'directorist' ),
-                    'value' => 'Price Range',
+                    'label'   => __( 'Price Range Label', 'directorist' ),
+                    'value'   => 'Price Range',
                 ],
-                'price_range_placeholder' => [
+                'price_range_placeholder'      => [
                     'type'    => 'text',
                     'show_if' => [
                         'where'      => "self.pricing_type",
@@ -217,10 +217,10 @@ return apply_filters(
                             ['key' => 'value', 'compare' => '=', 'value' => 'price_range'],
                         ],
                     ],
-                    'label' => __( 'Price Range Placeholder', 'directorist' ),
-                    'value' => 'Select Price Range',
+                    'label'   => __( 'Price Range Placeholder', 'directorist' ),
+                    'value'   => 'Select Price Range',
                 ],
-                'price_unit_field_type' => [
+                'price_unit_field_type'        => [
                     'type'    => 'select',
                     'label'   => __( 'Price Unit Field Type', 'directorist' ),
                     'show_if' => [
@@ -237,7 +237,7 @@ return apply_filters(
                         ['value' => 'text', 'label' => 'Text',],
                     ],
                 ],
-                'price_unit_field_label' => [
+                'price_unit_field_label'       => [
                     'type'    => 'text',
                     'label'   => __( 'Price Unit Field label', 'directorist' ),
                     'show_if' => [
@@ -248,7 +248,7 @@ return apply_filters(
                             ['key' => 'value', 'compare' => '=', 'value' => 'price_unit'],
                         ],
                     ],
-                    'value' => 'Price [USD]',
+                    'value'   => 'Price [USD]',
                 ],
                 'price_unit_field_placeholder' => [
                     'type'    => 'text',
@@ -261,18 +261,18 @@ return apply_filters(
                             ['key' => 'value', 'compare' => '=', 'value' => 'price_unit'],
                         ],
                     ],
-                    'value' => 'Price of this listing. Eg. 100',
+                    'value'   => 'Price of this listing. Eg. 100',
                 ],
-                'only_for_admin' => [
+                'only_for_admin'               => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
                 ],
-                'conditional_logic' => directorist_get_conditional_logic_field(),
-                'modules' => [
+                'conditional_logic'            => directorist_get_conditional_logic_field(),
+                'modules'                      => [
                     'type'  => 'hidden',
                     'value' => [
-                        'price_unit' => [
+                        'price_unit'  => [
                             'label'     => __( 'Price Unit', 'directorist' ),
                             'type'      => 'text',
                             'field_key' => 'price_unit',
@@ -287,15 +287,15 @@ return apply_filters(
             ]
         ],
 
-        'excerpt' => [
+        'excerpt'       => [
             'label'   => __( 'Excerpt', 'directorist' ),
             'icon'    => 'la la-paragraph',
             'options' => [
-                'type' => [
+                'type'              => [
                     'type'  => 'hidden',
                     'value' => 'textarea',
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'excerpt',
                     'rules' => [
@@ -303,22 +303,22 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Excerpt',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => '',
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
@@ -327,11 +327,11 @@ return apply_filters(
             ],
         ],
 
-        'location' => [
+        'location'      => [
             'label'   => 'Location',
             'icon'    => 'las la-map-marker',
             'options' => [
-                'field_key' => [
+                'field_key'             => [
                     'type'  => 'hidden',
                     'value' => 'tax_input[at_biz_dir-location][]',
                     'rules' => [
@@ -339,18 +339,18 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'                 => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Location',
                 ],
-                'placeholder' => [
-                    'type'  => 'text',
-                    'label' => __( 'Placeholder text', 'directorist' ),
+                'placeholder'           => [
+                    'type'        => 'text',
+                    'label'       => __( 'Placeholder text', 'directorist' ),
                     'placeholder' => 'Type text here...',
-                    'value' => '',
+                    'value'       => '',
                 ],
-                'type' => [
+                'type'                  => [
                     'type'    => 'radio',
                     'value'   => 'multiple',
                     'label'   => __( 'Selection Type', 'directorist' ),
@@ -365,7 +365,7 @@ return apply_filters(
                         ]
                     ]
                 ],
-                'create_new_loc' => [
+                'create_new_loc'        => [
                     'type'  => 'toggle',
                     'label' => __( 'Allow New', 'directorist' ),
                     'value' => false,
@@ -382,25 +382,25 @@ return apply_filters(
                         ],
                     ],
                 ],
-                'required' => [
+                'required'              => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'        => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
                 ],
-                'conditional_logic' => directorist_get_conditional_logic_field(),
+                'conditional_logic'     => directorist_get_conditional_logic_field(),
             ],
         ],
 
-        'tag' => [
+        'tag'           => [
             'label'   => __( 'Tag', 'directorist' ),
             'icon'    => 'las la-tag',
             'options' => [
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'tax_input[at_biz_dir-tags][]',
                     'rules' => [
@@ -408,17 +408,17 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Tag',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => 'Tag',
                 ],
-                'type' => [
+                'type'              => [
                     'type'    => 'radio',
                     'value'   => 'multiple',
                     'label'   => __( 'Selection Type', 'directorist' ),
@@ -433,17 +433,17 @@ return apply_filters(
                         ]
                     ]
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'allow_new' => [
+                'allow_new'         => [
                     'type'  => 'toggle',
                     'label' => __( 'Allow New', 'directorist' ),
                     'value' => true,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
@@ -452,11 +452,11 @@ return apply_filters(
             ],
         ],
 
-        'category' => [
+        'category'      => [
             'label'   => __( 'Category', 'directorist' ),
             'icon'    => 'las la-folder-open',
             'options' => [
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'admin_category_select[]',
                     'rules' => [
@@ -464,17 +464,17 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Category',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => '',
                 ],
-                'type' => [
+                'type'              => [
                     'type'    => 'radio',
                     'value'   => 'multiple',
                     'label'   => __( 'Selection Type', 'directorist' ),
@@ -489,17 +489,17 @@ return apply_filters(
                         ]
                     ]
                 ],
-                'create_new_cat' => [
+                'create_new_cat'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Allow New', 'directorist' ),
                     'value' => false,
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
@@ -508,11 +508,11 @@ return apply_filters(
             ],
         ],
 
-        'map' => [
+        'map'           => [
             'label'   => __( 'Map', 'directorist' ),
             'icon'    => 'las la-map',
             'options' => [
-                'type' => [
+                'type'              => [
                     'type'  => 'hidden',
                     'value' => 'map',
                     'rules' => [
@@ -520,20 +520,20 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'map',
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'hidden',
                     'value' => __( 'Map', 'directorist' ),
                 ],
-                'lat_long' => [
+                'lat_long'          => [
                     'type'  => 'text',
                     'label' => __( 'Enter Coordinates Label', 'directorist' ),
                     'value' => __( 'Or Enter Coordinates (latitude and longitude) Manually', 'directorist' ),
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
@@ -542,15 +542,15 @@ return apply_filters(
             ],
         ],
 
-        'address' => [
+        'address'       => [
             'label'   => __( 'Address', 'directorist' ),
             'icon'    => 'las la-map-pin',
             'options' => [
-                'type' => [
+                'type'              => [
                     'type'  => 'hidden',
                     'value' => 'text',
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'address',
                     'rules' => [
@@ -558,22 +558,22 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Address',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => __( 'Listing address eg. New York, USA', 'directorist' ),
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
@@ -582,15 +582,15 @@ return apply_filters(
             ],
         ],
 
-        'zip' => [
+        'zip'           => [
             'label'   => __( 'Zip or Post Code', 'directorist' ),
             'icon'    => 'las la-map-pin',
             'options' => [
-                'type' => [
+                'type'              => [
                     'type'  => 'hidden',
                     'value' => 'text',
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'zip',
                     'rules' => [
@@ -598,22 +598,22 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Zip/Post Code',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => '',
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
@@ -622,15 +622,15 @@ return apply_filters(
             ],
         ],
 
-        'phone' => [
+        'phone'         => [
             'label'   => 'Phone',
             'icon'    => 'la la-phone',
             'options' => [
-                'type' => [
+                'type'              => [
                     'type'  => 'hidden',
                     'value' => 'tel',
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'phone',
                     'rules' => [
@@ -638,27 +638,27 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Phone',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => '',
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
                 ],
-                'whatsapp' => [
+                'whatsapp'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Link with WhatsApp', 'directorist' ),
                     'value' => false,
@@ -667,15 +667,15 @@ return apply_filters(
             ],
         ],
 
-        'phone2' => [
+        'phone2'        => [
             'label'   => 'Phone 2',
             'icon'    => 'la la-phone',
             'options' => [
-                'type' => [
+                'type'              => [
                     'type'  => 'hidden',
                     'value' => 'tel',
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'phone2',
                     'rules' => [
@@ -683,28 +683,28 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Phone 2',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => '',
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
                 ],
                 'conditional_logic' => directorist_get_conditional_logic_field(),
-                'whatsapp' => [
+                'whatsapp'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Link with WhatsApp', 'directorist' ),
                     'value' => false,
@@ -712,15 +712,15 @@ return apply_filters(
             ],
         ],
 
-        'fax' => [
+        'fax'           => [
             'label'   => 'Fax',
             'icon'    => 'la la-print',
             'options' => [
-                'type' => [
+                'type'              => [
                     'type'  => 'hidden',
                     'value' => 'number',
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'fax',
                     'rules' => [
@@ -728,22 +728,22 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Fax',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => '',
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
@@ -752,15 +752,15 @@ return apply_filters(
             ],
         ],
 
-        'email' => [
+        'email'         => [
             'label'   => 'Email',
             'icon'    => 'la la-envelope',
             'options' => [
-                'type' => [
+                'type'              => [
                     'type'  => 'hidden',
                     'value' => 'email',
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'email',
                     'rules' => [
@@ -768,22 +768,22 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Email',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => '',
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
@@ -792,15 +792,15 @@ return apply_filters(
             ],
         ],
 
-        'website' => [
+        'website'       => [
             'label'   => 'Website',
             'icon'    => 'la la-globe',
             'options' => [
-                'type' => [
+                'type'              => [
                     'type'  => 'hidden',
                     'value' => 'text',
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'website',
                     'rules' => [
@@ -808,22 +808,22 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Website',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => '',
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
@@ -832,15 +832,15 @@ return apply_filters(
             ],
         ],
 
-        'social_info' => [
+        'social_info'   => [
             'label'   => 'Social Info',
             'icon'    => 'las la-users',
             'options' => [
-                'type' => [
+                'type'           => [
                     'type'  => 'hidden',
                     'value' => 'add_new',
                 ],
-                'field_key' => [
+                'field_key'      => [
                     'type'  => 'hidden',
                     'value' => 'social',
                     'rules' => [
@@ -848,12 +848,12 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'          => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Social Info',
                 ],
-                'required' => [
+                'required'       => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
@@ -866,15 +866,15 @@ return apply_filters(
             ],
         ],
 
-        'image_upload' => [
+        'image_upload'  => [
             'label'   => __( 'Images', 'directorist' ),
             'icon'    => 'la la-image',
             'options' => [
-                'type' => [
+                'type'                  => [
                     'type'  => 'hidden',
                     'value' => 'media',
                 ],
-                'field_key' => [
+                'field_key'             => [
                     'type'  => 'hidden',
                     'value' => 'listing_img',
                     'rules' => [
@@ -882,21 +882,21 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'                 => [
                     'type'  => 'hidden',
                     'value' => __( 'Images', 'directorist' ),
                 ],
-                'select_files_label' => [
+                'select_files_label'    => [
                     'type'  => 'text',
                     'label' => __( 'Select Files Label', 'directorist' ),
                     'value' => 'Select Files',
                 ],
-                'max_image_limit' => [
+                'max_image_limit'       => [
                     'type'  => 'number',
                     'label' => __( 'Max Image Limit', 'directorist' ),
                     'value' => 5,
                 ],
-                'max_per_image_limit' => [
+                'max_per_image_limit'   => [
                     'type'        => 'number',
                     'label'       => __( 'Max Upload Size Per Image in MB', 'directorist' ),
                     'description' => __( 'Here 0 means unlimited.', 'directorist' ),
@@ -907,29 +907,29 @@ return apply_filters(
                     'label' => __( 'Total Upload Size in MB', 'directorist' ),
                     'value' => 2,
                 ],
-                'required' => [
+                'required'              => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'        => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
                 ],
-                'conditional_logic' => directorist_get_conditional_logic_field()
+                'conditional_logic'     => directorist_get_conditional_logic_field()
             ],
         ],
 
-        'video' => [
+        'video'         => [
             'label'   => 'Video',
             'icon'    => 'la la-video',
             'options' => [
-                'type' => [
+                'type'              => [
                     'type'  => 'hidden',
                     'value' => 'text',
                 ],
-                'field_key' => [
+                'field_key'         => [
                     'type'  => 'hidden',
                     'value' => 'videourl',
                     'rules' => [
@@ -937,22 +937,22 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'label' => [
+                'label'             => [
                     'type'  => 'text',
                     'label' => __( 'Label', 'directorist' ),
                     'value' => 'Video',
                 ],
-                'placeholder' => [
+                'placeholder'       => [
                     'type'  => 'text',
                     'label' => __( 'Placeholder', 'directorist' ),
                     'value' => 'Only YouTube & Vimeo URLs.',
                 ],
-                'required' => [
+                'required'          => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,
                 ],
-                'only_for_admin' => [
+                'only_for_admin'    => [
                     'type'  => 'toggle',
                     'label' => __( 'Admin Only', 'directorist' ),
                     'value' => false,
@@ -966,7 +966,7 @@ return apply_filters(
             'icon'    => 'las la-text-height',
             'show'    => true,
             'options' => [
-                'type' => [
+                'type'      => [
                     'type'  => 'hidden',
                     'value' => 'text',
                 ],
@@ -978,18 +978,18 @@ return apply_filters(
                         'required' => true,
                     ]
                 ],
-                'text' => [
-                    'label'       => __( 'Text', 'directorist' ),
-                    'type'        => 'textarea',
-                    'editor'      => 'wp_editor',
-                    'editorID'    => 'wp_editor_terms_privacy',
-                    'value'       => sprintf(
+                'text'      => [
+                    'label'    => __( 'Text', 'directorist' ),
+                    'type'     => 'textarea',
+                    'editor'   => 'wp_editor',
+                    'editorID' => 'wp_editor_terms_privacy',
+                    'value'    => sprintf(
                         __( 'I agree to the <a href="%s" target="_blank">Privacy Policy</a> and <a href="%s" target="_blank">Terms of Service</a>', 'directorist' ),
                         ATBDP_Permalink::get_privacy_policy_page_url(),
                         ATBDP_Permalink::get_terms_and_conditions_page_url(),
                     ),
                 ],
-                'required' => [
+                'required'  => [
                     'type'  => 'toggle',
                     'label' => __( 'Required', 'directorist' ),
                     'value' => false,

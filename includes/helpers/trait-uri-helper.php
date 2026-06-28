@@ -50,7 +50,7 @@ trait URI_Helper {
             $extension_path = atbdp_get_extension_template_path( $ex_args['template_directory'], $ex_args['file_path'], $ex_args['base_directory'] );
 
             if ( file_exists( $extension_path ) ) {
-                $old_template_data = isset( $GLOBALS['atbdp_template_data'] ) ? $GLOBALS['atbdp_template_data'] : null;
+                $old_template_data              = isset( $GLOBALS['atbdp_template_data'] ) ? $GLOBALS['atbdp_template_data'] : null;
                 $GLOBALS['atbdp_template_data'] = $args;
 
                 include $extension_path;
@@ -61,7 +61,7 @@ trait URI_Helper {
         }
 
         $template = apply_filters( 'directorist_template', $template, $args );
-        $file = self::template_path( $template, $args );
+        $file     = self::template_path( $template, $args );
 
         do_action( 'before_directorist_template_loaded', $template, $file, $args );
 

@@ -14,7 +14,7 @@ class Search_Form extends \WP_Widget {
         $id_base        = 'bdsw_widget';
         $name           = esc_html__( 'Directorist - Search Listings', 'directorist' );
         $widget_options =             [
-            'classname' => 'directorist-widget',
+            'classname'   => 'directorist-widget',
             'description' => esc_html__( 'You can show search listing form by this widget', 'directorist' ),
         ];
 
@@ -23,15 +23,15 @@ class Search_Form extends \WP_Widget {
 
     public function form( $instance ) {
         $defaults = [
-            'title'           => esc_html__( 'Search', 'directorist' ),
+            'title' => esc_html__( 'Search', 'directorist' ),
         ];
 
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         $fields = [
-            'title'       => [
-                'label'   => esc_html__( 'Title:', 'directorist' ),
-                'type'    => 'text',
+            'title' => [
+                'label' => esc_html__( 'Title:', 'directorist' ),
+                'type'  => 'text',
             ],
         ];
 
@@ -41,7 +41,7 @@ class Search_Form extends \WP_Widget {
     public function update( $new_instance, $old_instance ) {
         $instance = [];
 
-        $instance['title']            = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
+        $instance['title'] = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
 
         return $instance;
     }
@@ -52,7 +52,7 @@ class Search_Form extends \WP_Widget {
 
         echo wp_kses_post( $args['before_widget'] );
 
-        $title = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Search', 'directorist' );
+        $title        = ! empty( $instance['title'] ) ? esc_html( $instance['title'] ) : esc_html__( 'Search', 'directorist' );
         $widget_title = $args['before_title'] . apply_filters( 'widget_title', $title ) . $args['after_title'];
         echo wp_kses_post( $widget_title );
 

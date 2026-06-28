@@ -140,7 +140,7 @@ class ATBDP_Review_Rating_DB {
         }
 
         $comments_query = new WP_Comment_Query( $args );
-        $comments = $comments_query->comments;
+        $comments       = $comments_query->comments;
 
         if ( empty( $comments ) ) {
             return false;

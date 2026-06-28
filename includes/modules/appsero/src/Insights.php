@@ -259,8 +259,8 @@ class Insights
                 }
 
                 $plugins_data[$slug] = [
-                    'name'      => isset( $plugin['name'] ) ? $plugin['name'] : '',
-                    'version'   => isset( $plugin['version'] ) ? $plugin['version'] : '',
+                    'name'    => isset( $plugin['name'] ) ? $plugin['name'] : '',
+                    'version' => isset( $plugin['version'] ) ? $plugin['version'] : '',
                 ];
             }
 
@@ -370,9 +370,9 @@ class Insights
      * @return bool
      */
     private function is_local_server() {
-        $host       = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : 'localhost';
-        $ip         = isset( $_SERVER['SERVER_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_ADDR'] ) ) : '127.0.0.1';
-        $is_local   = false;
+        $host     = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : 'localhost';
+        $ip       = isset( $_SERVER['SERVER_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_ADDR'] ) ) : '127.0.0.1';
+        $is_local = false;
 
         if ( in_array( $ip, ['127.0.0.1', '::1'], true )
             || ! strpos( $host, '.' )
@@ -648,8 +648,8 @@ class Insights
         }
 
         return [
-            'active_plugins'    => $active_plugins,
-            'inactive_plugins'  => $plugins,
+            'active_plugins'   => $active_plugins,
+            'inactive_plugins' => $plugins,
         ];
     }
 

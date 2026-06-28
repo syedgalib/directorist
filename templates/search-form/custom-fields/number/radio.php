@@ -23,8 +23,8 @@ $conditional_logic_attr = $searchform->get_conditional_logic_attributes( $data )
         <?php
         if ( $options['radio'] ) {
             foreach ( $options['radio'] as $option ) {
-                $uniqid = $option['start'] . '-' . wp_rand();
-                $option_value  = ( $option['start'] === $option['end'] ) ? (string) $option['start'] : $option['start'] . '-' . $option['end'];
+                $uniqid       = $option['start'] . '-' . wp_rand();
+                $option_value = ( $option['start'] === $option['end'] ) ? (string) $option['start'] : $option['start'] . '-' . $option['end'];
                 ?>
 
                 <div class="directorist-radio directorist-radio-circle">

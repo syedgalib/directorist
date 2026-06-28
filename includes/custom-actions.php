@@ -8,17 +8,17 @@ function atbdp_create_picvacyAndTerms_pages() {
 
     $create_permission = apply_filters( 'atbdp_create_required_pages', true );
     if ( $create_permission ) {
-        $options = get_option( 'atbdp_option' );
+        $options     = get_option( 'atbdp_option' );
         $page_exists = get_option( 'atbdp_picvacyAndTerms_pages' );
         // $op_name is the page option name in the database.
         // if we do not have the page id assigned in the settings with the given page option name, then create an page
         // and update the option.
-        $id = [];
+        $id        = [];
         $Old_terms = get_directorist_option( 'listing_terms_condition_text' );
-        $pages = apply_filters(
+        $pages     = apply_filters(
             'atbdp_create_picvacyAndTerms_pages', [
-                'privacy_policy' => [
-                    'title' => __( 'Privacy Policy', 'directorist' ),
+                'privacy_policy'   => [
+                    'title'   => __( 'Privacy Policy', 'directorist' ),
                     'content' => '<!-- wp:heading -->
 <h2>Who we are</h2>
 <!-- /wp:heading -->
@@ -124,19 +124,19 @@ function atbdp_create_picvacyAndTerms_pages() {
 <!-- /wp:heading -->'
                 ],
                 'terms_conditions' => [
-                    'title' => __( 'Terms and Conditions', 'directorist' ),
+                    'title'   => __( 'Terms and Conditions', 'directorist' ),
                     'content' => $Old_terms
                 ],
             ]
         );
         if ( ! $page_exists ) {
             foreach ( $pages as $op_name => $page_settings ) {
-                $id = wp_insert_post(
+                $id                = wp_insert_post(
                     [
-                        'post_title' => $page_settings['title'],
-                        'post_content' => $page_settings['content'],
-                        'post_status' => 'publish',
-                        'post_type' => 'page',
+                        'post_title'     => $page_settings['title'],
+                        'post_content'   => $page_settings['content'],
+                        'post_status'    => 'publish',
+                        'post_type'      => 'page',
                         'comment_status' => 'closed'
                     ]
                 );
@@ -176,9 +176,9 @@ function atbdp_get_preview_button() {
     if ( ! empty( $preview_enable ) ) {
         if ( isset( $_GET['redirect'] ) ) {
             $payment = isset( $_GET['payment'] ) ? directorist_clean( wp_unslash( $_GET['payment'] ) ) : '';
-            $id = isset( $_GET['p'] ) ? directorist_clean( wp_unslash( $_GET['p'] ) ) : '';
+            $id      = isset( $_GET['p'] ) ? directorist_clean( wp_unslash( $_GET['p'] ) ) : '';
             $post_id = isset( $_GET['post_id'] ) ? directorist_clean( wp_unslash( $_GET['post_id'] ) ) : get_the_ID();
-            $edited = isset( $_GET['edited'] ) ? directorist_clean( wp_unslash( $_GET['edited'] ) ) : '';
+            $edited  = isset( $_GET['edited'] ) ? directorist_clean( wp_unslash( $_GET['edited'] ) ) : '';
             // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $redirect = wp_validate_redirect( wp_unslash( $_GET['redirect'] ), '' );
             
@@ -222,16 +222,16 @@ function atbdp_is_extension_active() {
 function atbdp_extend_extension_settings_submenus( $default ) {
     if ( apply_filters( 'atbdp_extension_license_settings_init', atbdp_is_extension_active() ) ) {
         $array_license = [
-            'title' => __( 'Activate License', 'directorist' ),
-            'name' => 'extensions_license',
-            'icon' => 'font-awesome:fa-id-card',
+            'title'    => __( 'Activate License', 'directorist' ),
+            'name'     => 'extensions_license',
+            'icon'     => 'font-awesome:fa-id-card',
             'controls' => apply_filters(
                 'atbdp_license_settings_controls', [
                     [
-                        'type' => 'notebox',
-                        'name' => 'businedfssdfss_hours_license',
+                        'type'        => 'notebox',
+                        'name'        => 'businedfssdfss_hours_license',
                         'description' => sprintf( __( 'Enter your extension license keys here to receive updates for purchased extensions. Click %s to know more about licensing.', 'directorist' ), '<a target="_blank" href="https://directorist.com/documentation/extensions/license">here</a>' ),
-                        'status' => 'info',
+                        'status'      => 'info',
                     ],
 
                 ]

@@ -25,10 +25,10 @@ class Payments_Controller extends Abstract_Controller {
                     'callback'            => [ $this, 'index' ],
                     'permission_callback' => [ $this, 'admin_permissions_check' ],
                     'args'                => [
-                        'order_id'     => [
-                            'description'       => __( 'The order ID.' ),
-                            'type'              => 'integer',
-                            'required'          => true,
+                        'order_id' => [
+                            'description' => __( 'The order ID.' ),
+                            'type'        => 'integer',
+                            'required'    => true,
                         ],
                     ],
                 ],
@@ -50,10 +50,10 @@ class Payments_Controller extends Abstract_Controller {
                     'callback'            => [ $this, 'show' ],
                     'permission_callback' => [ $this, 'admin_permissions_check' ],
                     'args'                => [
-                        'id'     => [
-                            'description'       => __( 'The order ID.' ),
-                            'type'              => 'integer',
-                            'required'          => true,
+                        'id' => [
+                            'description' => __( 'The order ID.' ),
+                            'type'        => 'integer',
+                            'required'    => true,
                         ],
                     ],
                 ],
@@ -64,10 +64,10 @@ class Payments_Controller extends Abstract_Controller {
                     'args'                => array_merge(
                         $this->store_args(), 
                         [
-                            'id'     => [
-                                'description'       => __( 'The order ID.' ),
-                                'type'              => 'integer',
-                                'required'          => true,
+                            'id' => [
+                                'description' => __( 'The order ID.' ),
+                                'type'        => 'integer',
+                                'required'    => true,
                             ],
                         ],
                     )
@@ -77,10 +77,10 @@ class Payments_Controller extends Abstract_Controller {
                     'callback'            => [ $this, 'delete' ],
                     'permission_callback' => [ $this, 'admin_permissions_check' ],
                     'args'                => [
-                        'id'     => [
-                            'description'       => __( 'The order ID.' ),
-                            'type'              => 'integer',
-                            'required'          => true,
+                        'id' => [
+                            'description' => __( 'The order ID.' ),
+                            'type'        => 'integer',
+                            'required'    => true,
                         ],
                     ],
                 ],
@@ -95,7 +95,7 @@ class Payments_Controller extends Abstract_Controller {
             [
                 "payments" => $repository->get( (int) $request->get_param( "order_id" ) )
             ]
-         );
+        );
     }
 
     public function store( WP_REST_Request $request ) {
@@ -163,28 +163,28 @@ class Payments_Controller extends Abstract_Controller {
 
     protected function store_args(): array {
         return [
-            'order_id' => [
-                'description'       => __( 'The order ID.' ),
-                'type'              => 'integer',
-                'required'          => true,
+            'order_id'       => [
+                'description' => __( 'The order ID.' ),
+                'type'        => 'integer',
+                'required'    => true,
             ],
-            'status' => [
-                'description'       => __( 'The status of the payment.' ),
-                'type'              => 'string',
-                'required'          => true,
-                'enum'              => PaymentStatus::all(),
+            'status'         => [
+                'description' => __( 'The status of the payment.' ),
+                'type'        => 'string',
+                'required'    => true,
+                'enum'        => PaymentStatus::all(),
             ],
             'transaction_id' => [
-                'description'       => __( 'The transaction ID.' ),
-                'type'              => 'string',
-                'required'          => true,
-                'maxlength'         => 100,
+                'description' => __( 'The transaction ID.' ),
+                'type'        => 'string',
+                'required'    => true,
+                'maxlength'   => 100,
             ],
-            'method' => [
-                'description'       => __( 'The method of the payment.' ),
-                'type'              => 'string',
-                'required'          => true,
-                'maxlength'         => 30,
+            'method'         => [
+                'description' => __( 'The method of the payment.' ),
+                'type'        => 'string',
+                'required'    => true,
+                'maxlength'   => 30,
             ],
         ];
     }

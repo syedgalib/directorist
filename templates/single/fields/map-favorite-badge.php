@@ -7,7 +7,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-$fav_class  = $listings->loop_is_favourite() ? 'directorist-added-to-favorite' : '';
+$fav_class = $listings->loop_is_favourite() ? 'directorist-added-to-favorite' : '';
 ?>
 
 <div class="directorist-mark-as-favorite">

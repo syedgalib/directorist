@@ -58,7 +58,7 @@ class Users_Account_Controller extends Abstract_Controller {
                         'format'      => 'email',
                         'description' => __( 'User email address.', 'directorist' ),
                     ),
-                    'pin' => array(
+                    'pin'   => array(
                         'required'    => true,
                         'type'        => 'string',
                         'description' => __( 'Password rest pin.', 'directorist' ),
@@ -74,7 +74,7 @@ class Users_Account_Controller extends Abstract_Controller {
                 'callback'            => array( $this, 'reset_user_password' ),
                 'permission_callback' => array( $this, 'check_reset_password_permission' ),
                 'args'                => array(
-                    'email' => array(
+                    'email'    => array(
                         'required'    => true,
                         'type'        => 'string',
                         'format'      => 'email',
@@ -86,7 +86,7 @@ class Users_Account_Controller extends Abstract_Controller {
                         'minLength'   => 6,
                         'description' => __( 'User new password.', 'directorist' ),
                     ),
-                    'pin' => array(
+                    'pin'      => array(
                         'required'    => true,
                         'type'        => 'string',
                         'description' => __( 'Password rest pin.', 'directorist' ),
@@ -102,7 +102,7 @@ class Users_Account_Controller extends Abstract_Controller {
                 'callback'            => array( $this, 'change_password' ),
                 'permission_callback' => array( $this, 'check_change_password_permission' ),
                 'args'                => array(
-                    'user_id' => array(
+                    'user_id'      => array(
                         'required'    => true,
                         'type'        => 'integer',
                         'description' => __( 'User id.', 'directorist' ),
@@ -280,7 +280,7 @@ class Users_Account_Controller extends Abstract_Controller {
             return new WP_Error( 'directorist_rest_password_reset_pin_invalid', __( 'Pin code must be 4 letters long.', 'directorist' ), array( 'status' => 400 ) );
         }
 
-        $user   = $this->get_user_by_email( $request['email'] );
+        $user = $this->get_user_by_email( $request['email'] );
         return directorist_check_password_reset_pin_code( $user, $request['pin'] );
     }
 }

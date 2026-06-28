@@ -48,7 +48,7 @@ class Localized_Data {
     private static function search_listing_data() {
         $data = [
             'ajaxnonce' => wp_create_nonce( 'bdas_ajax_nonce' ),
-            'ajax_url' => admin_url( 'admin-ajax.php' ),
+            'ajax_url'  => admin_url( 'admin-ajax.php' ),
         ];
         return $data;
     }
@@ -85,7 +85,7 @@ class Localized_Data {
 
     public static function get_listings_data() {
         // listings data
-        $review_approval = get_directorist_option( 'review_approval_text', __( 'Your review has been received. It requires admin approval to publish.', 'directorist' ) );
+        $review_approval         = get_directorist_option( 'review_approval_text', __( 'Your review has been received. It requires admin approval to publish.', 'directorist' ) );
         $enable_reviewer_content = get_directorist_option( 'enable_reviewer_content', 1 );
 
         $data = [
@@ -153,19 +153,19 @@ class Localized_Data {
         $current_listing_type = isset( $_GET['directory_type'] ) ? sanitize_text_field( wp_unslash( $_GET['directory_type'] ) ) : directorist_get_listing_directory( $listing_id );
 
         if ( ! empty( $current_listing_type ) && ! is_numeric( $current_listing_type ) ) {
-            $term = get_term_by( 'slug', $current_listing_type, ATBDP_TYPE );
+            $term                 = get_term_by( 'slug', $current_listing_type, ATBDP_TYPE );
             $current_listing_type = ! empty( $term ) ? $term->term_id : '';
         }
 
         if ( ( strpos( $current_url, '/edit/' ) !== false ) && ( $pagenow = 'at_biz_dir' ) ) {
-            $arr = explode( '/edit/', $current_url );
-            $important = $arr[1];
+            $arr        = explode( '/edit/', $current_url );
+            $important  = $arr[1];
             $listing_id = (int) $important;
         }
 
         // For admin post edit (post.php?post=123&action=edit)
         if ( is_admin() && empty( $listing_id ) && ! empty( $_GET['post'] ) && get_post_type( (int) $_GET['post'] ) === 'at_biz_dir' ) {
-            $listing_id = (int) $_GET['post'];
+            $listing_id           = (int) $_GET['post'];
             $current_listing_type = directorist_get_listing_directory( $listing_id );
         }
 
@@ -192,11 +192,11 @@ class Localized_Data {
 
         //get listing is if the screen in edit listing
         $data = [
-            'nonce'          => wp_create_nonce( 'atbdp_nonce_action_js' ),
-            'ajaxurl'        => admin_url( 'admin-ajax.php' ),
-            'nonceName'      => 'atbdp_nonce_js',
-            'is_admin'       => is_admin(),
-            'media_uploader' => apply_filters(
+            'nonce'                           => wp_create_nonce( 'atbdp_nonce_action_js' ),
+            'ajaxurl'                         => admin_url( 'admin-ajax.php' ),
+            'nonceName'                       => 'atbdp_nonce_js',
+            'is_admin'                        => is_admin(),
+            'media_uploader'                  => apply_filters(
                 'atbdp_media_uploader', [
                     [
                         'element_id'      => 'directorist-image-upload',
@@ -230,7 +230,7 @@ class Localized_Data {
             return [];
         }
 
-        $targets = [];
+        $targets         = [];
         $admin_selectors = [
             'title'       => [ 'selector' => '#titlediv', 'field_key' => 'listing_title' ],
             'description' => [ 'selector' => '#postdivrich', 'field_key' => 'listing_content' ],
@@ -253,9 +253,9 @@ class Localized_Data {
 
             if ( ! empty( $conditional_logic['enabled'] ) && ! empty( $conditional_logic['groups'] ) ) {
                 $targets[] = [
-                    'selector'          => $config['selector'],
-                    'fieldKey'          => $config['field_key'],
-                    'conditionalLogic'  => $conditional_logic,
+                    'selector'         => $config['selector'],
+                    'fieldKey'         => $config['field_key'],
+                    'conditionalLogic' => $conditional_logic,
                 ];
             }
         }
@@ -328,7 +328,7 @@ class Localized_Data {
 
         $directory_type_term_data = [
             'submission_form_fields' => get_term_meta( $directory_type, 'submission_form_fields', true ),
-            'search_form_fields' => get_term_meta( $directory_type, 'search_form_fields', true ),
+            'search_form_fields'     => get_term_meta( $directory_type, 'search_form_fields', true ),
         ];
 
         /*Internationalization*/
@@ -345,7 +345,7 @@ class Localized_Data {
         }
 
         $data = [
-            'i18n_text'   => [
+            'i18n_text'                => [
                 'category_selection' => ! empty( $category_placeholder ) ? $category_placeholder : __( 'Select a category', 'directorist' ),
                 'location_selection' => ! empty( $location_placeholder ) ? $location_placeholder : __( 'Select a location', 'directorist' ),
                 'show_more'          => __( 'Show More', 'directorist' ),
@@ -378,9 +378,9 @@ class Localized_Data {
     }
 
     public static function login_data() {
-        $redirection = \ATBDP_Permalink::get_login_redirection_page_link();
+        $redirection     = \ATBDP_Permalink::get_login_redirection_page_link();
         $redirection_url = $redirection ? $redirection : \ATBDP_Permalink::get_dashboard_page_link();
-        $current_time = time();
+        $current_time    = time();
         $redirection_url = strpos( $redirection_url, '?' ) !== false ? $redirection . '&rand=' . $current_time : $redirection . '?rand=' . $current_time;
 
         if ( strpos( $redirection_url, '?' ) !== false ) {

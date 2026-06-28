@@ -60,7 +60,7 @@ use \Directorist\Helper;
                                                 <?php
                                                 // Add the price and product
                                                 if ( is_numeric( $atts['value'] ) && $option['selected'] && 'addition' === $atts['data-price-type'] ) {
-                                                    $price = ( preg_match( '/[.]/', $atts['value'] ) ) ? ( float ) $atts['value'] : ( int ) $atts['value'];
+                                                    $price     = ( preg_match( '/[.]/', $atts['value'] ) ) ? ( float ) $atts['value'] : ( int ) $atts['value'];
                                                     $subtotal += $price;
                                                     $selected_product++;
                                                 }

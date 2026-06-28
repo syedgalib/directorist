@@ -211,7 +211,7 @@ class ATBDP_Roles {
                 } else {
                     // If editing, deleting, or reading a custom post from the above list, get the post and post type object.
                     if ( "edit_{$cp}" == $cap || "delete_{$cp}" == $cap || "read_{$cp}" == $cap ) {
-                        $post = get_post( $args[0] );
+                        $post      = get_post( $args[0] );
                         $post_type = get_post_type_object( $post->post_type );
                         // Set an empty array for the caps.
                         $caps = [];
@@ -220,17 +220,17 @@ class ATBDP_Roles {
                     // If editing a listing, assign the required capability.
                     if ( "edit_{$cp}" == $cap ) {
                         if ( $user_id == $post->post_author )
-                            $caps[] = $post_type->cap->{'edit_' . $cp . 's'};
+                            $caps[]  = $post_type->cap->{'edit_' . $cp . 's'};
                         else $caps[] = $post_type->cap->{'edit_others_' . $cp . 's'};
                     } else if ( "delete_{$cp}" == $cap ) {
                         if ( $user_id == $post->post_author )
-                            $caps[] = $post_type->cap->{'delete_' . $cp . 's'};
+                            $caps[]  = $post_type->cap->{'delete_' . $cp . 's'};
                         else $caps[] = $post_type->cap->{'delete_others_' . $cp . 's'};
                     } else if ( "read_{$cp}" == $cap ) {
                         if ( 'private' != $post->post_status )
-                            $caps[] = 'read';
+                            $caps[]  = 'read';
                         elseif ( $user_id == $post->post_author )
-                            $caps[] = 'read';
+                            $caps[]  = 'read';
                         else $caps[] = $post_type->cap->{'read_private_' . $cp . 's'};
                     }
                 }

@@ -83,8 +83,8 @@ use Directorist\Enums\Order\DiscountType as OrderDiscountType;
                             </thead>
                             <tbody>
 
-                            <?php if ( ! empty( $order_items ) ): ?>
-                            <?php foreach ( $order_items as $order_item ): ?>
+                            <?php if ( ! empty( $order_items ) ) : ?>
+                                <?php foreach ( $order_items as $order_item ) : ?>
                             <tr>
                                 <td>
                                     <?php
@@ -103,10 +103,10 @@ use Directorist\Enums\Order\DiscountType as OrderDiscountType;
                             <?php endforeach; ?>
                             <?php endif; ?>
 
-                            <?php if ( ! empty( $order->get_coupon_discount() ) ): ?>
+                            <?php if ( ! empty( $order->get_coupon_discount() ) ) : ?>
                             <tr>
                                 <td class="directorist-payment-table__title">
-                                    <?php echo $order->get_coupon_discount_type() === OrderDiscountType::PERCENT ? sprintf( esc_html__('Discount ( %d%% )', 'directorist' ), $order->get_coupon_discount() ) : esc_html__( 'Discount', 'directorist' ); ?>
+                                    <?php echo $order->get_coupon_discount_type() === OrderDiscountType::PERCENT ? sprintf( esc_html__( 'Discount ( %d%% )', 'directorist' ), $order->get_coupon_discount() ) : esc_html__( 'Discount', 'directorist' ); ?>
                                 </td>
                                 <td>
                                     <?php echo '-' . wp_kses_post( directorist_price( $discount_amount ) ); ?>
@@ -114,7 +114,7 @@ use Directorist\Enums\Order\DiscountType as OrderDiscountType;
                             </tr>
                             <?php endif; ?>
 
-                            <?php if ( ! empty( $order->get_tax_rate() ) ): ?>
+                            <?php if ( ! empty( $order->get_tax_rate() ) ) : ?>
                             <tr>
                                 <td class="directorist-payment-table__title">
                                     <?php echo $order->get_tax_type() === OrderTaxType::PERCENT ? sprintf( esc_html__( 'Tax ( %d%% )', 'directorist' ), $order->get_tax_rate() ) : esc_html__( 'Tax', 'directorist' ); ?>
@@ -129,14 +129,18 @@ use Directorist\Enums\Order\DiscountType as OrderDiscountType;
                                 <td class="directorist-payment-table__title"><?php esc_html_e( 'Total amount', 'directorist' ); ?></td>
                                 <td>
                                     <?php 
-                                        echo wp_kses_post( directorist_price( directorist_compute_order_total_amount(
-                                            $order->get_sub_total(), 
-                                            $order->get_tax_rate(), 
-                                            $order->get_tax_type(), 
-                                            $order->get_coupon_discount(), 
-                                            $order->get_coupon_discount_type()
-                                        ) ) );
-                                    ?>
+                                        echo wp_kses_post(
+                                            directorist_price(
+                                                directorist_compute_order_total_amount(
+                                                    $order->get_sub_total(), 
+                                                    $order->get_tax_rate(), 
+                                                    $order->get_tax_type(), 
+                                                    $order->get_coupon_discount(), 
+                                                    $order->get_coupon_discount_type()
+                                                ) 
+                                            ) 
+                                        );
+                                        ?>
                                 </td>
                             </tr>
                             </tbody>
