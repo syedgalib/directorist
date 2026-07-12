@@ -5017,6 +5017,174 @@ function directorist_single_listings_contents( int $directory_type_id, array $da
     return apply_filters( 'directorist_single_listings_contents', $single_listings_contents, $data );
 }
 
+/**
+ * Evaluate Directorist conditional logic against listing category IDs.
+ *
+ * @param array $logic        Conditional logic value or builder option wrapper.
+ * @param array $category_ids Category term IDs.
+ * @param bool  $honor_action Whether a "hide" action should invert the result.
+ * @return bool
+ */
+function directorist_evaluate_category_conditional_logic( $logic, array $category_ids, $honor_action = true ) {
+    $category_ids = array_map( 'strval', array_map( 'absint', $category_ids ) );
+    return directorist_evaluate_conditional_logic(
+        $logic,
+        static function ( $field ) use ( $category_ids ) {
+            return in_array( $field, [ 'category', 'categories', 'admin_category_select[]', 'in_cat' ], true ) ? $category_ids : null;
+        },
+        $honor_action
+    );
+}
+
+/** Evaluate conditional logic with the same operators used by the frontend engine. */
+function directorist_evaluate_conditional_logic( $logic, callable $value_resolver, $honor_action = true ) {
+    if ( isset( $logic['value'] ) && is_array( $logic['value'] ) ) {
+        $logic = $logic['value'];
+    }
+    if ( empty( $logic['enabled'] ) || empty( $logic['groups'] ) || ! is_array( $logic['groups'] ) ) {
+        return true;
+    }
+
+    $group_results = [];
+    foreach ( $logic['groups'] as $group ) {
+        $results = [];
+        foreach ( (array) ( $group['conditions'] ?? [] ) as $condition ) {
+            $field = trim( (string) ( $condition['field'] ?? '' ) );
+            if ( '' === $field ) {
+                continue;
+            }
+            $results[] = directorist_evaluate_conditional_value( $value_resolver( $field ), $condition['value'] ?? '', (string) ( $condition['operator'] ?? 'is' ) );
+        }
+        if ( $results ) {
+            $group_results[] = 'OR' === strtoupper( (string) ( $group['operator'] ?? 'AND' ) ) ? in_array( true, $results, true ) : ! in_array( false, $results, true );
+        }
+    }
+
+    $matches = ! $group_results || ( 'AND' === strtoupper( (string) ( $logic['globalOperator'] ?? 'OR' ) ) ? ! in_array( false, $group_results, true ) : in_array( true, $group_results, true ) );
+    return $honor_action && 'hide' === ( $logic['action'] ?? 'show' ) ? ! $matches : $matches;
+}
+
+function directorist_conditional_logic_has_conditions( $logic ) {
+    if ( isset( $logic['value'] ) && is_array( $logic['value'] ) ) $logic = $logic['value'];
+    foreach ( (array) ( $logic['groups'] ?? [] ) as $group ) {
+        foreach ( (array) ( $group['conditions'] ?? [] ) as $condition ) {
+            if ( ! empty( $condition['field'] ) && ! empty( $condition['operator'] ) ) return true;
+        }
+    }
+    return false;
+}
+
+function directorist_evaluate_conditional_value( $actual, $expected, $operator ) {
+    $operator = strtolower( trim( $operator ) );
+    if ( in_array( $operator, [ 'empty', 'is empty' ], true ) ) {
+        return null === $actual || '' === trim( (string) $actual ) || [] === $actual;
+    }
+    if ( in_array( $operator, [ 'not empty', 'is not empty' ], true ) ) {
+        return ! directorist_evaluate_conditional_value( $actual, $expected, 'empty' );
+    }
+    if ( is_array( $actual ) ) {
+        $actual = array_map( static function ( $value ) { return strtolower( trim( (string) $value ) ); }, $actual );
+        $needle = strtolower( trim( (string) $expected ) );
+        $found  = in_array( $needle, $actual, true );
+        return in_array( $operator, [ 'is not', '!=', 'not', 'does not contain' ], true ) ? ! $found : $found;
+    }
+
+    $actual_string   = strtolower( trim( (string) $actual ) );
+    $expected_string = strtolower( trim( (string) $expected ) );
+    switch ( $operator ) {
+        case 'is': case '==': case '=': return $actual_string === $expected_string;
+        case 'is not': case '!=': case 'not': return $actual_string !== $expected_string;
+        case 'contains': return false !== strpos( $actual_string, $expected_string );
+        case 'does not contain': return false === strpos( $actual_string, $expected_string );
+        case 'greater than': case '>': return (float) $actual > (float) $expected;
+        case 'less than': case '<': return (float) $actual < (float) $expected;
+        case 'greater than or equal': case '>=': return (float) $actual >= (float) $expected;
+        case 'less than or equal': case '<=': return (float) $actual <= (float) $expected;
+        case 'starts with': return 0 === strpos( $actual_string, $expected_string );
+        case 'ends with': return '' === $expected_string || substr( $actual_string, -strlen( $expected_string ) ) === $expected_string;
+    }
+    return false;
+}
+
+/** Resolve the configured pricing type for selected categories. */
+function directorist_resolve_conditional_pricing_type( array $field_data, $value_resolver ) {
+    if ( 'conditional' !== ( $field_data['pricing_type'] ?? '' ) ) {
+        return $field_data['pricing_type'] ?? 'both';
+    }
+
+    if ( ! is_callable( $value_resolver ) ) {
+        $category_ids  = is_array( $value_resolver ) ? $value_resolver : [];
+        $value_resolver = static function ( $field ) use ( $category_ids ) {
+            return in_array( $field, [ 'category', 'categories', 'admin_category_select[]', 'in_cat' ], true ) ? $category_ids : null;
+        };
+    }
+
+    foreach ( (array) ( $field_data['pricing_type_mapping'] ?? [] ) as $mapping ) {
+        if ( ! empty( $mapping['conditional_logic'] ) && directorist_conditional_logic_has_conditions( $mapping['conditional_logic'] ) && directorist_evaluate_conditional_logic( $mapping['conditional_logic'], $value_resolver, false ) ) {
+            return in_array( $mapping['pricing_type'] ?? '', [ 'both', 'price_unit', 'price_range' ], true ) ? $mapping['pricing_type'] : 'both';
+        }
+    }
+
+    // Backward compatibility for the first conditional-pricing data shape.
+    foreach ( [ 'price_unit' => 'price_unit_condition', 'price_range' => 'price_range_condition', 'both' => 'both_condition' ] as $type => $key ) {
+        if ( ! empty( $field_data[ $key ]['enabled'] ) && directorist_evaluate_conditional_logic( $field_data[ $key ], $value_resolver, false ) ) return $type;
+    }
+
+    return 'both';
+}
+
+function directorist_get_listing_conditional_value( $listing_id, $field ) {
+    $taxonomy_fields = [
+        'category' => ATBDP_CATEGORY, 'categories' => ATBDP_CATEGORY, 'admin_category_select[]' => ATBDP_CATEGORY,
+        'location' => ATBDP_LOCATION, 'locations' => ATBDP_LOCATION, 'tax_input[at_biz_dir-location][]' => ATBDP_LOCATION,
+        'tag' => ATBDP_TAGS, 'tags' => ATBDP_TAGS, 'tax_input[at_biz_dir-tags][]' => ATBDP_TAGS,
+    ];
+    if ( isset( $taxonomy_fields[ $field ] ) ) {
+        $ids = wp_get_post_terms( $listing_id, $taxonomy_fields[ $field ], [ 'fields' => 'ids' ] );
+        return is_wp_error( $ids ) ? [] : array_map( 'strval', $ids );
+    }
+    if ( in_array( $field, [ 'title', 'listing_title' ], true ) ) return get_the_title( $listing_id );
+    if ( in_array( $field, [ 'description', 'content', 'listing_content' ], true ) ) return get_post_field( 'post_content', $listing_id );
+    $value = get_post_meta( $listing_id, '_' . ltrim( $field, '_' ), true );
+    return '' !== $value ? $value : get_post_meta( $listing_id, ltrim( $field, '_' ), true );
+}
+
+/**
+ * Assign all ancestors whenever hierarchical Directorist terms are assigned to a listing.
+ */
+function directorist_assign_parent_taxonomies( $object_id, $terms, $tt_ids, $taxonomy, $append, $old_tt_ids ) {
+    static $syncing = false;
+    unset( $terms, $tt_ids, $append, $old_tt_ids );
+
+    if ( $syncing || ! directorist_is_listing_post_type( $object_id ) || ! taxonomy_exists( $taxonomy ) || ! is_taxonomy_hierarchical( $taxonomy ) || ! is_object_in_taxonomy( ATBDP_POST_TYPE, $taxonomy ) ) {
+        return;
+    }
+
+    $assigned = wp_get_object_terms( $object_id, $taxonomy, [ 'fields' => 'ids' ] );
+    if ( is_wp_error( $assigned ) || ! $assigned ) {
+        return;
+    }
+
+    $expanded = array_map( 'absint', $assigned );
+    foreach ( $assigned as $term_id ) {
+        $expanded = array_merge( $expanded, get_ancestors( (int) $term_id, $taxonomy, 'taxonomy' ) );
+    }
+
+    $expanded = array_values( array_unique( array_filter( array_map( 'absint', $expanded ) ) ) );
+    $current  = array_values( array_unique( array_map( 'absint', $assigned ) ) );
+    sort( $expanded );
+    sort( $current );
+
+    if ( $expanded === $current ) {
+        return;
+    }
+
+    $syncing = true;
+    wp_set_object_terms( $object_id, $expanded, $taxonomy, false );
+    $syncing = false;
+}
+add_action( 'set_object_terms', 'directorist_assign_parent_taxonomies', 20, 6 );
+
 function directorist_listing_archive_fields( int $directory_type_id, array $data = [] ): array {
     $card_fields = get_term_meta( $directory_type_id, 'listings_card_grid_view', true );
     $list_fields = get_term_meta( $directory_type_id, 'listings_card_list_view', true );

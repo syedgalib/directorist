@@ -1577,6 +1577,36 @@ function updateLocalNonce() {
 		);
 	const updateCategoryFieldLabelFn = () =>
 		updateCategoryFieldLabelBase(initConditionalLogicFn, $);
+	const initConditionalPricing = () => {
+		$('[data-conditional-pricing]').each(function () {
+			const $wrapper = $(this);
+			let rules = {};
+			try {
+				rules = JSON.parse($wrapper.attr('data-conditional-pricing') || '{}');
+			} catch (error) {
+				return;
+			}
+
+			let pricingType = 'both';
+			for (const mapping of (Array.isArray(rules) ? rules : [])) {
+				const rule = mapping.conditional_logic;
+				const hasConditions = rule && Array.isArray(rule.groups) && rule.groups.some((group) => Array.isArray(group.conditions) && group.conditions.some((condition) => condition.field && condition.operator));
+				if (hasConditions && evaluateConditionalLogicBase({...rule, enabled: true, action: 'show'}, getFieldValueFn)) {
+					pricingType = ['both', 'price_unit', 'price_range'].includes(mapping.pricing_type) ? mapping.pricing_type : 'both';
+					break;
+				}
+			}
+
+			const showBoth = pricingType === 'both';
+			$wrapper.find('[data-pricing-part="both"]').toggle(showBoth).find('input').prop('disabled', !showBoth);
+			$wrapper.find('[data-pricing-part="price_unit"]').toggle(showBoth || pricingType === 'price_unit').prop('disabled', pricingType === 'price_range');
+			$wrapper.find('[data-pricing-part="price_range"]').toggle(showBoth || pricingType === 'price_range').prop('disabled', pricingType === 'price_unit');
+			$wrapper.find('[data-conditional-pricing-type]')
+				.val(pricingType === 'price_range' ? 'range' : 'price')
+				.prop('disabled', showBoth);
+			$wrapper.attr('data-resolved-pricing-type', pricingType);
+		});
+	};
 
 	// Initialize on page load
 	$(document).ready(function () {
@@ -1584,6 +1614,7 @@ function updateLocalNonce() {
 		// Wait a bit longer to ensure Select2 and all fields are initialized
 		setTimeout(function () {
 			initConditionalLogicFn();
+			initConditionalPricing();
 		}, 800);
 
 		// Also try after a longer delay to catch any late-loading fields
@@ -1596,8 +1627,15 @@ function updateLocalNonce() {
 	$(window).on('directorist-type-change', function () {
 		setTimeout(function () {
 			initConditionalLogicFn();
+			initConditionalPricing();
 		}, 500);
 	});
+
+	$(document).on(
+		'change input select2:select select2:unselect select2:clear',
+		'.directorist-add-listing-form input, .directorist-add-listing-form select, .directorist-add-listing-form textarea, #post input, #post select, #post textarea',
+		initConditionalPricing
+	);
 
 	// Re-initialize after category custom fields are rendered
 	$(window).on('load', function () {

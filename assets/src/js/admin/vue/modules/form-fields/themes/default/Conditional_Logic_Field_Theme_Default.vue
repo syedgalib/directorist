@@ -12,7 +12,7 @@
         ></p>
       </div>
 
-      <div class="directorist_vertical-align-m cptm-input-toggle-btn">
+      <div class="directorist_vertical-align-m cptm-input-toggle-btn" v-if="!hideToggle">
         <div class="directorist_item">
           <span
             class="cptm-input-toggle"
@@ -36,6 +36,7 @@
     >
       <div class="directorist-conditional-logic-builder__header">
         <select
+          v-if="!hideAction"
           class="directorist-conditional-logic-builder__action"
           v-model="localValue.action"
           @change="updateValue"
@@ -44,7 +45,7 @@
           <option value="hide">Hide</option>
         </select>
         <span class="directorist-conditional-logic-builder__label"
-          >this field if</span
+          >{{ hideAction ? "if" : "this field if" }}</span
         >
       </div>
 

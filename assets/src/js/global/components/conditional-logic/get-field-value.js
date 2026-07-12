@@ -85,7 +85,12 @@ export function getFieldValue(fieldKey, $) {
 		fieldKey === 'admin_category_select[]' ||
 		fieldKey === 'in_cat'
 	) {
-		$field = $(SELECTORS.CATEGORY_SELECT).first();
+		// Prefer the submission-form taxonomy control. A page can also contain
+		// a header/search category selector earlier in DOM order.
+		$field = $(SELECTORS.CATEGORY).first();
+		if (!$field.length) {
+			$field = $(SELECTORS.IN_CAT).first();
+		}
 		if (!$field.length) {
 			const $checkboxes = $(SELECTORS.CATEGORY_CHECKLIST_CHECKED);
 			if ($checkboxes.length) {
@@ -103,7 +108,10 @@ export function getFieldValue(fieldKey, $) {
 		fieldKey === 'tax_input[at_biz_dir-tags][]' ||
 		fieldKey === 'in_tag[]'
 	) {
-		$field = $(SELECTORS.TAGS_SELECT).first();
+		$field = $(SELECTORS.TAGS).first();
+		if (!$field.length) {
+			$field = $(SELECTORS.IN_TAG).first();
+		}
 		if (!$field.length) {
 			const $checkboxes = $(SELECTORS.TAGS_CHECKLIST_CHECKED);
 			if ($checkboxes.length) {
@@ -150,7 +158,10 @@ export function getFieldValue(fieldKey, $) {
 		fieldKey === 'in_loc' ||
 		fieldKey === 'address'
 	) {
-		$field = $(SELECTORS.LOCATION_SELECT).first();
+		$field = $(SELECTORS.LOCATION).first();
+		if (!$field.length) {
+			$field = $(SELECTORS.IN_LOC).first();
+		}
 		if (!$field.length) {
 			const $addressInput = $(SELECTORS.SEARCH_ADDRESS);
 			if ($addressInput.length) {

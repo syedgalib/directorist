@@ -551,6 +551,20 @@ export default {
 		 * This method will extract available fields from the submission form fields.
 		 */
 		getFieldsFromRoot() {
+			// Section settings can explicitly provide the submission-form fields.
+			// Prefer that collection over the nearest form builder, which is the
+			// single-listing content builder when configuring a single-page section.
+			if (
+				this.root &&
+				typeof this.root === 'object' &&
+				!Array.isArray(this.root)
+			) {
+				const explicitFields = this.formatFieldsForDropdown(this.root);
+				if (explicitFields.length) {
+					return explicitFields;
+				}
+			}
+
 			// Try multiple methods to find the form builder component
 
 			// Method 1: Traverse up the component tree to find form-builder

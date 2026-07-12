@@ -192,6 +192,22 @@ return apply_filters(
                         ['value' => 'both', 'label' => 'Both'],
                         ['value' => 'price_unit', 'label' => 'Price Unit'],
                         ['value' => 'price_range', 'label' => 'Price Range'],
+                        ['value' => 'conditional', 'label' => __( 'Conditional', 'directorist' )],
+                    ],
+                ],
+                'pricing_type_mapping' => [
+                    'type'        => 'conditional-mapping',
+                    'label'       => __( 'Pricing Type Conditional Mapping', 'directorist' ),
+                    'description' => __( 'The first matching rule determines which pricing fields are displayed.', 'directorist' ),
+                    'value'       => [],
+                    'show_if'     => [
+                        'where'      => 'self.pricing_type',
+                        'conditions' => [ [ 'key' => 'value', 'compare' => '=', 'value' => 'conditional' ] ],
+                    ],
+                    'resultOptions' => [
+                        [ 'value' => 'both', 'label' => __( 'Both', 'directorist' ) ],
+                        [ 'value' => 'price_unit', 'label' => __( 'Price Unit', 'directorist' ) ],
+                        [ 'value' => 'price_range', 'label' => __( 'Price Range', 'directorist' ) ],
                     ],
                 ],
                 'price_range_label' => [

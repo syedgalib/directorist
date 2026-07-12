@@ -129,6 +129,7 @@
           :key="fieldListComponentKey"
           :field-list="finalGroupFields"
           :value="groupData"
+          :root="conditionalFields || activeWidgets"
           @update="$emit('update-group-field', $event)"
         />
       </div>
@@ -155,6 +156,12 @@ export default {
   },
 
   props: {
+    activeWidgets: {
+      default: "",
+    },
+    conditionalFields: {
+      default: "",
+    },
     groupData: {
       default: "",
     },

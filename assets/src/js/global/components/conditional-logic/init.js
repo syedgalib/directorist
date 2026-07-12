@@ -2,8 +2,7 @@
  * Init, apply, and event binding for conditional logic.
  * Orchestrates evaluation and delegates to event-handlers for change detection.
  */
-import { fieldDependsOnChange } from './depends-on-field.js';
-import { normalizeConditionFieldKey, SELECTORS } from './field-mapping.js';
+import { SELECTORS } from './field-mapping.js';
 import { syncSelect2DataAttributes } from './helpers.js';
 import { setupTaxonomyHandlers } from './event-handlers/taxonomy-handlers.js';
 import { setupFileUploadHandlers } from './event-handlers/file-upload-handlers.js';
@@ -36,9 +35,21 @@ export function applyConditionalLogic(
 		}
 		const conditionalLogic = JSON.parse(decodedData);
 		const shouldShow = evaluateConditionalLogicFn(conditionalLogic);
+		const sectionId = $fieldWrapper.hasClass('directorist-form-section')
+			? $fieldWrapper.attr('id')
+			: '';
+		const $sectionNav = sectionId ? $(`a[href="#${sectionId}"]`) : $();
+		$fieldWrapper.attr(
+			'data-conditional-logic-visible',
+			shouldShow ? 'true' : 'false'
+		);
 
 		if (shouldShow) {
 			$fieldWrapper.show();
+			if ($fieldWrapper.hasClass('directorist-form-section')) {
+				$fieldWrapper[0].style.removeProperty('display');
+			}
+			$sectionNav.show();
 			$fieldWrapper
 				.find('input, select, textarea')
 				.prop('disabled', false);
@@ -53,6 +64,14 @@ export function applyConditionalLogic(
 			setTinyMCEMode($fieldWrapper, 'design');
 		} else {
 			$fieldWrapper.hide();
+			if ($fieldWrapper.hasClass('directorist-form-section')) {
+				$fieldWrapper[0].style.setProperty(
+					'display',
+					'none',
+					'important'
+				);
+			}
+			$sectionNav.hide();
 			$fieldWrapper
 				.find('input, select, textarea')
 				.prop('disabled', true);
@@ -71,6 +90,43 @@ export function applyConditionalLogic(
 			conditionalLogicData,
 		});
 	}
+}
+
+/**
+ * Hide form sections whose fields are all hidden by conditional logic.
+ * A section-level condition remains authoritative when it evaluates false.
+ *
+ * @param {jQuery} $
+ */
+export function syncEmptyConditionalSections($) {
+	$('.directorist-form-section').each(function () {
+		const $section = $(this);
+		const sectionId = $section.attr('id') || '';
+		const $sectionNav = sectionId ? $(`a[href="#${sectionId}"]`) : $();
+		const sectionConditionAllowsDisplay =
+			$section.attr('data-conditional-logic-visible') !== 'false';
+		const $fields = $section
+			.find('.directorist-content-module__contents')
+			.first()
+			.children('.directorist-form-group');
+		const hasVisibleField = $fields.toArray().some(function (field) {
+			const $field = $(field);
+			return (
+				$field.attr('hidden') === undefined &&
+				$field.css('display') !== 'none' &&
+				$field.attr('data-conditional-logic-visible') !== 'false'
+			);
+		});
+		const shouldShowSection =
+			sectionConditionAllowsDisplay && hasVisibleField;
+
+		if (shouldShowSection) {
+			$section[0].style.removeProperty('display');
+		} else {
+			$section[0].style.setProperty('display', 'none', 'important');
+		}
+		$sectionNav.toggle(shouldShowSection);
+	});
 }
 
 /** Set TinyMCE design/readonly mode when field visibility changes. */
@@ -129,11 +185,11 @@ export function initConditionalLogic(
 
 	const $formWrapper = $(getWrapperFn());
 	let $fieldsWithConditionalLogic = $formWrapper.find(
-		'.directorist-form-group[data-conditional-logic]'
+		'.directorist-form-group[data-conditional-logic], .directorist-form-section[data-conditional-logic]'
 	);
 	if ($fieldsWithConditionalLogic.length === 0) {
 		$fieldsWithConditionalLogic = $(
-			'.directorist-form-group[data-conditional-logic]'
+			'.directorist-form-group[data-conditional-logic], .directorist-form-section[data-conditional-logic]'
 		);
 	}
 
@@ -162,6 +218,8 @@ export function initConditionalLogic(
 			}
 		});
 	}
+
+	syncEmptyConditionalSections($);
 }
 
 /**
@@ -184,38 +242,15 @@ export function watchFieldChanges(
 		$changedField
 	) {
 		const $fieldsWithLogic = $(
-			'.directorist-form-group[data-conditional-logic], .directorist-conditional-logic-target[data-conditional-logic]'
+			'.directorist-form-group[data-conditional-logic], .directorist-form-section[data-conditional-logic], .directorist-conditional-logic-target[data-conditional-logic]'
 		);
 
 		$fieldsWithLogic.each(function () {
 			const $fieldWrapper = $(this);
-			const conditionalLogicData = $fieldWrapper.attr(
-				'data-conditional-logic'
-			);
-			if (!conditionalLogicData) return;
-
-			try {
-				let decodedData = conditionalLogicData;
-				if (typeof decodedData === 'string') {
-					const textarea = document.createElement('textarea');
-					textarea.innerHTML = decodedData;
-					decodedData = textarea.value;
-				}
-				const conditionalLogic = JSON.parse(decodedData);
-				const dependsOnField = fieldDependsOnChange(
-					conditionalLogic,
-					fieldKey,
-					fieldName,
-					$changedField,
-					normalizeConditionFieldKey
-				);
-				if (dependsOnField) {
-					applyConditionalLogicFn($fieldWrapper);
-				}
-			} catch (e) {
-				console.error('Error in conditional logic evaluation:', e);
-			}
+			applyConditionalLogicFn($fieldWrapper);
 		});
+
+		syncEmptyConditionalSections($);
 	}
 
 	setupTaxonomyHandlers($, triggerConditionalLogicEvaluation);

@@ -82,6 +82,18 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		hideToggle: {
+			type: Boolean,
+			default: false,
+		},
+		hideAction: {
+			type: Boolean,
+			default: false,
+		},
+		resultOptions: {
+			type: Array,
+			default: () => [],
+		},
 		shortcodes: {
 			type: [Array, String],
 			default: '',

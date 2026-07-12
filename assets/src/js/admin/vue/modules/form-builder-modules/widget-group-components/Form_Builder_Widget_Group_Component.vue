@@ -86,6 +86,9 @@ export default {
     activeWidgets: {
       default: "",
     },
+    conditionalFields: {
+      default: "",
+    },
     avilableWidgets: {
       default: "",
     },

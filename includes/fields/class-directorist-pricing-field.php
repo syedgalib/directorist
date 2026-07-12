@@ -13,8 +13,9 @@ class Pricing_Field extends Base_Field {
     public $type = 'pricing';
 
     public function get_value( $posted_data ) {
-        if ( $this->get_price_type_prop() !== 'both' ) {
-            $posted_data['atbd_listing_pricing'] = $this->get_price_type_prop();
+        $configured_price_type = $this->get_price_type_prop( $posted_data );
+        if ( $configured_price_type !== 'both' ) {
+            $posted_data['atbd_listing_pricing'] = $configured_price_type;
         }
 
         if ( ! isset( $posted_data['atbd_listing_pricing'] ) && ( isset( $posted_data['price'] ) || isset( $posted_data['price_range'] ) ) ) {
@@ -55,8 +56,24 @@ class Pricing_Field extends Base_Field {
         return [ 'skimming', 'moderate', 'economy', 'bellow_economy' ];
     }
 
-    protected function get_price_type_prop() {
+    protected function get_price_type_prop( array $posted_data = [] ) {
         $pricing_type = $this->__get( 'pricing_type' );
+
+        if ( 'conditional' === $pricing_type ) {
+            $pricing_type = directorist_resolve_conditional_pricing_type(
+                [
+                    'pricing_type'         => 'conditional',
+                    'pricing_type_mapping' => $this->__get( 'pricing_type_mapping' ),
+                ],
+                static function ( $field ) use ( $posted_data ) {
+                    if ( in_array( $field, [ 'category', 'categories', 'admin_category_select[]', 'in_cat' ], true ) ) return $posted_data['admin_category_select'] ?? ( $posted_data['tax_input'][ ATBDP_CATEGORY ] ?? [] );
+                    if ( in_array( $field, [ 'location', 'locations', 'tax_input[at_biz_dir-location][]', 'in_loc' ], true ) ) return $posted_data['tax_input'][ ATBDP_LOCATION ] ?? [];
+                    if ( in_array( $field, [ 'tag', 'tags', 'tax_input[at_biz_dir-tags][]' ], true ) ) return $posted_data['tax_input'][ ATBDP_TAGS ] ?? [];
+                    $normalized = preg_replace( '/^_/', '', $field );
+                    return $posted_data[ $normalized ] ?? ( $posted_data[ $field ] ?? null );
+                }
+            );
+        }
 
         if ( $pricing_type === 'price_unit' ) {
             return 'price';

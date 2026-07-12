@@ -54,6 +54,7 @@ function directorist_get_listing_form_groups( $directory_id, $context = [] ) {
             'label'  => $group['label'],
             'icon'   => isset( $group['icon'] ) ? $group['icon'] : '',
             'fields' => $group['fields'],
+            'conditional_logic' => isset( $group['conditional_logic'] ) ? $group['conditional_logic'] : [],
         ];
     }
 

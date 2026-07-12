@@ -107,6 +107,7 @@
                 :group-key="widget_group_key"
                 :field-id="fieldId"
                 :active-widgets="active_widget_fields"
+                :conditional-fields="conditionalFields"
                 :avilable-widgets="avilable_widgets"
                 :group-data="widget_group"
                 :group-settings="groupSettingsProp"
@@ -521,6 +522,22 @@ export default {
   },
 
   computed: {
+    conditionalFields() {
+      const submissionForm =
+        this.cached_fields && this.cached_fields.submission_form_fields;
+
+      if (
+        this.fieldKey === "single_listings_contents" &&
+        submissionForm &&
+        submissionForm.value &&
+        submissionForm.value.fields
+      ) {
+        return submissionForm.value.fields;
+      }
+
+      return this.active_widget_fields;
+    },
+
     finalValue() {
       return {
         fields: this.active_widget_fields,

@@ -10,7 +10,7 @@
       :is="field.type + '-field'"
       :section-id="sectionId"
       :field-id="`${sectionId}_${field_key}`"
-      :root="field_list"
+      :root="rootFields"
       v-bind="excludeShowIfCondition(field)"
       @update="update({ key: field_key, value: $event })"
       @blur="update({ key: field_key, value: $event, isBlur: true })"

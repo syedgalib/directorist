@@ -136,6 +136,9 @@ class Directorist_Single_Listing {
 
         if ( ! empty( $single_fields['groups'] ) ) {
             foreach ( $single_fields['groups'] as $group ) {
+                if ( ! directorist_evaluate_conditional_logic( $group['conditional_logic'] ?? [], [ $this, 'get_conditional_logic_field_value' ] ) ) {
+                    continue;
+                }
                 $section           = $group;
                 $section['fields'] = [];
 
@@ -149,14 +152,27 @@ class Directorist_Single_Listing {
                         continue;
                     }
 
-                    $section['fields'][ $field ] = $single_fields['fields'][ $field ];
+                    $field_data       = $single_fields['fields'][ $field ];
+                    $conditional_logic = $field_data['form_data']['conditional_logic'] ?? ( $field_data['conditional_logic'] ?? [] );
+
+                    if ( ! directorist_evaluate_conditional_logic( $conditional_logic, [ $this, 'get_conditional_logic_field_value' ] ) ) {
+                        continue;
+                    }
+
+                    $section['fields'][ $field ] = $field_data;
                 }
 
-                $content_data[] = $section;
+                if ( ! empty( $section['fields'] ) || 'general_group' !== ( $section['type'] ?? '' ) ) {
+                    $content_data[] = $section;
+                }
             }
         }
 
         return $content_data;
+    }
+
+    public function get_conditional_logic_field_value( $field ) {
+        return directorist_get_listing_conditional_value( $this->id, $field );
     }
 
     public function section_template( $section_data ) {

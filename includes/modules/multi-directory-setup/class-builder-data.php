@@ -2308,6 +2308,11 @@ class Builder_Data {
                                 'label'  => __( 'Section Icon', 'directorist' ),
                                 'value' => '',
                             ],
+                            'conditional_logic' => directorist_get_conditional_logic_field(
+                                [
+                                    'description' => __( 'Show or hide this section based on submission field values.', 'directorist' ),
+                                ]
+                            ),
                         ],
                         'value'           => [
                             'fields' => [
@@ -2397,6 +2402,11 @@ class Builder_Data {
                             'value' => '',
                             'field_type' => 'advanced',
                         ],
+                        'conditional_logic' => directorist_get_conditional_logic_field(
+                            [
+                                'description' => __( 'Show or hide this section based on submission field values.', 'directorist' ),
+                            ]
+                        ),
                         'shortcode'            => [
                             'type'        => 'shortcode-list',
                             'label'       => __( 'Shortcode', 'directorist' ),
