@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-18 05:20+0000\n"
+"POT-Creation-Date: 2026-09-21 02:14+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -298,99 +298,99 @@ msgstr ""
 msgid "Open account"
 msgstr ""
 
-#: ../directorist-base.php:507, ../directorist-base.php:519
+#: ../directorist-base.php:508, ../directorist-base.php:520
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: ../directorist-base.php:533
+#: ../directorist-base.php:534
 msgid "Directorist - Listing Right Sidebar"
 msgstr ""
 
-#: ../directorist-base.php:535
+#: ../directorist-base.php:536
 msgid "Add widgets for the right sidebar on single listing page"
 msgstr ""
 
-#: ../directorist-base.php:661
+#: ../directorist-base.php:662
 msgid "Directorist Add Listing"
 msgstr ""
 
-#: ../directorist-base.php:664
+#: ../directorist-base.php:665
 msgid "Directorist All Listings"
 msgstr ""
 
-#: ../directorist-base.php:667
+#: ../directorist-base.php:668
 msgid "Directorist Dashboard"
 msgstr ""
 
-#: ../directorist-base.php:670
+#: ../directorist-base.php:671
 msgid "Directorist Author Profile"
 msgstr ""
 
-#: ../directorist-base.php:673
+#: ../directorist-base.php:674
 msgid "Directorist All Categories"
 msgstr ""
 
-#: ../directorist-base.php:676
+#: ../directorist-base.php:677
 msgid "Directorist Single Category"
 msgstr ""
 
-#: ../directorist-base.php:679
+#: ../directorist-base.php:680
 msgid "Directorist All Locations"
 msgstr ""
 
-#: ../directorist-base.php:682
+#: ../directorist-base.php:683
 msgid "Directorist Single Location"
 msgstr ""
 
-#: ../directorist-base.php:685
+#: ../directorist-base.php:686
 msgid "Directorist Single Tag"
 msgstr ""
 
-#: ../directorist-base.php:688
+#: ../directorist-base.php:689
 msgid "Directorist Listing Search Form"
 msgstr ""
 
-#: ../directorist-base.php:691
+#: ../directorist-base.php:692
 msgid "Directorist Search Result"
 msgstr ""
 
-#: ../directorist-base.php:694
+#: ../directorist-base.php:695
 msgid "Directorist Checkout"
 msgstr ""
 
-#: ../directorist-base.php:697
+#: ../directorist-base.php:698
 msgid "Directorist Payment Receipt"
 msgstr ""
 
-#: ../directorist-base.php:700
+#: ../directorist-base.php:701
 msgid "Directorist Payment Failure"
 msgstr ""
 
-#: ../directorist-base.php:703
+#: ../directorist-base.php:704
 msgid "Directorist Privacy Policy"
 msgstr ""
 
-#: ../directorist-base.php:706
+#: ../directorist-base.php:707
 msgid "Directorist Terms & Conditions"
 msgstr ""
 
-#: ../directorist-base.php:709
+#: ../directorist-base.php:710
 msgid "Directorist Pricing Plan"
 msgstr ""
 
-#: ../directorist-base.php:712
+#: ../directorist-base.php:713
 msgid "Directorist Sign In"
 msgstr ""
 
-#: ../directorist-base.php:720, ../includes/classes/class-settings-panel.php:4818
+#: ../directorist-base.php:721, ../includes/classes/class-settings-panel.php:4818
 msgid "Uninstall"
 msgstr ""
 
-#: ../directorist-base.php:727
+#: ../directorist-base.php:728
 msgid "Uninstall Settings"
 msgstr ""
 
-#: ../directorist-base.php:734, ../directorist-base.php:741
+#: ../directorist-base.php:735, ../directorist-base.php:742
 msgid "Listings Import"
 msgstr ""
 
@@ -1276,7 +1276,7 @@ msgstr ""
 msgid "This field is required."
 msgstr ""
 
-#: ../includes/classes/class-add-listing.php:967, ../includes/classes/class-ajax-handler.php:873, ../includes/classes/class-ajax-handler.php:2095, ../includes/classes/class-custom-post.php:607, ../includes/classes/class-upgrade.php:1182, ../includes/classes/class-upgrade.php:1189, ../includes/classes/class-upgrade.php:1196
+#: ../includes/classes/class-add-listing.php:967, ../includes/classes/class-ajax-handler.php:873, ../includes/classes/class-ajax-handler.php:2096, ../includes/classes/class-custom-post.php:607, ../includes/classes/class-upgrade.php:1182, ../includes/classes/class-upgrade.php:1189, ../includes/classes/class-upgrade.php:1196
 msgid "Security check failed."
 msgstr ""
 
@@ -1332,7 +1332,7 @@ msgstr ""
 msgid "Something is wrong! Please refresh and retry."
 msgstr ""
 
-#: ../includes/classes/class-ajax-handler.php:424, ../includes/classes/class-ajax-handler.php:443, ../includes/classes/class-ajax-handler.php:458, ../includes/classes/class-ajax-handler.php:2099, ../includes/classes/class-custom-post.php:611
+#: ../includes/classes/class-ajax-handler.php:424, ../includes/classes/class-ajax-handler.php:443, ../includes/classes/class-ajax-handler.php:458, ../includes/classes/class-ajax-handler.php:2100, ../includes/classes/class-custom-post.php:611
 msgid "Permission denied."
 msgstr ""
 
@@ -1372,7 +1372,7 @@ msgstr ""
 msgid "No category selected."
 msgstr ""
 
-#: ../includes/classes/class-ajax-handler.php:728, ../includes/classes/class-ajax-handler.php:2106, ../includes/rest-api/Version1/class-orders-controller.php:110
+#: ../includes/classes/class-ajax-handler.php:728, ../includes/classes/class-ajax-handler.php:2107, ../includes/rest-api/Version1/class-orders-controller.php:110
 msgid "Invalid listing."
 msgstr ""
 
@@ -1437,7 +1437,7 @@ msgstr ""
 msgid "Preferences updated successfully."
 msgstr ""
 
-#: ../includes/classes/class-ajax-handler.php:1329, ../includes/classes/class-ajax-handler.php:1402, ../includes/review/class-email.php:76
+#: ../includes/classes/class-ajax-handler.php:1329, ../includes/classes/class-ajax-handler.php:1402
 msgid "[{site_name}] New review at \"{listing_title}\""
 msgstr ""
 
@@ -1485,24 +1485,36 @@ msgstr ""
 msgid "User not logged in."
 msgstr ""
 
-#: ../includes/classes/class-ajax-handler.php:1959, ../includes/classes/class-ajax-handler.php:1999, ../includes/classes/class-ajax-handler.php:2038, ../includes/classes/class-ajax-handler.php:2075
+#: ../includes/classes/class-ajax-handler.php:1960, ../includes/classes/class-ajax-handler.php:2000, ../includes/classes/class-ajax-handler.php:2039, ../includes/classes/class-ajax-handler.php:2076
 msgid "Invalid nonce."
 msgstr ""
 
-#: ../includes/classes/class-ajax-handler.php:2080
+#: ../includes/classes/class-ajax-handler.php:2081
 msgid "No listing ID found."
 msgstr ""
 
-#: ../includes/classes/class-ajax-handler.php:2110
+#: ../includes/classes/class-ajax-handler.php:2111
 msgid "Only pending listings can be rejected."
 msgstr ""
 
-#: ../includes/classes/class-ajax-handler.php:2114
+#: ../includes/classes/class-ajax-handler.php:2115
 msgid "Rejection reason is required."
 msgstr ""
 
-#: ../includes/classes/class-ajax-handler.php:2126
+#: ../includes/classes/class-ajax-handler.php:2127
 msgid "Could not reject the listing. Please try again."
+msgstr ""
+
+#: ../includes/classes/class-business-hours-csv.php:49
+msgid "Business Hours"
+msgstr ""
+
+#: ../includes/classes/class-business-hours-csv.php:53
+msgid "Social Links"
+msgstr ""
+
+#: ../includes/classes/class-business-hours-csv.php:60
+msgid "Social - %s"
 msgstr ""
 
 #: ../includes/classes/class-cron.php:52
@@ -6940,12 +6952,26 @@ msgstr ""
 msgid "<strong>Error</strong>: You already shared a review."
 msgstr ""
 
-#: ../includes/review/class-email.php:79
-msgid "Dear User,<br /><br />A new review at {listing_url}.<br /><br />Name: {sender_name}<br />Email: {sender_email}<br />Review: {message}"
+#: ../includes/review/class-email.php:101
+msgid "Anonymous"
+msgstr ""
+
+#: ../includes/review/class-email.php:103
+msgid "View review"
+msgstr ""
+
+#. translators: 1: Site name, 2: Listing title.
+#: ../includes/review/class-email.php:107
+msgid "[%1$s] New review at \"%2$s\""
+msgstr ""
+
+#. translators: 1: Listing title, 2: Public reviewer name, 3: Star rating, 4: Review text, 5: Public review link.
+#: ../includes/review/class-email.php:110
+msgid "Listing: %1$s<br />Reviewer: %2$s<br />Rating: %3$s / 5<br />Review: %4$s<br /><br />%5$s"
 msgstr ""
 
 #. translators: %1$s: Listing URL, %2$s: Comment author name, %3$s: Comment author email, %4$s: Review content
-#: ../includes/review/class-email.php:115
+#: ../includes/review/class-email.php:153
 msgid "Dear Admin,<br /><br />A new review at %1$s.<br /><br />Name: %2$s<br />Email: %3$s<br />Review: %4$s"
 msgstr ""
 
