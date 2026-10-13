@@ -213,6 +213,7 @@ class Asset_Loader {
 
             case 'listing-form/fields/address':
                 wp_enqueue_script( 'directorist-geolocation' );
+                self::enqueue_map_scripts();
                 break;
 
             case 'listing-form/fields/image_upload':
@@ -277,9 +278,12 @@ class Asset_Loader {
             do_action( 'directorist_builder_edit_assets_enqueued', $hook_suffix );
         } elseif ( Helper::is_admin_page( 'settings' ) ) {
             wp_enqueue_style( 'directorist-admin-style' );
+            wp_enqueue_style( 'directorist-settings-search-shortcut', DIRECTORIST_ASSETS . 'css/directorist-settings-search-shortcut.css', [ 'directorist-admin-style' ], ATBDP_VERSION );
             wp_enqueue_style( 'directorist-unicons' );
             wp_enqueue_script( 'directorist-icon-picker' );
             wp_enqueue_script( 'directorist-settings-manager' );
+            wp_enqueue_script( 'directorist-settings-search-shortcut', DIRECTORIST_ASSETS . 'js/directorist-settings-search-shortcut.js', [ 'directorist-settings-manager' ], ATBDP_VERSION, true );
+            wp_enqueue_script( 'directorist-settings-extension-link', DIRECTORIST_ASSETS . 'js/directorist-settings-extension-link.js', [ 'directorist-settings-manager' ], ATBDP_VERSION, true );
             wp_enqueue_media();
         } elseif ( Helper::is_admin_page( 'extensions' ) ) {
             wp_enqueue_style( 'directorist-admin-style' );
@@ -370,6 +374,17 @@ class Asset_Loader {
     public static function register_scripts() {
         Helper::register_all_scripts( Scripts::get_all_scripts() );
         Enqueue::register_script( 'directorist-payment-receipt', 'build/js/react/frontend/payment-receipt.js', ['jquery', 'wp-api-fetch'] );
+
+        // Google can invoke its callback before the map bundle has loaded.
+        static $google_map_callback_registered = false;
+        if ( ! $google_map_callback_registered ) {
+            wp_add_inline_script(
+                'google-map-api',
+                'window.directoristLoadGoogleMap = function () { window.dispatchEvent(new Event("directorist-google-maps-ready")); };',
+                'before'
+            );
+            $google_map_callback_registered = true;
+        }
 
         // Inline styles
         if ( apply_filters( 'directorist_load_inline_style', true ) ) {

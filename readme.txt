@@ -5,7 +5,7 @@ Tags: business directory, listings, classifieds, directory plugin, directory
 Requires at least: 4.6
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 8.10
+Stable tag: 8.10.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -300,7 +300,34 @@ Directorist comes with an AI-powered directory builder. Use the Create with AI o
 
 == Changelog ==
 
-= 8.10 - Sep 30, 2026 =
+= 8.10.4 - Oct 11, 2026 =
+
+**Improved**
+- Improved Themes & Extensions catalog, account connection, extension recommendations, and activation guidance. (#3067)
+- Improved gateway webhook registration with inline feedback and same-page settings flow. (#3069)
+- Updated licensing links and account connection copy. (#3072)
+
+**Fixed**
+- Payment setup progress when all gateways are disabled. (#3067)
+- Missing accessible labels on sign-in fields. (#3068)
+- Empty or unsaved webhook states showing incorrect registration status. (#3069)
+
+= 8.10.3 - Oct 6, 2026 =
+
+**Security**
+- Hardened listing tag submission and taxonomy dropdown rendering to prevent stored XSS. (#3056)
+- Strengthened REST API item permissions to prevent unauthorized access to non-public listing resources. (#3056)
+- Escaped single listing map info window phone and direction URL output to prevent stored XSS. (#3056)
+
+**Fixed**
+- Google Maps initialization before required map libraries finish loading. (#3055)
+- Malformed archive card layouts not recovering correctly. (#3033)
+- Listing address autocomplete not syncing with the map pin. (#3032)
+- Frontend listing submissions not persisting selected taxonomies. (#3031)
+- Review visibility in the featured listing widget. (#2998)
+- Deprecated PHP warning when rendering taxonomy list subterms with empty category or location children.
+
+= 8.10 - Oct 1, 2026 =
 
 **Added**
 - Introduced a new admin dashboard for Themes & Extensions with account licensing overview, setup progress, activity insights, quick actions, and extension recommendations. (#2932)
@@ -321,6 +348,7 @@ Directorist comes with an AI-powered directory builder. Use the Create with AI o
 - Map address search not matching reordered postal codes. (#3007)
 - Blank FormGent enquiries dashboard on WordPress 7.1. (#3005)
 - CSV import validation for WordPress temporary upload filenames. (#3004)
+- Preserved the selected directory type context for listing cards on author profile pages. (#3052)
 
 = 8.9.6 - Sep 20, 2026 =
 
