@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-/**
- * Colors
- */
-/**
- * Breakpoints & Media Queries
- */
-/**
- * Colors
- */
-/**
- * SCSS Variables.
- *
- * Please use variables from this sheet to ensure consistency across the UI.
- * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
- * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
- */
-/**
- * Fonts & basic variables.
- */
-=======
->>>>>>> ac5517e2afe25508e42530ed628ccd1f5801a048
 /**
  * Typography
  */
@@ -2982,8 +2960,6 @@ div.dataviews-view-list {
       -ms-flex-align: center;
           align-items: center;
 }
-<<<<<<< HEAD
-=======
 
 .dataforms-layouts-card__field {
   width: 100%;
@@ -3043,4 +3019,3 @@ div.dataviews-view-list {
   font-size: 13px;
   line-height: 20px;
 }
->>>>>>> ac5517e2afe25508e42530ed628ccd1f5801a048
