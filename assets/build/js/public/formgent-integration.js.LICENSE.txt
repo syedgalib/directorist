@@ -57,6 +57,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+<<<<<<< HEAD
+=======
+/**
+ * @license React
+ * use-sync-external-store-shim/with-selector.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+>>>>>>> ac5517e2afe25508e42530ed628ccd1f5801a048
 /** @license React v16.13.1
  * react-is.production.min.js
  *
