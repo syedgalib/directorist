@@ -8,5 +8,5 @@
 		'wp-i18n',
 		'wp-primitives'
 	),
-	'version' => '5153ae7440218d733962'
+	'version' => '7e18887ebc63aaf826ce'
 );
