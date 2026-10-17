@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-15 06:04+0000\n"
+"POT-Creation-Date: 2026-10-17 12:46+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -518,7 +518,7 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: ../includes/directorist-core-functions.php:68, ../includes/classes/class-formgent.php:361
+#: ../includes/directorist-core-functions.php:68, ../includes/classes/class-formgent.php:391
 msgid "Guest"
 msgstr ""
 
@@ -923,7 +923,7 @@ msgstr ""
 msgid "Yes, Delete it!"
 msgstr ""
 
-#: ../includes/asset-loader/localized_data.php:117, ../includes/asset-loader/localized_data.php:431, ../includes/classes/class-custom-post.php:230, ../templates/checkout/checkout.php:68, ../views/admin-templates/post-types-manager/all-listing-types.php:353
+#: ../includes/asset-loader/localized_data.php:117, ../includes/asset-loader/localized_data.php:437, ../includes/classes/class-custom-post.php:230, ../templates/checkout/checkout.php:68, ../views/admin-templates/post-types-manager/all-listing-types.php:353
 msgid "Cancel"
 msgstr ""
 
@@ -1132,67 +1132,103 @@ msgid "Track and manage all your incoming messages"
 msgstr ""
 
 #: ../includes/asset-loader/localized_data.php:418
-msgid "Total Enquiries"
+msgid "Forms you submitted on listings"
 msgstr ""
 
 #: ../includes/asset-loader/localized_data.php:419
-msgid "New Messages"
+msgid "Received"
 msgstr ""
 
 #: ../includes/asset-loader/localized_data.php:420
-msgid "This Week"
+msgid "Send"
 msgstr ""
 
 #: ../includes/asset-loader/localized_data.php:421
-msgid "Total Resolved"
+msgid "Total Enquiries"
 msgstr ""
 
 #: ../includes/asset-loader/localized_data.php:422
-msgid "Enquiry"
+msgid "Total Sent"
 msgstr ""
 
-#: ../includes/asset-loader/localized_data.php:423, ../includes/classes/class-custom-post.php:682
-msgid "Listing"
+#: ../includes/asset-loader/localized_data.php:423
+msgid "New Messages"
 msgstr ""
 
 #: ../includes/asset-loader/localized_data.php:424
-msgid "Sender"
+msgid "This Week"
 msgstr ""
 
-#: ../includes/asset-loader/localized_data.php:425, ../includes/classes/class-custom-post.php:776, ../includes/classes/class-upgrade.php:822, ../templates/dashboard/tab-my-listings.php:63, ../views/admin-templates/theme-extensions/theme-extension.php:1935
-msgid "Status"
+#: ../includes/asset-loader/localized_data.php:425
+msgid "Sent This Week"
 msgstr ""
 
 #: ../includes/asset-loader/localized_data.php:426
-msgid "Search enquiries..."
+msgid "Total Resolved"
 msgstr ""
 
-#: ../includes/asset-loader/localized_data.php:427, ../includes/classes/class-custom-taxonomy.php:197, ../includes/classes/class-custom-taxonomy.php:180, ../includes/payments/class-order.php:716
-msgid "View"
+#: ../includes/asset-loader/localized_data.php:427
+msgid "Enquiry"
 msgstr ""
 
-#: ../includes/asset-loader/localized_data.php:428, ../templates/single/action-section.php:117
-msgid "Send Email"
+#: ../includes/asset-loader/localized_data.php:428, ../includes/classes/class-custom-post.php:682
+msgid "Listing"
 msgstr ""
 
 #: ../includes/asset-loader/localized_data.php:429
-msgid "Mark as read"
+msgid "Sender"
 msgstr ""
 
-#: ../includes/asset-loader/localized_data.php:430, ../views/admin-templates/post-types-manager/all-listing-types.php:209, ../views/admin-templates/post-types-manager/all-listing-types.php:357, ../views/admin-templates/theme-extensions/theme-extension.php:490, ../views/admin-templates/theme-extensions/theme-extension.php:1908
-msgid "Delete"
+#: ../includes/asset-loader/localized_data.php:430
+msgid "Recipient"
+msgstr ""
+
+#: ../includes/asset-loader/localized_data.php:431, ../includes/classes/class-custom-post.php:776, ../includes/classes/class-upgrade.php:822, ../templates/dashboard/tab-my-listings.php:63, ../views/admin-templates/theme-extensions/theme-extension.php:1935
+msgid "Status"
 msgstr ""
 
 #: ../includes/asset-loader/localized_data.php:432
+msgid "Search enquiries..."
+msgstr ""
+
+#: ../includes/asset-loader/localized_data.php:433, ../includes/classes/class-custom-taxonomy.php:197, ../includes/classes/class-custom-taxonomy.php:180, ../includes/payments/class-order.php:716
+msgid "View"
+msgstr ""
+
+#: ../includes/asset-loader/localized_data.php:434, ../templates/single/action-section.php:117
+msgid "Send Email"
+msgstr ""
+
+#: ../includes/asset-loader/localized_data.php:435
+msgid "Mark as read"
+msgstr ""
+
+#: ../includes/asset-loader/localized_data.php:436, ../views/admin-templates/post-types-manager/all-listing-types.php:209, ../views/admin-templates/post-types-manager/all-listing-types.php:357, ../views/admin-templates/theme-extensions/theme-extension.php:490, ../views/admin-templates/theme-extensions/theme-extension.php:1908
+msgid "Delete"
+msgstr ""
+
+#: ../includes/asset-loader/localized_data.php:438
 msgid "Are you sure to delete this item?"
 msgstr ""
 
-#: ../includes/asset-loader/localized_data.php:433
+#: ../includes/asset-loader/localized_data.php:439
 msgid "Are you sure to delete %d items?"
 msgstr ""
 
-#: ../includes/asset-loader/localized_data.php:434
+#: ../includes/asset-loader/localized_data.php:440
 msgid "This action cannot be undone."
+msgstr ""
+
+#: ../includes/asset-loader/localized_data.php:441
+msgid "Unable to load enquiries. Please try again."
+msgstr ""
+
+#: ../includes/asset-loader/localized_data.php:442
+msgid "Retry"
+msgstr ""
+
+#: ../includes/asset-loader/localized_data.php:443
+msgid "Loading enquiries..."
 msgstr ""
 
 #: ../includes/checkout/class-checkout.php:67, ../includes/checkout/class-checkout.php:261
@@ -4035,16 +4071,20 @@ msgstr ""
 msgid "Featured Listing: %s"
 msgstr ""
 
-#: ../includes/classes/class-formgent.php:261, ../includes/classes/class-formgent.php:267, ../includes/classes/class-formgent.php:304, ../includes/classes/class-formgent.php:312, ../includes/classes/class-formgent.php:328
+#: ../includes/classes/class-formgent.php:262, ../includes/classes/class-formgent.php:268, ../includes/classes/class-formgent.php:305, ../includes/classes/class-formgent.php:313, ../includes/classes/class-formgent.php:329, ../includes/classes/class-formgent.php:337
 msgid "Response not found."
 msgstr ""
 
-#: ../includes/classes/class-formgent.php:318
+#: ../includes/classes/class-formgent.php:319
 msgid "Response has been marked as read successfully."
 msgstr ""
 
-#: ../includes/classes/class-formgent.php:335
+#: ../includes/classes/class-formgent.php:342
 msgid "Response has been deleted successfully."
+msgstr ""
+
+#: ../includes/classes/class-formgent.php:380
+msgid "Unknown User"
 msgstr ""
 
 #: ../includes/classes/class-helper.php:265
